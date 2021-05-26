@@ -57,9 +57,16 @@ public class UserRegisterManager implements UserRegisterService  {
 	
 	public Result Verify(int userId, String code) {
 		List<UserRegister> registers = userRegisterDao.findAll();
-		
+		if(code.isEmpty()) {
+			return new ErrorResult("Tüm alanları giriniz!");
+		}
 		for(UserRegister register : registers) {
 			if(register.getUserId() == userId) {
+				
+				if(register.isComfirmed()) {
+					return new ErrorResult("Zaten kaydınız tamamlanmış!");
+				}
+				
 				if(register.getActivisionCode().equals(code)) {
 					register.setComfirmed(true);
 					register.setComfirmedDate(new Date());

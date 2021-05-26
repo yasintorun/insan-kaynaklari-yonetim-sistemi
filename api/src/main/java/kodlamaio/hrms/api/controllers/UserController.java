@@ -29,4 +29,9 @@ public class UserController {
 	public DataResult<List<User>> getAll() {
 		return this.userService.getAll();
 	}
+	
+	@PostMapping("/verify")
+	public Result  Verify(int userId, String verifyCode) {
+		return this.userService.Verify(userId, verifyCode);
+	}
 }
