@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
@@ -14,7 +16,6 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.concretes.JobPosition;
 import kodlamaio.hrms.entities.dtos.DisplayJobAdvertisementDto;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 
@@ -81,7 +82,43 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 
 		return new SuccessDataResult<List<DisplayJobAdvertisementDto>>(null, "Aktif olan ilanlar tarihe göre listelendi!");
 	}
-	
-	
 
+	@Override
+	public DataResult<List<JobAdvertisementDto>> getAllSorted() {
+		Sort sort = Sort.by(Sort.Direction.DESC, "releaseDate");
+		
+		return new SuccessDataResult<List<JobAdvertisementDto>>(NormalToDto(this.jobAdvertisementDao.findAll(sort)), "Başarılı!");	
+	}
+	
+	
+	private List<JobAdvertisementDto> NormalToDto(List<JobAdvertisement> normalList) {
+		List<JobAdvertisementDto> dtoList = new ArrayList<JobAdvertisementDto>();
+		
+		for(int i = 0; i< normalList.size(); i++) {
+			dtoList.add(NormalToDto(normalList.get(i)));
+		}
+		
+		return dtoList;
+	}
+
+	private JobAdvertisementDto NormalToDto(JobAdvertisement normal) {
+		return new JobAdvertisementDto(normal.getDescription(), normal.getMinSalary(), normal.getMaxSalary(),
+									   normal.getMaxperson(), normal.getDeadline(), normal.isActive(), normal.getCity(), 
+									   normal.getJobPosition().getId(), normal.getEmployer().getUserId());
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByIsActiveAndEmployer_UserId(boolean isActive, int employerId) {
+		return new SuccessDataResult<List<JobAdvertisement>>
+		(this.jobAdvertisementDao.getByIsActiveAndEmployer_UserId(isActive, employerId), "listelendi!");
+	}
+
+	@Override
+	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId) {
+		JobAdvertisement current = jobAdvertisementDao.getOne(jobAdvertisementId);
+		current.setActive(false);
+		return new SuccessDataResult<JobAdvertisementDto>
+		(NormalToDto(this.jobAdvertisementDao.save(current)), "İlan pasif hale getirildi!");
+	}
+	
 }

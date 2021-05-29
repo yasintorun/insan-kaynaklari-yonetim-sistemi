@@ -50,4 +50,19 @@ public class JobAdvertisementController {
 		return this.jobAdvertisementService.getByIsActiveAndReleaseDate(true, releaseDate);
 	}
 	
+	@GetMapping("/getAllSortedJobAdvertisement")
+	public DataResult<List<JobAdvertisementDto>> getAllSorted() {
+		return this.jobAdvertisementService.getAllSorted();
+	}
+
+	@GetMapping("/getActiveCompanyJobAdvertisementList")
+	public DataResult<List<JobAdvertisement>> getByIsActiveAndEmployer(boolean isActive, int employerId) {
+		return this.jobAdvertisementService.getByIsActiveAndEmployer_UserId(isActive, employerId);
+	}
+
+	@GetMapping("/ChangeActive")
+	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId) {
+		return this.jobAdvertisementService.updateActive(jobAdvertisementId);
+	}
+	
 }
