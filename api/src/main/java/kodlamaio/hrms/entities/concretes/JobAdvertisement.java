@@ -1,6 +1,8 @@
 package kodlamaio.hrms.entities.concretes;
 
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,14 +26,34 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "job_advertisements")
 public class JobAdvertisement {
+	public JobAdvertisement(String description2, String city2, int minSalary2, int maxSalary2, int maxPerson2,
+			Date releaseDate2, Date deadline2, boolean isActive2, int jobPositionId, int employerId) {
+		this.description = description2;
+		this.city = city2;
+		this.minSalary = minSalary2;
+		this.maxSalary = maxSalary2;
+		this.maxperson = maxPerson2;
+		this.releaseDate = releaseDate2;
+		this.deadline = deadline2;
+		this.isActive = isActive2;
+		//this.jobPosition.setId(jobPositionId);
+		this.setJobPosition(new JobPosition(jobPositionId, "", null));
+		Employer emp = new Employer();
+		emp.setUserId(employerId);
+		
+		this.setEmployer(emp);
+	}
+
+
 	@Id
 	@Column(name="id")
 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="definition")
-	private String definition;
+	
+	@Column(name="job_description")
+	private String description;
 
 	@Column(name="city")
 	private String city;
@@ -45,11 +67,24 @@ public class JobAdvertisement {
 	@Column(name="max_person")
 	private int maxperson;
 	
+	@Column(name="release_date")
+	private Date releaseDate;
+	
+	@Column(name="deadline")
+	private Date deadline;
+	
+	@Column(name="is_active")
+	private boolean isActive;
+	
+	
+	@ManyToOne()
+	@JoinColumn(name="employer_id")
+	private Employer employer;
+	
+	
 	@ManyToOne()
 	@JoinColumn(name="job_position_id")
 	private JobPosition jobPosition;
 	
-	@OneToOne(mappedBy = "jobAdvertisement", cascade = CascadeType.ALL)
-	@PrimaryKeyJoinColumn
-	private JobAdvertisementInfo info;
+	
 }
