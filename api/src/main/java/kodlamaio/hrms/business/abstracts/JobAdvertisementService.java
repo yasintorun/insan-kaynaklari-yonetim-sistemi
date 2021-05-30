@@ -12,7 +12,7 @@ import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 public interface JobAdvertisementService extends BaseService<JobAdvertisement>{
 	
 	public Result add(JobAdvertisementDto entity);
-	
+	public DataResult<List<DisplayJobAdvertisementDto>> getAllDisplay();
 	
 	public DataResult<List<DisplayJobAdvertisementDto>> getByIsActive(boolean isActive);
 

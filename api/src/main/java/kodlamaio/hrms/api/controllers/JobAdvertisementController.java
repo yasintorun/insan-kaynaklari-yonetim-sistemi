@@ -29,8 +29,8 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getAllJobAdvertisement")
-	public DataResult<List<JobAdvertisement>> getAll() {
-		return this.jobAdvertisementService.getAll();
+	public DataResult<List<DisplayJobAdvertisementDto>> getAll() {
+		return this.jobAdvertisementService.getAllDisplay();
 	}
 	
 	@PostMapping("/add")
