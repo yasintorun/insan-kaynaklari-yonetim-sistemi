@@ -26,6 +26,7 @@ public class ResumeController {
 	
 	@GetMapping("/getAllResume")
 	public DataResult<List<ResumeDisplayDto>> getAll() {
+
 		return this.resumeService.getAllDisplay();
 	}
 	

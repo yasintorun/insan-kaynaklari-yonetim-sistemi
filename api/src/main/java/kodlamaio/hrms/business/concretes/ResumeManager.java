@@ -40,7 +40,10 @@ public class ResumeManager implements ResumeService{
 
 	@Override
 	public Result add(ResumeInputDto resume) {
-		this.resumeDao.save(ResumeDtoConverter.InputDtoToNormal(resume));
+		Resume res = ResumeDtoConverter.InputDtoToNormal(resume);
+		System.out.println("\n\n\n\n");
+		System.out.println(res.getImage().getId());
+		this.resumeDao.save(res);
 		return new SuccessResult("CV Eklendi");
 	}
 

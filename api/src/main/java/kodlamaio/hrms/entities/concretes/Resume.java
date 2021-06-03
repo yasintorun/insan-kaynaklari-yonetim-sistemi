@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="cv")
 public class Resume {
-	public Resume(String githubLink, String linkedinLink, String summary, int schoolId, int departmentId, int userId) {
+	public Resume(String githubLink, String linkedinLink, String summary, int schoolId, int departmentId, int userId, int imageId) {
 		this.github = githubLink;
 		this.linkedin = linkedinLink;
 		this.summary = summary;
@@ -28,6 +30,9 @@ public class Resume {
 		Jobseeker jobSeeker = new Jobseeker();
 		jobSeeker.setUserId(userId);
 		this.jobSeeker = jobSeeker;
+		Image image = new Image();
+		image.setId(imageId);
+		this.image = image;
 	}
 
 	@Id
@@ -44,8 +49,8 @@ public class Resume {
 	//@Column(name = "department_id")
 	//private int departmentId;
 	
-	@Column(name = "photo")
-	private String photo;
+	//@Column(name = "photo")
+	//private String photo;
 	
 	@Column(name = "github")
 	private String github;
@@ -64,6 +69,10 @@ public class Resume {
 	@ManyToOne()
 	@JoinColumn(name="department_id")
 	private Department department;
+	
+	@ManyToOne()
+	@JoinColumn(name="image_id")
+	private Image image;
 	
 	@ManyToOne()
 	@JoinColumn(name="user_id")

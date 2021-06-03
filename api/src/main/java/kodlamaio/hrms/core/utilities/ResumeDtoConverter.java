@@ -16,7 +16,7 @@ public class ResumeDtoConverter {
 	//Resume -> ResumeInputDto
 	public static ResumeInputDto NormalToInputDto(Resume normal) {
 		return new ResumeInputDto(normal.getJobSeeker().getUserId(), normal.getSchool().getId(), 
-				normal.getDepartment().getId(), normal.getGithub(), 
+				normal.getDepartment().getId(), normal.getImage().getId(), normal.getGithub(), 
 				normal.getLinkedin(), normal.getSummary());
 	}
 	
@@ -32,7 +32,7 @@ public class ResumeDtoConverter {
 	//ResumeInputDto -> Resume
 	public static Resume InputDtoToNormal(ResumeInputDto resumeDto) {
 		return new Resume(resumeDto.getGithubLink(), resumeDto.getLinkedinLink(), resumeDto.getSummary(),
-				resumeDto.getSchoolId(), resumeDto.getDepartmentId(), resumeDto.getUserId());
+				resumeDto.getSchoolId(), resumeDto.getDepartmentId(), resumeDto.getUserId(), resumeDto.getImageId());
 	}
 	
 	public static List<Resume> InputDtoToNormal(List<ResumeInputDto> dtoList) {
