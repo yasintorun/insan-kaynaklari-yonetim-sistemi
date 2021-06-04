@@ -18,4 +18,6 @@ public class ResumeDisplayDto {
 	private String linkedinLink;
 	private String summary;
 	private List<LanguageDisplayDto> languages;
+	private List<ExperienceDisplayDto> experiences;
+	private List<SkillDisplayDto> skills;
 }
