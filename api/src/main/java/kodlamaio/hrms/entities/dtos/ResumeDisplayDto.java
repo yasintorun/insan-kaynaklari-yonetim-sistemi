@@ -1,5 +1,7 @@
 package kodlamaio.hrms.entities.dtos;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +17,5 @@ public class ResumeDisplayDto {
 	private String githubLink;
 	private String linkedinLink;
 	private String summary;
+	private List<LanguageDisplayDto> languages;
 }

@@ -3,6 +3,7 @@ package kodlamaio.hrms.core.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import kodlamaio.hrms.entities.concretes.Language;
 import kodlamaio.hrms.entities.concretes.Resume;
 import kodlamaio.hrms.entities.dtos.ResumeDisplayDto;
 import kodlamaio.hrms.entities.dtos.ResumeInputDto;
@@ -55,7 +56,7 @@ public class ResumeDtoConverter {
 	public static ResumeDisplayDto NormalToDisplayDto(Resume resume) {
 		return new ResumeDisplayDto(resume.getJobSeeker().getFirstname(), resume.getJobSeeker().getLastname(),
 				resume.getSchool().getSchoolName(), resume.getDepartment().getDepartmentName(),
-				resume.getGithub(), resume.getLinkedin(), resume.getSummary());
+				resume.getGithub(), resume.getLinkedin(), resume.getSummary(), LanguageDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getLanguages()));
 	}
 	
 	public static List<ResumeDisplayDto> NormalToDisplayDto(List<Resume> resumeList) {
