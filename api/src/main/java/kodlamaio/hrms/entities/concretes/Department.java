@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="departments")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resumes"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","educations"})
 public class Department {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,5 +32,5 @@ public class Department {
 	private String departmentName;
 	
 	@OneToMany(mappedBy = "department")
-	private List<Resume> resumes;
+	private List<Education> educations;
 }

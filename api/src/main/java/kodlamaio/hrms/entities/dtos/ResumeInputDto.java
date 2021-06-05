@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResumeInputDto {
 	private int userId;
-	private int schoolId;
-	private int departmentId;
 	private int imageId;
 	private String githubLink;
 	private String linkedinLink;

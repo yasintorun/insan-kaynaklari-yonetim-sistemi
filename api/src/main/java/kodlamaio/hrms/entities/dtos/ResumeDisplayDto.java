@@ -12,12 +12,11 @@ import lombok.NoArgsConstructor;
 public class ResumeDisplayDto {
 	private String firstName;
 	private String lastName;
-	private String schoolName;
-	private String departmentName;
 	private String githubLink;
 	private String linkedinLink;
 	private String summary;
 	private List<LanguageDisplayDto> languages;
 	private List<ExperienceDisplayDto> experiences;
 	private List<SkillDisplayDto> skills;
+	private List<EducationDisplayDto> educations;
 }

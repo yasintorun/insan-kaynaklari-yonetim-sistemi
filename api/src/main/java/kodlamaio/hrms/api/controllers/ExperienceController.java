@@ -30,6 +30,11 @@ public class ExperienceController {
 		return this.experienceService.getAllDisplay();
 	}
 	
+	@GetMapping("/getAllSortedExperiences")
+	public DataResult<List<ExperienceDisplayDto>> getAllSorted() {
+		return this.experienceService.getAllSorted();
+	}
+	
 	@PostMapping("/addExperience")
 	public Result add(@RequestBody Experience experience) {
 		return this.experienceService.add(experience);

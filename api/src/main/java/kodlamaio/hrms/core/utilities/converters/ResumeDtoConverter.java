@@ -16,8 +16,8 @@ public class ResumeDtoConverter {
 	
 	//Resume -> ResumeInputDto
 	public static ResumeInputDto NormalToInputDto(Resume normal) {
-		return new ResumeInputDto(normal.getJobSeeker().getUserId(), normal.getSchool().getId(), 
-				normal.getDepartment().getId(), normal.getImage().getId(), normal.getGithub(), 
+		return new ResumeInputDto(normal.getJobSeeker().getUserId(), 
+				normal.getImage().getId(), normal.getGithub(), 
 				normal.getLinkedin(), normal.getSummary());
 	}
 	
@@ -33,7 +33,7 @@ public class ResumeDtoConverter {
 	//ResumeInputDto -> Resume
 	public static Resume InputDtoToNormal(ResumeInputDto resumeDto) {
 		return new Resume(resumeDto.getGithubLink(), resumeDto.getLinkedinLink(), resumeDto.getSummary(),
-				resumeDto.getSchoolId(), resumeDto.getDepartmentId(), resumeDto.getUserId(), resumeDto.getImageId());
+				resumeDto.getUserId(), resumeDto.getImageId());
 	}
 	
 	public static List<Resume> InputDtoToNormal(List<ResumeInputDto> dtoList) {
@@ -55,11 +55,11 @@ public class ResumeDtoConverter {
 	//Resume -> ResumeDisplayDto
 	public static ResumeDisplayDto NormalToDisplayDto(Resume resume) {
 		return new ResumeDisplayDto(resume.getJobSeeker().getFirstname(), resume.getJobSeeker().getLastname(),
-				resume.getSchool().getSchoolName(), resume.getDepartment().getDepartmentName(),
 				resume.getGithub(), resume.getLinkedin(), resume.getSummary(),
 				LanguageDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getLanguages()),
 				ExperienceDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getExperiences()),
-				SkillDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getSkills()));
+				SkillDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getSkills()),
+				EducationDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getEducations()));
 	}
 	
 	public static List<ResumeDisplayDto> NormalToDisplayDto(List<Resume> resumeList) {

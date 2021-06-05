@@ -2,6 +2,7 @@ package kodlamaio.hrms.api.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import kodlamaio.hrms.entities.concretes.Department;
 public class DepartmentController {
 	private DepartmentService departmentService;
 	
+	@Autowired
 	public DepartmentController(DepartmentService departmentService) {
 		this.departmentService = departmentService;
 	}
