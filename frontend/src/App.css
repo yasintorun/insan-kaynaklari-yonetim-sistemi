@@ -1,0 +1,25 @@
+
+:root{
+  --ThemeColor: rgb(223, 104, 24);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold !important;
+  color: var(--ThemeColor) !important;
+}
+
+.bg-theme-color {
+  background-color: var(--ThemeColor) !important;
+}
+
+.color-dark{
+  color: #2f2f2f;
+}
+.color-white {
+  color:white !important;
+}
+
+.color-theme {
+  color: var(--ThemeColor) !important;
+}
