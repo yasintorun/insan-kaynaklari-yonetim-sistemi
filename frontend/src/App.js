@@ -1,31 +1,16 @@
-
-import { Container } from 'semantic-ui-react';
 import './App.css';
 import Navbar from './layouts/Navbar';
-import EducationList from './pages/EducationList';
-import EmployerList from './pages/EmployerList';
-import JobAdvertisementList from './pages/JobAdvertisementList';
-import JobPositionList from './pages/JobPositionList';
-import JobSeekerList from './pages/JobSeekerList';
-import ResumeList from './pages/ResumeList';
-import UserLanguageList from './pages/UserLanguageList';
-import UserSkillList from './pages/UserSkillList';
+import Auth from './layouts/auth/Auth'
+import { Route } from 'react-router'
+import Dashboard from './layouts/Dashboard';
+import CityList from './pages/CityList';
 
 function App() {
   return (
     <div className="App">
       <Navbar/>
-      <Container>
-        
-        <JobSeekerList />
-        <ResumeList/>
-        <JobAdvertisementList/>
-        <EducationList/>
-        <EmployerList/>
-        <JobPositionList/>
-        <UserLanguageList/>
-        <UserSkillList/>
-      </Container>
+      <Route path ="/" component = {Dashboard}/>
+      <Route path ="/" component = {Auth}/>
     </div>
   );
 }
