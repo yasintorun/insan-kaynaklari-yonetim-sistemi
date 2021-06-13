@@ -5,3 +5,4 @@
 <li>Şuanlık herhangi bir kontrol yapılmıyor.</li>
 <li>İş ilanları listenebilir durumda.</li>
 
+![ui](https://raw.githubusercontent.com/yasintorun/insan-kaynaklari-yonetim-sistemi/Dev3/frontend/io.PNG)
