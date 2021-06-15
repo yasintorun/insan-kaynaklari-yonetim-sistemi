@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,11 +22,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "job_advertisements")
 public class JobAdvertisement {
-	public JobAdvertisement(String description2, String city2, int minSalary2, int maxSalary2, int maxPerson2,
-			Date releaseDate2, Date deadline2, boolean isActive2, int jobPositionId, int employerId) {
+	public JobAdvertisement(String description2, int city2, int minSalary2, int maxSalary2, int maxPerson2,
+			LocalDate releaseDate2, LocalDate deadline2, boolean isActive2, int jobPositionId, int employerId) {
 		this.description = description2;
 		City city = new City();
-		city.setCityName(city2);
+		city.setId(city2);
 		this.city = city;
 		this.minSalary = minSalary2;
 		this.maxSalary = maxSalary2;
@@ -65,10 +66,10 @@ public class JobAdvertisement {
 	private int maxperson;
 	
 	@Column(name="release_date")
-	private Date releaseDate;
+	private LocalDate releaseDate;
 	
 	@Column(name="deadline")
-	private Date deadline;
+	private LocalDate deadline;
 	
 	@Column(name="is_active")
 	private boolean isActive;
@@ -85,9 +86,17 @@ public class JobAdvertisement {
 	
 
 	@ManyToOne()
-	@JoinColumn(name="city_name")
+	@JoinColumn(name="city_id")
 	private City city;
 	
+	
+	@ManyToOne()
+	@JoinColumn(name="working_style_id")
+	private WorkStyle workStyle;
+	
+	@ManyToOne()
+	@JoinColumn(name="work_time_style_id")
+	private WorkTimeStyle workTimeStyle;
 	
 	///////////////////
 	

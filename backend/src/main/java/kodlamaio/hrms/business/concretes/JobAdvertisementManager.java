@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.converters.JobAdvertisementConverter;
+import kodlamaio.hrms.core.utilities.helpers.FormatHelper;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -18,6 +20,7 @@ import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 import kodlamaio.hrms.entities.dtos.DisplayJobAdvertisementDto;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
+import net.bytebuddy.asm.Advice.This;
 
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService{
@@ -46,9 +49,10 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	public Result add(JobAdvertisementDto entity) {
 		
 		JobAdvertisement jobAdvertisement = new JobAdvertisement(	
-				entity.getDescription(), entity.getCityName(), entity.getMinSalary(), entity.getMaxSalary(), entity.getMaxPerson(), new Date(), entity.getDeadline(), false, entity.getJobPositionId(), entity.getEmployerId()
+				entity.getDescription(), entity.getCityId(), entity.getMinSalary(), entity.getMaxSalary(), entity.getMaxPerson(),
+				 FormatHelper.newDate(), entity.getDeadline(),
+				false, entity.getJobPositionId(), entity.getEmployerId()
 				);
-		
 		
 		this.jobAdvertisementDao.save(jobAdvertisement);
 		return new SuccessResult("İş ilanı eklendi");
@@ -61,15 +65,22 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		
 		List<JobAdvertisement> activeJobAdList = this.jobAdvertisementDao.getByIsActive(isActive);
 		
+		displayJobAdvertisementDtos = JobAdvertisementConverter.DisplayNormalToDto(activeJobAdList);
+		/*
 		for(int i = 0; i< activeJobAdList.size(); i++) {
 			displayJobAdvertisementDtos.add(new DisplayJobAdvertisementDto(
+					activeJobAdList.get(i).getId(),
 					activeJobAdList.get(i).getEmployer().getCompanyName(),
 					activeJobAdList.get(i).getJobPosition().getJobName(),
+					activeJobAdList.get(i).getCity().getCityName(),
 					activeJobAdList.get(i).getMaxperson(),
+					activeJobAdList.get(i).getMinSalary(),
+					activeJobAdList.get(i).getMaxSalary(),
 					activeJobAdList.get(i).getReleaseDate(),
-					activeJobAdList.get(i).getDeadline()
+					activeJobAdList.get(i).getDeadline(),
+					activeJobAdList.get(i).getWorkStyle().getName()
 					));
-		}
+		}*/
 		
 		return new SuccessDataResult<List<DisplayJobAdvertisementDto>>(displayJobAdvertisementDtos, "Listelendi");
 	}
@@ -112,5 +123,13 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public DataResult<DisplayJobAdvertisementDto> getJobAdvertisementById(int id) {
+		return new SuccessDataResult<DisplayJobAdvertisementDto>
+		(JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.getJobAdvertisementById(id)), "İş ilanı getirildi");
+	}
+	
+	
 	
 }

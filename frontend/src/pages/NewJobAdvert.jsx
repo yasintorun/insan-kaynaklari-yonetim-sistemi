@@ -4,37 +4,38 @@ import { Icon, Input, Button, Label, Form, Dropdown, TextArea } from 'semantic-u
 import JobAdvertisementService from '../services/jobAdvertisementService';
 import CityService from '../services/cityService';
 import JobPositionService from '../services/jobPositionService'
+import WorkStyleService from '../services/workStyleService';
+import WorkTimeStyleService from '../services/workTimeService';
 export default function NewJobAdvert() {
 
   const [cities, setCities] = useState([])
   const [jobPositions, setJobPositions] = useState([])
+  const [workStyle, setWorkStyle] = useState([])
+  const [workTimeStyle, setWorkTimeStyle] = useState([])
+
   useEffect(() => {
     let cityService = new CityService()
     cityService.getCity().then(result => setCities(result.data.data))
 
     let jobPositionService = new JobPositionService()
     jobPositionService.getJobPosition().then(result => setJobPositions(result.data.data))
+
+    let workStyleService = new WorkStyleService()
+    workStyleService.getWorkStyles().then(result=> setWorkStyle(result.data.data))
+
+    let workTimeStyleService = new WorkTimeStyleService()
+    workTimeStyleService.getWorkTimeStyles().then(result=> setWorkTimeStyle(result.data.data))
   }, [])
 
   const jobAdvertisementService = new JobAdvertisementService()
 
-  const workOption = [
-    { text: 'Uzaktan', key: 1, value: 1 },
-    { text: 'Yüzyüze', key: 2, value: 2 }
-  ]
 
-  const workTimeOp = [
-    { text: 'Sürekli / Tam zamanlı', key: 1, value: 1},
-    { text: 'Yarı zamanlı / part time', key: 2, value: 2},
-    { text: 'Stajyer', key: 3, value: 3},
-    { text: 'Dönemsel / Proje bazlı', key: 4, value: 4},
-    { text: 'Serbest zamanlı', key: 5, value: 5}
-  ]
+
 
   const formik = useFormik({
     initialValues: {
-      cityId: 4,
-      jobPositionId: 1,
+      cityId: '',
+      jobPositionId: '',
       maxPerson: '',
       minSalary: '',
       maxSalary: '',
@@ -42,11 +43,17 @@ export default function NewJobAdvert() {
       deadline: '',
       description: '',
     },
-    onSubmit: values => {
+    onSubmit: values => { 
        cities.map(x => console.log(x))
-      jobAdvertisementService.add(values).then();
+      //jobAdvertisementService.add(values).then();
+      alert(JSON.stringify(values, null, 2))
     },
   });
+
+  const handleChangeSemantic = (value, fieldName) => {
+    formik.setFieldValue(fieldName, value);
+  }
+
   return (
     <Form onSubmit={formik.handleSubmit} className="mt-5 page-center" align="center">
       <div className="bordered shadow mb-5 w-75">
@@ -61,9 +68,15 @@ export default function NewJobAdvert() {
                 fluid
                 selection
                 search
-                options={cities.map( (x) => {
-                  return {text: x.cityName, key:x.id, value: x.id}
+                options={cities.map( (x, index) => {
+                  return {text: x.cityName, key:x.index, value: x.id}
                 })}
+                //onBlur={formik.onBlur}
+                onChange={(event, data) =>
+                  formik.setFieldValue("cityId", data.value)
+                }
+                //id="cityId"
+                value={formik.values.cityId}
               />
             </Form.Field>
 
@@ -82,11 +95,16 @@ export default function NewJobAdvert() {
                 placeholder='İş pozisyonunu seçiniz'
                 fluid
                 selection
-                search
-                multiple  
+                search  
                 options={jobPositions.map( (x) => {
                   return {text: x.jobName, key:x.id, value: x.id}
                 })}
+
+                onChange={(event, data) =>
+                  formik.setFieldValue("jobPositionId", data.value)
+                }
+                //id="cityId"
+                value={formik.values.jobPositionId  }
               />
             </Form.Field>
 
@@ -154,7 +172,9 @@ export default function NewJobAdvert() {
                 placeholder='Çalışma şekli'
                 fluid
                 selection
-                options={workOption}
+                options={workStyle.map( (x, index) => {
+                  return {text: x.name, key:x.index, value: x.id}
+                })}
                 />
 
             </Form.Field>
@@ -167,7 +187,9 @@ export default function NewJobAdvert() {
                 placeholder="çalışma zamanı "
                 fluids
                 selection
-                options={workTimeOp}
+                options={workTimeStyle.map( (x, index) => {
+                  return {text: x.name, key:x.index, value: x.id}
+                })}
               />
 
             </Form.Field>

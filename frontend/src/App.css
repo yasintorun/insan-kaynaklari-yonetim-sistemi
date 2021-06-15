@@ -1,6 +1,6 @@
 
 :root{
-  --ThemeColor: rgb(223, 104, 24);
+  --ThemeColor: rgb(86, 36, 179);
 }
 
 .logo {
@@ -40,4 +40,8 @@
 
 .shadow {
   box-shadow: 3px 2px 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+.text-big {
+  font-size: 16px;
 }

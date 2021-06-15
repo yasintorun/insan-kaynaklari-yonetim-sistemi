@@ -23,4 +23,6 @@ public interface JobAdvertisementService extends BaseService<JobAdvertisement>{
 	DataResult<List<JobAdvertisement>> getByIsActiveAndEmployer_UserId(boolean isActive, int employerId);
 	
 	DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId);
+	
+	DataResult<DisplayJobAdvertisementDto> getJobAdvertisementById(int id);
 }

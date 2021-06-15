@@ -37,6 +37,7 @@ public class JobAdvertisementController {
 	
 	@PostMapping("/add")
 	public Result add(@RequestBody JobAdvertisementDto jobAdvertisement) {
+		//System.out.println("\n\n\n"+jobAdvertisement.getCityId() +"\n\n\n");
 		return this.jobAdvertisementService.add(jobAdvertisement);
 	}
 	
@@ -65,6 +66,11 @@ public class JobAdvertisementController {
 	@GetMapping("/ChangeActive")
 	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId) {
 		return this.jobAdvertisementService.updateActive(jobAdvertisementId);
+	}
+	
+	@GetMapping("/getById")
+	public DataResult<DisplayJobAdvertisementDto> getJobAdvertisementById(int id) {
+		return this.jobAdvertisementService.getJobAdvertisementById(id);
 	}
 	
 }
