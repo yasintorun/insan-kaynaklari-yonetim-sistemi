@@ -16,7 +16,7 @@ export default function Dashboard() {
                 <Route exact path="/employer" component={Employer}/>
                 <Route exact path="/jobPosition" component={JobPosition}/>
                 <Route exact path="/newjobadvert" component = {NewJobAdvert} />
-                <Route exact path="/jobAdvertisement" component = {JobAdvertisement} />
+                <Route exact path="/jobAdvertisements" component = {JobAdvertisement} />
                 <Route exact path="/detail/:id" component = {JobPostDetail}/>
             </Container>
 

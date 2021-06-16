@@ -16,7 +16,7 @@ import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.dtos.DisplayJobAdvertisementDto;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 
 @RestController
@@ -31,7 +31,7 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getAllJobAdvertisement")
-	public DataResult<List<DisplayJobAdvertisementDto>> getAll() {
+	public DataResult<List<JobAdvertisementDisplayDto>> getAll() {
 		return this.jobAdvertisementService.getAllDisplay();
 	}
 	
@@ -42,13 +42,13 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getActiveJobAdvertisement")
-	public DataResult<List<DisplayJobAdvertisementDto>> getByIsActive() {
+	public DataResult<List<JobAdvertisementDisplayDto>> getByIsActive() {
 		return this.jobAdvertisementService.getByIsActive(true);
 	}
 	
 	
 	@GetMapping("/getActiveAndDateJobAdvertisement")
-	public DataResult<List<DisplayJobAdvertisementDto>> getByIsActiveAndReleaseDate(@RequestParam Date releaseDate) {
+	public DataResult<List<JobAdvertisementDisplayDto>> getByIsActiveAndReleaseDate(@RequestParam Date releaseDate) {
 		
 		return this.jobAdvertisementService.getByIsActiveAndReleaseDate(true, releaseDate);
 	}
@@ -69,7 +69,7 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getById")
-	public DataResult<DisplayJobAdvertisementDto> getJobAdvertisementById(int id) {
+	public DataResult<JobAdvertisementDisplayDto> getJobAdvertisementById(int id) {
 		return this.jobAdvertisementService.getJobAdvertisementById(id);
 	}
 	

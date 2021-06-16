@@ -9,6 +9,6 @@ public class FormatHelper {
 	}
 	
 	public static LocalDate newDate() {
-		 return LocalToDate(new Date());
+		 return LocalToDate(new Date());	
 	}
 }

@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom'
 import { Card, Label } from 'semantic-ui-react'
 import Helper from '../Helper'
 
-export default function JobPost( {jobAdvert}) {
+export default function JobPost({ jobAdvert }) {
     return (
         <div>
-            <Card className="w-50 m-auto mb-5 shadow" as={NavLink} to={'/detaily/' + jobAdvert.id}>
+            <Card className="w-50 m-auto mb-5 shadow" as={NavLink} to={'/detail/' + jobAdvert.id}>
                 <Card.Content>
                     <Card.Header>{jobAdvert.jobPositionName}</Card.Header>
                     <p>{jobAdvert.companyName}</p>

@@ -18,15 +18,30 @@ export default function Navbar() {
 
     return (
         <div>
-            <Menu inverted size='massive'>
+            <Menu  size='massive'>
                 <Container>
                 <Menu.Item
                     name='home'
+                    as={NavLink}
+                    to = "/"
                     
                 />
                 <Menu.Item
-                    name='messages'
+                    name='iş ilanları'
+                    as={NavLink}
+                    to="/jobAdvertisements"
                 />
+                <Menu.Item
+                    name='Yeni iş ilanı'
+                    as={NavLink}
+                    to="/newjobadvert"
+                />
+                <Menu.Item
+                    name='İş ilanlarını Görüntüle'
+                    as={NavLink}
+                    to="/admin/jobadvertlist"
+                />
+
 
                 <Menu.Menu position='right'>
                     {isAuthenticated?<SignedIn signOut = {handleSignOut}/>:<SignedOut />}

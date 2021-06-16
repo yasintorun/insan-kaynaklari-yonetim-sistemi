@@ -6,17 +6,17 @@ import java.util.List;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.dtos.DisplayJobAdvertisementDto;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 
 public interface JobAdvertisementService extends BaseService<JobAdvertisement>{
 	
 	public Result add(JobAdvertisementDto entity);
-	public DataResult<List<DisplayJobAdvertisementDto>> getAllDisplay();
+	public DataResult<List<JobAdvertisementDisplayDto>> getAllDisplay();
 	
-	public DataResult<List<DisplayJobAdvertisementDto>> getByIsActive(boolean isActive);
+	public DataResult<List<JobAdvertisementDisplayDto>> getByIsActive(boolean isActive);
 
-	DataResult<List<DisplayJobAdvertisementDto>> getByIsActiveAndReleaseDate(boolean isActive, Date releaseDate);
+	DataResult<List<JobAdvertisementDisplayDto>> getByIsActiveAndReleaseDate(boolean isActive, Date releaseDate);
 
 	DataResult<List<JobAdvertisementDto>> getAllSorted();
 	
@@ -24,5 +24,5 @@ public interface JobAdvertisementService extends BaseService<JobAdvertisement>{
 	
 	DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId);
 	
-	DataResult<DisplayJobAdvertisementDto> getJobAdvertisementById(int id);
+	DataResult<JobAdvertisementDisplayDto> getJobAdvertisementById(int id);
 }

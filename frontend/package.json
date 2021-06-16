@@ -18,6 +18,8 @@
     "react-scripts": "4.0.3",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
+    "slate": "^0.63.0",
+    "slate-react": "^0.65.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

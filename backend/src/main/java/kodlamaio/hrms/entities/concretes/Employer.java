@@ -35,6 +35,10 @@ public class Employer extends User{
 	@Column(name="is_confirmed")
 	private boolean isConfirmed;
 	
+
+	@Column(name="summary")
+	private String summary;
+	
 	@OneToMany(mappedBy="employer")
     private List<JobAdvertisement> jobAdvertisements;
 }

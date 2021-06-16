@@ -7,6 +7,7 @@ import CityList from './pages/CityList';
 import JobPost from './layouts/JobPost';
 import JobPostDetail from './pages/JobPostDetail';
 import Helper from './Helper';
+import AdminDashboard from './layouts/admin/AdminDashboard';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Navbar/>
       <Route path ="/" component = {Dashboard}/>
       <Route path ="/" component = {Auth}/>
+      <Route path = "/admin" component= {AdminDashboard} />
     </div>
   );
 }

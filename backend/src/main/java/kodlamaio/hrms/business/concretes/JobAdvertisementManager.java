@@ -18,7 +18,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.dtos.DisplayJobAdvertisementDto;
+import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 import net.bytebuddy.asm.Advice.This;
 
@@ -33,8 +33,8 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 	
 	@Override
-	public DataResult<List<DisplayJobAdvertisementDto>> getAllDisplay() {
-		return new SuccessDataResult<List<DisplayJobAdvertisementDto>>
+	public DataResult<List<JobAdvertisementDisplayDto>> getAllDisplay() {
+		return new SuccessDataResult<List<JobAdvertisementDisplayDto>>
 		(JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.findAll()));
 	}
 
@@ -59,13 +59,13 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public DataResult<List<DisplayJobAdvertisementDto>> getByIsActive(boolean isActive) {
+	public DataResult<List<JobAdvertisementDisplayDto>> getByIsActive(boolean isActive) {
 		
-		List<DisplayJobAdvertisementDto> displayJobAdvertisementDtos = new ArrayList<DisplayJobAdvertisementDto>();
+		List<JobAdvertisementDisplayDto> jobAdvertisementDisplayDtos = new ArrayList<JobAdvertisementDisplayDto>();
 		
 		List<JobAdvertisement> activeJobAdList = this.jobAdvertisementDao.getByIsActive(isActive);
 		
-		displayJobAdvertisementDtos = JobAdvertisementConverter.DisplayNormalToDto(activeJobAdList);
+		jobAdvertisementDisplayDtos = JobAdvertisementConverter.DisplayNormalToDto(activeJobAdList);
 		/*
 		for(int i = 0; i< activeJobAdList.size(); i++) {
 			displayJobAdvertisementDtos.add(new DisplayJobAdvertisementDto(
@@ -82,16 +82,16 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 					));
 		}*/
 		
-		return new SuccessDataResult<List<DisplayJobAdvertisementDto>>(displayJobAdvertisementDtos, "Listelendi");
+		return new SuccessDataResult<List<JobAdvertisementDisplayDto>>(jobAdvertisementDisplayDtos, "Listelendi");
 	}
 
 	@Override
-	public  DataResult<List<DisplayJobAdvertisementDto>> getByIsActiveAndReleaseDate(boolean isActive, Date releaseDate) {
-		List<DisplayJobAdvertisementDto> displayJobAdvertisementDtos = new ArrayList<DisplayJobAdvertisementDto>();
+	public  DataResult<List<JobAdvertisementDisplayDto>> getByIsActiveAndReleaseDate(boolean isActive, Date releaseDate) {
+		List<JobAdvertisementDisplayDto> jobAdvertisementDisplayDtos = new ArrayList<JobAdvertisementDisplayDto>();
 		
 		List<JobAdvertisement> activeJobAdList = this.jobAdvertisementDao.getByIsActive(isActive);
 
-		return new SuccessDataResult<List<DisplayJobAdvertisementDto>>(null, "Aktif olan ilanlar tarihe göre listelendi!");
+		return new SuccessDataResult<List<JobAdvertisementDisplayDto>>(null, "Aktif olan ilanlar tarihe göre listelendi!");
 	}
 
 	@Override
@@ -102,8 +102,6 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 	
 	
-
-
 	@Override
 	public DataResult<List<JobAdvertisement>> getByIsActiveAndEmployer_UserId(boolean isActive, int employerId) {
 		return new SuccessDataResult<List<JobAdvertisement>>
@@ -125,8 +123,8 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public DataResult<DisplayJobAdvertisementDto> getJobAdvertisementById(int id) {
-		return new SuccessDataResult<DisplayJobAdvertisementDto>
+	public DataResult<JobAdvertisementDisplayDto> getJobAdvertisementById(int id) {
+		return new SuccessDataResult<JobAdvertisementDisplayDto>
 		(JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.getJobAdvertisementById(id)), "İş ilanı getirildi");
 	}
 	

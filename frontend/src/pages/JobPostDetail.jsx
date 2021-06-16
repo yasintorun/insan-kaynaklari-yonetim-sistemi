@@ -6,12 +6,11 @@ import WorkStyleService from '../services/workStyleService'
 export default function JobPostDetail() {
     let { id } = useParams()
     const [jobAdvertisement, setjobAdvertisement] = useState({})
-    const [workStyles, setWorkStyles] = useState([])
-
+    //const [workStyles, setWorkStyles] = useState([])
     useEffect(() => {
         let jobAdvertService = new JobAdvertisementService()
         jobAdvertService.getJobAdvertisementById(id).then(result => setjobAdvertisement(result.data.data))
-
+        console.log("tsst")
     }, [])
 
     return (
@@ -19,7 +18,7 @@ export default function JobPostDetail() {
             <div className="bordered shadow w-75 m-auto">
                 <div className="row">
                     <div className="col-md-8">
-                        <h2>Backend Programlama</h2>
+                        <h2>{jobAdvertisement.jobPositionName}</h2>
                         <Label as='a' color='purple' >
                             {jobAdvertisement.workStyle}
                         </Label>
@@ -29,12 +28,14 @@ export default function JobPostDetail() {
                     </div>
                     <div className="card col-md-4">
                         <div className="card-body">
-                            <h2 className="card-title color-theme">Logo Yazılım</h2>
-                            <h6 class="card-subtitle mb-2 text-muted"><a href="">https://www.logo.com</a></h6>
-                            <h6 class="card-subtitle mb-2 text-muted">info@logo.com</h6>
-                            <p class="card-text">Biz kurumsal şirketizdir. Şöyleyiz böyleyiz</p>
+                            
+                            <h2 className="card-title color-theme">{jobAdvertisement.employer ? jobAdvertisement.employer.companyName : null}</h2>
+                            <h6 className="card-subtitle mb-2 text-muted"><a href="">{jobAdvertisement.employer ? jobAdvertisement.employer.website: null}</a></h6>
+                            <h6 className="card-subtitle mb-2 text-muted">{jobAdvertisement.employer ? jobAdvertisement.employer.eposta: null}</h6>
+                            <p className="card-text">{jobAdvertisement.employer ? jobAdvertisement.employer.summary : null}</p>
+                            
                             <Label color='teal' tag>
-                                Osmaniye
+                                {jobAdvertisement.cityName}
                             </Label>
                         </div>
                     </div>
@@ -45,15 +46,15 @@ export default function JobPostDetail() {
                         <Segment.Group horizontal >
                             <Segment padded color="teal">
                                 <Label attached='top'>Kontenjan</Label>
-                                <p>22</p>
+                                <p>{jobAdvertisement.maxPerson}</p>
                             </Segment>
                             <Segment padded color="teal">
                                 <Label attached='top'>Minimum maaş</Label>
-                                <p>3500</p>
+                                <p>{jobAdvertisement.minSalary}</p>
                             </Segment>
                             <Segment padded color="teal">
                                 <Label attached='top'>maksimum maaş</Label>
-                                <p>5000</p>
+                                <p>{jobAdvertisement.maxSalary}</p>
                             </Segment>
                         </Segment.Group>
                     </div>
@@ -64,14 +65,7 @@ export default function JobPostDetail() {
                         <Segment horizontal color="teal">
 
                             <Label attached='top'>İş Tanımı</Label>
-                            <p>
-                                <ul className>
-                                    <li className="mt-3">Sorumluluğundaki  Müşteri gruplarının dış aramalar yapılarak bağlayıcılıklarını, hedeflerini, risklerini , şikayetlerini izlemek ve gerekli aksiyonların alınması ve takipçisi olunması.</li>
-                                    <li className="mt-3">Sorumluluğundaki müşterilerine ürünlerin satışının gerçekleştirilmesi.</li>
-                                    <li className="mt-3">Müşterilerindeki olası satış fırsatlarını değerlendirerek aylık performans hedeflerinin yerine getirilmesi.Müşterilerine etkin, hızlı ve kaliteli hizmet verilmesi için gerekli desteğin sağlanması.</li>
-                                    <li className="mt-3">Müşterilerindeki olası satış fırsatlarını değerlendirerek aylık performans hedeflerinin yerine getirilmesi.Müşterilerine etkin, hızlı ve kaliteli hizmet verilmesi için gerekli desteğin sağlanması.</li>
-                                </ul>
-                            </p>
+                            <div dangerouslySetInnerHTML={{ __html: jobAdvertisement.description}} />
                         </Segment>
                     </div>
                 </div>
@@ -79,6 +73,6 @@ export default function JobPostDetail() {
                     <Button color='green'>Başvur</Button>
                 </div>
             </div>
-        </div>
+    </div>
     )
 }
