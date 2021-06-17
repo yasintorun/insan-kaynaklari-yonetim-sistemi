@@ -1,0 +1,18 @@
+.editorContainer {
+    border: 1px solid rgba(128, 128, 128, 0.205);
+    min-height: 25vh;
+}
+
+.w-full {
+    width: 100%;
+    margin: auto;
+}
+.editorBtnGroup {
+    text-align: left;
+}
+
+.public-DraftEditor-content {
+    font-size: large;
+    min-height: 25vh;
+    padding: 20px 30px;
+}

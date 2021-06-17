@@ -3,12 +3,8 @@ import Navbar from './layouts/Navbar';
 import Auth from './layouts/auth/Auth'
 import { Route } from 'react-router'
 import Dashboard from './layouts/Dashboard';
-import CityList from './pages/CityList';
-import JobPost from './layouts/JobPost';
-import JobPostDetail from './pages/JobPostDetail';
-import Helper from './Helper';
 import AdminDashboard from './layouts/admin/AdminDashboard';
-
+import RichTextEditor from './components/RichTextEditor/RichTextEditor';
 function App() {
   return (
     <div className="App">

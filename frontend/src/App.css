@@ -3,6 +3,11 @@
   --ThemeColor: rgb(86, 36, 179);
 }
 
+.container-large {
+  width: 80%;
+  margin: auto;
+}
+
 .logo {
   font-size: 20px;
   font-weight: bold !important;

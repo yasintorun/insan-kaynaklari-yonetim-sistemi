@@ -15,10 +15,10 @@ export default function JobPost({ jobAdvert }) {
                         <div className="d-flex justify-content-between">
                             <div>
                                 <Label as='a' color='teal' tag size="small">
-                                    {jobAdvert.workStyle}
+                                    {jobAdvert.workStyle?.name}
                                 </Label>
                                 <Label as='a' color='pink' tag size="small">
-                                    {jobAdvert.workTimeStyle}
+                                    {jobAdvert.workTimeStyle?.name}
                                 </Label>
                             </div>
                             <Card.Meta>

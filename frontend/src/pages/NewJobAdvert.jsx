@@ -1,24 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { Icon, Input, Button, Label, Form, Dropdown, TextArea } from 'semantic-ui-react'
+import { Input, Button, Label, Form, Dropdown, TextArea } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService';
 import CityService from '../services/cityService';
 import JobPositionService from '../services/jobPositionService'
 import WorkStyleService from '../services/workStyleService';
 import WorkTimeStyleService from '../services/workTimeService';
-
-import { createEditor } from 'slate'
-import { Slate, Editable, withReact, ReactEditor } from 'slate-react'
+import RichTextEditor from '../components/RichTextEditor/RichTextEditor';
 
 export default function NewJobAdvert() {
 
-  const editor = useMemo(() => withReact(createEditor()), [])
-  const [inputArea, setInputArea] = useState([
-    {
-      type: 'paragraph',
-      children: [{ text: 'A line of text in a paragraph.' }],
-    },
-  ])
 
   const [cities, setCities] = useState([])
   const [jobPositions, setJobPositions] = useState([])
@@ -54,11 +45,12 @@ export default function NewJobAdvert() {
       employerId: 2,
       deadline: '',
       description: '',
+      workStyleId: 1,
+      workTimeStyleId: 2
     },
     onSubmit: values => {
-      cities.map(x => console.log(x))
-      //jobAdvertisementService.add(values).then();
-      alert(JSON.stringify(values, null, 2))
+      jobAdvertisementService.add(values).then();
+      //alert(JSON.stringify(values, null, 2))
     },
   });
 
@@ -66,6 +58,10 @@ export default function NewJobAdvert() {
     formik.setFieldValue(fieldName, value);
   }
 
+  const handleRichTextEditorInput = (value) => {
+    formik.setFieldValue("description", value)
+  }
+  
   return (
     <Form onSubmit={formik.handleSubmit} className="mt-5 page-center" align="center">
       <div className="bordered shadow mb-5 w-75">
@@ -207,38 +203,14 @@ export default function NewJobAdvert() {
           </div>
 
         </div>
-
-        <Slate
-          editor={editor}
-          value={inputArea}
-          onChange={newValue => setInputArea(newValue)}
-        >
-          <Editable style={{ border: "1px solid black" }}
-            onKeyDown={event => {
-              if (event.key === '&') {
-                // Prevent the ampersand character from being inserted.
-                event.preventDefault()
-                // Execute the `insertText` method when the event occurs.
-                editor.insertText('and')
-              }
-            }}
-          />
-        </Slate>
-
         <Form.Field>
           <Label className="mt-3">
             Lütfen iş ilanı için açıklama giriniz
           </Label>
-          <TextArea
-            rows={10}
-            id="description"
-            name="description"
-            type="textarea"
-            onChange={formik.handleChange}
-            value={formik.values.description}
+          <RichTextEditor
+            textValue={handleRichTextEditorInput}
           />
         </Form.Field>
-
 
         <Button color='green' type="submit" className="mt-3">İlanı yayınla</Button>
       </div>

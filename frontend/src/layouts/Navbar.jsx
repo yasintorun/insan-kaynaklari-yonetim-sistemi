@@ -19,7 +19,7 @@ export default function Navbar() {
     return (
         <div>
             <Menu  size='massive'>
-                <Container>
+                <div className="container-large d-flex">
                 <Menu.Item
                     name='home'
                     as={NavLink}
@@ -41,12 +41,17 @@ export default function Navbar() {
                     as={NavLink}
                     to="/admin/jobadvertlist"
                 />
+                <Menu.Item
+                    name='Özgeçmişler'
+                    as={NavLink}
+                    to="/admin/resumeList"
+                />
 
 
                 <Menu.Menu position='right'>
                     {isAuthenticated?<SignedIn signOut = {handleSignOut}/>:<SignedOut />}
                 </Menu.Menu>
-                </Container>
+                </div>
             </Menu>
         </div>
     )

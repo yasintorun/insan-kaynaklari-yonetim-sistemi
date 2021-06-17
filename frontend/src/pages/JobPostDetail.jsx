@@ -20,19 +20,19 @@ export default function JobPostDetail() {
                     <div className="col-md-8">
                         <h2>{jobAdvertisement.jobPositionName}</h2>
                         <Label as='a' color='purple' >
-                            {jobAdvertisement.workStyle}
+                            {jobAdvertisement.workStyle?.name}
                         </Label>
                         <Label as='a' color='red'>
-                            {jobAdvertisement.workTimeStyle}
+                            {jobAdvertisement.workTimeStyle?.name}
                         </Label>
                     </div>
                     <div className="card col-md-4">
                         <div className="card-body">
                             
-                            <h2 className="card-title color-theme">{jobAdvertisement.employer ? jobAdvertisement.employer.companyName : null}</h2>
-                            <h6 className="card-subtitle mb-2 text-muted"><a href="">{jobAdvertisement.employer ? jobAdvertisement.employer.website: null}</a></h6>
-                            <h6 className="card-subtitle mb-2 text-muted">{jobAdvertisement.employer ? jobAdvertisement.employer.eposta: null}</h6>
-                            <p className="card-text">{jobAdvertisement.employer ? jobAdvertisement.employer.summary : null}</p>
+                            <h2 className="card-title color-theme">{jobAdvertisement.employer?.companyName }</h2>
+                            <h6 className="card-subtitle mb-2 text-muted"><a href="">{jobAdvertisement.employer?.website}</a></h6>
+                            <h6 className="card-subtitle mb-2 text-muted">{jobAdvertisement.employer?.eposta}</h6>
+                            <p className="card-text">{jobAdvertisement.employer?.summary}</p>
                             
                             <Label color='teal' tag>
                                 {jobAdvertisement.cityName}
