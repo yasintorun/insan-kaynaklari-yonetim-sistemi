@@ -37,7 +37,7 @@ Ayrıca draftjs den html dosyasına dönüştürebilmek için [Draft export Html
     	npm install draft-js-export-html
 
 
-<strong>Src</strong> klasörü içerisine <strong>component</strong> klasörü ve <strong>component</strong> klasörü içerisinede <strong>editor</strong> klasörü oluşturun.
+<strong>Src</strong> klasörü içerisine <strong>component</strong> klasörü ve <strong>component</strong> klasörü içerisinede <strong>RichTextEditor</strong> klasörü oluşturun.
 
 [Buradaki ](https://github.com/yasintorun/insan-kaynaklari-yonetim-sistemi/tree/Dev3/frontend/src/components/RichTextEditor) <strong>RichTextEditor.jsx</strong> ve <strong>editor.css</strong> dosyalarını indirip editör klasörüne ekleyiniz. 
 
