@@ -39,7 +39,7 @@ Ayrıca draftjs den html dosyasına dönüştürebilmek için [Draft export Html
 
 <strong>Src</strong> klasörü içerisine <strong>component</strong> klasörü ve <strong>component</strong> klasörü içerisinede <strong>editor</strong> klasörü oluşturun.
 
-[Buradaki ](http://github.com) <strong>RichTextEditor.jsx</strong> ve <strong>editor.css</strong> dosyalarını indirip editör klasörüne ekleyiniz. 
+[Buradaki ](https://github.com/yasintorun/insan-kaynaklari-yonetim-sistemi/tree/Dev3/frontend/src/components/RichTextEditor) <strong>RichTextEditor.jsx</strong> ve <strong>editor.css</strong> dosyalarını indirip editör klasörüne ekleyiniz. 
 
 #### Not: Ben projede semantic + bootstrap kullanıyorum. Siz hangi kütüphaneleri kullanıyorsanız Button kodlarını ona göre değiştirin.
 
