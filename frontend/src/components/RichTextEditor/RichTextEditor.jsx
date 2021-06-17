@@ -1,8 +1,7 @@
 import React from "react";
-import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
-import draftToHtml from 'draftjs-to-html';
+import { Editor, EditorState, RichUtils} from "draft-js";
 
-import { Button, Icon, TextArea } from "semantic-ui-react";
+import { Button, Icon } from "semantic-ui-react";
 import 'draft-js/dist/Draft.css';
 import './editor.css'
 
@@ -46,8 +45,6 @@ const allTransactions = [
 	},
 	
 ]
-
-
 
 class RichTextEditor extends React.Component {
 	constructor(props) {
@@ -130,11 +127,5 @@ class RichTextEditor extends React.Component {
 		);
 	}
 }
-
-
-
-
-
-
 
 export default RichTextEditor;
