@@ -2,7 +2,7 @@ import axios from "axios"
 
 export default class JobAdvertisementService {
     getJobAdvertisement()   {
-        return  axios.get("http://localhost:8080/api/jobAdvertisements/getAllJobAdvertisement");
+        return  axios.get("http://localhost:8080/api/jobAdvertisements/getAllSortedJobAdvertisement");
     }
 
     getJobAdvertisementById(id) {
@@ -11,5 +11,8 @@ export default class JobAdvertisementService {
 
     add(values) {
         return axios.post("http://localhost:8080/api/jobAdvertisements/add", values);
+    }
+    changeActive(isActive, id) {
+        return axios.get(`http://localhost:8080/api/jobAdvertisements/ChangeActive?isActive=${isActive}&jobAdvertisementId=${id}`)
     }
 }

@@ -17,7 +17,7 @@ export default function Navbar() {
     }
 
     return (
-        <div>
+        <div className="fixed-top">
             <Menu  size='massive'>
                 <div className="container-large d-flex">
                 <Menu.Item

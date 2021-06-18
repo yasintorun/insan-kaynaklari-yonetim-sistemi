@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import JobAdvertisementService from '../../services/jobAdvertisementService'
-import { Button, Table } from 'semantic-ui-react'
+import { Button, Label, Table } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 
 export default function JobAdvertList() {
@@ -10,7 +10,7 @@ export default function JobAdvertList() {
         let jobAdvertisementService = new JobAdvertisementService()
         jobAdvertisementService.getJobAdvertisement().then(result => setJobAdvertisements(result.data.data))
         console.log(jobAdvertisements)
-    })
+    }, [])
     return (
         <div>
             <Table singleLine striped color="purple" textAlign="center" selectable>
@@ -22,6 +22,7 @@ export default function JobAdvertList() {
                         <Table.HeaderCell>Çalışma Türü</Table.HeaderCell>
                         <Table.HeaderCell>Başvuru başlangıç tarihi</Table.HeaderCell>
                         <Table.HeaderCell>Başvuru bitiş tarihi</Table.HeaderCell>
+                        <Table.HeaderCell>Onaylı mı?</Table.HeaderCell>
                         <Table.HeaderCell></Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
@@ -30,13 +31,20 @@ export default function JobAdvertList() {
                     {jobAdvertisements.map(jobAdvert => (
                         <Table.Row>
                             <Table.Cell >{jobAdvert.jobPositionName}</Table.Cell>
-                            <Table.Cell>{jobAdvert.employer ? jobAdvert.employer.companyName : null}</Table.Cell>
+                            <Table.Cell>{jobAdvert.employer?.companyName}</Table.Cell>
                             <Table.Cell>{jobAdvert.cityName}</Table.Cell>
-                            <Table.Cell>{jobAdvert.workTimeStyle}</Table.Cell>
+                            <Table.Cell>{jobAdvert.workTimeStyle?.name}</Table.Cell>
                             <Table.Cell>{jobAdvert.releaseDate}</Table.Cell>
                             <Table.Cell>{jobAdvert.deadline}</Table.Cell>
+                            <Table.Cell>
+                                {
+                                    jobAdvert.active
+                                        ?<Label color="green"> &#10004; </Label>
+                                        :<Label color="red">&#10008;</Label>
+                                }
+                            </Table.Cell>
                             
-                            <Table.Cell><Button positive as = {NavLink} to="/jobad">Detay</Button></Table.Cell>
+                            <Table.Cell><Button positive as = {NavLink} to={'/detail/' + jobAdvert.id}>Detay</Button></Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>

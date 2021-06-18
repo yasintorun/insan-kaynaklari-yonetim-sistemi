@@ -7,7 +7,7 @@ import JobPositionService from '../services/jobPositionService'
 import WorkStyleService from '../services/workStyleService';
 import WorkTimeStyleService from '../services/workTimeService';
 import RichTextEditor from '../components/RichTextEditor/RichTextEditor';
-
+import * as Yup from 'yup';
 export default function NewJobAdvert() {
 
 
@@ -33,6 +33,34 @@ export default function NewJobAdvert() {
   const jobAdvertisementService = new JobAdvertisementService()
 
 
+  const SignupSchema = Yup.object().shape({
+    cityId: Yup.string()
+      .required('Zorunlu Alan'),
+    jobPositionId: Yup.string()
+      .required('Zorunlu alan'),
+    maxPerson: Yup.number()
+      .min(1, 'kontenjan sayısı minimum 1 olabilir.')
+      .max(100, 'kontenjan sayısı maksimum 100 olabilir.')
+      .required('Zorunlu alan'),
+    minSalary: Yup.number()
+      .min(0, 'minimum maaş en az 0 olabilir.')
+      .max(100000, 'minimum maaş en fazla 100 bin olabilir.')
+      .required('Zorunlu alan'),
+    maxSalary: Yup.number()
+      .min(0, 'maksimum maaş en az 0 olabilir.')
+      .max(1000000, 'maksimum maaş en fazla 1 milyon olabilir.')
+      .required('Zorunlu alan'),
+    deadline: Yup.date()
+      .min(new Date(), "Son başvuru tarihi bugünden itibaren olmalıdır.")
+      .required('Zorunlu alan'),
+    workStyleId: Yup.number()
+      .required('Zorunlu alan'),
+    workTimeStyleId: Yup.number()
+      .required('Zorunlu alan'),
+    description: Yup.string()
+      .required('Zorunlu Alan'),
+    //email: Yup.string().email('Invalid email').required('Required'),
+  });
 
 
   const formik = useFormik({
@@ -45,12 +73,13 @@ export default function NewJobAdvert() {
       employerId: 2,
       deadline: '',
       description: '',
-      workStyleId: 1,
-      workTimeStyleId: 2
+      workStyleId: '',
+      workTimeStyleId: ''
     },
+    validationSchema: SignupSchema,
     onSubmit: values => {
-      jobAdvertisementService.add(values).then();
-      //alert(JSON.stringify(values, null, 2))
+      //jobAdvertisementService.add(values).then();
+      alert(JSON.stringify(values, null, 2))
     },
   });
 
@@ -61,7 +90,7 @@ export default function NewJobAdvert() {
   const handleRichTextEditorInput = (value) => {
     formik.setFieldValue("description", value)
   }
-  
+
   return (
     <Form onSubmit={formik.handleSubmit} className="mt-5 page-center" align="center">
       <div className="bordered shadow mb-5 w-75">
@@ -86,6 +115,14 @@ export default function NewJobAdvert() {
                 //id="cityId"
                 value={formik.values.cityId}
               />
+              {formik.errors.cityId && formik.touched.cityId
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.cityId}
+                  </Label>
+                )
+                : null
+              }
             </Form.Field>
 
 
@@ -101,6 +138,14 @@ export default function NewJobAdvert() {
                 onChange={formik.handleChange}
                 value={formik.values.maxPerson}
               />
+              {formik.errors.maxPerson && formik.touched.maxPerson
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.maxPerson}
+                  </Label>
+                )
+                : null
+              }
             </Form.Field>
 
             <Form.Field>
@@ -114,6 +159,14 @@ export default function NewJobAdvert() {
                 onChange={formik.handleChange}
                 value={formik.values.minSalary}
               />
+              {formik.errors.minSalary && formik.touched.minSalary
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.minSalary}
+                  </Label>
+                )
+                : null
+              }
             </Form.Field>
 
             <Form.Field>
@@ -127,6 +180,14 @@ export default function NewJobAdvert() {
                 onChange={formik.handleChange}
                 value={formik.values.maxSalary}
               />
+              {formik.errors.maxSalary && formik.touched.maxSalary
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.maxSalary}
+                  </Label>
+                )
+                : null
+              }
             </Form.Field>
 
 
@@ -134,7 +195,6 @@ export default function NewJobAdvert() {
 
           <div className="col-md-2"></div>
           <div className="col-md-5">
-
             <Form.Field>
               <Label className="mt-3">
                 Lütfen iş pozisyonunu giriniz
@@ -154,6 +214,14 @@ export default function NewJobAdvert() {
                 //id="cityId"
                 value={formik.values.jobPositionId}
               />
+              {formik.errors.jobPositionId && formik.touched.jobPositionId
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.jobPositionId}
+                  </Label>
+                )
+                : null
+              }
             </Form.Field>
 
             <Form.Field>
@@ -167,6 +235,14 @@ export default function NewJobAdvert() {
                 onChange={formik.handleChange}
                 value={formik.values.deadline}
               />
+              {formik.errors.deadline && formik.touched.deadline
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.deadline}
+                  </Label>
+                )
+                : null
+              }
             </Form.Field>
             <Form.Field>
               <Label className="mt-3">
@@ -179,7 +255,20 @@ export default function NewJobAdvert() {
                 options={workStyle.map((x, index) => {
                   return { text: x.name, key: x.index, value: x.id }
                 })}
+                onChange={(event, data) =>
+                  formik.setFieldValue("workStyleId", data.value)
+                }
+                //id="cityId"
+                value={formik.values.workStyleId}
               />
+              {formik.errors.workStyleId && formik.touched.workStyleId
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.workStyleId}
+                  </Label>
+                )
+                : null
+              }
 
             </Form.Field>
 
@@ -194,8 +283,20 @@ export default function NewJobAdvert() {
                 options={workTimeStyle.map((x, index) => {
                   return { text: x.name, key: x.index, value: x.id }
                 })}
+                onChange={(event, data) =>
+                  formik.setFieldValue("workTimeStyleId", data.value)
+                }
+                //id="cityId"
+                value={formik.values.workTimeStyleId}
               />
-
+              {formik.errors.workTimeStyleId && formik.touched.workTimeStyleId
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.workTimeStyleId}
+                  </Label>
+                )
+                : null
+              }
             </Form.Field>
 
 
@@ -210,6 +311,14 @@ export default function NewJobAdvert() {
           <RichTextEditor
             textValue={handleRichTextEditorInput}
           />
+          {formik.errors.description && formik.touched.description
+                ? (
+                  <Label basic color='red' pointing>
+                    {formik.errors.description}
+                  </Label>
+                ) 
+                : null
+              }
         </Form.Field>
 
         <Button color='green' type="submit" className="mt-3">İlanı yayınla</Button>

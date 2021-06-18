@@ -1,16 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Header, Image, Table, Label, Segment, Button } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import WorkStyleService from '../services/workStyleService'
+
 export default function JobPostDetail() {
     let { id } = useParams()
     const [jobAdvertisement, setjobAdvertisement] = useState({})
-    //const [workStyles, setWorkStyles] = useState([])
+    const [isAdmin, setIsAdmin] = useState(true)
+
+    let jobAdvertService = new JobAdvertisementService()
+    function handleAdmin(params) {
+        setIsAdmin(true)
+    }
+
+    function handleOther(params) {
+        setIsAdmin(false)
+    }
+
+    const handleOnSubmit = (jobAdvertisement) => {
+        toast.success(`${jobAdvertisement.id} onaylandı`, {onClose: () => {/*Burada sayfa geri gelcek.*/}})
+        jobAdvertService.changeActive(!jobAdvertisement.active, jobAdvertisement.id).then() 
+        
+    }
+
     useEffect(() => {
-        let jobAdvertService = new JobAdvertisementService()
+        
         jobAdvertService.getJobAdvertisementById(id).then(result => setjobAdvertisement(result.data.data))
-        console.log("tsst")
     }, [])
 
     return (
@@ -28,12 +45,12 @@ export default function JobPostDetail() {
                     </div>
                     <div className="card col-md-4">
                         <div className="card-body">
-                            
-                            <h2 className="card-title color-theme">{jobAdvertisement.employer?.companyName }</h2>
+
+                            <h2 className="card-title color-theme">{jobAdvertisement.employer?.companyName}</h2>
                             <h6 className="card-subtitle mb-2 text-muted"><a href="">{jobAdvertisement.employer?.website}</a></h6>
                             <h6 className="card-subtitle mb-2 text-muted">{jobAdvertisement.employer?.eposta}</h6>
                             <p className="card-text">{jobAdvertisement.employer?.summary}</p>
-                            
+
                             <Label color='teal' tag>
                                 {jobAdvertisement.cityName}
                             </Label>
@@ -65,14 +82,29 @@ export default function JobPostDetail() {
                         <Segment horizontal color="teal">
 
                             <Label attached='top'>İş Tanımı</Label>
-                            <div dangerouslySetInnerHTML={{ __html: jobAdvertisement.description}} />
+                            <div dangerouslySetInnerHTML={{ __html: jobAdvertisement.description }} />
                         </Segment>
                     </div>
                 </div>
                 <div className="text-center mt-4">
-                    <Button color='green'>Başvur</Button>
+                    {
+                        isAdmin
+                            ? <div>
+                                <Button color='green' 
+                                onClick={() => handleOnSubmit(jobAdvertisement)}>
+                                    {
+                                        jobAdvertisement.active ?  "De-Aktif et" : "Onayla"
+                                    }
+                                    
+                                </Button>
+                                <Button color='red'>Sil</Button>
+                            </div>
+                            : <Button color='green'>Başvur</Button>
+
+                    }
+
                 </div>
             </div>
-    </div>
+        </div>
     )
 }
