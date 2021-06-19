@@ -9,12 +9,11 @@ import { ToastContainer } from 'react-toastify';
 function App() {
   return (
     <div className="App">
-       <ToastContainer position="bottom-right" autoClose={1500} hideProgressBar={true} pauseOnHover={false}/>
-      <Navbar/>
-      <div className="mt-8"></div>
-      <Route path ="/" component = {Dashboard}/>
-      <Route path ="/" component = {Auth}/>
-      <Route path = "/admin" component= {AdminDashboard} />
+      <ToastContainer position="bottom-right" autoClose={1500} hideProgressBar={true} pauseOnHover={false} />
+      <Navbar />
+      <Route path="/" component={Dashboard} />
+      <Route path="/" component={Auth} />
+      <Route path="/admin" component={AdminDashboard} />
     </div>
   );
 }

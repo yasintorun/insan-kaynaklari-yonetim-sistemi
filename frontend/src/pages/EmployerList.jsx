@@ -19,7 +19,6 @@ export default function Employer() {
                     <Table.HeaderCell>E-posta</Table.HeaderCell>
                     <Table.HeaderCell>Web-site</Table.HeaderCell>
                     <Table.HeaderCell>Telefon</Table.HeaderCell>
-                    <Table.HeaderCell>Onaylı mı</Table.HeaderCell>
                 </Table.Row>
                 </Table.Header>
 
@@ -31,7 +30,6 @@ export default function Employer() {
                                 <Table.Cell>{employer.eposta}</Table.Cell>
                                 <Table.Cell>{employer.website}</Table.Cell>
                                 <Table.Cell>{employer.phone}</Table.Cell>
-                                <Table.Cell>{employer.confirmed}</Table.Cell>
                             </Table.Row>
                         ))
                     }

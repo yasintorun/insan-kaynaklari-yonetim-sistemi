@@ -17,6 +17,9 @@ export default function Navbar() {
     }
 
     return (
+        <div>
+
+        
         <div className="fixed-top">
             <Menu  size='massive'>
                 <div className="container-large d-flex">
@@ -53,6 +56,9 @@ export default function Navbar() {
                 </Menu.Menu>
                 </div>
             </Menu>
+        </div>
+        
+      <div className="mt-8"></div>
         </div>
     )
 }

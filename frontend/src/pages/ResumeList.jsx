@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {Icon, Menu, Table } from 'semantic-ui-react'
 import ResumeService from '../services/resumeService'
 
-export default function Resume() {
+export default function ResumeList() {
     const [resumes, setResumes] = useState([])
 
     useEffect(() => {
