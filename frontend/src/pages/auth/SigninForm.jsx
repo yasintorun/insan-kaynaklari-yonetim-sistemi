@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { Icon, Input, Button, Label, Form , Menu} from 'semantic-ui-react'
-import { Link } from 'react-router-dom';
+import { Input, Button, Label, Form , Icon} from 'semantic-ui-react'
 
 export default function SigninForm() {
   const formik = useFormik({
@@ -19,7 +18,7 @@ export default function SigninForm() {
         <div className="bordered shadow w-25">
 
 
-          <Form.Field className="w-75 m-auto" >
+          <Form.Field className="w-100 m-auto" >
             <Label className="mt-3" color="grey">
               Lütfen eposta adresinizi giriniz:
             </Label>
@@ -28,12 +27,14 @@ export default function SigninForm() {
               id="email"
               name="email"
               type="email"
+              icon="user"
+              iconPosition="left"
               onChange={formik.handleChange}
               value={formik.values.email}
             />
           </Form.Field>
 
-          <Form.Field className="w-75 m-auto">
+          <Form.Field className="w-100 m-auto">
             <Label className="mt-3" color="grey">
               Lütfen şifrenizi giriniz
             </Label>
@@ -42,6 +43,8 @@ export default function SigninForm() {
               id="password"
               name="password"
               type="password"
+              icon="key"
+              iconPosition="left"
               onChange={formik.handleChange}
               value={formik.values.password}
             />
@@ -50,7 +53,7 @@ export default function SigninForm() {
 
 
 
-          <Button color='green' type="submit" className="mt-3">Giriş Yap</Button>
+          <Button color='green' type="submit" className="mt-3"><Icon name="sign-in"/>Giriş Yap</Button>
         </div>
       </Form>
     </div>

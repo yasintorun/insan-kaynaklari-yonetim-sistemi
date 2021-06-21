@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Icon, Menu, Table } from 'semantic-ui-react'
+import { Table } from 'semantic-ui-react'
 import UserSkillService from '../services/userSkillService'
 
 export default function UserSkill() {

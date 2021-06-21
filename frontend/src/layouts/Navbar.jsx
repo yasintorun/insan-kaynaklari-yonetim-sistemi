@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Container, Dropdown, Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 import SignedOut from './SignedOut'
 import SignedIn from './SignedIn'
 import { NavLink } from 'react-router-dom'

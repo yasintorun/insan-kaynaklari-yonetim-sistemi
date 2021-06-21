@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Icon, Menu, Table } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import JobPost from '../layouts/JobPost'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import JobAdvertFiltering from '../layouts/JobAdvertFiltering'
@@ -11,25 +11,25 @@ export default function JobAdvertisement() {
         let jobAdvertisementService = new JobAdvertisementService()
         jobAdvertisementService.getJobAdvertisement().then(result => setJobAdvertisements(result.data.data))
         jobAdvertisementService.getJobAdvertisement().then(result => setBaseJobAdvert(result.data.data))
-       // setBaseJobAdvert(jobAdvertisements)
+        // setBaseJobAdvert(jobAdvertisements)
     }, [])
 
     const handleFilterClick = (filterOption) => {
-        setJobAdvertisements(baseJobAdvert.filter(x=> filterOption.city == 0 || filterOption.city.indexOf(x.city.id) > -1)
-        .filter(y=> filterOption.jobPosition[y.jobPosition.id] || filterOption.jobPosition.indexOf(true) < 0)
-        .filter(z => filterOption.workStyle[z.workStyle.id] || filterOption.workStyle.indexOf(true) < 0)
-        .filter(z => filterOption.workTimeStyle[z.workTimeStyle.id] || filterOption.workTimeStyle.indexOf(true) < 0)
+        setJobAdvertisements(baseJobAdvert.filter(x => filterOption.city == 0 || filterOption.city.indexOf(x.city.id) > -1)
+            .filter(y => filterOption.jobPosition[y.jobPosition.id] || filterOption.jobPosition.indexOf(true) < 0)
+            .filter(z => filterOption.workStyle[z.workStyle.id] || filterOption.workStyle.indexOf(true) < 0)
+            .filter(z => filterOption.workTimeStyle[z.workTimeStyle.id] || filterOption.workTimeStyle.indexOf(true) < 0)
         )
-        
+
     }
 
     return (
 
-        <div className="mt-5">
-        <h2 className="text-center">İş ilanları</h2>
+        <div className="mt-8 mb-5">
+            <h2 className="text-center">İş ilanları</h2>
             <Grid>
                 <Grid.Column width={4}>
-                    <JobAdvertFiltering clickEvent={handleFilterClick}/>
+                    <JobAdvertFiltering clickEvent={handleFilterClick} />
                 </Grid.Column>
                 <Grid.Column width={12}>
                     {

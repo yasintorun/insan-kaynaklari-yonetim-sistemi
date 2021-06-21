@@ -1,8 +1,8 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { Icon, Input, Button, Label, Form } from 'semantic-ui-react'
+import { Input, Button, Label, Form } from 'semantic-ui-react'
 
-export default function SignupForm() {
+export default function SignupForJobseeker() {
   const formik = useFormik({
     initialValues: {
       email: '',

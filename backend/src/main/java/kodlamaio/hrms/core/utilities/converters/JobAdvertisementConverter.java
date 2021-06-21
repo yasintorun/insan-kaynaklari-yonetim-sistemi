@@ -25,7 +25,7 @@ public class JobAdvertisementConverter {
 	public static JobAdvertisementDto NormalToDto(JobAdvertisement normal) {
 		return new JobAdvertisementDto(normal.getId(), normal.getDescription(), normal.getMinSalary(), normal.getMaxSalary(),
 									   normal.getMaxperson(), normal.getDeadline(), normal.isActive(), normal.getCity().getId(), 
-									   normal.getJobPosition().getId(), normal.getEmployer().getUserId());
+									   normal.getJobPosition().getId(), normal.getEmployer().getUserId(), normal.getWorkStyle().getId(), normal.getWorkStyle().getId());
 	}
 	
 	
@@ -42,9 +42,9 @@ public class JobAdvertisementConverter {
 
 	public static JobAdvertisementDisplayDto DisplayNormalToDto(JobAdvertisement normal) {
 		EmployerDisplayDto empDto = EmployerDtoConverter.NormalToDisplayDto(normal.getEmployer());
-		return new JobAdvertisementDisplayDto(normal.getId(), empDto, normal.getJobPosition().getJobName(), normal.getCity().getCityName(), 
+		return new JobAdvertisementDisplayDto(normal.getId(), empDto, normal.getJobPosition(), normal.getCity(), 
 									   normal.getMaxperson(), normal.getMinSalary(), normal.getMaxSalary(), normal.getReleaseDate(), normal.getDeadline(),
-									   normal.getWorkStyle().getName(), normal.getWorkTimeStyle().getName(), normal.getDescription(), normal.isActive());
+									   normal.getWorkStyle(), normal.getWorkTimeStyle(), normal.getDescription(), normal.isActive());
 	}
 	
 	

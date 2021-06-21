@@ -5,13 +5,10 @@ import JobAdvertisement from '../pages/JobAdvertisementList'
 import JobPosition from '../pages/JobPositionList'
 import JobPostDetail from '../pages/JobPostDetail'
 import NewJobAdvert from '../pages/NewJobAdvert'
-import Navbar from './Navbar'
-import Home from '../pages/Home'
 export default function Dashboard() {
     return (
-        <div>
+        <div className="bg-light">
             
-            <Navbar/>
             <div className="container">
                 <Route exact path="/employer" component={Employer} />
                 <Route exact path="/jobPosition" component={JobPosition} />
@@ -19,7 +16,6 @@ export default function Dashboard() {
                 <Route exact path="/jobAdvertisements" component={JobAdvertisement} />
                 <Route exact path="/detail/:id" component={JobPostDetail} />
             </div>
-
         </div>
     )
 }

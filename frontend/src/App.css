@@ -103,9 +103,12 @@
   line-height: 30px;
 }
 .shadow:hover {
-  background-color: #e4f2ff !important;
+  background-color: #f6fbff !important;
   box-shadow: 0px 0px 20px 1px rgba(205, 205, 205, 1) !important;
-
+}
+.shadow-no-hover:hover {
+  
+  background-color: white !important;
 }
 
 .line {

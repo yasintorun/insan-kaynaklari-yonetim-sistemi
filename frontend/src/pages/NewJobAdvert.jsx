@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { Input, Button, Label, Form, Dropdown, TextArea } from 'semantic-ui-react'
+import { Input, Button, Label, Form, Dropdown } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService';
 import CityService from '../services/cityService';
 import JobPositionService from '../services/jobPositionService'

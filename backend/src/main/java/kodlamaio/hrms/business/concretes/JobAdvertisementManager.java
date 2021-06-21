@@ -95,10 +95,10 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisementDto>> getAllSorted() {
+	public DataResult<List<JobAdvertisementDisplayDto>> getAllSorted() {
 		Sort sort = Sort.by(Sort.Direction.DESC, "releaseDate");
 		
-		return new SuccessDataResult<List<JobAdvertisementDto>>(JobAdvertisementConverter.NormalToDto(this.jobAdvertisementDao.findAll(sort)), "Başarılı!");	
+		return new SuccessDataResult<List<JobAdvertisementDisplayDto>>(JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.findAll(sort)), "Başarılı!");	
 	}
 	
 	
@@ -109,9 +109,9 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId) {
+	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId, boolean active) {
 		JobAdvertisement current = jobAdvertisementDao.getOne(jobAdvertisementId);
-		current.setActive(false);
+		current.setActive(active);
 		return new SuccessDataResult<JobAdvertisementDto>
 		(JobAdvertisementConverter.NormalToDto(this.jobAdvertisementDao.save(current)), "İlan pasif hale getirildi!");
 	}
@@ -126,6 +126,11 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	public DataResult<JobAdvertisementDisplayDto> getJobAdvertisementById(int id) {
 		return new SuccessDataResult<JobAdvertisementDisplayDto>
 		(JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.getJobAdvertisementById(id)), "İş ilanı getirildi");
+	}
+
+	@Override
+	public void updateIsActive(boolean isActive, int id) {
+		this.jobAdvertisementDao.updateIsActive(id, isActive);
 	}
 	
 	

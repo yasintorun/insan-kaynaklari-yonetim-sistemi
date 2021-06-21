@@ -23,4 +23,6 @@ public class JobAdvertisementDto {
 	private int cityId;
 	private int jobPositionId;
 	private int employerId;
+	private int workStyleId;
+	private int workTimeStyleId;
 }

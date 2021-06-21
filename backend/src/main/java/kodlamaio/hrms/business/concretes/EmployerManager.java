@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.EmployerService;
+import kodlamaio.hrms.core.utilities.converters.EmployerDtoConverter;
 import kodlamaio.hrms.core.utilities.helpers.CheckHelper;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
@@ -16,6 +17,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.User;
+import kodlamaio.hrms.entities.dtos.EmployerInputDto;
 @Service
 public class EmployerManager implements EmployerService{
 	private EmployerDao employerDao;
@@ -76,6 +78,12 @@ public class EmployerManager implements EmployerService{
 	
 	private boolean isExist(Employer entity) {
 		return employerDao.existsUserByEposta(entity.getEposta());
+	}
+
+	@Override
+	public Result add(EmployerInputDto inputDto) {
+		// TODO Auto-generated method stub
+		return this.add(EmployerDtoConverter.InputToNormal(inputDto));
 	}
 	
 	

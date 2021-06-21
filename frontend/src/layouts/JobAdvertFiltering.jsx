@@ -112,13 +112,6 @@ export default function JobAdvertFiltering({ clickEvent }) {
             >
                 Filtrele
             </Button>
-            <Button
-                type="button"
-                fluid negative
-                className="mt-2"
-            >
-                Sıfırla
-            </Button>
         </div>
     )
 }

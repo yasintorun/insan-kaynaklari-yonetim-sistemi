@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Header, Image, Table, Label, Segment, Button } from 'semantic-ui-react'
+import { Label, Segment, Button } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService'
-import WorkStyleService from '../services/workStyleService'
 
 export default function JobPostDetail() {
     let { id } = useParams()
@@ -32,10 +31,10 @@ export default function JobPostDetail() {
 
     return (
         <div className="page-center">
-            <div className="bordered shadow w-75 m-auto">
+            <div className="shadow-no-hover bordered shadow w-75 m-auto">
                 <div className="row">
                     <div className="col-md-8">
-                        <h2>{jobAdvertisement.jobPositionName}</h2>
+                        <h2>{jobAdvertisement.jobPosition?.jobName}</h2>
                         <Label as='a' color='purple' >
                             {jobAdvertisement.workStyle?.name}
                         </Label>
@@ -52,7 +51,7 @@ export default function JobPostDetail() {
                             <p className="card-text">{jobAdvertisement.employer?.summary}</p>
 
                             <Label color='teal' tag>
-                                {jobAdvertisement.cityName}
+                                {jobAdvertisement.city?.cityName}
                             </Label>
                         </div>
                     </div>

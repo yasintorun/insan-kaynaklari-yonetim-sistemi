@@ -14,6 +14,7 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.dtos.EmployerInputDto;
 
 @RestController
 @RequestMapping("/api/employers")
@@ -34,7 +35,8 @@ public class EmployerController {
 	
 
 	@PostMapping("/add")
-	public Result add(@RequestBody Employer employer) {
+	public Result add(@RequestBody EmployerInputDto employer) {
+		System.out.println("\n\nTest \n\n");
 		return this.employerService.add(employer);
 	}
 	

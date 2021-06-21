@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {Icon, Menu, Table } from 'semantic-ui-react'
+import {Table } from 'semantic-ui-react'
 import EmployerService from '../services/employerService'
 
 export default function Employer() {

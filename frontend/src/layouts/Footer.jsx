@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button, Icon, Label } from 'semantic-ui-react'
 
 export default function Footer() {

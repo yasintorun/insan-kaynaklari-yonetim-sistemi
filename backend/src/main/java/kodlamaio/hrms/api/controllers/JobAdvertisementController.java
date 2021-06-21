@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
@@ -54,7 +55,7 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getAllSortedJobAdvertisement")
-	public DataResult<List<JobAdvertisementDto>> getAllSorted() {
+	public DataResult<List<JobAdvertisementDisplayDto>> getAllSorted() {
 		return this.jobAdvertisementService.getAllSorted();
 	}
 
@@ -64,13 +65,19 @@ public class JobAdvertisementController {
 	}
 
 	@GetMapping("/ChangeActive")
-	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId) {
-		return this.jobAdvertisementService.updateActive(jobAdvertisementId);
+	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId, boolean isActive) {
+		return this.jobAdvertisementService.updateActive(jobAdvertisementId, isActive);
 	}
 	
 	@GetMapping("/getById")
 	public DataResult<JobAdvertisementDisplayDto> getJobAdvertisementById(int id) {
 		return this.jobAdvertisementService.getJobAdvertisementById(id);
+	}
+	
+	@PostMapping("/changeActive")
+	public Result updateIsActive(int id, boolean isActive) {
+		this.jobAdvertisementService.updateIsActive(isActive, id);
+		return new SuccessResult("başarılı");
 	}
 	
 }

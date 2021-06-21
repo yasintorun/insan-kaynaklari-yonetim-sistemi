@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, Icon } from 'semantic-ui-react'
-import Footer from '../layouts/Footer'
+import {Icon } from 'semantic-ui-react'
 import SignedOut from '../layouts/SignedOut'
 export default function Home() {
     return (
