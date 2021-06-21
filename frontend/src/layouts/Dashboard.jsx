@@ -6,10 +6,12 @@ import JobPosition from '../pages/JobPositionList'
 import JobPostDetail from '../pages/JobPostDetail'
 import NewJobAdvert from '../pages/NewJobAdvert'
 import Navbar from './Navbar'
+import Home from '../pages/Home'
 export default function Dashboard() {
     return (
         <div>
-           
+            
+            <Navbar/>
             <div className="container">
                 <Route exact path="/employer" component={Employer} />
                 <Route exact path="/jobPosition" component={JobPosition} />

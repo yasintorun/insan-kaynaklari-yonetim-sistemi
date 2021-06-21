@@ -23,31 +23,12 @@ export default function Navbar() {
         <div className="fixed-top">
             <Menu  size='massive'>
                 <div className="container-large d-flex">
+                <Menu.Item as={NavLink} to = "/" className="logo" >iKariyer</Menu.Item>
                 <Menu.Item
-                    name='home'
-                    as={NavLink}
-                    to = "/"
-                    
-                />
-                <Menu.Item
+                icon="search"
                     name='iş ilanları'
                     as={NavLink}
                     to="/jobAdvertisements"
-                />
-                <Menu.Item
-                    name='Yeni iş ilanı'
-                    as={NavLink}
-                    to="/newjobadvert"
-                />
-                <Menu.Item
-                    name='İş ilanlarını Görüntüle'
-                    as={NavLink}
-                    to="/admin/jobadvertlist"
-                />
-                <Menu.Item
-                    name='Özgeçmişler'
-                    as={NavLink}
-                    to="/admin/resumeList"
                 />
 
 

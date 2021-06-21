@@ -9,9 +9,10 @@
 }
 
 .logo {
-  font-size: 20px;
-  font-weight: bold !important;
-  color: var(--ThemeColor) !important;
+  font-family: 'Dela Gothic One', cursive !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  color: rgb(21, 125, 156) !important;
 }
 
 .bg-theme-color {
@@ -45,11 +46,90 @@
 
 .shadow {
   box-shadow: 3px 2px 3px 2px rgba(0, 0, 0, 0.2);
+  transition-duration: 0.5s;
 }
 
 .text-big {
   font-size: 16px;
 }
 .mt-8 {
-  margin-top: 80px;
+  margin-top: 64px;
+}
+
+.home-showcase {
+  height: 90vh;
+  background: url('./indir.png') no-repeat 50%;
+  background-size: cover;
+  background-position: bottom;
+}
+
+.bold-header {
+  font-weight: 800 !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  color: #161615;
+}
+
+.home-about {
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center ;
+
+}
+
+
+.ico {
+  height: 100px;
+  background-position: center;
+  margin-top: 20px;
+}
+
+.jobseekerico{
+  background: url('./jobseeker.png') no-repeat 50%;
+  background-size: 100px;
+}
+
+.employerico{
+  background: url('./employer.png') no-repeat 50%;
+  background-size: 100px;
+}
+
+.description {
+  text-align: left !important;
+  padding-left: 10%;
+  padding-top: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 30px;
+}
+.shadow:hover {
+  background-color: #e4f2ff !important;
+  box-shadow: 0px 0px 20px 1px rgba(205, 205, 205, 1) !important;
+
+}
+
+.line {
+  border: 2px solid rgb(7, 36, 75);
+  background-color: rgb(0, 52, 121);
+}
+
+.bg-footer {
+  background-color: rgb(211, 211, 211) !important;
+}
+
+.full-bg-image{
+  min-height: 100vh;
+  background: url('./login2.jpg') no-repeat 50%;
+  background-size: cover;
+  background-position: right;
+}
+.full-bg-image2{
+  min-height: 100vh;
+  background: url('./register.jpg') no-repeat 50%;
+  background-size: cover;
+  background-position: right;
+}
+
+.no-scroll {
+  overflow: hidden !important;
 }

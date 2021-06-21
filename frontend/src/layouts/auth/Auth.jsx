@@ -6,7 +6,7 @@ import Education from '../../pages/EducationList'
 import SignupForJobseeker from '../../pages/auth/SignupForJobseeker'
 export default function Login() {
     return (
-        <div>
+        <div>   
             <Route exact path="/login" component={SigninForm}/>
             <Route exact path="/register" component={SignupForJobseeker}/>
         </div>

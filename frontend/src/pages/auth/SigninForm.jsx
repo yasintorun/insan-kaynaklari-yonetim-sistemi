@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { Icon, Input, Button, Label, Form } from 'semantic-ui-react'
+import { Icon, Input, Button, Label, Form , Menu} from 'semantic-ui-react'
+import { Link } from 'react-router-dom';
 
 export default function SigninForm() {
   const formik = useFormik({
@@ -9,47 +10,49 @@ export default function SigninForm() {
       password: '',
     },
     onSubmit: values => {
-        (JSON.stringify(values, null, 2));
+      (JSON.stringify(values, null, 2));
     },
   });
   return (
-    <Form onSubmit={formik.handleSubmit} className="mt-5 page-center" size="big" align="center">
-      <div className="bordered shadow">
+    <div>
+      <Form onSubmit={formik.handleSubmit} className="mt-5 page-center full-bg-image no-scroll" size="big" align="center" >
+        <div className="bordered shadow w-25">
 
 
-        <Form.Field>
-          <Label className="mt-3">
-            Lütfen eposta adresinizi giriniz:
-          </Label>
+          <Form.Field className="w-75 m-auto" >
+            <Label className="mt-3" color="grey">
+              Lütfen eposta adresinizi giriniz:
+            </Label>
 
-          <Input placeholder='Eposta' className="d-block"
-            id="email"
-            name="email"
-            type="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-          />
-        </Form.Field>
+            <Input placeholder='Eposta'
+              id="email"
+              name="email"
+              type="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />
+          </Form.Field>
 
-        <Form.Field>
-          <Label className="mt-3">
-            Lütfen şifrenizi giriniz
-          </Label>
+          <Form.Field className="w-75 m-auto">
+            <Label className="mt-3" color="grey">
+              Lütfen şifrenizi giriniz
+            </Label>
 
-          <Input placeholder='Şifre' className="d-block"
-            id="password"
-            name="password"
-            type="password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
+            <Input placeholder='Şifre'
+              id="password"
+              name="password"
+              type="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
 
-        </Form.Field>
+          </Form.Field>
 
 
 
-        <Button color='green' type="submit" className="mt-3">Giriş Yap</Button>
-      </div>
-    </Form>
+          <Button color='green' type="submit" className="mt-3">Giriş Yap</Button>
+        </div>
+      </Form>
+    </div>
   );
 };
