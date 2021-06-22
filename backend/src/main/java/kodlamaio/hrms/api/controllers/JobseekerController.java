@@ -14,6 +14,7 @@ import kodlamaio.hrms.business.abstracts.JobseekerService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
+import kodlamaio.hrms.entities.dtos.JobSeekerInputDto;
 
 @RestController
 @RequestMapping("/api/jobseekers")
@@ -34,7 +35,7 @@ public class JobseekerController {
 	
 
 	@PostMapping("/add")
-	public Result add(@RequestBody Jobseeker jobseeker) {
+	public Result add(@RequestBody JobSeekerInputDto jobseeker) {
 		return this.jobseekerService.add(jobseeker);
 	}
 }

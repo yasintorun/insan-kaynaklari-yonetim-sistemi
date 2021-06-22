@@ -93,7 +93,7 @@ export default function NewJobAdvert() {
 
   return (
     <Form onSubmit={formik.handleSubmit} className="mt-5 page-center" align="center">
-      <div className="bordered shadow mb-5 w-75">
+      <div className="bordered shadow-no-hover shadow mb-5 w-75">
         <div className="row">
           <div className="col-md-5">
             <Form.Field>

@@ -54,6 +54,7 @@ export default function SignupForEmployer() {
     validationSchema: SignupSchema,
     onSubmit: values => {
       employerService.add(values).then(r => setResult(r.data));
+      console.log(result)
       if(result.success) {
         toast.success(`Kayıt başarılı: Yönlendiriliyorsunuz`, {onClose: () => {/*Burada sayfa geri gelcek.*/}})
       } else {

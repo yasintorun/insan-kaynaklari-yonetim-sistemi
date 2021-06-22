@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.Services.Mernis;
 import kodlamaio.hrms.business.abstracts.JobseekerService;
+import kodlamaio.hrms.core.utilities.converters.JobSeekerDtoConverter;
 import kodlamaio.hrms.core.utilities.helpers.CheckHelper;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
@@ -18,6 +19,7 @@ import kodlamaio.hrms.dataAccess.abstracts.JobseekerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.User;
+import kodlamaio.hrms.entities.dtos.JobSeekerInputDto;
 
 @Service
 public class JobseekerManager implements JobseekerService{
@@ -75,6 +77,11 @@ public class JobseekerManager implements JobseekerService{
 	
 	private boolean isExist(Jobseeker entity) {
 		return jobseekerDao.existsJobseekerByTcNo(entity.getTcNo()) || jobseekerDao.existsUserByEposta(entity.getEposta());
+	}
+
+	@Override
+	public Result add(JobSeekerInputDto inputDto) {
+		return this.add(JobSeekerDtoConverter.InputDtoToNormal(inputDto));
 	}
 	
 	

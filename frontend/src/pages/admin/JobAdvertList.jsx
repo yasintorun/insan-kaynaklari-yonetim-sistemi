@@ -10,6 +10,7 @@ export default function JobAdvertList() {
         let jobAdvertisementService = new JobAdvertisementService()
         jobAdvertisementService.getJobAdvertisement().then(result => setJobAdvertisements(result.data.data))
     }, [])
+
     return (
         <div>
             <Table singleLine striped color="purple" textAlign="center" selectable>
@@ -38,12 +39,14 @@ export default function JobAdvertList() {
                             <Table.Cell>
                                 {
                                     jobAdvert.active
-                                        ?<Label color="green"> &#10004; </Label>
-                                        :<Label color="red">&#10008;</Label>
+                                        ? <Label color="green"> &#10004; </Label>
+                                        : <Label color="red">&#10008;</Label>
                                 }
                             </Table.Cell>
-                            
-                            <Table.Cell><Button positive as = {NavLink} to={'/detail/' + jobAdvert.id}>Detay</Button></Table.Cell>
+
+                            <Table.Cell>
+                                <Button positive as={NavLink} to={'/detail/' + jobAdvert.id}>Detay</Button>
+                            </Table.Cell>
                         </Table.Row>
                     ))}
                 </Table.Body>

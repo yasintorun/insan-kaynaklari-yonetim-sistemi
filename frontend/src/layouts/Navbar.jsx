@@ -9,37 +9,57 @@ export default function Navbar() {
     // history = useHistory()
     function handleSignOut(params) {
         setIsAuthenticated(false)
-//history.push("/")
+        //history.push("/")
     }
 
     function handleSignIn(params) {
         setIsAuthenticated(true)
     }
 
+
     return (
         <div>
 
-        
-        <div className="fixed-top">
-            <Menu  size='massive'>
-                <div className="container-large d-flex">
-                <Menu.Item as={NavLink} to = "/" className="logo" >iKariyer</Menu.Item>
-                <Menu.Item
-                icon="search"
-                    name='iş ilanları'
-                    as={NavLink}
-                    to="/jobAdvertisements"
-                />
+
+            <div className="fixed-top">
+                <Menu size='massive'>
+                    <div className="container-large d-flex">
+                        <Menu.Item as={NavLink} to="/" className="logo" >iKariyer</Menu.Item>
+                        <Menu.Item
+                            icon="search"
+                            name='iş ilanları'
+                            as={NavLink}
+                            to="/jobAdvertisements"
+                        />
 
 
-                <Menu.Menu position='right'>
-                    {isAuthenticated?<SignedIn signOut = {handleSignOut}/>:<SignedOut />}
-                </Menu.Menu>
+                        <Menu.Menu position='right'>
+                            {isAuthenticated ? <SignedIn signOut={handleSignOut} /> : <SignedOut />}
+                        </Menu.Menu>
+                    </div>
+                </Menu>
+
+
+            </div>
+
+            <div className="mt-8"></div>
+            <Menu size='massive'>
+                <div className="d-flex">
+                    <Menu.Item >Bu blok silinecektir.</Menu.Item>
+                    <Menu.Item
+                        icon="search"
+                        name='Yeni iş ilanı'
+                        as={NavLink}
+                        to="/newjobadvert"
+                    />
+                    <Menu.Item
+                        icon="search"
+                        name='Admin panel'
+                        as={NavLink}
+                        to="/admin"
+                    />
                 </div>
             </Menu>
-        </div>
-        
-      <div className="mt-8"></div>
         </div>
     )
 }

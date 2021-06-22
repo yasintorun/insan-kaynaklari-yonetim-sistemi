@@ -19,7 +19,7 @@ export default function AdminDashboard() {
 
 
 
-    const SideBarButton = ({ options }) => {
+     const SideBarButton = ({ options }) => {
         return (
             <Button
                 fluid
@@ -89,7 +89,7 @@ export default function AdminDashboard() {
                         <Dropdown.Menu>
                             <Dropdown.Item>Test</Dropdown.Item>
                             <Dropdown.Item>12</Dropdown.Item>
-                            <Dropdown.Item>
+                            <Dropdown.Item >
                                 <Icon name="sign-out"/>Çıkış Yap
                             </Dropdown.Item>
                         </Dropdown.Menu>

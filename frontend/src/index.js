@@ -10,8 +10,10 @@ import "react-toastify/dist/ReactToastify.min.css"
 
 
 ReactDOM.render(
-    <BrowserRouter><App /></BrowserRouter>
-    ,
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  ,
   document.getElementById('root')
 );
 

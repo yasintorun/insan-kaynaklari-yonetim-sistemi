@@ -1,18 +1,59 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { Input, Button, Label, Form } from 'semantic-ui-react'
-
+import * as Yup from 'yup';
+import JobSeekerService from '../../services/jobSeekerService';
+import { toast } from 'react-toastify';
 export default function SignupForJobseeker() {
+
+  const jobseekerService = new JobSeekerService()
+  const [result, setResult] = useState({})
+
+  const SignupSchema = Yup.object().shape({
+    firstname: Yup.string()
+      .required('Zorunlu Alan')
+      .min(2, "İsim en az 2 karakterden oluşabilir")
+      .max(30, "İsim en fazla 30 karakter olabilir"),
+    lastname: Yup.string()
+      .required('Zorunlu Alan')
+      .min(2, "Soyisim en az 2 karakter olmalı")
+      .max(30, "Soyisim en fazla 30 karakter olabilir"),
+    eposta: Yup.string()
+      .required('Zorunlu alan')
+      .email('Geçersiz mail adresi'),
+    password: Yup.string()
+      .min(6, 'Şifre en az 6 karakterden oluşmalıdır')
+      .max(30, 'Şifre en fazla 30 karakterden oluşabilir')
+      .required('Zorunlu alan'),
+    passwordCheck: Yup.string()
+      .min(6, 'Şifre en az 6 karakterden oluşmalıdır')
+      .max(30, 'Şifre en fazla 30 karakterden oluşabilir')
+      .required('Zorunlu alan'),
+      tcNo: Yup.string()
+      .min(11, 'Tc kimlik numarası 11 haneli olmalı')
+      .max(11, 'Tc kimlik numarası 11 haneli olmalı')
+      .required('Zorunlu alan'),
+  });
+
+
   const formik = useFormik({
     initialValues: {
-      email: '',
+      eposta: '',
       password: '',
+      passwordCheck: '',
       firstname: '',
       lastname: '',
-      tc: ''
+      tcNo: ''
     },
+    validationSchema: SignupSchema,
     onSubmit: values => {
-      (JSON.stringify(values, null, 2));
+      alert(JSON.stringify(values, null, 2));
+      jobseekerService.add(values).then(r => setResult(r.data))
+      if (result.success) {
+        toast.success(`Kayıt başarılı: Yönlendiriliyorsunuz`, { onClose: () => {/*Burada sayfa  yüklenecek.*/ } })
+      } else {
+        toast.error(`Kayıt başarısız: ${result.message}`)
+      }
     },
   });
   return (
@@ -34,7 +75,14 @@ export default function SignupForJobseeker() {
             onChange={formik.handleChange}
             value={formik.values.firstname}
           />
-
+          {formik.errors.firstname && formik.touched.firstname
+            ? (
+              <Label basic color='red' pointing>
+                {formik.errors.firstname}
+              </Label>
+            )
+            : null
+          }
         </Form.Field>
 
         <Form.Field>
@@ -49,7 +97,14 @@ export default function SignupForJobseeker() {
             onChange={formik.handleChange}
             value={formik.values.lastname}
           />
-
+          {formik.errors.lastname && formik.touched.lastname
+            ? (
+              <Label basic color='red' pointing>
+                {formik.errors.lastname}
+              </Label>
+            )
+            : null
+          }
 
         </Form.Field>
 
@@ -60,15 +115,22 @@ export default function SignupForJobseeker() {
           </Label>
 
           <Input placeholder='TC kimlik numarası'
-            id="tc"
-            name="tc"
+            id="tcNo"
+            name="tcNo"
             type="number"
             maxLength="11"
             onChange={formik.handleChange}
-            value={formik.values.tc}
+            value={formik.values.tcNo}
           />
 
-
+          {formik.errors.tcNo && formik.touched.tcNo
+            ? (
+              <Label basic color='red' pointing>
+                {formik.errors.tcNo}
+              </Label>
+            )
+            : null
+          }
         </Form.Field>
 
         <Form.Field>
@@ -77,12 +139,20 @@ export default function SignupForJobseeker() {
           </Label>
 
           <Input placeholder='Eposta'
-            id="email"
-            name="email"
+            id="eposta"
+            name="eposta"
             type="email"
             onChange={formik.handleChange}
-            value={formik.values.email}
+            value={formik.values.eposta}
           />
+          {formik.errors.eposta && formik.touched.eposta
+            ? (
+              <Label basic color='red' pointing>
+                {formik.errors.eposta}
+              </Label>
+            )
+            : null
+          }
         </Form.Field>
 
         <Form.Field>
@@ -97,7 +167,14 @@ export default function SignupForJobseeker() {
             onChange={formik.handleChange}
             value={formik.values.password}
           />
-
+          {formik.errors.password && formik.touched.password
+            ? (
+              <Label basic color='red' pointing>
+                {formik.errors.password}
+              </Label>
+            )
+            : null
+          }
         </Form.Field>
         <Form.Field>
           <Label className="mt-3" color="grey">
@@ -105,13 +182,20 @@ export default function SignupForJobseeker() {
           </Label>
 
           <Input placeholder='Şifre'
-            id="password"
-            name="password"
+            id="passwordCheck"
+            name="passwordCheck"
             type="password"
             onChange={formik.handleChange}
-            value={formik.values.password}
+            value={formik.values.passwordCheck}
           />
-
+          {formik.errors.passwordCheck && formik.touched.passwordCheck
+            ? (
+              <Label basic color='red' pointing>
+                {formik.errors.passwordCheck}
+              </Label>
+            )
+            : null
+          }
         </Form.Field>
 
         <Button color='green' type="submit" className="mt-3">Kayıt Ol</Button>
