@@ -1,11 +1,42 @@
 # HRMS Projesinin Frontend kısmı
 
-<li>Kayıt ol, giriş yap, iş ilanı oluştur sayfaları eklendi.</li>
-<li>Kullanıcı iş ilanı oluşturabilir ve yayınlayabilir.</li>
-<li>Şuanlık herhangi bir kontrol yapılmıyor.</li>
-<li>İş ilanları listenebilir durumda.</li>
+### Req19 isteri
+- Özgeçmiş kısmını tek sayfada oluşturdum. Kullanıcı Bu sayfada bilgilerini girebilir, güncelleyebilir veya silebilir(silme kısmı şuanda yok).
+
+![req19](https://github.com/yasintorun/insan-kaynaklari-yonetim-sistemi/blob/Dev3/frontend/showcase/cv.PNG)
+![req19](https://github.com/yasintorun/insan-kaynaklari-yonetim-sistemi/blob/Dev3/frontend/showcase/editCv.PNG)
+
+<br>
+<br>
+
+### Req20 isteri
+- Özgeçmiş sayfasındaki her bilgi alanını MessageBox olarak component şeklinde yazdım. Bu component sayesinde bilgi gösterme ve düzenleme eklenebliyor.
+- Özgeçmiştekine benzer bir durumu req20 isterindeki admin bilgi sayfasına uyguladım.
+
+![req20](https://github.com/yasintorun/insan-kaynaklari-yonetim-sistemi/blob/Dev3/frontend/showcase/Ads%C4%B1z.png)
+
+##### Video: [Kısa işleyiş videosu](https://streamable.com/l5jirf)
 
 
+<br>
+<br>
+
+
+### Req22, Req23 İş ilanı filtreleme ve Sayfalama
+- Bu iki isteri aslında farklı yapmıştım. Fakat sayfalama kısmı filtreleme ile aynı anda çalışmıyor. Yani filtreleme yaptıktan sonra kullanıcı sayfa değiştirdiginde filtreleme işlemleri sıfırlanıyor. Bu durumu çözmek için filtreleme işlemlerini backend tarafına aldım. Hem filtreleme hem sayfalama kısmı aynı metod içerisinde tanımlı.
+##### Method:
+```java
+@Query("Select j from JobAdvertisement j where ((:#{#filter.cityId}) IS NULL OR j.city.id IN (:#{#filter.cityId}))"
+			+ "and ((:#{#filter.jobPositionId}) IS NULL OR j.jobPosition.id IN (:#{#filter.jobPositionId}))"
+			+ "and ((:#{#filter.workStyleId}) IS NULL OR j.workStyle.id IN (:#{#filter.workStyleId}))"
+			+ "and ((:#{#filter.workTimeStyleId}) IS NULL OR j.workTimeStyle.id IN (:#{#filter.workTimeStyleId}))")
+	public Page<JobAdvertisement> getFilteringAndPage(@Param("filter") JobAdvertFilterOption filterOption, Pageable pageable);
+   ```
+   Daha iyi bir yöntem bulundugunda değiştirilecek. Şuanda çözüm olarak bunu üretebildim.
+   Method tamamne sql bilgisine dayalı. Eğer filter bilgileri null ise tüm bilgiler seçili gibi işlem yap. Ayrıca filter elemanları array olarak geliyor o yüzden IN operatörü ile çoklu karşılaştırma yapıyoruz.
+   <br><br>
+   ![req22_23](https://github.com/yasintorun/insan-kaynaklari-yonetim-sistemi/blob/Dev3/frontend/showcase/isilani.PNG)
+   ![req22_23](https://github.com/yasintorun/insan-kaynaklari-yonetim-sistemi/blob/Dev3/frontend/showcase/isilani2.PNG)
 <br><br><br>
 ## Zengin Metin Editörü
 Projeye Zengin metin eklemeye yarayan editör eklendi.<br><br>
