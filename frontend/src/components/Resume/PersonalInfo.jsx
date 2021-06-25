@@ -1,50 +1,94 @@
-import React from 'react'
+import React, { useState } from 'react'
 import MessageBox from '../MessageBox'
-export default function PersonalInfo() {
+import YTInfoMessage from '../../utilities/messages/YTInfoMessage'
+import { Formik, useFormik } from 'formik'
+import { Form, Button, Input, Divider } from 'semantic-ui-react'
+import { useEffect } from 'react'
+import ResumeService from '../../services/resumeService'
+import GenderDropdown from '../../utilities/dropdowns/GenderDropdown'
+export default function PersonalInfo({ resume }) {
+
+    const [isEdit, setIsEdit] = useState(false)
+
+    const handleEditClick = () => {
+        setIsEdit(!isEdit)
+    }
+    useEffect(() => {
+    }, [isEdit])
+
+    const resumeService = new ResumeService()
+
+    const formik = useFormik({
+        initialValues: {
+        },
+        onSubmit: values => {
+            resumeService.update(26, values).then(r => console.log(r.data.message))
+            handleEditClick()
+        },
+    });
+
     return (
         <div>
             <MessageBox>
-                    <div>Kişisel Bilgiler</div>
-                    <div className="d-flex ">
-                        <div className="w-25 d-block">
-                            <img src="https://res.cloudinary.com/dost/image/upload/v1622719799/userPhotos/user1.gif" alt="pp" className="rounded-circle w-100 img-fluid img-thumbnail" />
-                        </div>
-                        <div className="w-100 ms-4">
-                            <h2>Yasin Torun</h2>
-                            <div className="d-flex justify-content-between w-75">
-                                <div>
-                                    <div className="message-item m-0">
-                                        <p className="text-muted secondary-text">E-posta Adresi</p>
-                                        <p className="primary-text">yasintorun4680@gmail.com</p>
-                                    </div>
-                                    <div className="message-item">
-                                        <p className="text-muted secondary-text">Telefon</p>
-                                        <p className="primary-text">90 (546) 227 09 78</p>
-                                    </div>
-                                    <div className="message-item">
-                                        <p className="text-muted secondary-text">Ev adresi</p>
-                                        <p className="primary-text">Düziçi / Osmaniye</p>
-                                    </div>
+                <div>Kişisel Bilgiler</div>
+                {
+                    isEdit
+                        ?
+                        <Form onSubmit={formik.handleSubmit} size="small">
+                            <div className="row">
+                                <div className="col-md-3">
+                                    <img src="https://res.cloudinary.com/dost/image/upload/v1622719799/userPhotos/user1.gif" alt="pp" className="rounded-circle w-100 img-fluid img-thumbnail" />
                                 </div>
-                                <div>
-                                    <div className="message-item m-0">
-                                        <p className="text-muted secondary-text">Doğum tarihi</p>
-                                        <p className="primary-text">21/07/1998</p>
-                                    </div>
-                                    <div className="message-item">
-                                        <p className="text-muted secondary-text">Cinsiyet</p>
-                                        <p className="primary-text">Erkek</p>
-                                    </div>
-                                    <div className="message-item">
-                                        <p className="text-muted secondary-text">Uyruk</p>
-                                        <p className="primary-text">Türkiye Cumhuriyeti</p>
-                                    </div>
+                                <div className="col-md-9">
+                                    <Form.Group widths='equal'>
+                                        <Form.Input fluid placeholder="İsim" label='İsim*' name="user.firstname" onChange={formik.handleChange} />
+                                        <Form.Input fluid placeholder="Soyisim" label='Soyisim*' name="user.lastname" onChange={formik.handleChange}/>
+                                    </Form.Group>
+                                    <Form.Group widths='equal'>
+                                        <Form.Field><GenderDropdown onChangeEvent={(event, data) =>formik.setFieldValue("genderId", data.value)}/></Form.Field>
+                                        <Form.Input type="date" fluid placeholder="Doğum tarihi" label='Doğum tarihi*' name="birthDate" onChange={formik.handleChange}/>
+                                    </Form.Group>
+                                    <Form.Group widths='equal'>
+                                        <Form.Input fluid placeholder="Telefon" label='Telefon' name="phone" onChange={formik.handleChange}/>
+                                        <Form.Input fluid placeholder="Adres" label='Adres' name="phone"  onChange={formik.handleChange}/>
+                                    </Form.Group>
+                                    <Form.Group widths='equal'>
+                                        <Form.Input fluid placeholder="Github Link" label='Github' name="linkedinLink" onChange={formik.handleChange} />
+                                        <Form.Input fluid placeholder="Linkedin Link" label='Linkedin' name="githubLink"  onChange={formik.handleChange}/>
+                                    </Form.Group>
+                                    <Button positive>Kaydet</Button>
+                                    <Button negative type="button" onClick={() => handleEditClick()}>Vazgeç</Button>
                                 </div>
+                            </div>
+                        </Form>
+                        :
 
+                        <div className="d-flex message-content" onClick={() => isEdit ? null : handleEditClick()}>
+                            <div className="w-25 d-block">
+                                <img src="https://res.cloudinary.com/dost/image/upload/v1622719799/userPhotos/user1.gif" alt="pp" className="rounded-circle w-100 img-fluid img-thumbnail" />
+                            </div>
+                            <div className="w-100 ms-4">
+                                <div>
+                                    <h2>{resume.user?.firstname + " " + resume.user?.lastname}</h2>
+                                    <div className="d-flex justify-content-between w-75">
+                                        <div>
+                                            <YTInfoMessage info="E-posta adresi" text={resume.user?.eposta} />
+                                            <YTInfoMessage info="Telefon" text={resume.phone} />
+                                            <YTInfoMessage info="Ev adresi" text={"Düziçi / Osmaniye"} />
+                                            <YTInfoMessage info="Github" text={resume.githubLink} />
+                                        </div>
+                                        <div>
+                                            <YTInfoMessage info="Doğum tarihi" text={resume.birtdate} />
+                                            <YTInfoMessage info="Cinsiyet" text={resume.gender?.name} />
+                                            <YTInfoMessage info="Uyruk" text={resume.nationality?.name} />
+                                            <YTInfoMessage info="Linkedin" text={resume.linkedinLink} />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </MessageBox>
+                }
+            </MessageBox>
         </div>
     )
 }

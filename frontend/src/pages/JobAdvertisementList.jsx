@@ -1,28 +1,44 @@
 import React, { useState, useEffect } from 'react'
-import { Grid } from 'semantic-ui-react'
+import { Grid, Pagination } from 'semantic-ui-react'
 import JobPost from '../layouts/JobPost'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import JobAdvertFiltering from '../layouts/JobAdvertFiltering'
+
 export default function JobAdvertisement() {
     const [jobAdvertisements, setJobAdvertisements] = useState([])
     const [baseJobAdvert, setBaseJobAdvert] = useState([])
-
+    const [activePage, setActivePage] = useState(1)
+    const [filterOption, setFilterOption] = useState({})
+    const [pageSize, setPageSize] = useState(2)
+    const [totalPageSize, setTotalPageSize] = useState(0)
     useEffect(() => {
         let jobAdvertisementService = new JobAdvertisementService()
-        jobAdvertisementService.getJobAdvertisement().then(result => setJobAdvertisements(result.data.data))
-        jobAdvertisementService.getJobAdvertisement().then(result => setBaseJobAdvert(result.data.data))
-        // setBaseJobAdvert(jobAdvertisements)
-    }, [])
+        jobAdvertisementService.getJobAdvertFilterWithPage(activePage, pageSize, filterOption).then(result => {
+            setJobAdvertisements(result.data.data)
+            setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
+        })
+
+    }, [filterOption, activePage])
+
 
     const handleFilterClick = (filterOption) => {
-        setJobAdvertisements(baseJobAdvert.filter(x => filterOption.city == 0 || filterOption.city.indexOf(x.city.id) > -1)
-            .filter(y => filterOption.jobPosition[y.jobPosition.id] || filterOption.jobPosition.indexOf(true) < 0)
-            .filter(z => filterOption.workStyle[z.workStyle.id] || filterOption.workStyle.indexOf(true) < 0)
-            .filter(z => filterOption.workTimeStyle[z.workTimeStyle.id] || filterOption.workTimeStyle.indexOf(true) < 0)
-        )
-
+        if (filterOption.cityId.length == 0)
+            filterOption.cityId = null
+        if (filterOption.jobPositionId.length == 0)
+            filterOption.jobPositionId = null
+        if (filterOption.workStyleId.length == 0)
+            filterOption.workStyleId = null
+        if (filterOption.workTimeStyleId.length == 0)
+            filterOption.workTimeStyleId = null
+        setFilterOption(filterOption)
     }
 
+
+
+    const handlePaginationChange = (e, { activePage }) => {
+        setActivePage(activePage)
+    }
+    console.log("asd")
     return (
 
         <div className="mt-8 mb-5">
@@ -37,7 +53,17 @@ export default function JobAdvertisement() {
                             <JobPost jobAdvert={jobAdvertisement} />
                         ))
                     }
+                    <div className="w-75 m-auto">
+                        <Pagination
+                            firstItem={null}
+                            lastItem={null}
+                            activePage={activePage}
+                            onPageChange={handlePaginationChange}
+                            totalPages={totalPageSize / pageSize}
+                        />
+                    </div>
                 </Grid.Column>
+
             </Grid>
         </div>
     )

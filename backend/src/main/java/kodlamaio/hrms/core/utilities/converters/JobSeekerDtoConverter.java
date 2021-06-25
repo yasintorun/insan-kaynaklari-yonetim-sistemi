@@ -1,6 +1,7 @@
 package kodlamaio.hrms.core.utilities.converters;
 
 import kodlamaio.hrms.entities.concretes.Jobseeker;
+import kodlamaio.hrms.entities.dtos.JobSeekerDisplayDto;
 import kodlamaio.hrms.entities.dtos.JobSeekerInputDto;
 
 public class JobSeekerDtoConverter {
@@ -15,4 +16,11 @@ public class JobSeekerDtoConverter {
 		System.out.println("\n\n\n" + jobseeker.getEposta()+"\n\n");
 		return jobseeker;
 	}
+	
+	
+	public static JobSeekerDisplayDto NormalToDisplayDto(Jobseeker jobseeker) {
+		return new JobSeekerDisplayDto(jobseeker.getUserId(), jobseeker.getFirstname(),
+				jobseeker.getLastname(), jobseeker.getEposta(), jobseeker.getTcNo());
+	}
+	
 }

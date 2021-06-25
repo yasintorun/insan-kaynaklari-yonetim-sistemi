@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
+import kodlamaio.hrms.core.utilities.helpers.JobAdvertFilterOption;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -34,6 +36,13 @@ public class JobAdvertisementController {
 	@GetMapping("/getAllJobAdvertisement")
 	public DataResult<List<JobAdvertisementDisplayDto>> getAll() {
 		return this.jobAdvertisementService.getAllDisplay();
+	}
+	
+	@PostMapping("/getAllJobAdvertisementWithPage")
+	@ResponseBody
+	public DataResult<List<JobAdvertisementDisplayDto>> getWithPage(int pageNo, int pageSize, @RequestBody JobAdvertFilterOption filterOption) {
+		
+		return this.jobAdvertisementService.getAll(pageNo, pageSize, filterOption);
 	}
 	
 	@PostMapping("/add")

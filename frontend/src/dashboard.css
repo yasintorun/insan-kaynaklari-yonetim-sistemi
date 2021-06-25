@@ -1,0 +1,27 @@
+.sidebar {
+    height: 100vh;
+    background-color: #00b5ad;
+    overflow: hidden;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.container-content {
+    padding-left: 18%;
+    width: 100%;
+}
+
+.btn-dashboard {
+    background-color: transparent;
+    text-align: left;
+    padding: 20px;
+}
+
+.btn-dashboard:hover {
+    background-color: rgb(253, 231, 227);
+    border: 1px solid transparent;
+}

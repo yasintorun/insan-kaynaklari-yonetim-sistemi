@@ -21,8 +21,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "work_time_styles")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements", "experiences"})
 public class WorkTimeStyle {
+	public WorkTimeStyle(int id) {
+		this.id = id;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -33,4 +37,7 @@ public class WorkTimeStyle {
 	
 	@OneToMany(mappedBy = "workTimeStyle")
 	private List<JobAdvertisement> jobAdvertisements;
+	
+	@OneToMany(mappedBy = "workTimeStyle")
+	private List<Experience> experiences;
 }

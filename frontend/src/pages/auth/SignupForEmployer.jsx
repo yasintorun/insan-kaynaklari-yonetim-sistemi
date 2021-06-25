@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 
 export default function SignupForEmployer() {
 
-  const employerService = new EmployerService
+  const employerService = new EmployerService()
 
 
   const SignupSchema = Yup.object().shape({

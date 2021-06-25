@@ -31,10 +31,24 @@ public class ResumeController {
 
 		return this.resumeService.getAllDisplay();
 	}
+
+	@GetMapping("/getById")
+	public DataResult<ResumeDisplayDto> getById(int id) {
+		return this.resumeService.getResumeById(id);
+	}
+	
 	
 	@PostMapping("/add")
 	public Result add(@RequestBody ResumeInputDto resumeDto) {
 		return this.resumeService.add(resumeDto);
 	}
+	
+	
+	@PostMapping("/update")
+	public Result update(int id, @RequestBody ResumeInputDto resume) {
+		return this.resumeService.updateResume(id, resume);
+	}
+	
+	
 	
 }

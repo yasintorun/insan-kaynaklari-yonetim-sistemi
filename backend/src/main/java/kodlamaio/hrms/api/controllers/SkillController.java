@@ -14,8 +14,7 @@ import kodlamaio.hrms.business.abstracts.SkillService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Skill;
-import kodlamaio.hrms.entities.dtos.SkillDisplayDto;
-
+import kodlamaio.hrms.entities.concretes.UserSkill;
 @RestController
 @RequestMapping("/api/skills")
 @CrossOrigin
@@ -28,8 +27,8 @@ public class SkillController {
 		this.skillService = skillService;
 	}
 	@GetMapping("/getAllSkills")
-	public DataResult<List<SkillDisplayDto>> getAll() {
-		return this.skillService.getAllDisplay();
+	public DataResult<List<Skill>> getAll() {
+		return this.skillService.getAll();
 	}
 	
 	@PostMapping("/addSkill")

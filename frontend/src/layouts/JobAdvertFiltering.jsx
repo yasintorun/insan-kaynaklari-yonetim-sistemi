@@ -34,19 +34,42 @@ export default function JobAdvertFiltering({ clickEvent }) {
     }
 
     const [jobPosIndexs, setJobPosIndexs] = useState([])
-    const handleChangeJobPosition = (e, { value }) => {
-        jobPosIndexs[value] = !jobPosIndexs[value]
+    const handleChangeJobPosition = (e, { value, checked }) => {
+        if (checked)
+        jobPosIndexs.push(value)
+        else {
+            let idx = jobPosIndexs.indexOf(value)
+            if (idx > -1) {
+                jobPosIndexs.splice(idx, 1)
+            }
+        }
     }
 
     const [workStyleIndexs, setWorkStyleIndexs] = useState([])
-    const handleChangeWorkStyle = (e, { value }) => {
-        //console.log(value)
-        workStyleIndexs[value] = !workStyleIndexs[value]
+    const handleChangeWorkStyle = (e, { value, checked }) => {
+        if (checked)
+            workStyleIndexs.push(value)
+        else {
+            let idx = workStyleIndexs.indexOf(value)
+            if (idx > -1) {
+                workStyleIndexs.splice(idx, 1)
+            }
+        }
     }
 
     const [workTimeStyleIndexs, setWorkTimeStyleIndexs] = useState([])
-    const handleChangeWorkTimeStyle = (e, { value }) => {
-        workTimeStyleIndexs[value] = !workTimeStyleIndexs[value]
+    const handleChangeWorkTimeStyle = (e, { value, checked }) => {
+
+
+
+        if (checked)
+            workTimeStyleIndexs.push(value)
+        else {
+            let idx = workTimeStyleIndexs.indexOf(value)
+            if (idx > -1) {
+                workTimeStyleIndexs.splice(idx, 1)
+            }
+        }
     }
 
     return (
@@ -100,7 +123,7 @@ export default function JobAdvertFiltering({ clickEvent }) {
                             label={style.name}
                             className="mt-4 d-block"
                             onChange={handleChangeWorkTimeStyle}
-                            value = {style.id}
+                            value={style.id}
                         />
                     ))
                 }
@@ -108,7 +131,7 @@ export default function JobAdvertFiltering({ clickEvent }) {
             <Button
                 type="button"
                 fluid positive
-                onClick={() => clickEvent({ city: cityIndexs, jobPosition: jobPosIndexs, workStyle: workStyleIndexs, workTimeStyle: workTimeStyleIndexs })}
+                onClick={() => clickEvent({ cityId: cityIndexs, jobPositionId: jobPosIndexs, workStyleId: workStyleIndexs, workTimeStyleId: workTimeStyleIndexs })}
             >
                 Filtrele
             </Button>

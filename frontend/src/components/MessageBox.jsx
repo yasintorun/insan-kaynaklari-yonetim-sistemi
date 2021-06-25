@@ -10,7 +10,7 @@ export default function MessageBox(props) {
                         {props.children[0]}
                     </h3>
                 </div>
-                <div className="bg-light message-content" style={{ borderRadius: '0px 0px 15px 15px ' }}>
+                <div className="bg-light messasge-content" style={{ borderRadius: '0px 0px 15px 15px ' }}>
                     <div className="p-4">
                         {props.children[1]}
                     </div>

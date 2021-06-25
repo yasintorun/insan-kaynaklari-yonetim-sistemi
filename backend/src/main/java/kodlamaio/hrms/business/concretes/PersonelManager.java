@@ -39,6 +39,19 @@ public class PersonelManager implements PersonelService {
 		return new SuccessResult("Sistem Personeli eklendi");
 	}
 
+	@Override
+	public DataResult<Personel> getPersonelByUserId(int id) {
+		return new SuccessDataResult<Personel>
+		(this.personelDao.getPersonelByUserId(id), "Personel getirildi");
+	}
+
+	@Override
+	public DataResult<Personel> updatePersonel(Personel personel) {
+		this.personelDao.save(personel);
+		return new SuccessDataResult<Personel>
+		(personel, "güncellendi");
+	}
+
 	
 	
 }

@@ -1,6 +1,7 @@
 package kodlamaio.hrms.core.utilities.helpers;
 
 import java.util.*;
+import java.text.SimpleDateFormat;
 import java.time.*;
 
 public class FormatHelper {
@@ -10,5 +11,11 @@ public class FormatHelper {
 	
 	public static LocalDate newDate() {
 		 return LocalToDate(new Date());	
+	}
+	
+	public static LocalDate OnlyYearAndMonth(String date) {
+		
+		date += "-01";
+		return LocalDate.parse(date);
 	}
 }

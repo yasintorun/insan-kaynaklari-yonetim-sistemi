@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -30,14 +31,26 @@ public class Experience {
 	@Column(name="company_name")
 	private String companyName;
 	
-	@Column(name="job_position")
-	private String jobPosition;
+
 	
 	@Column(name="starting_date")
-	private Date startingDate;
+	private LocalDate startingDate;
 	
 	@Column(name="leaving_date")
-	private Date leavingDate;
+	private LocalDate leavingDate;
+
+	
+	@ManyToOne()
+	@JoinColumn(name="work_time_style_id")
+	private WorkTimeStyle workTimeStyle;
+	
+	@ManyToOne()
+	@JoinColumn(name="job_position_id")
+	private JobPosition jobPosition;
+	
+	@ManyToOne()
+	@JoinColumn(name="city_id")
+	private City city;
 	
 	@ManyToOne()
 	@JoinColumn(name="user_id")

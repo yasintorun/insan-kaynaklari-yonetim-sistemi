@@ -21,9 +21,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resumes", "languages", "experiences", "skills", "educations"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resumes", "languages", "experiences", "userSkills", "educations"})
 public class Jobseeker extends User{
 		
+	public Jobseeker(int userId) {
+		this.setUserId(userId);
+	}
 	@Column(name="firstname")
 	private String firstname;
 	
@@ -45,7 +48,7 @@ public class Jobseeker extends User{
 	private List<Experience> experiences;
 	
 	@OneToMany(mappedBy = "jobseeker")
-	private List<Skill> skills;
+	private List<UserSkill> userSkills;
 	
 
 	@OneToMany(mappedBy = "jobseeker")

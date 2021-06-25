@@ -10,17 +10,19 @@ import Links from './components/Links';
 import Navbar from './layouts/Navbar';
 import Footer from './layouts/Footer';
 import ResumeDetail from './pages/ResumeDetail';
+import JobseekerDashboard from './layouts/JobseekerDashboard';
 function App() {
 
 
   return (
     <div className="App">
-      <ToastContainer position="bottom-right" autoClose={2500} hideProgressBar={true} pauseOnHover={false} />
+      <ToastContainer position="top-right" autoClose={2500} hideProgressBar={true} pauseOnHover={false} />
 
       <Switch>
         <Route exact path="/admin*" component={AdminDashboard} />
 
         <Route exact path="/resume*" component={ResumeDetail} />
+        <Route exact path="/jobseeker_dashboard*" component={JobseekerDashboard} />
         
         <Route path={Links.USERS} component={Auth} />
         <Route exact path="/" component={HomeDashboard} />

@@ -12,4 +12,7 @@ import kodlamaio.hrms.entities.dtos.ResumeInputDto;
 public interface ResumeService extends BaseService<Resume>{
 	public Result add(ResumeInputDto resume);
 	public DataResult<List<ResumeDisplayDto>> getAllDisplay();
+	public DataResult<ResumeDisplayDto> getResumeById(int id);
+	
+	public DataResult<ResumeDisplayDto> updateResume(int id, ResumeInputDto resume);
 }

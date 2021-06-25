@@ -12,6 +12,7 @@ import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
 import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
 
 public class JobAdvertisementConverter {
+	public static int totalJobAdvertListSize = -1;
 	public static List<JobAdvertisementDto> NormalToDto(List<JobAdvertisement> normalList) {
 		List<JobAdvertisementDto> dtoList = new ArrayList<JobAdvertisementDto>();
 		
@@ -44,7 +45,7 @@ public class JobAdvertisementConverter {
 		EmployerDisplayDto empDto = EmployerDtoConverter.NormalToDisplayDto(normal.getEmployer());
 		return new JobAdvertisementDisplayDto(normal.getId(), empDto, normal.getJobPosition(), normal.getCity(), 
 									   normal.getMaxperson(), normal.getMinSalary(), normal.getMaxSalary(), normal.getReleaseDate(), normal.getDeadline(),
-									   normal.getWorkStyle(), normal.getWorkTimeStyle(), normal.getDescription(), normal.isActive());
+									   normal.getWorkStyle(), normal.getWorkTimeStyle(), normal.getDescription(), normal.isActive(), totalJobAdvertListSize);
 	}
 	
 	

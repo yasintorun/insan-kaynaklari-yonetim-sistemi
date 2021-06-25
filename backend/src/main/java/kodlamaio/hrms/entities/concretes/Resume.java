@@ -1,5 +1,6 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -52,14 +53,31 @@ public class Resume {
 	@Column(name = "summary")
 	private String summary;
 	
+	@Column(name = "birtdate")
+	private LocalDate birtdate;
 	
+	@Column(name = "phone")
+	private String phone;
 	
 	@ManyToOne()
 	@JoinColumn(name="image_id")
 	private Image image;
 	
+	
+
+	@ManyToOne()
+	@JoinColumn(name="gender_id")
+	private Gender gender;
+	
+	
+	@ManyToOne()
+	@JoinColumn(name="nationality_id")
+	private Nationality nationality;
+	
 	@ManyToOne()
 	@JoinColumn(name="user_id")
 	private Jobseeker jobSeeker;
+	
+	
 	
 }

@@ -5,6 +5,7 @@ import {  Button, Icon, Dropdown } from 'semantic-ui-react'
 import './admin.css'
 import ResumeList from '../../pages/ResumeList'
 import Employer from '../../pages/EmployerList'
+import AdminProfile from '../../pages/admin/AdminProfile'
 export default function AdminDashboard() {
 
     const [activePage, setActivePage] = useState({})
@@ -61,7 +62,6 @@ export default function AdminDashboard() {
             key: 'Jenny Hess',
         },
     ]
-
     return (
 
         <div className="row">
@@ -70,8 +70,8 @@ export default function AdminDashboard() {
             <div className="col-md-2 side-bar ">
                 <Button.Group vertical fluid>
                     {
-                        sideBarOptions.map(options => (
-                            <SideBarButton options={options} />
+                        sideBarOptions.map((options, index) => (
+                            <SideBarButton options={options} key={index}/>
                         ))
                     }
                 </Button.Group>
@@ -87,7 +87,7 @@ export default function AdminDashboard() {
                     </Button>
                     <Dropdown icon="user" button>
                         <Dropdown.Menu>
-                            <Dropdown.Item>Test</Dropdown.Item>
+                            <Dropdown.Item as={NavLink} to="/admin/profile"><Icon name="user"/>Profil</Dropdown.Item>
                             <Dropdown.Item>12</Dropdown.Item>
                             <Dropdown.Item >
                                 <Icon name="sign-out"/>Çıkış Yap
@@ -100,6 +100,7 @@ export default function AdminDashboard() {
                 <Route exact path="/admin/jobadvertlist" component={JobAdvertList} />
                 <Route exact path="/admin/userlist" component={Employer} />
                 <Route exact path="/admin/resumelist" component={ResumeList} />
+                <Route exact path="/admin/profile" component ={AdminProfile} />
             </div>
         </div >
     )

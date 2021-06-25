@@ -8,10 +8,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
 import kodlamaio.hrms.core.utilities.converters.JobAdvertisementConverter;
 import kodlamaio.hrms.core.utilities.helpers.FormatHelper;
+import kodlamaio.hrms.core.utilities.helpers.JobAdvertFilterOption;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -131,6 +134,17 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	@Override
 	public void updateIsActive(boolean isActive, int id) {
 		this.jobAdvertisementDao.updateIsActive(id, isActive);
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisementDisplayDto>> getAll(int pageNo, int pageSize, JobAdvertFilterOption filterOption) {
+		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+		
+		//System.out.println(this.jobAdvertisementDao.getFilteringAndPage(filterOption, pageable).getTotalElements());
+		
+		JobAdvertisementConverter.totalJobAdvertListSize = (int) this.jobAdvertisementDao.getFilteringAndPage(filterOption, pageable).getTotalElements();
+		return new SuccessDataResult<List<JobAdvertisementDisplayDto>>
+		(JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.getFilteringAndPage(filterOption, pageable).getContent()), "iş ilanı "+pageNo+". sayfa getirildi.");
 	}
 	
 	

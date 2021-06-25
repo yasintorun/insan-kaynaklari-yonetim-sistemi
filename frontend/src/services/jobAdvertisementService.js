@@ -5,6 +5,10 @@ export default class JobAdvertisementService {
         return  axios.get("http://localhost:8080/api/jobAdvertisements/getAllSortedJobAdvertisement");
     }
 
+    getJobAdvertFilterWithPage(pageNo, pageSize, filterOption) {
+        return axios.post(`http://localhost:8080/api/jobAdvertisements/getAllJobAdvertisementWithPage?pageNo=${pageNo}&pageSize=${pageSize}`, filterOption)
+    }
+
     getJobAdvertisementById(id) {
         return  axios.get("http://localhost:8080/api/jobAdvertisements/getById?id=" + id);
     }

@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.SkillService;
-import kodlamaio.hrms.core.utilities.converters.SkillDtoConverter;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.SkillDao;
 import kodlamaio.hrms.entities.concretes.Skill;
-import kodlamaio.hrms.entities.dtos.SkillDisplayDto;
 
 @Service
 public class SkillManager implements SkillService{
@@ -36,10 +34,10 @@ public class SkillManager implements SkillService{
 		return new SuccessResult("Yetenek eklendi");
 	}
 
-	@Override
+	/*@Override
 	public DataResult<List<SkillDisplayDto>> getAllDisplay() {
 		return new SuccessDataResult<List<SkillDisplayDto>>
 		(SkillDtoConverter.NormalToDisplayDto(this.skillDao.findAll()), "Yetenekler listelendi");
 	}
-
+*/
 }

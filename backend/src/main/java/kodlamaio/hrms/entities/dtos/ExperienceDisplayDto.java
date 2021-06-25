@@ -1,7 +1,11 @@
 package kodlamaio.hrms.entities.dtos;
 
+import java.time.LocalDate;
 import java.util.Date;
 
+import kodlamaio.hrms.entities.concretes.City;
+import kodlamaio.hrms.entities.concretes.JobPosition;
+import kodlamaio.hrms.entities.concretes.WorkTimeStyle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +14,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExperienceDisplayDto {
+	private int id;
 	private String companyName;
-	private String jobPosition;
-	private Date startingDate;
-	private Date leavingDate;
+	private JobPosition jobPosition;
+	private LocalDate startingDate;
+	private LocalDate leavingDate;
+	private City city;
+	private WorkTimeStyle workTimeStyle;
 }

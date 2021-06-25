@@ -35,7 +35,7 @@ public class JobAdvertisement {
 		this.deadline = deadline2;
 		this.isActive = isActive2;
 		//this.jobPosition.setId(jobPositionId);
-		this.setJobPosition(new JobPosition(jobPositionId, "", null));
+		this.setJobPosition(new JobPosition(jobPositionId, "", null, null));
 		Employer emp = new Employer();
 		emp.setUserId(employerId);
 		

@@ -58,6 +58,12 @@ export default function Navbar() {
                         as={NavLink}
                         to="/admin"
                     />
+                    <Menu.Item
+                        icon="gg"
+                        name='Özgeçmiş'
+                        as={NavLink}
+                        to="/resume"
+                    />
                 </div>
             </Menu>
         </div>

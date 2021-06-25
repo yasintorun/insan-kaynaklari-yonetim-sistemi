@@ -15,6 +15,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EducationDao;
 import kodlamaio.hrms.entities.concretes.Education;
 import kodlamaio.hrms.entities.dtos.EducationDisplayDto;
+import kodlamaio.hrms.entities.dtos.EducationInputDto;
 
 @Service
 public class EducationManager implements EducationService{
@@ -48,6 +49,20 @@ public class EducationManager implements EducationService{
 		Sort sort = Sort.by(Sort.Direction.DESC, "graduationDate");
 		return new SuccessDataResult<List<EducationDisplayDto>>
 		(EducationDtoConverter.NormalToDisplayDto(this.educationDao.findAll(sort)), "Mezuniyet tarihine göre listelendi!");
+	}
+
+	@Override
+	public DataResult<EducationDisplayDto> updateEducation(int id, EducationInputDto inputDto) {
+		Education current = this.educationDao.getOne(id);
+		Education temp = EducationDtoConverter.InputDtoToNormal(inputDto);
+		current.setSchool(temp.getSchool());
+		current.setDepartment(temp.getDepartment());
+		current.setJobseeker(temp.getJobseeker());
+		current.setGraduationDate(temp.getGraduationDate());
+		current.setStartingDate(temp.getStartingDate());
+		this.educationDao.save(current);
+		return new SuccessDataResult<EducationDisplayDto>
+		(null, "Eğitim güncellendi");
 	}	
 
 }

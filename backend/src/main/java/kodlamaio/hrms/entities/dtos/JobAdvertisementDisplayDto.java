@@ -28,4 +28,5 @@ public class JobAdvertisementDisplayDto {
 	private WorkTimeStyle workTimeStyle;
 	private String description;
 	private boolean isActive;
+	private int totalJobAdvertSize;
 }

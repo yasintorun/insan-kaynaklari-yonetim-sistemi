@@ -32,7 +32,6 @@ export default function NewJobAdvert() {
 
   const jobAdvertisementService = new JobAdvertisementService()
 
-
   const SignupSchema = Yup.object().shape({
     cityId: Yup.string()
       .required('Zorunlu Alan'),
@@ -78,8 +77,8 @@ export default function NewJobAdvert() {
     },
     validationSchema: SignupSchema,
     onSubmit: values => {
-      //jobAdvertisementService.add(values).then();
-      alert(JSON.stringify(values, null, 2))
+      jobAdvertisementService.add(values).then();
+      //alert(JSON.stringify(values, null, 2))
     },
   });
 
