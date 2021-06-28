@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Pagination } from 'semantic-ui-react'
+import { Grid, Pagination, Dropdown, Label, Divider } from 'semantic-ui-react'
 import JobPost from '../layouts/JobPost'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import JobAdvertFiltering from '../layouts/JobAdvertFiltering'
@@ -9,16 +9,17 @@ export default function JobAdvertisement() {
     const [baseJobAdvert, setBaseJobAdvert] = useState([])
     const [activePage, setActivePage] = useState(1)
     const [filterOption, setFilterOption] = useState({})
-    const [pageSize, setPageSize] = useState(2)
+    const [pageSize, setPageSize] = useState(1)
     const [totalPageSize, setTotalPageSize] = useState(0)
     useEffect(() => {
         let jobAdvertisementService = new JobAdvertisementService()
-        jobAdvertisementService.getJobAdvertFilterWithPage(activePage, pageSize, filterOption).then(result => {
+        jobAdvertisementService.getJobAdvertFilterAndPage(activePage, pageSize, filterOption).then(result => {
             setJobAdvertisements(result.data.data)
-            setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
+            if(totalPageSize == 0)
+                setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
         })
 
-    }, [filterOption, activePage])
+    }, [filterOption, activePage, pageSize])
 
 
     const handleFilterClick = (filterOption) => {
@@ -30,6 +31,8 @@ export default function JobAdvertisement() {
             filterOption.workStyleId = null
         if (filterOption.workTimeStyleId.length == 0)
             filterOption.workTimeStyleId = null
+        setTotalPageSize(0)
+        setActivePage(1)
         setFilterOption(filterOption)
     }
 
@@ -38,7 +41,14 @@ export default function JobAdvertisement() {
     const handlePaginationChange = (e, { activePage }) => {
         setActivePage(activePage)
     }
-    console.log("asd")
+
+    const pageSizeOptions = [1, 2, 5, 10]
+
+    const handlePageSizeOnChange = (e, { value }) => {
+        setPageSize(pageSizeOptions[value])
+        setActivePage(1)
+    }
+
     return (
 
         <div className="mt-8 mb-5">
@@ -53,14 +63,26 @@ export default function JobAdvertisement() {
                             <JobPost jobAdvert={jobAdvertisement} />
                         ))
                     }
-                    <div className="w-75 m-auto">
+                    <div className="w-75 m-auto" align = "center">
                         <Pagination
                             firstItem={null}
                             lastItem={null}
                             activePage={activePage}
                             onPageChange={handlePaginationChange}
-                            totalPages={totalPageSize / pageSize}
+                            totalPages={ Math.ceil(totalPageSize / pageSize)}
                         />
+                        <Divider />
+                        <div>
+                            <Label>Sayfada görülecek toplam iş ilan sayısı</Label><br/>
+                            <Dropdown
+                                selection
+                                defaultValue = {0}
+                                options={pageSizeOptions.map((x, index) => {
+                                    return { text: x, key: index, value: index }
+                                })}
+                                onChange = {handlePageSizeOnChange}
+                            />
+                        </div>
                     </div>
                 </Grid.Column>
 

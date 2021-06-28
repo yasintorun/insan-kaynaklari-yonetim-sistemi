@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Label, Segment, Button } from 'semantic-ui-react'
+import { Label, Segment, Button, Icon } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import BackButton from '../components/BackButton'
+import FavoriteJobAdvertService from '../services/favoriteJobAdvert'
 export default function JobPostDetail() {
     let { id } = useParams()
     const [jobAdvertisement, setjobAdvertisement] = useState({})
     const [isAdmin, setIsAdmin] = useState(true)
 
+    const [isAddedFavorite, setIsAddedFavorite] = useState(false)
+
     let jobAdvertService = new JobAdvertisementService()
+    let favoriteJobAdvertService = new FavoriteJobAdvertService()
     function handleAdmin(params) {
         setIsAdmin(true)
     }
@@ -17,6 +21,15 @@ export default function JobPostDetail() {
     function handleOther(params) {
         setIsAdmin(false)
     }
+
+    const handleAddFavoriteClick = () => {
+        setIsAddedFavorite(!isAddedFavorite)
+        if(isAddedFavorite) {
+            favoriteJobAdvertService.add({jobAdvertId: jobAdvertisement.id, userId: 1}).then(r => console.log(r.data))
+            toast.success(`Favorilere eklendi`)
+        }
+    }
+    
 
 
     const handleOnSubmit = (jobAdvertisement) => {
@@ -27,17 +40,25 @@ export default function JobPostDetail() {
     }
 
     useEffect(() => {
-
         jobAdvertService.getJobAdvertisementById(id).then(result => setjobAdvertisement(result.data.data))
-    }, [jobAdvertisement])
+        favoriteJobAdvertService.getByJobAdvert_Id(7).then(result => {
+            console.log(!!(result.data.data))  
+        })
+    }, [])
+
 
     return (
         <div>
 
-            <BackButton className="w-75 m-auto mt-2"/>
+            <BackButton className="w-75 m-auto mt-2" />
             <div className="page-center">
-                <div className="shadow-no-hover bordered shadow w-75 m-auto">
-                    <div className="row">
+
+
+                <div className="shadow-no-hover bordered shadow w-75 m-auto position-relative">
+                    <div className="topright">
+                        <Button icon={isAddedFavorite ? "heart" : "heart outline"} color="red" basic className="shadow" onClick={() => handleAddFavoriteClick()}/>
+                    </div>
+                    <div className="row mt-3">
                         <div className="col-md-8">
                             <h2>{jobAdvertisement.jobPosition?.jobName}</h2>
                             <Label as='a' color='purple' >

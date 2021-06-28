@@ -163,3 +163,14 @@
   border: 5px dashed  rgba(128, 128, 128, 0.335);
   cursor: pointer;
 }
+
+.z-index-1 {
+  z-index: 100;
+}
+
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  background-color: transparent !important;
+}
