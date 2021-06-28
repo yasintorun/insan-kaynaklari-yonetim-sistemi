@@ -2,6 +2,7 @@ package kodlamaio.hrms.entities.concretes;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +25,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "job_advertisements")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","favoriteJobAdverts"})
+
 public class JobAdvertisement {
 	public JobAdvertisement(String description2, int city2, int minSalary2, int maxSalary2, int maxPerson2,
 			LocalDate releaseDate2, LocalDate deadline2, boolean isActive2, int jobPositionId, int employerId) {
@@ -40,6 +46,11 @@ public class JobAdvertisement {
 		emp.setUserId(employerId);
 		
 		this.setEmployer(emp);
+	}
+
+
+	public JobAdvertisement(int jobAdvertId) {
+		this.id = jobAdvertId;
 	}
 
 
@@ -97,6 +108,9 @@ public class JobAdvertisement {
 	@ManyToOne()
 	@JoinColumn(name="work_time_style_id")
 	private WorkTimeStyle workTimeStyle;
+	
+	@OneToMany(mappedBy = "jobAdvert")
+	private List<FavoriteJobAdvert> favoriteJobAdverts;
 	
 	///////////////////
 	

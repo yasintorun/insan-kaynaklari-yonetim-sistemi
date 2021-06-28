@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SkillDisplayDto {
-	private int id;
+public class FavoriteJobAdvertInputDto {
 	private int userId;
-	private String skillName;
+	private int jobAdvertId;
 }

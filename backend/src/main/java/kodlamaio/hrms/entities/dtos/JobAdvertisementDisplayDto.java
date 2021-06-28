@@ -1,4 +1,4 @@
-package kodlamaio.hrms.entities.dtos;
+package kodlamaio.hrms.entities.dtos;	
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -27,6 +27,6 @@ public class JobAdvertisementDisplayDto {
 	private WorkStyle workStyle;
 	private WorkTimeStyle workTimeStyle;
 	private String description;
-	private boolean isActive;
+	private boolean isActive;	
 	private int totalJobAdvertSize;
 }

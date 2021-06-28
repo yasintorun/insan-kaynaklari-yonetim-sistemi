@@ -10,10 +10,9 @@ public class JobSeekerDtoConverter {
 			return null;
 		}
 		
-		Jobseeker jobseeker = new Jobseeker(inputDto.getFirstname(), inputDto.getLastname(), inputDto.getTcNo(), null, null, null, null, null);
+		Jobseeker jobseeker = new Jobseeker(inputDto.getFirstname(), inputDto.getLastname(), inputDto.getTcNo(), null, null, null, null, null, null);
 		jobseeker.setEposta(inputDto.getEposta());
 		jobseeker.setPassword(inputDto.getPassword());
-		System.out.println("\n\n\n" + jobseeker.getEposta()+"\n\n");
 		return jobseeker;
 	}
 	
