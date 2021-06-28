@@ -23,11 +23,16 @@ export default function JobPostDetail() {
     }
 
     const handleAddFavoriteClick = () => {
-        setIsAddedFavorite(!isAddedFavorite)
+        
         if(isAddedFavorite) {
-            favoriteJobAdvertService.add({jobAdvertId: jobAdvertisement.id, userId: 1}).then(r => console.log(r.data))
+            favoriteJobAdvertService.delete(id).then(r => console.log(r.data))
+            toast.success(`Favorilerden çıkarıldı`)
+        } else {
+            favoriteJobAdvertService.add({jobAdvertId: id, userId: 1}).then(r => console.log(r.data))
             toast.success(`Favorilere eklendi`)
         }
+
+        setIsAddedFavorite(!isAddedFavorite)
     }
     
 
@@ -41,8 +46,8 @@ export default function JobPostDetail() {
 
     useEffect(() => {
         jobAdvertService.getJobAdvertisementById(id).then(result => setjobAdvertisement(result.data.data))
-        favoriteJobAdvertService.getByJobAdvert_Id(7).then(result => {
-            console.log(!!(result.data.data))  
+        favoriteJobAdvertService.getByJobAdvert_Id(id).then(result => {
+            setIsAddedFavorite(!!result.data.data)  
         })
     }, [])
 

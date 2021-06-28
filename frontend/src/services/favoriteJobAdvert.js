@@ -12,4 +12,8 @@ export default class FavoriteJobAdvertService{
     add(values) {
         return axios.post("http://localhost:8080/api/favoriteJobAdverts/add", values)
     }
+
+    delete(jobAdvertId) {
+        return axios.delete("http://localhost:8080/api/favoriteJobAdverts/delete?jobAdvertId=" + jobAdvertId)
+    }
 }
