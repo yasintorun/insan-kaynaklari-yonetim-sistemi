@@ -14,6 +14,7 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.dtos.EmployerDisplayDto;
 import kodlamaio.hrms.entities.dtos.EmployerInputDto;
 
 @RestController
@@ -32,6 +33,13 @@ public class EmployerController {
 	public DataResult<List<Employer>> getAll() {
 		return this.employerService.getAll();
 	}
+	
+	
+	@GetMapping("/getById")
+	public DataResult<EmployerDisplayDto> getById(int userId) {
+		return this.employerService.getById(userId);
+	}
+	
 	
 
 	@PostMapping("/add")

@@ -1,4 +1,4 @@
-package kodlamaio.hrms.entities.concretes;
+	package kodlamaio.hrms.entities.concretes;
 
 
 import java.util.List;
