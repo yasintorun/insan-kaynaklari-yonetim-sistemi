@@ -11,6 +11,7 @@ import Navbar from './layouts/Navbar';
 import Footer from './layouts/Footer';
 import ResumeDetail from './pages/ResumeDetail';
 import JobseekerDashboard from './layouts/JobseekerDashboard';
+import EmployerDashboard from './layouts/employer/EmployerDashboard';
 function App() {
 
 
@@ -23,6 +24,7 @@ function App() {
 
         <Route exact path="/resume*" component={ResumeDetail} />
         <Route exact path="/jobseeker_dashboard*" component={JobseekerDashboard} />
+        <Route exact path="/employer_dashboard*" component={EmployerDashboard} />
         
         <Route path={Links.USERS} component={Auth} />
         <Route exact path="/" component={HomeDashboard} />

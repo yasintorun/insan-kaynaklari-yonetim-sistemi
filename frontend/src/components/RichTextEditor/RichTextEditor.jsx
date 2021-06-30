@@ -8,6 +8,7 @@ import './editor.css'
 import { stateToHTML } from "draft-js-export-html";
 
 
+
 const STYLE_TYPE = 'style'
 const LIST_TYPE = 'list'
 const ENTITY_TYPE = 'entity'
@@ -46,6 +47,8 @@ const allTransactions = [
 	
 ]
 
+//Yasin T.
+
 class RichTextEditor extends React.Component {
 	constructor(props) {
 		super(props);
@@ -61,6 +64,8 @@ class RichTextEditor extends React.Component {
 		}, () => {this.handleCallBack()});
 		
 	};
+
+	//Yasin T.
 
 	handleCallBack = () => {
 		this.val = stateToHTML(this.state.editorState.getCurrentContent())

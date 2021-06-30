@@ -148,7 +148,9 @@
 
 .primary-text {
   font-weight: 600;
-  line-height: 10px;
+}
+.bolder-text {
+  font-weight: 500 !important;
 }
 .message-item {
   margin-top: 30px;

@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import JobAdvertisementService from '../../services/jobAdvertisementService'
-import { Button, Label, Table } from 'semantic-ui-react'
-import { NavLink } from 'react-router-dom'
-import IsApprovedIcon from '../../components/IsApprovedIcon'
-export default function JobAdvertList() {
-    const [jobAdvertisements, setJobAdvertisements] = useState([])
+import React from 'react'
 
-    useEffect(() => {
-        let jobAdvertisementService = new JobAdvertisementService()
-        jobAdvertisementService.getJobAdvertisement().then(result => setJobAdvertisements(result.data.data))
-    }, [])
-
+export default function EmployerWaitUpdate() {
     return (
         <div>
             <Table singleLine striped color="purple" textAlign="center" selectable>
@@ -36,7 +26,13 @@ export default function JobAdvertList() {
                             <Table.Cell>{jobAdvert.workTimeStyle?.name}</Table.Cell>
                             <Table.Cell>{jobAdvert.releaseDate}</Table.Cell>
                             <Table.Cell>{jobAdvert.deadline}</Table.Cell>
-                            <Table.Cell><IsApprovedIcon isActive = {jobAdvert.active} /></Table.Cell>
+                            <Table.Cell>
+                                {
+                                    jobAdvert.active
+                                        ? <Label color="green"> &#10004; </Label>
+                                        : <Label color="red">&#10008;</Label>
+                                }
+                            </Table.Cell>
 
                             <Table.Cell>
                                 <Button positive as={NavLink} to={'/detail/' + jobAdvert.id}>Detay</Button>

@@ -12,11 +12,7 @@ export default function JobseekerDashboard() {
                     <h1 className="dashboard-header bold-header text-center">iKariyer</h1>
                     <Button.Group vertical fluid className="w-100" size="big" color="teal">
                         <Button className="p-4"><Icon name="user"/>Profil</Button>
-                        <Button className="p-4"><Icon name="gg"/>Özgeçmiş</Button>
-                        <Button className="p-4" as={NavLink} to="/jobseeker_dashboard/isilani">
-                            <Icon name="list"/>
-                            İş ilanları
-                        </Button>
+                        <Button className="p-4"><Icon name="list"/>İş ilanlarım</Button>
                         <Button className="p-4"><Icon name="bullhorn"/>Duyurular</Button>
                     </Button.Group>
                 </div>

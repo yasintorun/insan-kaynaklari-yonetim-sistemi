@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import EmployerDetail from '../pages/EmployerDetail'
 import Employer from '../pages/EmployerList'
 import JobAdvertisement from '../pages/JobAdvertisementList'
 import JobPosition from '../pages/JobPositionList'
@@ -17,6 +18,7 @@ export default function Dashboard() {
                 <Route exact path="/newjobadvert" component={NewJobAdvert} />
                 <Route exact path="/jobAdvertisements" component={JobAdvertisement} />
                 <Route exact path="/detail/:id" component={JobPostDetail} />
+                <Route exact path="/employer/detail/:id" component={EmployerDetail} />
             </div>
             <Footer/>
         </div>

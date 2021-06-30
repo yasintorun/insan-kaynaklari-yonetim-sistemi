@@ -6,6 +6,7 @@ import './admin.css'
 import ResumeList from '../../pages/ResumeList'
 import Employer from '../../pages/EmployerList'
 import AdminProfile from '../../pages/admin/AdminProfile'
+import AdminEmployerDetails from '../../pages/admin/AdminEmployerDetails'
 export default function AdminDashboard() {
 
     const [activePage, setActivePage] = useState({})
@@ -101,6 +102,7 @@ export default function AdminDashboard() {
                 <Route exact path="/admin/userlist" component={Employer} />
                 <Route exact path="/admin/resumelist" component={ResumeList} />
                 <Route exact path="/admin/profile" component ={AdminProfile} />
+                <Route exact path="/admin/userlist/employerDetail/:id" component ={AdminEmployerDetails} />
             </div>
         </div >
     )

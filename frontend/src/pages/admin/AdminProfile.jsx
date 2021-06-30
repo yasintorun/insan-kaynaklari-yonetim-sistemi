@@ -17,8 +17,7 @@ export default function AdminProfile() {
     const [isEdit, setIsEdit] = useState(false)
     const handleEditClick = () => {
         setIsEdit(true)
-        let val = personel;
-        formik.setValues(val)
+        formik.setValues(personel)
     }
     const handleEditCancel = () => {
         setIsEdit(false)
@@ -28,7 +27,7 @@ export default function AdminProfile() {
         },
         onSubmit: values => {
             console.log(values)
-            personelService.update(values).then(r => console.log(r.data.message))
+            //personelService.update(values).then(r => console.log(r.data.message))
             handleEditCancel()
         },
     });
