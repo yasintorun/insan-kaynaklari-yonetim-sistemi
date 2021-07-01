@@ -116,6 +116,10 @@
   background-color: rgb(0, 52, 121);
 }
 
+.ms-8 {
+  margin-left: 80px;
+}
+
 .bg-footer {
   background-color: rgb(211, 211, 211) !important;
 }
