@@ -10,7 +10,7 @@ export default function JobPostDetail() {
     const [jobAdvertisement, setjobAdvertisement] = useState({})
     const [isAdmin, setIsAdmin] = useState(true)
 
-    const [isAddedFavorite, setIsAddedFavorite] = useState(false)
+    const [favorite, setFavorite] = useState({})
 
     let jobAdvertService = new JobAdvertisementService()
     let favoriteJobAdvertService = new FavoriteJobAdvertService()
@@ -24,15 +24,19 @@ export default function JobPostDetail() {
 
     const handleAddFavoriteClick = () => {
         
-        if(isAddedFavorite) {
-            favoriteJobAdvertService.delete(id).then(r => console.log(r.data))
+        if(favorite != null) {
+            favoriteJobAdvertService.deleteById(favorite.id).then(r => console.log(r.data))
             toast.success(`Favorilerden çıkarıldı`)
         } else {
             favoriteJobAdvertService.add({jobAdvertId: id, userId: 1}).then(r => console.log(r.data))
             toast.success(`Favorilere eklendi`)
         }
 
-        setIsAddedFavorite(!isAddedFavorite)
+        setTimeout(() => {
+            favoriteJobAdvertService.getById(1, id).then(result => setFavorite(result.data.data))
+        }, 200)
+
+        //setIsAddedFavorite(!isAddedFavorite)
     }
     
 
@@ -46,8 +50,8 @@ export default function JobPostDetail() {
 
     useEffect(() => {
         jobAdvertService.getJobAdvertisementById(id).then(result => setjobAdvertisement(result.data.data))
-        favoriteJobAdvertService.getByJobAdvert_Id(id).then(result => {
-            setIsAddedFavorite(!!result.data.data)  
+        favoriteJobAdvertService.getById(1, id).then(result => {
+            setFavorite(result.data.data)  
         })
     }, [])
 
@@ -61,7 +65,7 @@ export default function JobPostDetail() {
 
                 <div className="shadow-no-hover bordered shadow w-75 m-auto position-relative">
                     <div className="topright">
-                        <Button icon={isAddedFavorite ? "heart" : "heart outline"} color="red" basic className="shadow" onClick={() => handleAddFavoriteClick()}/>
+                        <Button icon={favorite != null ? "heart" : "heart outline"} color="red" basic className="shadow" onClick={() => handleAddFavoriteClick()}/>
                     </div>
                     <div className="row mt-3">
                         <div className="col-md-8">

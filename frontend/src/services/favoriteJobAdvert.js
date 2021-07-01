@@ -5,6 +5,10 @@ export default class FavoriteJobAdvertService{
         return axios.get("http://localhost:8080/api/favoriteJobAdverts/getAll")
     }
 
+    getById(userId, jobAdvertId) {
+        return axios.get(`http://localhost:8080/api/favoriteJobAdverts/getFavorite?jobAdvertId=${jobAdvertId}&userId=${userId}`)
+    }
+
     getByJobAdvert_Id(id) {
         return axios.get("http://localhost:8080/api/favoriteJobAdverts/getByJobAdvertId?id=" + id)
     }
@@ -13,7 +17,14 @@ export default class FavoriteJobAdvertService{
         return axios.post("http://localhost:8080/api/favoriteJobAdverts/add", values)
     }
 
-    delete(jobAdvertId) {
+    deleteByJobAdvertId(jobAdvertId) {
         return axios.delete("http://localhost:8080/api/favoriteJobAdverts/delete?jobAdvertId=" + jobAdvertId)
     }
+
+    deleteById(id) {
+        return axios.delete("http://localhost:8080/api/favoriteJobAdverts/deleteById?id=" + id)
+    }
+
+
 }
+
