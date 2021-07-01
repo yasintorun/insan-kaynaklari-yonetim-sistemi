@@ -65,7 +65,7 @@ export default function Employer() {
                                 <Table.Cell><IsApprovedIcon isActive={employer.confirmed} /></Table.Cell>
                                 <Table.Cell><IsApprovedIcon isActive={isUpToDate(employer.userId)} /></Table.Cell>
                                 <Table.Cell>
-                                    <Button positive as={NavLink} to={'/admin/userlist/employerDetail/' + employer.id}>Detay</Button>
+                                    <Button positive as={NavLink} to={'/admin/userlist/employerDetail/' + employer.userId}>Detay</Button>
                                 </Table.Cell>
                             </Table.Row>
                         ))
