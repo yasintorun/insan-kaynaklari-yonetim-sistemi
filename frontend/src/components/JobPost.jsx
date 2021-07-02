@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Card, Label, Icon, Button } from 'semantic-ui-react'
-import Helper from '../Helper'
+import Helper from '../utilities/Helper'
 
 export default function JobPost({ jobAdvert }) {
     return (

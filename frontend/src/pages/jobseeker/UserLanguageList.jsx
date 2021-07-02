@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Table } from 'semantic-ui-react'
-import UserLanguageService from '../services/userLanguageService'
+import UserLanguageService from '../../services/userLanguageService'
 
 export default function UserLanguage() {
     const [userLanguages, setUserLangugages] = useState([])

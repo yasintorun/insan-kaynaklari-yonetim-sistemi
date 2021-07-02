@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Table } from 'semantic-ui-react'
-import ResumeService from '../services/resumeService'
+import ResumeService from '../../services/resumeService'
 
 export default function ResumeList() {
     const [resumes, setResumes] = useState([])

@@ -13,9 +13,9 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Table, Label, Button } from 'semantic-ui-react'
-import IsApprovedIcon from '../components/IsApprovedIcon'
-import EmployerService from '../services/employerService'
-import UpdateEmployerInfoService from '../services/UpdateEmployerInfoService'
+import IsApprovedIcon from '../../components/IsApprovedIcon'
+import EmployerService from '../../services/employerService'
+import UpdateEmployerInfoService from '../../services/UpdateEmployerInfoService'
 
 export default function Employer() {
     const [employers, setEmployers] = useState([])

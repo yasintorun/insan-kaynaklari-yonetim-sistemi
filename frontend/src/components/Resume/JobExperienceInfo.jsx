@@ -7,7 +7,7 @@ import CityDropDown from '../../utilities/dropdowns/CityDropDown'
 import WorkTimeStyleDropdown from '../../utilities/dropdowns/WorkTimeStyleDropdown'
 import JobPositionDropDown from '../../utilities/dropdowns/JobPositionDropdown'
 import ExperienceService from '../../services/experienceService'
-import Helper from '../../Helper'
+import Helper from '../../utilities/Helper'
 import { toast } from 'react-toastify'
 export default function JobExperienceInfo() {
     

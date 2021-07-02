@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {Table } from 'semantic-ui-react'
-import JobSeekerService from '../services/jobSeekerService'
+import JobSeekerService from '../../services/jobSeekerService'
 
 export default function JobSeekerList() {
     const [jobSeekers, setJobSeekers] = useState([])

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import EmployerDetail from '../EmployerDetail'
+import EmployerDetail from '../employer/EmployerDetail'
 import MessageBox from '../../components/MessageBox'
 import YTInfoMessage from '../../utilities/messages/YTInfoMessage'
 import EmployerService from '../../services/employerService'

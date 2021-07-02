@@ -58,7 +58,7 @@
 
 .home-showcase {
   height: 90vh;
-  background: url('./indir.png') no-repeat 50%;
+  background: url('../images/indir.png') no-repeat 50%;
   background-size: cover;
   background-position: bottom;
 }
@@ -86,12 +86,12 @@
 }
 
 .jobseekerico{
-  background: url('./jobseeker.png') no-repeat 50%;
+  background: url('../images/jobseeker.png') no-repeat 50%;
   background-size: 100px;
 }
 
 .employerico{
-  background: url('./employer.png') no-repeat 50%;
+  background: url('../images/employer.png') no-repeat 50%;
   background-size: 100px;
 }
 
@@ -126,13 +126,13 @@
 
 .full-bg-image{
   min-height: 100vh;
-  background: url('./login2.jpg') no-repeat 50%;
+  background: url('../images/login2.jpg') no-repeat 50%;
   background-size: cover;
   background-position: right;
 }
 .full-bg-image2{
   min-height: 100vh;
-  background: url('./register.jpg') no-repeat 50%;
+  background: url('../images/register.jpg') no-repeat 50%;
   background-size: cover;
   background-position: right;
 }

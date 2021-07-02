@@ -4,8 +4,8 @@ import Links from '../../components/Links'
 import SigninForm from '../../pages/auth/SigninForm'
 import SignupForJobseeker from '../../pages/auth/SignupForJobseeker'
 import SignupForEmployer from '../../pages/auth/SignupForEmployer'
-import Footer from '../Footer'
-import Navbar from '../Navbar'
+import Footer from '../../components/Footer'
+import Navbar from '../../components/Navbar'
 export default function Login() {
     return (
         <div>

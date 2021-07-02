@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import { Input, Button, Label, Form, Dropdown } from 'semantic-ui-react'
-import JobAdvertisementService from '../services/jobAdvertisementService';
-import CityService from '../services/cityService';
-import JobPositionService from '../services/jobPositionService'
-import WorkStyleService from '../services/workStyleService';
-import WorkTimeStyleService from '../services/workTimeService';
-import RichTextEditor from '../components/RichTextEditor/RichTextEditor';
+import JobAdvertisementService from '../../services/jobAdvertisementService';
+import CityService from '../../services/cityService';
+import JobPositionService from '../../services/jobPositionService'
+import WorkStyleService from '../../services/workStyleService';
+import WorkTimeStyleService from '../../services/workTimeService';
+import RichTextEditor from '../../components/RichTextEditor/RichTextEditor';
 import * as Yup from 'yup';
 export default function NewJobAdvert() {
 

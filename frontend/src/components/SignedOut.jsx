@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Menu, Button, Icon, Dropdown } from 'semantic-ui-react'
-import Links from '../components/Links'
+import Links from './Links'
 export default function SignedOut({ signIn }) {
     return (
         <div>

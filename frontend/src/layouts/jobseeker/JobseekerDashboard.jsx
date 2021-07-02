@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Button, Icon } from 'semantic-ui-react'
 import { Route } from 'react-router'
-import JobAdvertisement from './../pages/JobAdvertisementList'
+import JobAdvertisement from '../../pages/JobAdvertisementList'
 import { NavLink } from 'react-router-dom'
 export default function JobseekerDashboard() {
     return (

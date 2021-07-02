@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Table } from 'semantic-ui-react'
-import UserSkillService from '../services/userSkillService'
+import UserSkillService from '../../services/userSkillService'
 
 export default function UserSkill() {
     const [userSkills, setUserSkills] = useState([])

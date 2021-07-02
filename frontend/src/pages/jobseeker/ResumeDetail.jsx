@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import PersonalInfo from '../components/Resume/PersonalInfo'
-import EducationInfo from '../components/Resume/EducationInfo'
-import JobExperienceInfo from '../components/Resume/JobExperienceInfo'
-import SkillInfo from '../components/Resume/SkillInfo'
-import ResumeService from '../services/resumeService'
+import PersonalInfo from '../../components/Resume/PersonalInfo'
+import EducationInfo from '../../components/Resume/EducationInfo'
+import JobExperienceInfo from '../../components/Resume/JobExperienceInfo'
+import SkillInfo from '../../components/Resume/SkillInfo'
+import ResumeService from '../../services/resumeService'
 export default function ResumeDetail() {
     
     const [resume, setResume] = useState([])

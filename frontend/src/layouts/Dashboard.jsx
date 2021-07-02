@@ -1,13 +1,13 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import EmployerDetail from '../pages/EmployerDetail'
-import Employer from '../pages/EmployerList'
+import EmployerDetail from '../pages/employer/EmployerDetail'
+import Employer from '../pages/admin/EmployerList'
 import JobAdvertisement from '../pages/JobAdvertisementList'
 import JobPosition from '../pages/JobPositionList'
 import JobPostDetail from '../pages/JobPostDetail'
-import NewJobAdvert from '../pages/NewJobAdvert'
-import Footer from './Footer'
-import Navbar from './Navbar'
+import NewJobAdvert from '../pages/employer/NewJobAdvert'
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
 export default function Dashboard() {
     return (
         <div className="bg-light">

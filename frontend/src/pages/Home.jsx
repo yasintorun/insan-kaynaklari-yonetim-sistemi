@@ -1,6 +1,6 @@
 import React from 'react'
 import {Icon } from 'semantic-ui-react'
-import SignedOut from '../layouts/SignedOut'
+import SignedOut from '../components/SignedOut'
 export default function Home() {
     return (
         <div>

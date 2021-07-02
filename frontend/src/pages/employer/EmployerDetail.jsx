@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import MessageBox from '../components/MessageBox'
-import YTInfoMessage from '../utilities/messages/YTInfoMessage'
-import EmployerService from '../services/employerService'
+import MessageBox from '../../components/MessageBox'
+import YTInfoMessage from '../../utilities/messages/YTInfoMessage'
+import EmployerService from '../../services/employerService'
 import { useParams } from 'react-router'
 export default function EmployerDetail({employerId}) {
     

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Grid, Pagination, Dropdown, Label, Divider } from 'semantic-ui-react'
-import JobPost from '../layouts/JobPost'
+import JobPost from '../components/JobPost'
 import JobAdvertisementService from '../services/jobAdvertisementService'
-import JobAdvertFiltering from '../layouts/JobAdvertFiltering'
+import JobAdvertFiltering from '../components/JobAdvertFiltering'
 
 export default function JobAdvertisement() {
     const [jobAdvertisements, setJobAdvertisements] = useState([])
