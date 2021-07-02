@@ -9,6 +9,6 @@
 <br><br>
 
 
-##### UML Diyagram
+##### Sayfalama yapısı
 
-![uml](https://raw.githubusercontent.com/yasintorun/insan-kaynaklari-yonetim-sistemi/Dev3/uml.jpg)
+![uml](https://raw.githubusercontent.com/yasintorun/insan-kaynaklari-yonetim-sistemi/Dev3/pageDiagram.png)
