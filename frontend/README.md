@@ -1,6 +1,6 @@
 # HRMS Projesinin Frontend kısmı
 
-### Req19 isteri
+### Req18 isteri
 - Özgeçmiş kısmını tek sayfada oluşturdum. Kullanıcı Bu sayfada bilgilerini girebilir, güncelleyebilir veya silebilir(silme kısmı şuanda yok).
 
 ![req19](https://github.com/yasintorun/insan-kaynaklari-yonetim-sistemi/blob/Dev3/frontend/showcase/cv.PNG)
