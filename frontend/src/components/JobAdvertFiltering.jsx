@@ -36,7 +36,7 @@ export default function JobAdvertFiltering({ clickEvent }) {
     const [jobPosIndexs, setJobPosIndexs] = useState([])
     const handleChangeJobPosition = (e, { value, checked }) => {
         if (checked)
-        jobPosIndexs.push(value)
+            jobPosIndexs.push(value)
         else {
             let idx = jobPosIndexs.indexOf(value)
             if (idx > -1) {
@@ -73,62 +73,58 @@ export default function JobAdvertFiltering({ clickEvent }) {
     }
 
     return (
-        <div>
-            <Segment color="teal" raised className="w-100">
-                <Label attached="top" size="large">Şehir</Label>
-                <Dropdown
-                    placeholder='Şehir seçiniz'
-                    fluid
-                    selection
-                    search
-                    multiple
-                    options={cities.map((x, index) => {
-                        return { text: x.cityName, key: x.index, value: x.id }
-                    })}
-                    onChange={handleChangeCity}
-                    value={cityIndexs}
-                />
-            </Segment>
-            <Segment color="teal" raised className="w-100">
-                <Label attached="top" size="large">İş Pozisyonu</Label>
-                {
-                    jobPositions.map(jobPos => (
-                        <Checkbox
-                            label={jobPos.jobName}
-                            className="mt-4 d-block"
-                            onChange={handleChangeJobPosition}
-                            value={jobPos.id}
-                        />
-                    ))
-                }
-            </Segment>
-            <Segment color="teal" raised className="w-100">
-                <Label attached="top" size="large">Çalışma Şekli</Label>
-                {
-                    workStyle.map(style => (
-                        <Checkbox
-                            label={style.name}
-                            className="mt-4 d-block"
-                            onChange={handleChangeWorkStyle}
-                            value={style.id}
-                        />
-                    ))
-                }
-            </Segment>
-            <Segment color="teal" raised className="w-100">
-                <Label attached="top" size="large">Çalışma zamanı</Label>
-                {
-                    workTimeStyle.map(style => (
-                        <Checkbox
-                            label={style.name}
-                            className="mt-4 d-block"
-                            onChange={handleChangeWorkTimeStyle}
-                            value={style.id}
-                        />
-                    ))
-                }
-            </Segment>
+        <div className="rounded-w bg-light-blue p-5">
+
+            <h3>Şehir</h3>
+            <Dropdown
+                placeholder='Şehir seçiniz'
+                fluid
+                selection
+                search
+                multiple
+                options={cities.map((x, index) => {
+                    return { text: x.cityName, key: x.index, value: x.id }
+                })}
+                onChange={handleChangeCity}
+                value={cityIndexs}
+            />
+
+            <h3 className="mt-5">İş pozisyonu</h3>
+            {
+                jobPositions.map(jobPos => (
+                    <Checkbox
+                        label={jobPos.jobName}
+                        className="mt-4 d-block"
+                        onChange={handleChangeJobPosition}
+                        value={jobPos.id}
+                    />
+                ))
+            }
+            <h3 className="mt-5">Çalışma Şekli</h3>
+            {
+                workStyle.map(style => (
+                    <Checkbox
+                        label={style.name}
+                        className="mt-4 d-block"
+                        onChange={handleChangeWorkStyle}
+                        value={style.id}
+                    />
+                ))
+            }
+            <h3 className="mt-5">Çalışma zamanı</h3>
+            {
+                workTimeStyle.map(style => (
+                    <Checkbox
+                        label={style.name}
+                        className="mt-4 d-block"
+                        onChange={handleChangeWorkTimeStyle}
+                        value={style.id}
+                    />
+                ))
+            }
+
             <Button
+            className="mt-5"
                 type="button"
                 fluid positive
                 onClick={() => clickEvent({ cityId: cityIndexs, jobPositionId: jobPosIndexs, workStyleId: workStyleIndexs, workTimeStyleId: workTimeStyleIndexs })}

@@ -1,4 +1,16 @@
 
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'SofiaPro',Helvetica,Arial,sans-serif !important;
+
+  font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.75 !important;
+}
+
+
 :root{
   --ThemeColor: rgb(86, 36, 179);
 }
@@ -19,6 +31,14 @@
   background-color: var(--ThemeColor) !important;
 }
 
+.bg-light-blue {
+  background-color: #F5F7FC;
+}
+
+.color-grey {
+  color: #77838F ;
+}
+
 .color-dark{
   color: #2f2f2f;
 }
@@ -28,6 +48,10 @@
 
 .color-theme {
   color: var(--ThemeColor) !important;
+}
+
+h3 {
+  color: #161615 !important;
 }
 
 
@@ -179,4 +203,34 @@
   top: 8px;
   right: 16px;
   background-color: transparent !important;
+}
+
+.rounded-5 {
+  border-radius: 50px;
+}
+.rounded-4 {
+  border-radius: 40px;
+}
+.rounded-w {
+  border-radius: 20px !important;
+}
+.rounded-2 {
+  border-radius: 20px !important;
+}
+
+.bolder {
+  font-weight: 600 !important;
+}
+
+
+.hover-shadow {
+  transition-duration: 0.25s;
+}
+
+.hover-shadow:hover {
+  box-shadow: 0 6px 15px 0 rgb(64 79 104 / 5%) !important;
+}
+
+.font-small {
+  font-size: 85%;
 }

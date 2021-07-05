@@ -1,16 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Card, Label, Icon, Button } from 'semantic-ui-react'
+import { Card, Label, Icon, Button, Segment } from 'semantic-ui-react'
 import Helper from '../utilities/Helper'
+import { toast } from 'react-toastify'
+import FavoriteJobAdvertService from '../services/favoriteJobAdvert'
+import JobAdvertCardInfo from './JobAdvertCardInfo'
 
 export default function JobPost({ jobAdvert }) {
+    const [favorite, setFavorite] = useState({})
+    let favoriteJobAdvertService = new FavoriteJobAdvertService()
+
+    useEffect(() => {
+        favoriteJobAdvertService.getById(1, jobAdvert.id).then(result => {
+            setFavorite(result.data.data)
+        }).catch(result => console.log(result))
+    }, [])
+
+    const handleAddFavoriteClick = () => {
+
+        if (favorite != null) {
+            favoriteJobAdvertService.deleteById(favorite.id).then(r => console.log(r.data))
+            toast.success(`Favorilerden çıkarıldı`)
+        } else {
+            favoriteJobAdvertService.add({ jobAdvertId: jobAdvert.id, userId: 1 }).then(r => console.log(r.data))
+            toast.success(`Favorilere eklendi`)
+        }
+
+        setTimeout(() => {
+            favoriteJobAdvertService.getById(1, jobAdvert.id).then(result => setFavorite(result.data.data))
+        }, 200)
+
+        //setIsAddedFavorite(!isAddedFavorite)
+    }
+
+
     return (
         <div>
-            <Card className="w-75 m-auto mb-5 shadow position-relative"  as={NavLink} to={'/detail/' + jobAdvert.id}>
+            <div className="bordered  ms-4 mb-4 p-3 hover-shadow font-small position-relative">
+                <Segment basic as={NavLink} to={'/detail/' + jobAdvert.id} className="color-grey">
+                    <JobAdvertCardInfo jobAdvertisement={jobAdvert} isSmall />
+                </Segment>
+                <div>
+                    <Button size="big"  icon = {favorite != null ? "heart" : "heart outline"} className="z-index-1 topright text-danger" onClick={() => handleAddFavoriteClick()}/>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+/*
+ <Card className="w-75 m-auto mb-5 p-3 shadow position-relative"  as={NavLink} to={'/detail/' + jobAdvert.id}>
                 <Card.Content>
-                    <div className="header d-flex justify-content-between">
+
+                    <JobAdvertCardInfo  jobAdvertisement={jobAdvert}/>
+                    {<div className="header d-flex justify-content-between">
                         <Card.Header className="mt-1">{jobAdvert.jobPosition?.jobName}</Card.Header>
-                        
+
                     </div>
                     <div >
                         <p className="mt-3">{jobAdvert.employer?.companyName}</p>
@@ -30,24 +76,11 @@ export default function JobPost({ jobAdvert }) {
                                 </Card.Meta>
                             </div>
                         </Card.Description>
+                    </div>}
+                    </Card.Content>
+                    <div>
+                        <Button size="big" icon="heart outline" className="z-index-1 topright"/>
                     </div>
-                </Card.Content>
-                <div>
-                    <Button size="big" icon="heart outline" className="z-index-1 topright"/>
-                </div>
-            </Card>
-        </div>
-    )
-}
-
-
-/*
-<Table.Row key={jobAdvertisement.userId}>
-    <Table.Cell>{jobAdvertisement.companyName}</Table.Cell>
-    <Table.Cell>{jobAdvertisement.jobPositionName}</Table.Cell>
-    <Table.Cell>{jobAdvertisement.maxPerson}</Table.Cell>
-    <Table.Cell>{jobAdvertisement.releaseDate}</Table.Cell>
-    <Table.Cell>{jobAdvertisement.deadline}</Table.Cell>
-</Table.Row>
+                </Card>
 
 */

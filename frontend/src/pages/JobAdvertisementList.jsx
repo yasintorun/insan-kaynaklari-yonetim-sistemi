@@ -51,13 +51,13 @@ export default function JobAdvertisement() {
 
     return (
 
-        <div className="mt-8 mb-5">
+        <div className="mt-8 mb-5 container-large">
             <h2 className="text-center">İş ilanları</h2>
-            <Grid>
-                <Grid.Column width={4}>
+            <div className="row">
+                <div className="col-md-3">
                     <JobAdvertFiltering clickEvent={handleFilterClick} />
-                </Grid.Column>
-                <Grid.Column width={12}>
+                </div>
+                <div className="col-md-9">
                     {
                         jobAdvertisements.map(jobAdvertisement => (
                             <JobPost jobAdvert={jobAdvertisement} />
@@ -84,21 +84,9 @@ export default function JobAdvertisement() {
                             />
                         </div>
                     </div>
-                </Grid.Column>
+                </div>
 
-            </Grid>
+            </div>
         </div>
     )
 }
-
-
-/*
-<Table.Row key={jobAdvertisement.userId}>
-    <Table.Cell>{jobAdvertisement.companyName}</Table.Cell>
-    <Table.Cell>{jobAdvertisement.jobPositionName}</Table.Cell>
-    <Table.Cell>{jobAdvertisement.maxPerson}</Table.Cell>
-    <Table.Cell>{jobAdvertisement.releaseDate}</Table.Cell>
-    <Table.Cell>{jobAdvertisement.deadline}</Table.Cell>
-</Table.Row>
-
-*/

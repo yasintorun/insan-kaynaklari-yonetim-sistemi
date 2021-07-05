@@ -10,13 +10,14 @@ import Links from './components/Links';
 import ResumeDetail from './pages/jobseeker/ResumeDetail';
 import JobseekerDashboard from './layouts/jobseeker/JobseekerDashboard';
 import EmployerDashboard from './layouts/employer/EmployerDashboard';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { GetAllCities } from './Store/actions/cityActions';
 function App() {
-
-
+  
   return (
     <div className="App">
       <ToastContainer position="top-right" autoClose={2500} hideProgressBar={true} pauseOnHover={false} />
-
       <Switch>
         <Route exact path="/" component={HomeDashboard} />
         <Route exact path="/admin*" component={AdminDashboard} />

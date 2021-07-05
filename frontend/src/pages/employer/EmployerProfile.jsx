@@ -123,7 +123,7 @@ export default function EmployerProfile() {
                                         </div>
                                         {
                                             isWaitConfirm
-                                                ? <Label color="teal">GÜncelleme oany bekleniyor</Label>
+                                                ? <Label color="teal">Güncelleme onay bekleniyor</Label>
                                                 : null
                                         }
 
