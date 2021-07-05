@@ -12,7 +12,6 @@ import { configureStore } from './Store/configureStore';
 
 const store = configureStore()
 store.subscribe()
-store.getState().cities
 
 ReactDOM.render(
   <Provider store={store}>
