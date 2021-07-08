@@ -10,4 +10,8 @@ public interface FavoriteJobAdvertService extends BaseService<FavoriteJobAdvert>
 	DataResult<FavoriteJobAdvert> getByJobAdvert_Id(int id);
 	
 	Result deleteByJobAdverId(int id);
+	
+	Result delete(int id);
+	
+	DataResult<FavoriteJobAdvert> getFavorite(FavoriteJobAdvertInputDto inputDto);
 }

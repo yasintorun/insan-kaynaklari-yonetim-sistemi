@@ -60,6 +60,10 @@ public class EmployerManager implements EmployerService{
 			return validate;
 		}
 		
+		if(isExist(inputDto)) {
+			return new ErrorResult("E posta kayıtlı!");
+		}
+		
 		// TODO Auto-generated method stub
 		return this.add(EmployerDtoConverter.InputToNormal(inputDto));
 	}
@@ -116,15 +120,13 @@ public class EmployerManager implements EmployerService{
 		
 		//Todo: Burayı Düzenle. 
 		String domain = inputDto.getEposta().split("@")[1];
-		if(!domain.startsWith(inputDto.getCompanyName())) {
-			return new ErrorResult("Lütfen şirket adınıza kayıtlı e posta kullanınız!");
+		if(!inputDto.getWebsite().contains(domain)) {
+			return new ErrorResult("Lütfen websitenize kayıtlı e posta kullanınız!");
 		}
 		
 		
 		
-		if(isExist(inputDto)) {
-			return new ErrorResult("E posta kayıtlı!");
-		}
+		
 		
 		return new SuccessResult();
 	}

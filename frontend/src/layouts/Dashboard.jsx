@@ -8,6 +8,7 @@ import JobPostDetail from '../pages/JobPostDetail'
 import NewJobAdvert from '../pages/employer/NewJobAdvert'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
+import ResumeDetail from '../pages/jobseeker/ResumeDetail'
 export default function Dashboard() {
     return (
         <div className="bg-ligh">
@@ -20,6 +21,7 @@ export default function Dashboard() {
             </div>
                 <Route exact path="/detail/:id" component={JobPostDetail} />
                 <Route exact path="/jobAdvertisements" component={JobAdvertisement} />
+                <Route exact path="/resume" component={ResumeDetail} />
             <Footer/>
         </div>
     )

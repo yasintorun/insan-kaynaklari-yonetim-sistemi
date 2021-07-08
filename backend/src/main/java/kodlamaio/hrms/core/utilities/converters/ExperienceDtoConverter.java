@@ -14,7 +14,7 @@ import kodlamaio.hrms.entities.dtos.ExperienceInputDto;
 
 public class ExperienceDtoConverter {
 	public static ExperienceDisplayDto NormalToDisplayDto(Experience exp) {
-		return new ExperienceDisplayDto(exp.getId(), exp.getCompanyName(), exp.getJobPosition(),
+		return new ExperienceDisplayDto(exp.getId(), exp.getJobseeker().getUserId(), exp.getCompanyName(), exp.getJobPosition(),
 					exp.getStartingDate(), exp.getLeavingDate(),
 					exp.getCity(), exp.getWorkTimeStyle());
 	}

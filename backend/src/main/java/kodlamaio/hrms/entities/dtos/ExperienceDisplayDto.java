@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ExperienceDisplayDto {
 	private int id;
+	private int userId;
 	private String companyName;
 	private JobPosition jobPosition;
 	private LocalDate startingDate;

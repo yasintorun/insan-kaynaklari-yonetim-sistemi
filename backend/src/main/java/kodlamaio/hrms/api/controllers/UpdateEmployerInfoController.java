@@ -34,15 +34,20 @@ public class UpdateEmployerInfoController {
 		return this.employerInfoService.getAll();
 	}
 	
+	@GetMapping("/getByUserId")
+	public DataResult<UpdateEmployerInfo> getByUserId(int userId) {
+		return this.employerInfoService.getByUserId(userId);
+	}
+	
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody UpdateEmployerInfo updateEmployerInfo) {
-		return this.employerInfoService.add(updateEmployerInfo);
+	public Result add(int userId, @RequestBody EmployerInputDto dto) {
+		return this.employerInfoService.add(userId, dto);
 	}
 	
 	
 	@PostMapping("/confirmByAdmin")
-	public Result confirmByAdmin(@RequestBody int userId) {
+	public Result confirmByAdmin(int userId) {
 		return this.employerInfoService.confirmByAdmin(userId);
 	}
 }

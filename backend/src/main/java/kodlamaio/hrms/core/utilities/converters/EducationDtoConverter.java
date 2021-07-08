@@ -12,8 +12,8 @@ import kodlamaio.hrms.entities.dtos.EducationInputDto;
 
 public class EducationDtoConverter {
 	public static EducationDisplayDto NormalToDisplayDto(Education edu) {
-		return new EducationDisplayDto(edu.getSchool().getSchoolName(), edu.getDepartment().getDepartmentName(),
-				edu.getStartingDate(), edu.getGraduationDate());
+		return new EducationDisplayDto(edu.getId(), edu.getJobseeker().getUserId(), edu.getSchool(), edu.getDepartment(),
+				edu.getStartingDate(), edu.getGraduationDate(), edu.getSchoolType());
 	}
 	
 	public static List<EducationDisplayDto> NormalToDisplayDto(List<Education> eduList) {
@@ -28,7 +28,7 @@ public class EducationDtoConverter {
 	
 	//INPUT
 	public static Education InputDtoToNormal(EducationInputDto dto) {
-		return new Education(0, dto.getStartingDate(), dto.getGraduationDate(), new School(dto.getSchoolId()), new Department(dto.getDepartmentId()), new Jobseeker(dto.getUserId()));
+		return new Education(0, dto.getStartingDate(), dto.getGraduationDate(), dto.getSchoolType(), new School(dto.getSchoolId()), new Department(dto.getDepartmentId()), new Jobseeker(dto.getUserId()));
 	}
 		
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor, EditorState, RichUtils} from "draft-js";
+import { ContentBlock, ContentState, convertFromHTML, Editor, EditorState, RichUtils} from "draft-js";
 
 import { Button, Icon } from "semantic-ui-react";
 import 'draft-js/dist/Draft.css';
@@ -55,7 +55,13 @@ class RichTextEditor extends React.Component {
 		this.editorRef = React.createRef()
 		this.val = ""
 		this.state = {
-			editorState: EditorState.createEmpty()
+			editorState: 
+			props.defaultValue ? EditorState.createWithContent(
+				ContentState.createFromBlockArray(
+					convertFromHTML(props.defaultValue)
+				)
+			)
+			: EditorState.createEmpty()
 		};
 	}
 	onChange = editorState => {

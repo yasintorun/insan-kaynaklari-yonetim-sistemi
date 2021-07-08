@@ -34,6 +34,8 @@ public class SkillManager implements SkillService{
 		return new SuccessResult("Yetenek eklendi");
 	}
 
+
+
 	/*@Override
 	public DataResult<List<SkillDisplayDto>> getAllDisplay() {
 		return new SuccessDataResult<List<SkillDisplayDto>>

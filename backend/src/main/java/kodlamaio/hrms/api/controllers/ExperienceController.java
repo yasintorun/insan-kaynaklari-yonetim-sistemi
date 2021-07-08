@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,13 @@ public class ExperienceController {
 		return this.experienceService.getAllDisplay();
 	}
 	
+	
+	@GetMapping("/getByUserId")
+	public DataResult<List<ExperienceDisplayDto>> getByUserId(int userId) {
+		return this.experienceService.getByUserId(userId);
+	}
+	
+	
 	@GetMapping("/getAllSortedExperiences")
 	public DataResult<List<ExperienceDisplayDto>> getAllSorted() {
 		return this.experienceService.getAllSorted();
@@ -46,6 +54,11 @@ public class ExperienceController {
 	@PostMapping("/updateExperience")
 	public Result update(int id, @RequestBody ExperienceInputDto experience) {
 		return this.experienceService.updateExperience(id, experience);
+	}
+	
+	@DeleteMapping("/delete")
+	public Result delete(int id) {
+		return this.experienceService.delete(id);
 	}
 	
 }

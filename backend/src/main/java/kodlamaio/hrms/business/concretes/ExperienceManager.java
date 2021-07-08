@@ -10,6 +10,7 @@ import kodlamaio.hrms.business.abstracts.ExperienceService;
 import kodlamaio.hrms.core.utilities.converters.ExperienceDtoConverter;
 import kodlamaio.hrms.core.utilities.helpers.FormatHelper;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -82,6 +83,22 @@ public class ExperienceManager implements ExperienceService{
 	public DataResult<ExperienceDisplayDto> getExperienceById(int id) {
 		return new SuccessDataResult<ExperienceDisplayDto>
 		(ExperienceDtoConverter.NormalToDisplayDto(this.experienceDao.getExperienceById(id)), "İş ilanı getirildi");
+	}
+
+	@Override
+	public DataResult<List<ExperienceDisplayDto>> getByUserId(int userId) {
+		return new SuccessDataResult<List<ExperienceDisplayDto>>
+		(ExperienceDtoConverter.NormalToDisplayDto(this.experienceDao.getByJobseeker_userId(userId)), "kullanıcı deneyimleri listelendi");
+	}
+
+	@Override
+	public Result delete(int id) {
+		try {
+			this.experienceDao.deleteById(id);
+			return new SuccessResult("Deneyim silindi");
+		} catch (Exception e) {
+			return new ErrorResult("Hata: " + e.getMessage());
+		}
 	}
 
 }

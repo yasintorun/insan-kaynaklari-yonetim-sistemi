@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Form } from 'semantic-ui-react'
 import SkillService from '../../services/SkillService'
-export default function SkillDropDown({onChangeEvent, value}) {
+export default function SkillDropDown({onChangeEvent, defaultValue, isMultiple}) {
     const [skills, setSkills] = useState([])
 
     useEffect(() => {
@@ -15,11 +15,12 @@ export default function SkillDropDown({onChangeEvent, value}) {
                 label="Yetenek"
                 name="skill"
                 search
+                multiple = {isMultiple}
                 options={skills.map((x, index) => {
-                    return { text: x.skillName, key: x.index, value: x.id }
+                    return { text: x.skillName, key: index, value: x.id }
                 })}
                 onChange={onChangeEvent}
-                value = {value}
+                defaultValue = {defaultValue}
             />
         </div>
     )

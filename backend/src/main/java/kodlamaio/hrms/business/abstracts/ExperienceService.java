@@ -14,4 +14,6 @@ public interface ExperienceService extends BaseService<Experience>{
 	public DataResult<ExperienceDisplayDto> updateExperience(int id, ExperienceInputDto exp);
 	public Result add(ExperienceInputDto dto);
 	public DataResult<ExperienceDisplayDto> getExperienceById(int id);
+	public DataResult<List<ExperienceDisplayDto>> getByUserId(int userId);
+	public Result delete(int id);
 }

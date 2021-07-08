@@ -23,6 +23,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","userSkills"})
 public class Skill {
+	public Skill(int skillId) {
+		this.id = skillId;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")

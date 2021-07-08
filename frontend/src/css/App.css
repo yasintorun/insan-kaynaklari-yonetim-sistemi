@@ -35,8 +35,12 @@ body {
   background-color: #F5F7FC;
 }
 
+.text-bb {
+  color: rgb(183 24 17);
+}
+
 .color-grey {
-  color: #77838F ;
+  color: #77838F !important;
 }
 
 .color-dark{
@@ -185,12 +189,12 @@ h3 {
 }
 
 .message-content {
-  border: 5px solid transparent;
-  transition-duration: 0.3s;
+  border: 5px solid transparent !important;
+  transition-duration: 0.3s !important;
 }
 
 .message-content:hover {
-  border: 5px dashed  rgba(128, 128, 128, 0.335);
+  border: 5px dashed  rgba(128, 128, 128, 0.335) !important;
   cursor: pointer;
 }
 
@@ -233,4 +237,16 @@ h3 {
 
 .font-small {
   font-size: 85%;
+}
+
+.anim {
+  transition-duration: 0.4s;
+}
+
+.anim-speed {
+  transition-duration: 0.2s;
+}
+
+.anim-slow {
+  transition-duration: 0.6s;
 }

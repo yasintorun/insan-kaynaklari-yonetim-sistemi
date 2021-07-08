@@ -12,4 +12,8 @@ export default class ResumeService {
     update(id, values) {
         return axios.post(`http://localhost:8080/api/resume/update?id=${id}`, values)
     }
+
+    updateResumeSummary(id, summary) {
+        return axios.post(`http://localhost:8080/api/resume/updateSummary?id=${id}`, summary)
+    }
 }

@@ -24,7 +24,7 @@ export default function UserLanguage() {
                 <Table.Body>
                     {
                         userLanguages.map(userLanguage => (
-                            <Table.Row key={userLanguage.id}>   
+                            <Table.Row key={userLanguage.id} >   
                                 <Table.Cell>{userLanguage.jobseeker.userId}</Table.Cell>
                                 <Table.Cell>{userLanguage.languageName}</Table.Cell>
                                 <Table.Cell>{userLanguage.level}</Table.Cell>

@@ -31,6 +31,8 @@ public class SkillController {
 		return this.skillService.getAll();
 	}
 	
+
+	
 	@PostMapping("/addSkill")
 	public Result add(@RequestBody Skill entity) {
 		return this.skillService.add(entity);

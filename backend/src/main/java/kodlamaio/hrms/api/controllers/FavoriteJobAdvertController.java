@@ -37,6 +37,12 @@ public class FavoriteJobAdvertController {
 		return this.favoriteJobAdvertService.getAll();
 	}
 	
+	@GetMapping("/getFavorite")
+	public DataResult<FavoriteJobAdvert> getFavorite(FavoriteJobAdvertInputDto inputDto) {
+		return this.favoriteJobAdvertService.getFavorite(inputDto);
+	}
+	
+	
 	@GetMapping("/getByJobAdvertId")
 	public DataResult<FavoriteJobAdvert> getByJobAdvert_Id(int id) {
 		return this.favoriteJobAdvertService.getByJobAdvert_Id(id);
@@ -47,10 +53,16 @@ public class FavoriteJobAdvertController {
 		return this.favoriteJobAdvertService.add(favoriteJobAdvert);
 	}
 	
-	@DeleteMapping("/delete")
+	@DeleteMapping("/deleteByJobAdvertId")
 	@Transactional
-	public Result delete(int jobAdvertId) {
+	public Result deleteByJobAdvertId(int jobAdvertId) {
 		return this.favoriteJobAdvertService.deleteByJobAdverId(jobAdvertId);
+	}
+	
+	@DeleteMapping("/deleteById")
+	@Transactional
+	public Result deleteById(int id) {
+		return this.favoriteJobAdvertService.delete(id);
 	}
 	
 }

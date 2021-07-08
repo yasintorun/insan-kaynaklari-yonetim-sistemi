@@ -3,8 +3,11 @@ package kodlamaio.hrms.core.utilities.converters;
 import java.util.ArrayList;
 import java.util.List;
 
+import kodlamaio.hrms.entities.concretes.Jobseeker;
+import kodlamaio.hrms.entities.concretes.Skill;
 import kodlamaio.hrms.entities.concretes.UserSkill;
 import kodlamaio.hrms.entities.dtos.UserSkillDisplayDto;
+import kodlamaio.hrms.entities.dtos.UserSkillInputDto;
 
 public class UserSkillDtoConverter {
 	public static UserSkillDisplayDto NormalToDisplayDto(UserSkill skill) {
@@ -22,6 +25,14 @@ public class UserSkillDtoConverter {
 		
 		return dtoList;
 		
+	}
+	
+	//INPUT DTO
+	
+	
+	public static UserSkill InputDtoToNormal(UserSkillInputDto inputDto, int index) {
+		int skillId = inputDto.getSkillIds().get(index);
+		return new UserSkill(0, new Jobseeker(inputDto.getUserId()), new Skill(skillId));
 	}
 	
 }

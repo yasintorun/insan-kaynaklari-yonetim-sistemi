@@ -10,12 +10,12 @@ import ExperienceService from '../../services/experienceService'
 import Helper from '../../utilities/Helper'
 import { toast } from 'react-toastify'
 export default function JobExperienceInfo() {
-    
+
     const [experiences, setExperiences] = useState([])
 
     useEffect(() => {
-        experienceService.getExperience().then(result => setExperiences(result.data.data))
-        
+        experienceService.getByUserId(1).then(result => setExperiences(result.data.data))
+
     }, [experiences])
 
     const [isEdit, setIsEdit] = useState(false)
@@ -31,7 +31,7 @@ export default function JobExperienceInfo() {
         let val = experiences[index]
         let startingDate = Helper.OnlyYearAndMonth(val?.startingDate)
         let leavingDate = Helper.OnlyYearAndMonth(val?.leavingDate)
-        formik.setValues({ 
+        formik.setValues({
             id: val.id,
             userId: val.userId,
             cityId: val?.city.id,
@@ -57,7 +57,7 @@ export default function JobExperienceInfo() {
             isNew
                 ? experienceService.add(values).then(r => toast.success(r.data.message))
                 : experienceService.update(values.id, values).then(r => toast.success(r.data.message))
-                
+
             handleCancelEdit()
         },
     });
@@ -65,7 +65,7 @@ export default function JobExperienceInfo() {
     const handleAddClick = () => {
         setIsNew(true)
         setIsEdit(true)
-        formik.setValues({ 
+        formik.setValues({
             userId: 1,
             cityId: '',
             jobPositionId: '',
@@ -76,6 +76,10 @@ export default function JobExperienceInfo() {
         })
     }
 
+    const handleDeleteClick = () => {
+        experienceService.delete(formik.values.id).then(result => console.log(result.data))
+        handleCancelEdit()
+    }
 
     return (
         <div >
@@ -86,22 +90,31 @@ export default function JobExperienceInfo() {
                 </div>
                 {
                     isEdit
-                        ? 
+                        ?
                         <div>
                             <Form onSubmit={formik.handleSubmit} size="small">
                                 <Form.Group widths='equal'>
-                                    <Form.Field><JobPositionDropDown onChangeEvent={(event, data) => formik.setFieldValue("jobPositionId", data.value)} value={formik.values?.jobPositionId}/></Form.Field>
-                                    <Form.Input fluid placeholder="Firma adı" label='Firma Adı*' name="companyName" onChange={formik.handleChange} value={formik.values?.companyName}/>
-                                    <Form.Field><CityDropDown onChangeEvent={(event, data) => formik.setFieldValue("cityId", data.value)} value={formik.values?.cityId}/></Form.Field>
+                                    <Form.Field><JobPositionDropDown onChangeEvent={(event, data) => formik.setFieldValue("jobPositionId", data.value)} value={formik.values?.jobPositionId} /></Form.Field>
+                                    <Form.Input fluid placeholder="Firma adı" label='Firma Adı*' name="companyName" onChange={formik.handleChange} value={formik.values?.companyName} />
+                                    <Form.Field><CityDropDown onChangeEvent={(event, data) => formik.setFieldValue("cityId", data.value)} value={formik.values?.cityId} /></Form.Field>
                                 </Form.Group>
                                 <Form.Group widths='equal'>
-                                    <Form.Field><WorkTimeStyleDropdown onChangeEvent={(event, data) => formik.setFieldValue("workTimeStyleId", data.value)} value = {formik.values?.workTimeStyleId}/></Form.Field>
-                                    <Form.Input type="month" fluid placeholder="Başlama tarihi" label='Başlangıç tarihi*' name="startingDate" onChange={formik.handleChange} value = {formik.values?.startingDate}/>
-                                    <Form.Input type="month" fluid placeholder="Çıkış tarihi" label='Çıkış tarihi*' name="leavingDate" onChange={formik.handleChange} value={formik.values?.leavingDate }/>
+                                    <Form.Field><WorkTimeStyleDropdown onChangeEvent={(event, data) => formik.setFieldValue("workTimeStyleId", data.value)} value={formik.values?.workTimeStyleId} /></Form.Field>
+                                    <Form.Input type="month" fluid placeholder="Başlama tarihi" label='Başlangıç tarihi*' name="startingDate" onChange={formik.handleChange} value={formik.values?.startingDate} />
+                                    <Form.Input type="month" fluid placeholder="Çıkış tarihi" label='Çıkış tarihi*' name="leavingDate" onChange={formik.handleChange} value={formik.values?.leavingDate} />
                                 </Form.Group>
 
-                                <Button positive type="submit" >Kaydet</Button>
-                                <Button negative type="button" onClick={() => handleCancelEdit()}>Vazgeç</Button>
+
+
+                                <div className="d-flex justify-content-between">
+                                    <div>
+                                        <Button positive type="submit" >Kaydet</Button>
+                                        <Button negative type="button" onClick={() => handleCancelEdit()}>Vazgeç</Button>
+                                    </div>
+                                    <div>
+                                        <Button negative type="button" onClick={() => handleDeleteClick()}>Sil</Button>
+                                    </div>
+                                </div>
                             </Form>
                         </div>
                         :

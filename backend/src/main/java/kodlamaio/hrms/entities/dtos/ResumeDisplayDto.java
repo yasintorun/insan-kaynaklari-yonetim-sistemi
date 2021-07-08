@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResumeDisplayDto {
-
+	private int id;
 	private JobSeekerDisplayDto user;
 	private String githubLink;
 	private String linkedinLink;

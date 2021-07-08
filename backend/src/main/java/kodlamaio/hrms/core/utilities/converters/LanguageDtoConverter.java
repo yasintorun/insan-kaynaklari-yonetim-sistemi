@@ -8,7 +8,7 @@ import kodlamaio.hrms.entities.dtos.LanguageDisplayDto;
 
 public class LanguageDtoConverter {
 	public static LanguageDisplayDto NormalToDisplayDto(Language language) {
-		return new LanguageDisplayDto(language.getLanguageName(), language.getLevel());
+		return new LanguageDisplayDto(language.getId(), language.getJobseeker().getUserId(), language.getLanguageName(), language.getLevel());
 	}
 	
 	public static List<LanguageDisplayDto> NormalToDisplayDto(List<Language> languages) {

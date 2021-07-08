@@ -1,76 +1,63 @@
 import React, { useEffect, useState } from 'react'
 import MessageBox from '../MessageBox'
 import { Label } from 'semantic-ui-react'
-import UserSkillService from '../../services/userSkillService'
 import { useFormik } from 'formik'
 import { FormGroup, Form, Button, Divider } from 'semantic-ui-react'
 import SkillDropDown from '../../utilities/dropdowns/SkillDropdown'
-export default function SkillInfo({ skills }) {
+import SkillService from '../../services/SkillService'
+export default function SkillInfo() {
 
     const [isEdit, setIsEdit] = useState(false)
-    const [values, setValues] = useState([])
+    const [skills, setSkills] = useState([])
     const handleEditClick = () => {
         setIsEdit(!isEdit)
-    }
-    useEffect(() => {
-    }, [isEdit])
+        formik.setValues = {
 
-    const userSkillService = new UserSkillService()
+        }
+    }
+    const skillService = new SkillService()
+    useEffect(() => {
+        skillService.getByUserId(1).then(result => setSkills(result.data.data))
+    }, [skills])
+
 
     const formik = useFormik({
         initialValues: {
-            skillId: '',
+            skillIds: [],
         },
         onSubmit: values => {
             values = { ...values, userId: 1 }
-            //userSkillService.update(10, values).then(r => console.log(r.data.message))
-            //handleEditClick()
+            skillService.update(values).then(r => console.log(r.data.message))
+            handleEditClick()
             console.log(values)
         },
     });
-    const addClick = () => {
-        values.push({
-            skillId: formik.values.skillId,
-        })
-        console.log(values)
-    }
-    console.log(skills)
+    //console.log(skills)
     return (
         <div>
             <MessageBox >
                 <div>Yetenekler</div>
-                <div className="row">
-                    {
-                        isEdit
-                            ? <div className="col-md-6">
-                                <Form onSubmit={formik.handleSubmit} size="small">
 
-                                    <Form.Field><SkillDropDown onChangeEvent={(event, data) => formik.setFieldValue("skillId", data.value)} /></Form.Field>
-                                    <Button fluid type="button" onClick= {() => addClick()}>Ekle</Button>
+                {
+                    isEdit
+                        ? <div>
+                            <Form onSubmit={formik.handleSubmit} size="small">
+                                <SkillDropDown onChangeEvent= {(event, data) => formik.setFieldValue("skillIds", data.value)} isMultiple={true} defaultValue = {skills?.map(skill => skill.skill.id)}/>
 
                                 <Divider />
                                 <Button positive type="submit">Kaydet</Button>
                                 <Button negative type="button" onClick={() => handleEditClick()}>Vazgeç</Button>
-                                </Form>
-                            </div>
-                : <div></div>
-                    }
-
-                <div className="d-s col-md-6 message-content" onClick={() => handleEditClick()}>
-                    {
-                        skills?.map(skill => (
-                            <Label color="teal"><p className="h5">{skill?.skillName}</p></Label>
-                        ))
-                    }
-                    {
-                        isEdit
-                            ? values.map(val => (
-                                <Label color="teal"><p className="h5">{skills[val.skillId].skillName}</p></Label>
-                            ))
-                            : null
-                    }
-                </div>
-                </div>
+                            </Form>
+                        </div>
+                        
+                        : <div className="message-content anim" onClick={() => handleEditClick()}>
+                            {
+                                skills?.map(skill => (
+                                    <Label color="teal"><p className="h5">{skill?.skill?.skillName}</p></Label>
+                                ))
+                            }
+                        </div>
+                }
             </MessageBox>
         </div >
     )

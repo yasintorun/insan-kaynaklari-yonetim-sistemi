@@ -9,6 +9,7 @@ import kodlamaio.hrms.business.abstracts.JobseekerService;
 import kodlamaio.hrms.business.abstracts.ResumeService;
 import kodlamaio.hrms.core.utilities.converters.ResumeDtoConverter;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -79,6 +80,20 @@ public class ResumeManager implements ResumeService{
 		
 		this.resumeDao.save(current);
 		return new SuccessDataResult<ResumeDisplayDto>(null, "güncellendi");
+	}
+
+	@Override
+	public Result updateResumeSummary(int id, ResumeInputDto dto) {
+		Resume current = this.resumeDao.getResumeById(id);
+		current.setSummary(dto.getSummary());
+		
+		try {
+			this.resumeDao.save(current);
+			return new SuccessResult("Ön yazı güncellendi");
+		} catch (Exception e) {
+			return new ErrorResult("Hata: " + e.getMessage());
+		}
+		
 	}
 
 }

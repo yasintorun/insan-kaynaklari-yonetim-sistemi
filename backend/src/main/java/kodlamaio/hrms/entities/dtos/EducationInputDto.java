@@ -13,4 +13,5 @@ public class EducationInputDto {
 	private int departmentId;
 	private int startingDate;
 	private int graduationDate;
+	private String schoolType;
 }

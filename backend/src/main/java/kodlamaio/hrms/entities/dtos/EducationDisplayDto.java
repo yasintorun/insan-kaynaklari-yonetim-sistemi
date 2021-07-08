@@ -2,6 +2,8 @@ package kodlamaio.hrms.entities.dtos;
 
 import java.util.Date;
 
+import kodlamaio.hrms.entities.concretes.Department;
+import kodlamaio.hrms.entities.concretes.School;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EducationDisplayDto {
-	private String schoolName;
-	private String departmentName;
+	private int id;
+	private int userId;
+	private School school;
+	private Department department;
 	private int startingDate;
 	private int graduationDate;
+	private String schoolType;
 }

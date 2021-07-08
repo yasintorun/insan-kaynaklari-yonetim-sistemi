@@ -49,6 +49,9 @@ public class ResumeController {
 		return this.resumeService.updateResume(id, resume);
 	}
 	
-	
+	@PostMapping("/updateSummary")
+	public Result updateSummary(int id,  @RequestBody ResumeInputDto resume) {
+		return this.resumeService.updateResumeSummary(id, resume);
+	}
 	
 }

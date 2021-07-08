@@ -3,6 +3,7 @@
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -47,7 +48,7 @@ public class Jobseeker extends User{
 	@OneToMany(mappedBy = "jobseeker")
 	private List<Experience> experiences;
 	
-	@OneToMany(mappedBy = "jobseeker")
+	@OneToMany(mappedBy = "jobseeker", cascade = CascadeType.REMOVE)
 	private List<UserSkill> userSkills;
 	
 

@@ -12,7 +12,7 @@ import kodlamaio.hrms.entities.dtos.EmployerInputDto;
 public class EmployerDtoConverter {
 	public static EmployerDisplayDto NormalToDisplayDto(Employer employer) {
 		return new EmployerDisplayDto(employer.getUserId(), employer.getCompanyName(), 
-				employer.getEposta(), employer.getWebsite(),employer.getSummary(), employer.getPhone());
+				employer.getEposta(), employer.getWebsite(),employer.getSummary(), employer.getPhone(), employer.isConfirmed(), true);
 	}
 	
 	public static List<EmployerDisplayDto> NormalToDisplayDto(List<Employer> empList) {

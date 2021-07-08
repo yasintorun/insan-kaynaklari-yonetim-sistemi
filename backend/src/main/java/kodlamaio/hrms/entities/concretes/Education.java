@@ -33,6 +33,10 @@ public class Education {
 	@Column(name="graduation_date")
 	private int graduationDate;
 	
+
+	@Column(name="school_type")
+	private String schoolType;
+	
 	@ManyToOne()
 	@JoinColumn(name="school_id")
 	private School school;

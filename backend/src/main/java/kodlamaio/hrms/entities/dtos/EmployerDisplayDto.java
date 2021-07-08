@@ -15,4 +15,6 @@ public class EmployerDisplayDto {
 	private String website;
 	private String summary;
 	private String phone;
+	private boolean confirmed;
+	private boolean isUptoDate;	
 }

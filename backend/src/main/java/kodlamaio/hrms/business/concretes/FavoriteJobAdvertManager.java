@@ -48,4 +48,14 @@ public class FavoriteJobAdvertManager implements FavoriteJobAdvertService{
 		this.favoriteJobAdvertDao.deleteByJobAdvert_Id(id);
 		return new SuccessResult("Favorilerden çıkarıldı");
 	}
+	@Override
+	public DataResult<FavoriteJobAdvert> getFavorite(FavoriteJobAdvertInputDto inputDto) {
+		return new SuccessDataResult<FavoriteJobAdvert>
+		(this.favoriteJobAdvertDao.getByJobseeker_userIdAndJobAdvert_id(inputDto.getUserId(), inputDto.getJobAdvertId()), "FAvoriler");
+	}
+	@Override
+	public Result delete(int id) {
+		this.favoriteJobAdvertDao.deleteById(id);
+		return new SuccessResult("Favorilerden çıkarıldı");
+	}
 }

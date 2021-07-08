@@ -55,7 +55,7 @@ public class ResumeDtoConverter {
 	
 	//Resume -> ResumeDisplayDto
 	public static ResumeDisplayDto NormalToDisplayDto(Resume resume) {
-		return new ResumeDisplayDto(JobSeekerDtoConverter.NormalToDisplayDto(resume.getJobSeeker()),
+		return new ResumeDisplayDto(resume.getId(), JobSeekerDtoConverter.NormalToDisplayDto(resume.getJobSeeker()),
 				resume.getGithub(), resume.getLinkedin(), resume.getSummary(),
 				resume.getBirtdate(), resume.getPhone(), resume.getGender(), resume.getNationality(),
 				LanguageDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getLanguages()),

@@ -11,7 +11,6 @@ import './css/App.css';
 import { configureStore } from './Store/configureStore';
 
 const store = configureStore()
-store.subscribe()
 
 ReactDOM.render(
   <Provider store={store}>

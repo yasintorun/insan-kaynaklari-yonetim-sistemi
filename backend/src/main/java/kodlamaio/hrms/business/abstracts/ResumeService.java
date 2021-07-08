@@ -15,4 +15,5 @@ public interface ResumeService extends BaseService<Resume>{
 	public DataResult<ResumeDisplayDto> getResumeById(int id);
 	
 	public DataResult<ResumeDisplayDto> updateResume(int id, ResumeInputDto resume);
+	public Result updateResumeSummary(int id, ResumeInputDto resume);
 }

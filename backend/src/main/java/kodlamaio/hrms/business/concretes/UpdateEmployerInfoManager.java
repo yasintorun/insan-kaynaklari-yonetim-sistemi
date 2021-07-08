@@ -47,7 +47,15 @@ public class UpdateEmployerInfoManager implements UpdateEmployerInfoService{
 			return validate;
 		}
 		
+		UpdateEmployerInfo control = this.updateEmployerInfoDao.getByEmployer_UserId(userId);
 		
+		
+		
+		
+		/*if(control != null); {
+			this.updateEmployerInfoDao.delete(control);
+		}*/
+		System.out.println("\n\n" + control + "\n\n");
 		this.updateEmployerInfoDao.save( EmployerDtoConverter.InputDtoToUpdateEmployer(userId, entity));
 		
 		return new SuccessResult("Güncelleme onay için sistem personeline gönderildi");

@@ -4,6 +4,8 @@ import EducationInfo from '../../components/Resume/EducationInfo'
 import JobExperienceInfo from '../../components/Resume/JobExperienceInfo'
 import SkillInfo from '../../components/Resume/SkillInfo'
 import ResumeService from '../../services/resumeService'
+import LanguageInfo from '../../components/Resume/LanguageInfo'
+import ResumeSummaryInfo from '../../components/Resume/ResumeSummaryInfo'
 export default function ResumeDetail() {
     
     const [resume, setResume] = useState([])
@@ -17,9 +19,11 @@ export default function ResumeDetail() {
         <div style={{ backgroundColor: '#e6e6e6' }}>
             <div className="w-50 m-auto message-block">
                 <PersonalInfo resume= {resume}/>
+                <ResumeSummaryInfo resume= {resume}/>
                 <JobExperienceInfo/>
-                <EducationInfo educations = {resume.educations}/>
-                <SkillInfo skills={resume.skills} />
+                <EducationInfo />
+                <LanguageInfo />
+                <SkillInfo />
             </div>
         </div>
     )
