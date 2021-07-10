@@ -232,7 +232,7 @@ h3 {
 }
 
 .hover-shadow:hover {
-  box-shadow: 0 6px 15px 0 rgb(64 79 104 / 5%) !important;
+  box-shadow: 0 6px 15px 0 rgb(64 79 104 / 25%) !important;
 }
 
 .font-small {

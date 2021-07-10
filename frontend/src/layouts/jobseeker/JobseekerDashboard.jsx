@@ -1,23 +1,53 @@
 import React from 'react'
 
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Accordion, Menu, Segment } from 'semantic-ui-react'
 import { Route } from 'react-router'
 import JobAdvertisement from '../../pages/JobAdvertisementList'
 import { NavLink } from 'react-router-dom'
+import ResumeDetail from '../../pages/jobseeker/ResumeDetail'
+import JobPostDetail from '../../pages/JobPostDetail'
+import SideBar from '../../components/SideBar'
+import { useState } from 'react'
 export default function JobseekerDashboard() {
+
+    const [profileActiveIndex, setProfileActiveIndex] = useState(0)
+
+    function handleProfileClick(e, titleProps) {
+        const { index } = titleProps
+
+        const newIndex = profileActiveIndex === index ? -1 : index
+
+        setProfileActiveIndex(newIndex)
+    }
+
     return (
-        <div>
+        <div style={{ backgroundColor: '#e6e6e6' }}>
             <div className="row">
-                <div className="col-md-2 sidebar fixed-left">
-                    <h1 className="dashboard-header bold-header text-center">iKariyer</h1>
-                    <Button.Group vertical fluid className="w-100" size="big" color="teal">
-                        <Button className="p-4"><Icon name="user"/>Profil</Button>
-                        <Button className="p-4"><Icon name="list"/>İş ilanlarım</Button>
-                        <Button className="p-4"><Icon name="bullhorn"/>Duyurular</Button>
-                    </Button.Group>
-                </div>
+                <SideBar>
+
+                    <Button className="p-4 theme-bg" as={NavLink} to="/jobseeker_dashboard/profile">
+                        <Icon name="user"/>
+                        Profile
+                    </Button>
+
+                    <Button className="p-4 theme-bg" as={NavLink} to="/jobseeker_dashboard/resume">
+                        <Icon name="gg" />
+                        Özgeçmişim
+                    </Button>
+                    <Button className="p-4 theme-bg" as={NavLink} to="/jobseeker_dashboard/isilanlari">
+                        <Icon name="list" />
+                        İş ilanları
+                    </Button>
+                    <Button className="p-4 theme-bg">
+                        <Icon name="bullhorn" />
+                        Duyurular
+                    </Button>
+                </SideBar>
+
                 <div className="col-md-10 container-content">
-                    <Route path="/jobseeker_dashboard/isilani" component={JobAdvertisement}/>
+                    <Route path="/jobseeker_dashboard/isilanlari" component={JobAdvertisement} />
+                    <Route path="/jobseeker_dashboard/resume" component={ResumeDetail} />
+                    <Route path="/jobseeker_dashboard/jobpost_detail/:id" component={JobPostDetail} />
                 </div>
             </div>
         </div>

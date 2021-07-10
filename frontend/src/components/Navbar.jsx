@@ -70,6 +70,12 @@ export default function Navbar() {
                         as={NavLink}
                         to="/employer_dashboard"
                     />
+                    <Menu.Item
+                        icon="gg"
+                        name='İş arayan panel'
+                        as={NavLink}
+                        to="/jobseeker_dashboard"
+                    />
                 </div>
             </Menu>
         </div>

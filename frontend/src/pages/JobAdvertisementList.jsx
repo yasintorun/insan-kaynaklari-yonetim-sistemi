@@ -15,7 +15,7 @@ export default function JobAdvertisement() {
         let jobAdvertisementService = new JobAdvertisementService()
         jobAdvertisementService.getJobAdvertFilterAndPage(activePage, pageSize, filterOption).then(result => {
             setJobAdvertisements(result.data.data)
-            if(totalPageSize == 0)
+            if (totalPageSize == 0)
                 setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
         })
 
@@ -52,35 +52,37 @@ export default function JobAdvertisement() {
     return (
 
         <div className="mt-8 mb-5 container-large">
-            <h2 className="text-center">İş ilanları</h2>
             <div className="row">
-                <div className="col-md-3">
+                <div className="col-md-4">
+                    <h2>Filtreleme</h2>
                     <JobAdvertFiltering clickEvent={handleFilterClick} />
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
+
+                    <h2 className="text-center">İş ilanları</h2>
                     {
                         jobAdvertisements.map(jobAdvertisement => (
                             <JobPost jobAdvert={jobAdvertisement} />
                         ))
                     }
-                    <div className="w-75 m-auto" align = "center">
+                    <div className="w-75 m-auto" align="center">
                         <Pagination
                             firstItem={null}
                             lastItem={null}
                             activePage={activePage}
                             onPageChange={handlePaginationChange}
-                            totalPages={ Math.ceil(totalPageSize / pageSize)}
+                            totalPages={Math.ceil(totalPageSize / pageSize)}
                         />
                         <Divider />
                         <div>
-                            <Label>Sayfada görülecek toplam iş ilan sayısı</Label><br/>
+                            <Label>Sayfada görülecek toplam iş ilan sayısı</Label><br />
                             <Dropdown
                                 selection
-                                defaultValue = {0}
+                                defaultValue={0}
                                 options={pageSizeOptions.map((x, index) => {
                                     return { text: x, key: index, value: index }
                                 })}
-                                onChange = {handlePageSizeOnChange}
+                                onChange={handlePageSizeOnChange}
                             />
                         </div>
                     </div>

@@ -35,9 +35,9 @@ export default function JobPost({ jobAdvert }) {
 
 
     return (
-        <div>
-            <div className="bordered  ms-4 mb-4 p-3 hover-shadow font-small position-relative">
-                <Segment basic as={NavLink} to={'/detail/' + jobAdvert.id} className="color-grey">
+        <div >
+            <div className="bordered bg-light-blue  ms-4 mb-4 p-3 hover-shadow font-small position-relative">
+                <Segment basic as={NavLink} to={'/jobseeker_dashboard/jobpost_detail/' + jobAdvert.id} className="color-grey">
                     <JobAdvertCardInfo jobAdvertisement={jobAdvert} isSmall />
                 </Segment>
                 <div>

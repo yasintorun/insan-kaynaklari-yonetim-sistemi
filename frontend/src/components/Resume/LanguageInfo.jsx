@@ -92,7 +92,7 @@ export default function LanguageInfo() {
                                 <Table.Body>
                                     {
                                         languages?.map((language, index) => (
-                                            <Table.Row className="message-content shadow no-shadow" onClick={() => handleEditClick(language)}>
+                                            <Table.Row className="message-content hover-shadow" onClick={() => handleEditClick(language)}>
                                                 <Table.Cell>
                                                     <span className="bolder text-bb">{language.languageName}</span>
                                                 </Table.Cell>

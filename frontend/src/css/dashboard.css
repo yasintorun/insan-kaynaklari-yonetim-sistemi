@@ -1,6 +1,16 @@
+
+:root {
+    --bgColor: #c2c3ca;
+    --headerColor: #f2711c;
+    --textColor: #868686;
+    --hoverColor: #ececec;
+    --focusColor: #c5a57b;
+}
+
 .sidebar {
     height: 100vh;
-    background-color: #00b5ad;
+    background-color: var(--bgColor) !important;
+    color: var(--textColor) !important;
     overflow: hidden;
     position: fixed;
     z-index: 10;
@@ -8,10 +18,23 @@
     left: 0;
     padding: 0;
     margin: 0;
+    overflow-y: scroll;
+}
+
+.topbar {
+    height: 5.4vh;
+    background-color: var(--bgColor) !important;
+    color: var(--textColor) !important;
+    overflow: hidden;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    padding-left: 17%;
+    width: 100%;
 }
 
 .container-content {
-    padding-left: 18%;
+    padding-left: 17%;
     width: 100%;
 }
 
@@ -24,4 +47,25 @@
 .btn-dashboard:hover {
     background-color: rgb(253, 231, 227);
     border: 1px solid transparent;
+}
+
+.logo-header {
+    color: var(--headerColor) !important;
+    text-shadow: 2px 2px 3px rgb(158, 47, 47);
+}
+
+.theme-bg {
+    background-color: var(--bgColor) !important;
+}
+
+.theme-bg:hover {
+    background-color: var(--hoverColor) !important;
+}
+
+.theme-bg:focus, .theme-bg:active, .theme-bg.active {
+    background-color: var(--focusColor) !important;
+}
+
+.theme-text {
+    color: var(--textColor) !important;
 }
