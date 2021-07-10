@@ -7,8 +7,8 @@ import kodlamaio.hrms.entities.concretes.Department;
 import kodlamaio.hrms.entities.concretes.Education;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.School;
-import kodlamaio.hrms.entities.dtos.EducationDisplayDto;
-import kodlamaio.hrms.entities.dtos.EducationInputDto;
+import kodlamaio.hrms.entities.dtos.display.EducationDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.EducationInputDto;
 
 public class EducationDtoConverter {
 	public static EducationDisplayDto NormalToDisplayDto(Education edu) {

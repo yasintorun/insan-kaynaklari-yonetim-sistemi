@@ -15,8 +15,8 @@ import kodlamaio.hrms.business.abstracts.EducationService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Education;
-import kodlamaio.hrms.entities.dtos.EducationDisplayDto;
-import kodlamaio.hrms.entities.dtos.EducationInputDto;
+import kodlamaio.hrms.entities.dtos.display.EducationDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.EducationInputDto;
 
 @RestController
 @RequestMapping("/api/educations")

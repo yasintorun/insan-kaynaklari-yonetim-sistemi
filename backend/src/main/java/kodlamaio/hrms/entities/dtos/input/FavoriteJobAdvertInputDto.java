@@ -1,6 +1,4 @@
-package kodlamaio.hrms.entities.dtos;
-
-import java.util.List;
+package kodlamaio.hrms.entities.dtos.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserSkillInputDto {
+public class FavoriteJobAdvertInputDto {
 	private int userId;
-	private List<Integer> skillIds;
+	private int jobAdvertId;
 }

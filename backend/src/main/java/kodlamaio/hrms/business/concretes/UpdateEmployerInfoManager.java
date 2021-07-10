@@ -19,7 +19,7 @@ import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.dataAccess.abstracts.UpdateEmployerInfoDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.UpdateEmployerInfo;
-import kodlamaio.hrms.entities.dtos.EmployerInputDto;
+import kodlamaio.hrms.entities.dtos.input.EmployerInputDto;
 @Service
 public class UpdateEmployerInfoManager implements UpdateEmployerInfoService{
 	

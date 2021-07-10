@@ -14,7 +14,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.LanguageDao;
 import kodlamaio.hrms.entities.concretes.Language;
-import kodlamaio.hrms.entities.dtos.LanguageDisplayDto;
+import kodlamaio.hrms.entities.dtos.display.LanguageDisplayDto;
 
 @Service
 public class LanguageManager implements LanguageService{

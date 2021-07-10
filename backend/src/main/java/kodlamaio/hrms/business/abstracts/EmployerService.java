@@ -4,8 +4,8 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.UpdateEmployerInfo;
-import kodlamaio.hrms.entities.dtos.EmployerDisplayDto;
-import kodlamaio.hrms.entities.dtos.EmployerInputDto;
+import kodlamaio.hrms.entities.dtos.display.EmployerDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.EmployerInputDto;
 
 public interface EmployerService extends BaseService<Employer>{
 	Result add(EmployerInputDto inputDto);

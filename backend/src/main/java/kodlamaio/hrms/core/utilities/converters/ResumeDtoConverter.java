@@ -5,9 +5,9 @@ import java.util.List;
 
 import kodlamaio.hrms.entities.concretes.Language;
 import kodlamaio.hrms.entities.concretes.Resume;
-import kodlamaio.hrms.entities.dtos.JobSeekerDisplayDto;
-import kodlamaio.hrms.entities.dtos.ResumeDisplayDto;
-import kodlamaio.hrms.entities.dtos.ResumeInputDto;
+import kodlamaio.hrms.entities.dtos.display.JobSeekerDisplayDto;
+import kodlamaio.hrms.entities.dtos.display.ResumeDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.ResumeInputDto;
 
 public class ResumeDtoConverter {
 	

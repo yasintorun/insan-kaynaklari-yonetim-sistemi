@@ -9,8 +9,8 @@ import kodlamaio.hrms.entities.concretes.Experience;
 import kodlamaio.hrms.entities.concretes.JobPosition;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.WorkTimeStyle;
-import kodlamaio.hrms.entities.dtos.ExperienceDisplayDto;
-import kodlamaio.hrms.entities.dtos.ExperienceInputDto;
+import kodlamaio.hrms.entities.dtos.display.ExperienceDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.ExperienceInputDto;
 
 public class ExperienceDtoConverter {
 	public static ExperienceDisplayDto NormalToDisplayDto(Experience exp) {

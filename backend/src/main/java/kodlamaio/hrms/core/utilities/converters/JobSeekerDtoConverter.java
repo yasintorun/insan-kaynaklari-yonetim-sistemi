@@ -1,8 +1,8 @@
 package kodlamaio.hrms.core.utilities.converters;
 
 import kodlamaio.hrms.entities.concretes.Jobseeker;
-import kodlamaio.hrms.entities.dtos.JobSeekerDisplayDto;
-import kodlamaio.hrms.entities.dtos.JobSeekerInputDto;
+import kodlamaio.hrms.entities.dtos.display.JobSeekerDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.JobSeekerInputDto;
 
 public class JobSeekerDtoConverter {
 	public static Jobseeker InputDtoToNormal(JobSeekerInputDto inputDto) {

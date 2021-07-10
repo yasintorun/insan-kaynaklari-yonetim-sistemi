@@ -19,7 +19,7 @@ import kodlamaio.hrms.dataAccess.abstracts.JobseekerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.User;
-import kodlamaio.hrms.entities.dtos.JobSeekerInputDto;
+import kodlamaio.hrms.entities.dtos.input.JobSeekerInputDto;
 
 @Service
 public class JobseekerManager implements JobseekerService{

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import kodlamaio.hrms.entities.concretes.Language;
-import kodlamaio.hrms.entities.dtos.LanguageDisplayDto;
+import kodlamaio.hrms.entities.dtos.display.LanguageDisplayDto;
 
 public class LanguageDtoConverter {
 	public static LanguageDisplayDto NormalToDisplayDto(Language language) {

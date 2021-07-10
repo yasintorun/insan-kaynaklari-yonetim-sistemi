@@ -1,4 +1,4 @@
-package kodlamaio.hrms.entities.dtos;
+package kodlamaio.hrms.entities.dtos.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobSeekerDisplayDto {
-	private int userId;
+public class JobSeekerInputDto {
+	private String eposta;
+	private String password;
+	private String passwordCheck;
 	private String firstname;
 	private String lastname;
-	private String eposta;
 	private String tcNo;
-	
 }

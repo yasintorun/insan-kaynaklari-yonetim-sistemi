@@ -6,8 +6,8 @@ import java.util.List;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.UpdateEmployerInfo;
-import kodlamaio.hrms.entities.dtos.EmployerDisplayDto;
-import kodlamaio.hrms.entities.dtos.EmployerInputDto;
+import kodlamaio.hrms.entities.dtos.display.EmployerDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.EmployerInputDto;
 
 public class EmployerDtoConverter {
 	public static EmployerDisplayDto NormalToDisplayDto(Employer employer) {

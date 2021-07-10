@@ -19,8 +19,8 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
-import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
+import kodlamaio.hrms.entities.dtos.display.JobAdvertisementDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.JobAdvertisementInputDto;
 
 @RestController
 @RequestMapping("/api/jobAdvertisements")
@@ -46,7 +46,7 @@ public class JobAdvertisementController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobAdvertisementDto jobAdvertisement) {
+	public Result add(@RequestBody JobAdvertisementInputDto jobAdvertisement) {
 		//System.out.println("\n\n\n"+jobAdvertisement.getCityId() +"\n\n\n");
 		return this.jobAdvertisementService.add(jobAdvertisement);
 	}
@@ -74,7 +74,7 @@ public class JobAdvertisementController {
 	}
 
 	@GetMapping("/ChangeActive")
-	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId, boolean isActive) {
+	public DataResult<JobAdvertisementInputDto> updateActive(int jobAdvertisementId, boolean isActive) {
 		return this.jobAdvertisementService.updateActive(jobAdvertisementId, isActive);
 	}
 	

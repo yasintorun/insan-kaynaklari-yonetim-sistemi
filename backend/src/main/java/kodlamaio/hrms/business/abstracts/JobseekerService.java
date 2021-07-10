@@ -2,7 +2,7 @@ package kodlamaio.hrms.business.abstracts;
 
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
-import kodlamaio.hrms.entities.dtos.JobSeekerInputDto;
+import kodlamaio.hrms.entities.dtos.input.JobSeekerInputDto;
 
 public interface JobseekerService extends BaseService<Jobseeker>{
 	Result add(JobSeekerInputDto inputDto);

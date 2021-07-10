@@ -15,7 +15,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.UserSkillDao;
 import kodlamaio.hrms.entities.concretes.Skill;
 import kodlamaio.hrms.entities.concretes.UserSkill;
-import kodlamaio.hrms.entities.dtos.UserSkillInputDto;
+import kodlamaio.hrms.entities.dtos.input.UserSkillInputDto;
 
 @Service
 public class UserSkillManager implements UserSkillService{

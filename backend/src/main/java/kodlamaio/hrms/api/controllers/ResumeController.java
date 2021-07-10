@@ -13,8 +13,8 @@ import kodlamaio.hrms.business.abstracts.ResumeService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Resume;
-import kodlamaio.hrms.entities.dtos.ResumeDisplayDto;
-import kodlamaio.hrms.entities.dtos.ResumeInputDto;
+import kodlamaio.hrms.entities.dtos.display.ResumeDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.ResumeInputDto;
 
 @RestController
 @RequestMapping("/api/resume")

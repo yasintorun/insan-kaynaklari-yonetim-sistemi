@@ -5,7 +5,7 @@ import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
-import kodlamaio.hrms.entities.dtos.EmployerInputDto;
+import kodlamaio.hrms.entities.dtos.input.EmployerInputDto;
 
 public class EmployerValidation {
 	

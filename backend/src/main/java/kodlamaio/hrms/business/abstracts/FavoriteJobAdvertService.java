@@ -3,7 +3,7 @@ package kodlamaio.hrms.business.abstracts;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.FavoriteJobAdvert;
-import kodlamaio.hrms.entities.dtos.FavoriteJobAdvertInputDto;
+import kodlamaio.hrms.entities.dtos.input.FavoriteJobAdvertInputDto;
 
 public interface FavoriteJobAdvertService extends BaseService<FavoriteJobAdvert>{
 	Result add(FavoriteJobAdvertInputDto inputDto);

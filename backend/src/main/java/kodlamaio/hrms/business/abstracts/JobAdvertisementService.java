@@ -7,14 +7,14 @@ import kodlamaio.hrms.core.utilities.helpers.JobAdvertFilterOption;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
-import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
+import kodlamaio.hrms.entities.dtos.display.JobAdvertisementDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.JobAdvertisementInputDto;
 
 public interface JobAdvertisementService extends BaseService<JobAdvertisement>{
 	
 	DataResult<List<JobAdvertisementDisplayDto>> getAll(int pageNo, int pageSize, JobAdvertFilterOption filterOption);
 	
-	public Result add(JobAdvertisementDto entity);
+	public Result add(JobAdvertisementInputDto entity);
 	public DataResult<List<JobAdvertisementDisplayDto>> getAllDisplay();
 	
 	public DataResult<List<JobAdvertisementDisplayDto>> getByIsActive(boolean isActive);
@@ -25,7 +25,7 @@ public interface JobAdvertisementService extends BaseService<JobAdvertisement>{
 	
 	DataResult<List<JobAdvertisement>> getByIsActiveAndEmployer_UserId(boolean isActive, int employerId);
 	
-	DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId, boolean active);
+	DataResult<JobAdvertisementInputDto> updateActive(int jobAdvertisementId, boolean active);
 	
 	DataResult<JobAdvertisementDisplayDto> getJobAdvertisementById(int id);
 	

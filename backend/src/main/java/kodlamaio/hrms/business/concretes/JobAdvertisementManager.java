@@ -21,8 +21,8 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
-import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
+import kodlamaio.hrms.entities.dtos.display.JobAdvertisementDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.JobAdvertisementInputDto;
 import net.bytebuddy.asm.Advice.This;
 
 @Service
@@ -49,7 +49,7 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	
 	
 	@Override
-	public Result add(JobAdvertisementDto entity) {
+	public Result add(JobAdvertisementInputDto entity) {
 		
 		JobAdvertisement jobAdvertisement = new JobAdvertisement(	
 				entity.getDescription(), entity.getCityId(), entity.getMinSalary(), entity.getMaxSalary(), entity.getMaxPerson(),
@@ -112,10 +112,10 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	}
 
 	@Override
-	public DataResult<JobAdvertisementDto> updateActive(int jobAdvertisementId, boolean active) {
+	public DataResult<JobAdvertisementInputDto> updateActive(int jobAdvertisementId, boolean active) {
 		JobAdvertisement current = jobAdvertisementDao.getOne(jobAdvertisementId);
 		current.setActive(active);
-		return new SuccessDataResult<JobAdvertisementDto>
+		return new SuccessDataResult<JobAdvertisementInputDto>
 		(JobAdvertisementConverter.NormalToDto(this.jobAdvertisementDao.save(current)), "İlan pasif hale getirildi!");
 	}
 

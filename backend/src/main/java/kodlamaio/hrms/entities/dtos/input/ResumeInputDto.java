@@ -1,8 +1,9 @@
-package kodlamaio.hrms.entities.dtos;
+package kodlamaio.hrms.entities.dtos.input;
 
 import java.time.LocalDate;
 
 import kodlamaio.hrms.entities.concretes.User;
+import kodlamaio.hrms.entities.dtos.display.JobSeekerDisplayDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

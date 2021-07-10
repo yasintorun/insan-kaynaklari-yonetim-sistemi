@@ -13,7 +13,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.FavoriteJobAdvertDao;
 import kodlamaio.hrms.entities.concretes.FavoriteJobAdvert;
-import kodlamaio.hrms.entities.dtos.FavoriteJobAdvertInputDto;
+import kodlamaio.hrms.entities.dtos.input.FavoriteJobAdvertInputDto;
 
 @Service
 public class FavoriteJobAdvertManager implements FavoriteJobAdvertService{

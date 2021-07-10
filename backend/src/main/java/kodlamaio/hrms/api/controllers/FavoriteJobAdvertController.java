@@ -17,7 +17,7 @@ import kodlamaio.hrms.business.abstracts.FavoriteJobAdvertService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.FavoriteJobAdvert;
-import kodlamaio.hrms.entities.dtos.FavoriteJobAdvertInputDto;
+import kodlamaio.hrms.entities.dtos.input.FavoriteJobAdvertInputDto;
 
 @RestController
 @RequestMapping("/api/favoriteJobAdverts")

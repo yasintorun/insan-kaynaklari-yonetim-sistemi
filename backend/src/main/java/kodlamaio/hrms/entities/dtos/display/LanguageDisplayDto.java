@@ -1,4 +1,4 @@
-package kodlamaio.hrms.entities.dtos;
+package kodlamaio.hrms.entities.dtos.display;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -7,14 +7,14 @@ import java.util.List;
 
 import kodlamaio.hrms.core.utilities.helpers.FormatHelper;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.dtos.EmployerDisplayDto;
-import kodlamaio.hrms.entities.dtos.JobAdvertisementDisplayDto;
-import kodlamaio.hrms.entities.dtos.JobAdvertisementDto;
+import kodlamaio.hrms.entities.dtos.display.EmployerDisplayDto;
+import kodlamaio.hrms.entities.dtos.display.JobAdvertisementDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.JobAdvertisementInputDto;
 
 public class JobAdvertisementConverter {
 	public static int totalJobAdvertListSize = -1;
-	public static List<JobAdvertisementDto> NormalToDto(List<JobAdvertisement> normalList) {
-		List<JobAdvertisementDto> dtoList = new ArrayList<JobAdvertisementDto>();
+	public static List<JobAdvertisementInputDto> NormalToDto(List<JobAdvertisement> normalList) {
+		List<JobAdvertisementInputDto> dtoList = new ArrayList<JobAdvertisementInputDto>();
 		
 		for(int i = 0; i< normalList.size(); i++) {
 			dtoList.add(NormalToDto(normalList.get(i)));
@@ -23,8 +23,8 @@ public class JobAdvertisementConverter {
 		return dtoList;
 	}
 
-	public static JobAdvertisementDto NormalToDto(JobAdvertisement normal) {
-		return new JobAdvertisementDto(normal.getId(), normal.getDescription(), normal.getMinSalary(), normal.getMaxSalary(),
+	public static JobAdvertisementInputDto NormalToDto(JobAdvertisement normal) {
+		return new JobAdvertisementInputDto(normal.getId(), normal.getDescription(), normal.getMinSalary(), normal.getMaxSalary(),
 									   normal.getMaxperson(), normal.getDeadline(), normal.isActive(), normal.getCity().getId(), 
 									   normal.getJobPosition().getId(), normal.getEmployer().getUserId(), normal.getWorkStyle().getId(), normal.getWorkStyle().getId());
 	}
@@ -50,7 +50,7 @@ public class JobAdvertisementConverter {
 	
 	
 	
-	public static JobAdvertisement DtoToNormal(JobAdvertisementDto dto) {
+	public static JobAdvertisement DtoToNormal(JobAdvertisementInputDto dto) {
 		return new JobAdvertisement(	
 				dto.getDescription(), dto.getCityId(), dto.getMinSalary(), dto.getMaxSalary(), dto.getMaxPerson(),
 				 FormatHelper.newDate() , dto.getDeadline(),

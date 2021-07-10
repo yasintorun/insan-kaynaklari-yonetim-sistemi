@@ -15,8 +15,8 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EducationDao;
 import kodlamaio.hrms.entities.concretes.Education;
-import kodlamaio.hrms.entities.dtos.EducationDisplayDto;
-import kodlamaio.hrms.entities.dtos.EducationInputDto;
+import kodlamaio.hrms.entities.dtos.display.EducationDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.EducationInputDto;
 
 @Service
 public class EducationManager implements EducationService{

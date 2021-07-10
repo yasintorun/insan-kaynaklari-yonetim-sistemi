@@ -1,4 +1,4 @@
-package kodlamaio.hrms.entities.dtos;
+package kodlamaio.hrms.entities.dtos.display;
 
 import java.time.LocalDate;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package kodlamaio.hrms.entities.dtos;
+package kodlamaio.hrms.entities.dtos.input;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JobAdvertisementDto {
+public class JobAdvertisementInputDto {
 	private int id;
 	private String description;
 	private int minSalary;

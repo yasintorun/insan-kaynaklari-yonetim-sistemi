@@ -15,8 +15,8 @@ import kodlamaio.hrms.business.abstracts.ExperienceService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Experience;
-import kodlamaio.hrms.entities.dtos.ExperienceDisplayDto;
-import kodlamaio.hrms.entities.dtos.ExperienceInputDto;
+import kodlamaio.hrms.entities.dtos.display.ExperienceDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.ExperienceInputDto;
 
 @RestController
 @RequestMapping("/api/experiences")

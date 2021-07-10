@@ -6,8 +6,8 @@ import java.util.List;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.Skill;
 import kodlamaio.hrms.entities.concretes.UserSkill;
-import kodlamaio.hrms.entities.dtos.UserSkillDisplayDto;
-import kodlamaio.hrms.entities.dtos.UserSkillInputDto;
+import kodlamaio.hrms.entities.dtos.display.UserSkillDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.UserSkillInputDto;
 
 public class UserSkillDtoConverter {
 	public static UserSkillDisplayDto NormalToDisplayDto(UserSkill skill) {

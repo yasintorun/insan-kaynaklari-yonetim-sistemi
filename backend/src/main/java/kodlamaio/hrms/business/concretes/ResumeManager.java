@@ -17,8 +17,8 @@ import kodlamaio.hrms.dataAccess.abstracts.JobseekerDao;
 import kodlamaio.hrms.dataAccess.abstracts.ResumeDao;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.Resume;
-import kodlamaio.hrms.entities.dtos.ResumeDisplayDto;
-import kodlamaio.hrms.entities.dtos.ResumeInputDto;
+import kodlamaio.hrms.entities.dtos.display.ResumeDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.ResumeInputDto;
 
 @Service
 public class ResumeManager implements ResumeService{
