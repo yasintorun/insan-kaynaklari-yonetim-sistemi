@@ -6,17 +6,20 @@ import { Form, Button, Input, Divider } from 'semantic-ui-react'
 import { useEffect } from 'react'
 import ResumeService from '../../services/resumeService'
 import GenderDropdown from '../../utilities/dropdowns/GenderDropdown'
-export default function PersonalInfo({ resume }) {
-
+export default function PersonalInfo() {
+    const [resume, setResume] = useState({})
     const [isEdit, setIsEdit] = useState(false)
+
+
+    const resumeService = new ResumeService()
 
     const handleEditClick = () => {
         setIsEdit(!isEdit)
     }
     useEffect(() => {
-    }, [isEdit])
+        resumeService.getResumeById(26).then(result => setResume(result.data.data)).catch(r => console.log(r.data))
+    }, [])
 
-    const resumeService = new ResumeService()
 
     const formik = useFormik({
         initialValues: {
@@ -28,8 +31,8 @@ export default function PersonalInfo({ resume }) {
     });
 
     return (
-        <div>
-            <MessageBox>
+        <div >
+            <MessageBox className="">
                 <div>Kişisel Bilgiler</div>
                 {
                     isEdit

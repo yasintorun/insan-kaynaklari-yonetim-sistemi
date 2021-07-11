@@ -58,14 +58,9 @@ export default function EmployerProfile() {
 
     return (
         <div>
-            <div className="alert alert-info" role="alert">
-                Sadece req19 isteri için yazıldı.<br />
-                <strong>Bu sayfa modern bir şekilde dizayn edilecek.</strong>
-            </div>
-            <div className="mt-8">
+            <div className="">
                 <MessageBox>
                     <div>Genel Şirket Bilgileri<Label className="ms-4" color="green" content="Kayıt Onaylandı" /></div>
-
                     {
                         isEdit
                             ?
