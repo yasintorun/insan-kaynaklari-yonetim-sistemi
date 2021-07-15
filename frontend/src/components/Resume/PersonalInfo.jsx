@@ -15,6 +15,18 @@ export default function PersonalInfo() {
 
     const handleEditClick = () => {
         setIsEdit(!isEdit)
+        formik.setValues ({
+            id: resume?.id,
+            user: {
+                firstname: resume?.user?.firstname,
+                lastname: resume?.user?.lastname,
+                eposta: resume?.user?.eposta,
+            },
+            phone: resume?.phone,
+            genderId: resume?.gender?.id,
+            githubLink: resume?.githubLink,
+            linkedinLink: resume?.linkedinLink,
+        })
     }
     useEffect(() => {
         resumeService.getResumeById(26).then(result => setResume(result.data.data)).catch(r => console.log(r.data))
@@ -44,20 +56,20 @@ export default function PersonalInfo() {
                                 </div>
                                 <div className="col-md-9">
                                     <Form.Group widths='equal'>
-                                        <Form.Input fluid placeholder="İsim" label='İsim*' name="user.firstname" onChange={formik.handleChange} />
-                                        <Form.Input fluid placeholder="Soyisim" label='Soyisim*' name="user.lastname" onChange={formik.handleChange}/>
+                                        <Form.Input fluid placeholder="İsim" label='İsim*' name="user.firstname" onChange={formik.handleChange} value = {formik.values?.user?.firstname}/>
+                                        <Form.Input fluid placeholder="Soyisim" label='Soyisim*' name="user.lastname" onChange={formik.handleChange} value = {formik.values?.user?.lastname}/>
                                     </Form.Group>
                                     <Form.Group widths='equal'>
                                         <Form.Field><GenderDropdown onChangeEvent={(event, data) =>formik.setFieldValue("genderId", data.value)}/></Form.Field>
                                         <Form.Input type="date" fluid placeholder="Doğum tarihi" label='Doğum tarihi*' name="birthDate" onChange={formik.handleChange}/>
                                     </Form.Group>
                                     <Form.Group widths='equal'>
-                                        <Form.Input fluid placeholder="Telefon" label='Telefon' name="phone" onChange={formik.handleChange}/>
+                                        <Form.Input fluid placeholder="Telefon" label='Telefon' name="phone" onChange={formik.handleChange} value = {formik.values?.phone}/>
                                         <Form.Input fluid placeholder="Adres" label='Adres' name="phone"  onChange={formik.handleChange}/>
                                     </Form.Group>
                                     <Form.Group widths='equal'>
-                                        <Form.Input fluid placeholder="Github Link" label='Github' name="linkedinLink" onChange={formik.handleChange} />
-                                        <Form.Input fluid placeholder="Linkedin Link" label='Linkedin' name="githubLink"  onChange={formik.handleChange}/>
+                                        <Form.Input fluid placeholder="Github Link" label='Github' name="githubLink" onChange={formik.handleChange} value={formik.values?.githubLink}/>
+                                        <Form.Input fluid placeholder="Linkedin Link" label='Linkedin' name="linkedinLink"  onChange={formik.handleChange} value = {formik.values?.linkedinLink}/>
                                     </Form.Group>
                                     <Button positive>Kaydet</Button>
                                     <Button negative type="button" onClick={() => handleEditClick()}>Vazgeç</Button>

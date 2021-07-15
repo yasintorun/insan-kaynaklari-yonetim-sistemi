@@ -15,7 +15,6 @@ export default function JobExperienceInfo() {
 
     useEffect(() => {
         experienceService.getByUserId(1).then(result => setExperiences(result.data.data))
-
     }, [experiences])
 
     const [isEdit, setIsEdit] = useState(false)
@@ -77,8 +76,10 @@ export default function JobExperienceInfo() {
     }
 
     const handleDeleteClick = () => {
-        experienceService.delete(formik.values.id).then(result => console.log(result.data))
-        handleCancelEdit()
+        Helper.DeleteModalBox("İş deneyimi", "Bu işlemi geri alamazsın!", () => experienceService.delete(formik.values.id)).then( () => {
+            handleCancelEdit()
+        })
+        //experienceService.delete(formik.values.id).then(result => console.log(result.data))
     }
 
     return (
@@ -111,9 +112,13 @@ export default function JobExperienceInfo() {
                                         <Button positive type="submit" >Kaydet</Button>
                                         <Button negative type="button" onClick={() => handleCancelEdit()}>Vazgeç</Button>
                                     </div>
-                                    <div>
-                                        <Button negative type="button" onClick={() => handleDeleteClick()}>Sil</Button>
-                                    </div>
+                                    {
+                                        !isNew ?
+                                        <div>
+                                            <Button negative type="button" onClick={() => handleDeleteClick()}>Sil</Button>
+                                        </div>
+                                        : null
+                                    }
                                 </div>
                             </Form>
                         </div>

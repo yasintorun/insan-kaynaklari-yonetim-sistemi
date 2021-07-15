@@ -15,7 +15,7 @@ export default function JobAdvertisement() {
         let jobAdvertisementService = new JobAdvertisementService()
         jobAdvertisementService.getJobAdvertFilterAndPage(activePage, pageSize, filterOption).then(result => {
             setJobAdvertisements(result.data.data)
-            if (totalPageSize == 0)
+            if (totalPageSize == 0 && !!result.data.data[0])
                 setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
         })
 

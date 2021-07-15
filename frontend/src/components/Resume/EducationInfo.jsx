@@ -112,9 +112,14 @@ export default function EducationInfo() {
                                         <Button positive type="submit">Kaydet</Button>
                                         <Button negative type="button" onClick={() => handleCancelEdit()}>Vazgeç</Button>
                                     </div>
-                                    <div>
-                                        <Button negative type="button" onClick={() => handleDeleteClick()}>Sil</Button>
-                                    </div>
+                                    {
+                                        !isNew
+                                            ?
+                                            <div>
+                                                <Button negative type="button" onClick={() => handleDeleteClick()}>Sil</Button>
+                                            </div>
+                                            : null
+                                    }
                                 </div>
                             </Form>
                         </div>

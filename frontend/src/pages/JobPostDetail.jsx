@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, useHistory, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Label, Segment, Button, Icon } from 'semantic-ui-react'
+import { Label, Segment, Button, Icon, Popup } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import BackButton from '../components/BackButton'
 import FavoriteJobAdvertService from '../services/favoriteJobAdvert'
 import JobAdvertCardInfo from '../components/JobAdvertCardInfo'
 import Swal from 'sweetalert2'
+import Helper from '../utilities/Helper'
 export default function JobPostDetail(props) {
     let { id } = useParams()
     const [jobAdvertisement, setjobAdvertisement] = useState({})
@@ -50,31 +51,11 @@ export default function JobPostDetail(props) {
 
     }
     const handleDeleteJobAdvertClick = () => {
+        
         //
-        Swal.fire({
-            title: 'İş ilanını silmek istediğinden emin misin?',
-            text: 'İş ilanını silersen tekrar geri getiremezsin!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Evet, Sil!',
-            cancelButtonText: 'Vazgeç'
-          }).then((result) => {
-            if (result.isConfirmed) {
-                jobAdvertService.delete(jobAdvertisement.id).then(result => {
-                    Swal.fire(
-                      'Silindi!',
-                      result.data.message,
-                      'success'
-                    )
-                })
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-              Swal.fire(
-                'İptal Edildi',
-                'İş ilanı silinmedi',
-                'error'
-              )
-            }
-          })
+        Helper.DeleteModalBox("İş ilanı", "İş ilanını silersen tekrar geri getiremezsin!", () => jobAdvertService.delete(jobAdvertisement.id)).then(() => {
+            
+        })
     }
 
     useEffect(() => {
@@ -105,7 +86,12 @@ export default function JobPostDetail(props) {
                 return (
                     <div>
                         <Button color="blue big" >Başvur</Button>
-                        <Button icon={favorite != null ? "heart" : "heart outline"} size="big" color="red" basic onClick={() => handleAddFavoriteClick()} />
+                        
+                        <Popup
+                            position = "bottom right"
+                            content={favorite != null ? "Favorilerden çıkar" : "Favorilere ekle"}
+                            trigger={<Button icon={favorite != null ? "heart" : "heart outline"} size="big" color="red" basic onClick={() => handleAddFavoriteClick()} />} 
+                        />
                     </div>
                 )
         }

@@ -53,7 +53,7 @@ export default function SkillInfo() {
                         : <div className="message-content anim" onClick={() => handleEditClick()}>
                             {
                                 skills?.map(skill => (
-                                    <Label color="teal"><p className="h5">{skill?.skill?.skillName}</p></Label>
+                                    <Label color="teal" className="mb-2"><p className="h5">{skill?.skill?.skillName}</p></Label>
                                 ))
                             }
                         </div>

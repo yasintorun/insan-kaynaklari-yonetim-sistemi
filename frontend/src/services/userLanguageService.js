@@ -12,4 +12,8 @@ export default class UserLanguageService{
     add(values) {
         return axios.post("http://localhost:8080/api/languages/add", values)
     }
+
+    delete(id) {
+        return axios.delete("http://localhost:8080/api/languages/deleteLanguage?id=" + id)
+    }
 }

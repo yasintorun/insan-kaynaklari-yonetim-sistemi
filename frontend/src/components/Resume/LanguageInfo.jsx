@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import MessageBox from '../MessageBox'
-import { FormField, Label } from 'semantic-ui-react'
-import { useFormik } from 'formik'
+import { FormField, Label, Popup, Rating } from 'semantic-ui-react'
+import { Formik, useFormik } from 'formik'
 import { FormGroup, Form, Button, Divider, Table, Icon } from 'semantic-ui-react'
 import SkillDropDown from '../../utilities/dropdowns/SkillDropdown'
 import UserLanguageService from '../../services/userLanguageService'
 import { StaticRouter } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import Helper from '../../utilities/Helper'
 export default function LanguageInfo() {
 
     const [isEdit, setIsEdit] = useState(false)
@@ -40,7 +42,7 @@ export default function LanguageInfo() {
     const languageService = new UserLanguageService()
     useEffect(() => {
         languageService.getByUserId(1).then(result => setLanguages(result.data.data))
-    }, [])
+    }, [languages])
 
 
     const formik = useFormik({
@@ -52,10 +54,17 @@ export default function LanguageInfo() {
             isNew
                 ? languageService.add(values).then(r => console.log(r.data))
                 : languageService.update(values).then(r => console.log(r.data))
-            //handleEditClick()
+            handleCancelEdit()
             console.log(values)
         },
     });
+
+    const handleLanguageDeleteClick = (id) => {
+        Helper.DeleteModalBox("Dil bilgisi", null, () => languageService.delete(id)).then(() => {
+            
+        })
+    }
+
     //console.log(languages)
     return (
         <div>
@@ -71,7 +80,11 @@ export default function LanguageInfo() {
                             <Form onSubmit={formik.handleSubmit} size="small">
                                 <Form.Group widths="equal">
                                     <Form.Input fluid placeholder="Dil adı" label='Dil Adı*' name="languageName" onChange={formik.handleChange} value={formik.values?.languageName} />
-                                    <Form.Input fluid placeholder="Seviye" label='Seviye*' name="level" onChange={formik.handleChange} value={formik.values?.level} />
+                                    {/* <Form.Input fluid placeholder="Seviye" label='Seviye*' name="level" onChange={formik.handleChange} value={formik.values?.level} /> */}
+                                    <Form.Field>
+                                        <label className="mb-2">Seviye</label>
+                                        <Rating className="mt-2" defaultRating={formik.values.level} maxRating={5} onRate={(e, { rating }) => { formik.setFieldValue("level", rating) }} icon="star" />
+                                    </Form.Field>
                                 </Form.Group>
                                 <Divider />
                                 <Button positive type="submit">Kaydet</Button>
@@ -86,13 +99,14 @@ export default function LanguageInfo() {
                                     <Table.Row>
                                         <Table.HeaderCell><span className="text-secondary bold-header">Dil</span></Table.HeaderCell>
                                         <Table.HeaderCell><span className="text-secondary bold-header">Seviye</span></Table.HeaderCell>
+                                        <Table.HeaderCell><span className="text-secondary bold-header"></span></Table.HeaderCell>
                                     </Table.Row>
                                 </Table.Header>
 
                                 <Table.Body>
                                     {
                                         languages?.map((language, index) => (
-                                            <Table.Row className="message-content hover-shadow" onClick={() => handleEditClick(language)}>
+                                            <Table.Row className="message-content hover-shadow" >
                                                 <Table.Cell>
                                                     <span className="bolder text-bb">{language.languageName}</span>
                                                 </Table.Cell>
@@ -100,6 +114,11 @@ export default function LanguageInfo() {
                                                     {
                                                         <StarLevel level={language.level} />
                                                     }
+                                                </Table.Cell>
+                                                <Table.Cell collapsing textAlign="right">
+                                                    <Popup content='Düzenle' trigger={<Button icon="edit" color="green" onClick={() => handleEditClick(language)} />} />
+                                                    <Popup content="Sil" trigger={<Button icon="delete" color="red" onClick={() => handleLanguageDeleteClick(language.id)} />} />
+
                                                 </Table.Cell>
                                             </Table.Row>
 
