@@ -184,6 +184,10 @@ h3 {
 .bolder-text {
   font-weight: 500 !important;
 }
+.full-bold-text {
+  font-weight: 900 !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
 .message-item {
   margin-top: 30px;
 }
@@ -256,6 +260,10 @@ h3 {
   text-shadow: 2px 2px 2px rgb(195, 195, 195);
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .YTInfoBox {
   /* background-color: rgb(246, 246, 246) !important;
   display: flex;
@@ -306,4 +314,43 @@ h3 {
   -webkit-box-flex: 0;
   -ms-flex: 0 0 85px;
   flex: 0 0 85px;
+}
+
+/*Login panel*/
+
+.full-panel {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-panel {
+  background-color: #F5F7FC;
+  font-size: 125%;
+}
+.register-panel {
+  background: linear-gradient(to top right, #fc2c77 0%, #6c4079 100%);
+}
+
+.login-register-panel {
+  background: linear-gradient(135deg ,#f75959 0%,#f35587 100%);
+  color: #fff;
+}
+
+.register-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px 0 rgb(0 0 0 / 15%);
+  width: 600px;
+}
+
+.register-card-text label{
+  font-size: 16px !important;
+  color: #555 !important;
+  text-transform: capitalize !important;
+  display: block !important;
+  margin-bottom: 5px !important; 
+  font-weight: 400 !important;
+  font-family: poppins,arial,helvetica neue,sans-serif !important;
 }

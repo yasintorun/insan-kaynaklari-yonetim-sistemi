@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { Input, Button, Label, Form } from 'semantic-ui-react'
+import { Input, Button, label, Form } from 'semantic-ui-react'
 import * as Yup from 'yup';
 import JobSeekerService from '../../services/jobSeekerService';
 import { toast } from 'react-toastify';
@@ -29,7 +29,7 @@ export default function SignupForJobseeker() {
       .min(6, 'Şifre en az 6 karakterden oluşmalıdır')
       .max(30, 'Şifre en fazla 30 karakterden oluşabilir')
       .required('Zorunlu alan'),
-      tcNo: Yup.string()
+    tcNo: Yup.string()
       .min(11, 'Tc kimlik numarası 11 haneli olmalı')
       .max(11, 'Tc kimlik numarası 11 haneli olmalı')
       .required('Zorunlu alan'),
@@ -57,62 +57,61 @@ export default function SignupForJobseeker() {
     },
   });
   return (
-    <Form onSubmit={formik.handleSubmit} className="mt-5 page-center full-bg-image2" size="big" align="center">
-      <div className="bordered shadow w-25">
+    <Form onSubmit={formik.handleSubmit} size="big">
+      <div className="register-card-text">
+        <Form.Group widths="equal">
+          <Form.Field>
+            <label className="mt-3" color="grey">
+              Lütfen isminizi giriniz
+            </label>
 
+            <Input placeholder='İsim'
+              id="firstname"
+              name="firstname"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.firstname}
+            />
+            {formik.errors.firstname && formik.touched.firstname
+              ? (
+                <label basic color='red' pointing>
+                  {formik.errors.firstname}
+                </label>
+              )
+              : null
+            }
+          </Form.Field>
+
+          <Form.Field>
+            <label className="mt-3" color="grey">
+              Lütfen soyisminizi giriniz
+            </label>
+
+            <Input placeholder='soyisim'
+              id="lastname"
+              name="lastname"
+              type="text"
+              onChange={formik.handleChange}
+              value={formik.values.lastname}
+            />
+            {formik.errors.lastname && formik.touched.lastname
+              ? (
+                <label basic color='red' pointing>
+                  {formik.errors.lastname}
+                </label>
+              )
+              : null
+            }
+
+          </Form.Field>
+        </Form.Group>
 
 
 
         <Form.Field>
-          <Label className="mt-3" color="grey">
-            Lütfen isminizi giriniz
-          </Label>
-
-          <Input placeholder='İsim'
-            id="firstname"
-            name="firstname"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.firstname}
-          />
-          {formik.errors.firstname && formik.touched.firstname
-            ? (
-              <Label basic color='red' pointing>
-                {formik.errors.firstname}
-              </Label>
-            )
-            : null
-          }
-        </Form.Field>
-
-        <Form.Field>
-          <Label className="mt-3" color="grey">
-            Lütfen soyisminizi giriniz
-          </Label>
-
-          <Input placeholder='soyisim'
-            id="lastname"
-            name="lastname"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.lastname}
-          />
-          {formik.errors.lastname && formik.touched.lastname
-            ? (
-              <Label basic color='red' pointing>
-                {formik.errors.lastname}
-              </Label>
-            )
-            : null
-          }
-
-        </Form.Field>
-
-
-        <Form.Field>
-          <Label className="mt-3" color="grey">
+          <label className="mt-3" color="grey">
             Lütfen Tc kimlik numaranızı giriniz
-          </Label>
+          </label>
 
           <Input placeholder='TC kimlik numarası'
             id="tcNo"
@@ -125,18 +124,18 @@ export default function SignupForJobseeker() {
 
           {formik.errors.tcNo && formik.touched.tcNo
             ? (
-              <Label basic color='red' pointing>
+              <label basic color='red' pointing>
                 {formik.errors.tcNo}
-              </Label>
+              </label>
             )
             : null
           }
         </Form.Field>
 
         <Form.Field>
-          <Label className="mt-3" color="grey">
+          <label className="mt-3" color="grey">
             Lütfen eposta adresinizi giriniz:
-          </Label>
+          </label>
 
           <Input placeholder='Eposta'
             id="eposta"
@@ -147,58 +146,62 @@ export default function SignupForJobseeker() {
           />
           {formik.errors.eposta && formik.touched.eposta
             ? (
-              <Label basic color='red' pointing>
+              <label basic color='red' pointing>
                 {formik.errors.eposta}
-              </Label>
+              </label>
             )
             : null
           }
         </Form.Field>
 
-        <Form.Field>
-          <Label className="mt-3" color="grey">
-            Lütfen şifrenizi giriniz
-          </Label>
+        <Form.Group>
 
-          <Input placeholder='Şifre'
-            id="password"
-            name="password"
-            type="password"
-            onChange={formik.handleChange}
-            value={formik.values.password}
-          />
-          {formik.errors.password && formik.touched.password
-            ? (
-              <Label basic color='red' pointing>
-                {formik.errors.password}
-              </Label>
-            )
-            : null
-          }
-        </Form.Field>
-        <Form.Field>
-          <Label className="mt-3" color="grey">
-            Lütfen şifrenizi tekrar giriniz
-          </Label>
+          <Form.Field>
+            <label className="mt-3" color="grey">
+              Lütfen şifrenizi giriniz
+            </label>
 
-          <Input placeholder='Şifre'
-            id="passwordCheck"
-            name="passwordCheck"
-            type="password"
-            onChange={formik.handleChange}
-            value={formik.values.passwordCheck}
-          />
-          {formik.errors.passwordCheck && formik.touched.passwordCheck
-            ? (
-              <Label basic color='red' pointing>
-                {formik.errors.passwordCheck}
-              </Label>
-            )
-            : null
-          }
-        </Form.Field>
+            <Input placeholder='Şifre'
+              id="password"
+              name="password"
+              type="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
+            {formik.errors.password && formik.touched.password
+              ? (
+                <label basic color='red' pointing>
+                  {formik.errors.password}
+                </label>
+              )
+              : null
+            }
+          </Form.Field>
+          <Form.Field>
+            <label className="mt-3" color="grey">
+              Lütfen şifrenizi tekrar giriniz
+            </label>
 
-        <Button color='green' type="submit" className="mt-3">Kayıt Ol</Button>
+            <Input placeholder='Şifre'
+              id="passwordCheck"
+              name="passwordCheck"
+              type="password"
+              onChange={formik.handleChange}
+              value={formik.values.passwordCheck}
+            />
+            {formik.errors.passwordCheck && formik.touched.passwordCheck
+              ? (
+                <label basic color='red' pointing>
+                  {formik.errors.passwordCheck}
+                </label>
+              )
+              : null
+            }
+          </Form.Field>
+
+        </Form.Group>
+
+        <Button color="blue large" type="submit" className="mt-3">Kayıt Ol</Button>
       </div>
     </Form>
   );
