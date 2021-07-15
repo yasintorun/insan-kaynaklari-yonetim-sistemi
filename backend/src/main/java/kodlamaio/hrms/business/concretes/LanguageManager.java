@@ -61,4 +61,14 @@ public class LanguageManager implements LanguageService{
 		
 	}
 
+	@Override
+	public Result deleteLanguage(int id) {
+		try {
+			this.languageDao.deleteById(id);
+			return new SuccessResult("Dil bilgisi silindi");
+		} catch (Exception e) {
+			return new ErrorResult("Hata: " + e.getMessage());
+		}
+	}
+
 }

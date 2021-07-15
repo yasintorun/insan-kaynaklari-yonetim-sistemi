@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink, Route } from 'react-router-dom'
 import JobAdvertList from '../../pages/admin/JobAdvertList'
-import {  Button, Icon, Dropdown } from 'semantic-ui-react'
+import { Button, Icon, Dropdown } from 'semantic-ui-react'
 import './admin.css'
 import ResumeList from '../../pages/admin/ResumeList'
 import Employer from '../../pages/admin/EmployerList'
 import AdminProfile from '../../pages/admin/AdminProfile'
 import AdminEmployerDetails from '../../pages/admin/AdminEmployerDetails'
+import SideBar from '../../components/SideBar'
 export default function AdminDashboard() {
 
     const [activePage, setActivePage] = useState({})
@@ -21,7 +22,7 @@ export default function AdminDashboard() {
 
 
 
-     const SideBarButton = ({ options }) => {
+    const SideBarButton = ({ options }) => {
         return (
             <Button
                 fluid
@@ -66,43 +67,30 @@ export default function AdminDashboard() {
     return (
 
         <div className="row">
-
-
-            <div className="col-md-2 side-bar ">
-                <Button.Group vertical fluid>
-                    {
-                        sideBarOptions.map((options, index) => (
-                            <SideBarButton options={options} key={index}/>
-                        ))
-                    }
-                </Button.Group>
-                <Button fluid negative icon="sign-out" content="Çıkış" as={NavLink} to="/" />
-            </div>
-            <div className="col-md-10 w-75 m-auto mt-0">
-                <div className="" align="right">
-                    <Button icon>
-                        <Icon name="setting" />
-                    </Button>
-                    <Button icon >
-                        <Icon name="bell" />
-                    </Button>
-                    <Dropdown icon="user" button>
-                        <Dropdown.Menu>
-                            <Dropdown.Item as={NavLink} to="/admin/profile"><Icon name="user"/>Profil</Dropdown.Item>
-                            <Dropdown.Item>12</Dropdown.Item>
-                            <Dropdown.Item >
-                                <Icon name="sign-out"/>Çıkış Yap
-                            </Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div>
-
-
+            <SideBar>
+                <Button className="p-4 theme-bg" as={NavLink} to="/admin/profile">
+                    <Icon name="user" />
+                    Profile
+                </Button>
+                <Button className="p-4 theme-bg" as={NavLink} to="/admin/jobadvertlist">
+                    <Icon name="list" />
+                    İş ilanları
+                </Button>
+                <Button className="p-4 theme-bg" as={NavLink} to="/admin/userlist">
+                    <Icon name="heart" />
+                    Kullanıcılar
+                </Button>
+                <Button className="p-4 theme-bg" as={NavLink} to="/admin/duyurular">
+                    <Icon name="bullhorn" />
+                    Duyurular
+                </Button>
+            </SideBar>
+            <div className="col-md-10 container-content mt-0">
                 <Route exact path="/admin/jobadvertlist" component={JobAdvertList} />
                 <Route exact path="/admin/userlist" component={Employer} />
                 <Route exact path="/admin/resumelist" component={ResumeList} />
-                <Route exact path="/admin/profile" component ={AdminProfile} />
-                <Route exact path="/admin/userlist/employerDetail/:id" component ={AdminEmployerDetails} />
+                <Route exact path="/admin/profile" component={AdminProfile} />
+                <Route exact path="/admin/userlist/employerDetail/:id" component={AdminEmployerDetails} />
             </div>
         </div >
     )

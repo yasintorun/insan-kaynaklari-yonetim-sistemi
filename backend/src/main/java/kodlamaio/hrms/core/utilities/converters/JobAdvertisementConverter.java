@@ -33,7 +33,7 @@ public class JobAdvertisementConverter {
 	
 	public static List<JobAdvertisementDisplayDto> DisplayNormalToDto(List<JobAdvertisement> normalList) {
 		List<JobAdvertisementDisplayDto> dtoList = new ArrayList<JobAdvertisementDisplayDto>();
-		
+		System.out.println("\n\n" + normalList.size());
 		for(int i = 0; i< normalList.size(); i++) {
 			dtoList.add(DisplayNormalToDto(normalList.get(i)));
 		}
@@ -42,6 +42,7 @@ public class JobAdvertisementConverter {
 	}
 
 	public static JobAdvertisementDisplayDto DisplayNormalToDto(JobAdvertisement normal) {
+		
 		EmployerDisplayDto empDto = EmployerDtoConverter.NormalToDisplayDto(normal.getEmployer());
 		return new JobAdvertisementDisplayDto(normal.getId(), empDto, normal.getJobPosition(), normal.getCity(), 
 									   normal.getMaxperson(), normal.getMinSalary(), normal.getMaxSalary(), normal.getReleaseDate(), normal.getDeadline(),

@@ -30,4 +30,8 @@ public interface JobAdvertisementService extends BaseService<JobAdvertisement>{
 	DataResult<JobAdvertisementDisplayDto> getJobAdvertisementById(int id);
 	
 	void updateIsActive(boolean isActive, int id);
+	
+	DataResult<List<JobAdvertisementDisplayDto>> getByEmployerUserId(int userId);
+
+	Result deleteById(int id);
 }

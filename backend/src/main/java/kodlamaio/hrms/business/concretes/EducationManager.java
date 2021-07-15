@@ -1,5 +1,7 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,24 @@ public class EducationManager implements EducationService{
 	@Override
 	public Result add(Education entity) {
 		entity.setGraduationDate(GraduationControl(entity.getGraduationDate()));
+		
+		if(entity.getStartingDate() < 1950) {
+			return new ErrorResult("Başlanğıç yılı en düşük 1950 olabilir.");
+		}
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+		if(entity.getStartingDate() > currentYear) {
+			return new ErrorResult("Başlangıç yılı hatalı. Başlangıç yılı en fazla " + currentYear + " olabilir.");
+		}
+		
+		if(entity.getGraduationDate() <= entity.getStartingDate()) {
+			return new ErrorResult("Mezuniyet tarihi başlangıç tarihinden düşük veya eşit olamaz.");
+		}
+		
+		if(entity.getGraduationDate() > currentYear + 6) {
+			return new ErrorResult("Mezuniyet yılı en fazla " + currentYear + 6 + " olabilir.");
+		}
+		
+		
 		this.educationDao.save(entity);
 		return new SuccessResult("Eğitim eklendi!");
 	}

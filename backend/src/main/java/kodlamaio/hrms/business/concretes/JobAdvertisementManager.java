@@ -16,6 +16,7 @@ import kodlamaio.hrms.core.utilities.converters.JobAdvertisementConverter;
 import kodlamaio.hrms.core.utilities.helpers.FormatHelper;
 import kodlamaio.hrms.core.utilities.helpers.JobAdvertFilterOption;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
@@ -145,6 +146,22 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 		JobAdvertisementConverter.totalJobAdvertListSize = (int) this.jobAdvertisementDao.getFilteringAndPage(filterOption, pageable).getTotalElements();
 		return new SuccessDataResult<List<JobAdvertisementDisplayDto>>
 		(JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.getFilteringAndPage(filterOption, pageable).getContent()), "iş ilanı "+pageNo+". sayfa getirildi.");
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisementDisplayDto>> getByEmployerUserId(int userId) {
+		return new SuccessDataResult<List<JobAdvertisementDisplayDto>>
+		(JobAdvertisementConverter.DisplayNormalToDto(this.jobAdvertisementDao.getByEmployer_userId(userId)), "İşverenin iş ilanları getirildi");
+	}
+
+	@Override
+	public Result deleteById(int id) {
+		try {
+			this.jobAdvertisementDao.deleteById(id);
+			return new SuccessResult("İş ilanı silindi");
+		} catch (Exception e) {
+			return new ErrorResult("Hata: " + e.getMessage());
+		}
 	}
 	
 	

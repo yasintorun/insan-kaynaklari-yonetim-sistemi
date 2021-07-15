@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -109,7 +110,7 @@ public class JobAdvertisement {
 	@JoinColumn(name="work_time_style_id")
 	private WorkTimeStyle workTimeStyle;
 	
-	@OneToMany(mappedBy = "jobAdvert")
+	@OneToMany(mappedBy = "jobAdvert", cascade = CascadeType.REMOVE)
 	private List<FavoriteJobAdvert> favoriteJobAdverts;
 	
 	///////////////////

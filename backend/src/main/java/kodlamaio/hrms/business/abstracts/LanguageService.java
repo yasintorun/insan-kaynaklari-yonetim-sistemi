@@ -13,4 +13,6 @@ public interface LanguageService extends BaseService<Language>{
 
 	Result update(Language language);
 
+	Result deleteLanguage(int id);
+
 }

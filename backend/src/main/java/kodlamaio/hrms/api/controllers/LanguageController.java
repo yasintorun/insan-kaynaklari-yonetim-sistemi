@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,6 +47,11 @@ public class LanguageController {
 	@PutMapping("/update")
 	public Result update(@RequestBody Language language) {
 		return this.languageService.update(language);
+	}
+	
+	@DeleteMapping("/deleteLanguage")
+	public Result deleteLanguage(int id) {
+		return this.languageService.deleteLanguage(id);
 	}
 	
 }

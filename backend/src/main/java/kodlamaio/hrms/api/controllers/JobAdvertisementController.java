@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -83,10 +84,20 @@ public class JobAdvertisementController {
 		return this.jobAdvertisementService.getJobAdvertisementById(id);
 	}
 	
+	@GetMapping("/getByEmployerUserId")
+	public DataResult<List<JobAdvertisementDisplayDto>> getByEmployerUserId(int userId) {
+		return this.jobAdvertisementService.getByEmployerUserId(userId);
+	}
+	
 	@PostMapping("/changeActive")
 	public Result updateIsActive(int id, boolean isActive) {
 		this.jobAdvertisementService.updateIsActive(isActive, id);
 		return new SuccessResult("başarılı");
+	}
+	
+	@DeleteMapping("/deleteJobAdvert")
+	public Result deleteJobAdvert(int id) {
+		return this.jobAdvertisementService.deleteById(id);
 	}
 	
 }
