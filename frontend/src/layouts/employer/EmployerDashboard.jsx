@@ -7,13 +7,16 @@ import EmployerProfile from '../../pages/employer/EmployerProfile'
 import { NavLink } from 'react-router-dom'
 import SideBar from '../../components/SideBar'
 import EmployerHome from '../../pages/employer/EmployerHome'
+import NewJobAdvert from '../../pages/employer/NewJobAdvert'
+import EmployerJobs from '../../pages/employer/EmployerJobs'
+import JobPostDetail from '../../pages/JobPostDetail'
 export default function EmployerDashboard() {
     return (
         <div>
             <div className="row">
                 <SideBar>
                     <Button className="p-4 theme-bg" as={NavLink} to="/employer_dashboard">
-                        <Icon name="user" />
+                        <Icon name="home" />
                         Anasayfa
                     </Button>
                     <Button className="p-4 theme-bg" as={NavLink} to="/employer_dashboard/profile">
@@ -24,6 +27,10 @@ export default function EmployerDashboard() {
                         <Icon name="list" />
                         İş ilanlarım
                     </Button>
+                    <Button className="p-4 theme-bg" as={NavLink} to="/employer_dashboard/new-job-advert">
+                        <Icon name="edit" />
+                        Yeni iş ilanı oluştur
+                    </Button>
                     <Button className="p-4 theme-bg" as={NavLink} to="/employer_dashboard/duyurular">
                         <Icon name="bullhorn" />
                         Duyurular
@@ -32,8 +39,12 @@ export default function EmployerDashboard() {
                 <div className="col-md-10 container-content">
                     <Route exact path="/employer_dashboard" component={EmployerHome} />
                     <Route exact path="/employer_dashboard/profile" component={EmployerProfile} />
-                    <Route path="/employer_dashboard/my-job-advertisements" component={""} />
+                    <Route path="/employer_dashboard/my-job-advertisements" component={EmployerJobs} />
                     <Route path="/employer_dashboard/duyurular" component={""} />
+                    <Route path="/employer_dashboard/new-job-advert" component={NewJobAdvert} />
+                    <Route path="/employer_dashboard/jobpost_detail/:id">
+                        <JobPostDetail userType = "EMPLOYER"/>
+                    </Route>
                 </div>
             </div>
         </div>

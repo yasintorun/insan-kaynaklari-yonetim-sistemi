@@ -9,6 +9,7 @@ import {Provider} from 'react-redux'
 import './css/dashboard.css'
 import './css/App.css';
 import { configureStore } from './Store/configureStore';
+import $ from 'jquery'; 
 
 const store = configureStore()
 

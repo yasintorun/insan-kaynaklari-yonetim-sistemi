@@ -19,4 +19,12 @@ export default class JobAdvertisementService {
     changeActive(isActive, id) {
         return axios.get(`http://localhost:8080/api/jobAdvertisements/ChangeActive?isActive=${isActive}&jobAdvertisementId=${id}`)
     }
+
+    getByEmployerUserId(userId) {
+        return axios.get("http://localhost:8080/api/jobAdvertisements/getByEmployerUserId?userId="+userId)
+    }
+
+    delete(id) {
+        return axios.delete("http://localhost:8080/api/jobAdvertisements/deleteJobAdvert?id=" + id)
+    }
 }

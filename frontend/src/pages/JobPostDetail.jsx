@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { NavLink, useHistory, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Label, Segment, Button, Icon } from 'semantic-ui-react'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import BackButton from '../components/BackButton'
 import FavoriteJobAdvertService from '../services/favoriteJobAdvert'
 import JobAdvertCardInfo from '../components/JobAdvertCardInfo'
-export default function JobPostDetail() {
+import Swal from 'sweetalert2'
+export default function JobPostDetail(props) {
     let { id } = useParams()
     const [jobAdvertisement, setjobAdvertisement] = useState({})
     const [isAdmin, setIsAdmin] = useState(true)
@@ -48,6 +49,33 @@ export default function JobPostDetail() {
         jobAdvertService.changeActive(!jobAdvertisement.active, jobAdvertisement.id).then()
 
     }
+    const handleDeleteJobAdvertClick = () => {
+        //
+        Swal.fire({
+            title: 'İş ilanını silmek istediğinden emin misin?',
+            text: 'İş ilanını silersen tekrar geri getiremezsin!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Evet, Sil!',
+            cancelButtonText: 'Vazgeç'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                jobAdvertService.delete(jobAdvertisement.id).then(result => {
+                    Swal.fire(
+                      'Silindi!',
+                      result.data.message,
+                      'success'
+                    )
+                })
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+              Swal.fire(
+                'İptal Edildi',
+                'İş ilanı silinmedi',
+                'error'
+              )
+            }
+          })
+    }
 
     useEffect(() => {
         jobAdvertService.getJobAdvertisementById(id).then(result => setjobAdvertisement(result.data.data))
@@ -57,13 +85,40 @@ export default function JobPostDetail() {
     }, [])
 
 
+    const ButtonsForUserTypes = () => {
+        switch (props.userType) {
+            case "ADMIN":
+                return (
+                    <div>
+                        Admin İçin buttonlar
+                    </div>
+                )
+            case "EMPLOYER":
+                return (
+                    <div>
+                        <Button color="blue big" as={NavLink} to={{pathname: "/employer_dashboard/new-job-advert", initialVal: jobAdvertisement}}>Düzenle</Button>
+                        <Button color="red big" onClick={() => handleDeleteJobAdvertClick()}>Sil</Button>
+                    </div>
+                )
+            case "JOBSEEKER":
+            default:
+                return (
+                    <div>
+                        <Button color="blue big" >Başvur</Button>
+                        <Button icon={favorite != null ? "heart" : "heart outline"} size="big" color="red" basic onClick={() => handleAddFavoriteClick()} />
+                    </div>
+                )
+        }
+    }
+
+
     return (
         <div className="bg-white">
             <div className="bg-light-blue">
                 <div className="container pt-5 pb-5">
                     <div className="row">
                         <div className="col-sm-8">
-                            <JobAdvertCardInfo  jobAdvertisement={jobAdvertisement}/>
+                            <JobAdvertCardInfo jobAdvertisement={jobAdvertisement} />
                         </div>
                         <div className="col-sm-4">
                             <div>
@@ -71,10 +126,11 @@ export default function JobPostDetail() {
                                     <div>
                                         Son başvuru tarihi: <span className="text-danger bold-header">{jobAdvertisement.deadline}</span>
                                     </div>
-                                    <div className="mt-3">
-                                        <Button color="blue big">Başvur</Button>
-                                        <Button icon={favorite != null ? "heart" : "heart outline"} size="big" color="red" basic onClick={() => handleAddFavoriteClick()}/>
-                                    </div>
+                                    {
+                                        <div className="mt-3">
+                                            <ButtonsForUserTypes />
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -147,6 +203,9 @@ export default function JobPostDetail() {
 
         </div>
     )
+
+
+
 }
 
 const InfoMessage = ({ header, text, iconName }) => {
@@ -168,6 +227,8 @@ const InfoMessage = ({ header, text, iconName }) => {
         </div>
     )
 }
+
+
 
 
 

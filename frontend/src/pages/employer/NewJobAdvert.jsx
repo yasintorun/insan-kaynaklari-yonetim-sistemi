@@ -8,7 +8,7 @@ import WorkStyleService from '../../services/workStyleService';
 import WorkTimeStyleService from '../../services/workTimeService';
 import RichTextEditor from '../../components/RichTextEditor/RichTextEditor';
 import * as Yup from 'yup';
-export default function NewJobAdvert() {
+export default function NewJobAdvert(props) {
 
 
   const [cities, setCities] = useState([])
@@ -28,6 +28,9 @@ export default function NewJobAdvert() {
 
     let workTimeStyleService = new WorkTimeStyleService()
     workTimeStyleService.getWorkTimeStyles().then(result => setWorkTimeStyle(result.data.data))
+
+    console.log(props.location?.initialVal)
+
   }, [])
 
   const jobAdvertisementService = new JobAdvertisementService()
@@ -61,19 +64,19 @@ export default function NewJobAdvert() {
     //email: Yup.string().email('Invalid email').required('Required'),
   });
 
-
+  let initialVal = props.location?.initialVal
   const formik = useFormik({
     initialValues: {
-      cityId: '',
-      jobPositionId: '',
-      maxPerson: '',
-      minSalary: '',
-      maxSalary: '',
+      cityId: initialVal?.city?.id,
+      jobPositionId: initialVal?.jobPosition?.id,
+      maxPerson: initialVal?.maxPerson,
+      minSalary: initialVal?.minSalary,
+      maxSalary: initialVal?.maxSalary,
       employerId: 2,
-      deadline: '',
-      description: '',
-      workStyleId: '',
-      workTimeStyleId: ''
+      deadline: initialVal?.deadline,
+      description: initialVal?.description,
+      workStyleId: initialVal?.workStyle?.id,
+      workTimeStyleId: initialVal?.workTimeStyle?.id
     },
     validationSchema: SignupSchema,
     onSubmit: values => {
@@ -92,13 +95,14 @@ export default function NewJobAdvert() {
 
   return (
     <Form onSubmit={formik.handleSubmit} className="mt-5 page-center" align="center">
-      <div className="bordered shadow-no-hover shadow mb-5 w-75">
-        <div className="row">
-          <div className="col-md-5">
+      <div className="mb-5 w-75 ">
+      <Label className="mb-2" color="red">Lütfen tüm alanları eksiksiz doldurunuz.<strong> İlanınız sistem personelinin onayı ile yayına alınacaktır.</strong></Label>
+        <div className="row text-left">
+          <div className="col-md-5 ">
             <Form.Field>
-              <Label className="mt-3">
+              <label className="mt-3 text-left" >
                 Lütfen Şehir seçiniz:
-              </Label>
+              </label>
               <Dropdown
                 placeholder='Şehir seçiniz'
                 fluid
@@ -127,9 +131,9 @@ export default function NewJobAdvert() {
 
 
             <Form.Field>
-              <Label className="mt-3">
+              <label className="mt-3">
                 Lütfen kapasite giriniz
-              </Label>
+              </label>
               <Input placeholder='Kontenjan'
                 id="maxPerson"
                 name="maxPerson"
@@ -148,9 +152,9 @@ export default function NewJobAdvert() {
             </Form.Field>
 
             <Form.Field>
-              <Label className="mt-3">
+              <label className="mt-3">
                 Lütfen minimum maaşı giriniz
-              </Label>
+              </label>
               <Input placeholder='Minimum maaş'
                 id="minSalary"
                 name="minSalary"
@@ -169,9 +173,9 @@ export default function NewJobAdvert() {
             </Form.Field>
 
             <Form.Field>
-              <Label className="mt-3">
+              <label className="mt-3">
                 Lütfen maksimum maaşı giriniz
-              </Label>
+              </label>
               <Input placeholder='maksimum maaş'
                 id="maxSalary"
                 name="maxSalary"
@@ -195,9 +199,9 @@ export default function NewJobAdvert() {
           <div className="col-md-2"></div>
           <div className="col-md-5">
             <Form.Field>
-              <Label className="mt-3">
+              <label className="mt-3">
                 Lütfen iş pozisyonunu giriniz
-              </Label>
+              </label>
               <Dropdown
                 placeholder='İş pozisyonunu seçiniz'
                 fluid
@@ -224,9 +228,9 @@ export default function NewJobAdvert() {
             </Form.Field>
 
             <Form.Field>
-              <Label className="mt-3">
+              <label className="mt-3">
                 Lütfen son başvuru tarihini giriniz
-              </Label>
+              </label>
               <Input
                 id="deadline"
                 name="deadline"
@@ -244,9 +248,9 @@ export default function NewJobAdvert() {
               }
             </Form.Field>
             <Form.Field>
-              <Label className="mt-3">
+              <label className="mt-3">
                 Lütfen Çalışma şekli giriniz
-              </Label>
+              </label>
               <Dropdown
                 placeholder='Çalışma şekli'
                 fluid
@@ -272,9 +276,9 @@ export default function NewJobAdvert() {
             </Form.Field>
 
             <Form.Field>
-              <Label className="mt-3">
+              <label className="mt-3">
                 Lütfen çalışma zamanı özelliğini giriniz
-              </Label>
+              </label>
               <Dropdown
                 placeholder="çalışma zamanı "
                 fluids
@@ -304,11 +308,12 @@ export default function NewJobAdvert() {
 
         </div>
         <Form.Field>
-          <Label className="mt-3">
+          <label className="mt-5 text-left">
             Lütfen iş ilanı için açıklama giriniz
-          </Label>
+          </label>
           <RichTextEditor
             textValue={handleRichTextEditorInput}
+            defaultValue={formik.values.description}
           />
           {formik.errors.description && formik.touched.description
                 ? (

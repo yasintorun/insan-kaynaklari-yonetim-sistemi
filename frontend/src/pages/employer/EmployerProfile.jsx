@@ -58,7 +58,7 @@ export default function EmployerProfile() {
 
     return (
         <div>
-            <div className="">
+            <div className="w-75 m-auto">
                 <MessageBox>
                     <div>Genel Şirket Bilgileri<Label className="ms-4" color="green" content="Kayıt Onaylandı" /></div>
                     {
@@ -79,12 +79,12 @@ export default function EmployerProfile() {
                                             <Form.Input fluid placeholder="Website" label='Website' required name="website" onChange={formik.handleChange} value={formik.values?.website} />
                                         </Form.Group>
                                         <Divider hidden />
-
+{/* 
                                         <Label color="red" size="tiny">Eğer şifre değiştirmek istemiyorsanız, şifre kısmını boş bırakın.</Label>
                                         <Form.Group widths='equal'>
                                             <Form.Input fluid placeholder="Şifre" label='Şifre' name="password" onChange={formik.handleChange} value={formik.values?.password} />
                                             <Form.Input fluid placeholder="Şifre tekrarı" label='Şifre Tekrarı' name="passwordCheck" onChange={formik.handleChange} value={formik.values?.passwordCheck} />
-                                        </Form.Group>
+                                        </Form.Group> */}
 
 
                                         <Form.TextArea fluid placeholder="Özet bilgi" label="Şirket hakkında özet bilgi" name="summary" onChange={formik.handleChange} value={formik.values?.summary}>

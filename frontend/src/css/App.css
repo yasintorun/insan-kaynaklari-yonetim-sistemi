@@ -289,6 +289,9 @@ h3 {
 .text-right {
   text-align: right !important;
 }
+.text-left {
+  text-align: left !important;
+}
 
 .text-small {
   font-size: 18px;
