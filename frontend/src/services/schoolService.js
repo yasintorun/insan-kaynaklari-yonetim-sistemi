@@ -1,8 +1,9 @@
 import axios from "axios"
 
+import Links from "../components/Links"
 export default class SchoolService{
     getSchool() {
-        return axios.get("http://localhost:8080/api/schools/getAllSchool")
+        return axios.get(Links.ROOT + "/schools/getAllSchool")
     }
 
     update(id, values) {

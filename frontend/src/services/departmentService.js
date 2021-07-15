@@ -1,7 +1,8 @@
 import axios from "axios"
+import Links from "../components/Links"
 
 export default class DepartmentService{
     getDepartments() {
-        return axios.get("http://localhost:8080/api/departments/getAll")
+        return axios.get(Links.ROOT + "/departments/getAll")
     }
 }

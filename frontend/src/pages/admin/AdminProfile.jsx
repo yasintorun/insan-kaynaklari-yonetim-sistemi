@@ -77,7 +77,7 @@ export default function AdminProfile() {
 
                                 <div className="d-flex justify-content-between w-75">
                                     <div>
-                                        <YTInfoMessage info="E-posta adresi" text={personel.eposta} />
+                                        <YTInfoMessage info="E-posta adresi" text={personel?.eposta} />
                                         <YTInfoMessage info="Rol (Yetki) " text={"Admin"} />
                                     </div>
                                 </div>

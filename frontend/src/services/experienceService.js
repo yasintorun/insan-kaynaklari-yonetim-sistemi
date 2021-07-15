@@ -1,23 +1,24 @@
 import axios from "axios"
+import Links from "../components/Links"
 
 export default class ExperienceService{
     getExperience() {
-        return axios.get("http://localhost:8080/api/experiences/getAllExperiences")
+        return axios.get(Links.ROOT + "/experiences/getAllExperiences")
     }
 
     getByUserId(userId) {
-        return axios.get("http://localhost:8080/api/experiences/getByUserId?userId=" + userId)
+        return axios.get(Links.ROOT + "/experiences/getByUserId?userId=" + userId)
     }
 
     add(values) {
-        return axios.post("http://localhost:8080/api/experiences/addExperience", values)
+        return axios.post(Links.ROOT + "/experiences/addExperience", values)
     }
 
     update(id, values) {
-        return axios.post(`http://localhost:8080/api/experiences/updateExperience?id=${id}`, values)
+        return axios.post(`${Links.ROOT} /experiences/updateExperience?id=${id}`, values)
     }
     
     delete(id) {
-        return axios.delete("http://localhost:8080/api/experiences/delete?id=" + id)
+        return axios.delete(Links.ROOT + "/experiences/delete?id=" + id)
     }
 }

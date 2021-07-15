@@ -1,7 +1,8 @@
 import axios from "axios"
+import Links from "../components/Links"
 
 export default class GenderService{
     getGenders() {
-        return axios.get("http://localhost:8080/api/genders/getAllCities")
+        return axios.get(Links.ROOT + "/genders/getAllCities")
     }
 }

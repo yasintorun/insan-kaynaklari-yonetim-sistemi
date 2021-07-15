@@ -1,7 +1,8 @@
 import axios from "axios"
+import Links from "../components/Links"
 
 export default class WorkStyleService{
     getWorkStyles() {
-        return axios.get("http://localhost:8080/api/workStyle/getAllWorkStyles")
+        return axios.get(Links.ROOT + "/workStyle/getAllWorkStyles")
     }
 }

@@ -1,19 +1,20 @@
 import axios from "axios"
+import Links from "../components/Links"
 
 export default class UserLanguageService{
     getByUserId(userId) {
-        return axios.get("http://localhost:8080/api/languages/getByUserId?userId=" + userId)
+        return axios.get(Links.ROOT + "/languages/getByUserId?userId=" + userId)
     }
 
     update(values) {
-        return axios.put("http://localhost:8080/api/languages/update", values)
+        return axios.put(Links.ROOT + "/languages/update", values)
     }
 
     add(values) {
-        return axios.post("http://localhost:8080/api/languages/add", values)
+        return axios.post(Links.ROOT + "/languages/add", values)
     }
 
     delete(id) {
-        return axios.delete("http://localhost:8080/api/languages/deleteLanguage?id=" + id)
+        return axios.delete(Links.ROOT + "/languages/deleteLanguage?id=" + id)
     }
 }

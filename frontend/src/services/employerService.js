@@ -1,15 +1,16 @@
 import axios from "axios"
+import Links from "../components/Links"
 
 export default class EmployerService{
     getEmployer() {
-        return axios.get("http://localhost:8080/api/employers/getAllEmployer")
+        return axios.get(Links.ROOT + "/employers/getAllEmployer")
     }
 
     getById(id) {
-        return axios.get("http://localhost:8080/api/employers/getById?userId=" + id)
+        return axios.get(Links.ROOT + "/employers/getById?userId=" + id)
     }
 
     add(employer) {
-        return axios.post("http://localhost:8080/api/employers/add", employer)
+        return axios.post(Links.ROOT + "/employers/add", employer)
     }
 }

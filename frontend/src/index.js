@@ -10,8 +10,14 @@ import './css/dashboard.css'
 import './css/App.css';
 import { configureStore } from './Store/configureStore';
 import $ from 'jquery'; 
+import Links from './components/Links';
 
 const store = configureStore()
+
+const local = "http://localhost:8080/"
+const live = "https://ikariyernet.herokuapp.com/"
+
+Links.HOST = window.location.hostname.search("localhost")<= -1 ? local : live
 
 ReactDOM.render(
   <Provider store={store}>
