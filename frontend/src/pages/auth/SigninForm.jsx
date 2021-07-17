@@ -1,18 +1,29 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { Input, Button, Label, Form, Icon, Divider, Dropdown } from 'semantic-ui-react'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import Links from '../../components/Links';
+import { useDispatch, useSelector } from 'react-redux';
+import UserService from '../../services/userService'
+import { userLogin } from '../../Store/actions/userActions';
 export default function SigninForm() {
+
+  const dispatch = useDispatch()
+  const history = useHistory()
   const formik = useFormik({
     initialValues: {
-      email: '',
+      eposta: '',
       password: '',
     },
     onSubmit: values => {
-      (JSON.stringify(values, null, 2));
+        dispatch(userLogin(values)).then(res => {
+          history.push('/')
+        })
+      // alert(JSON.stringify(values, null, 2));
+      // let userService = new UserService()
+      // userService.login(values).then(result => console.log(result.data))
     },
-  });
+  }); 
   return (
     <div className="login-panel full-panel">
       <div className="container">
@@ -64,7 +75,7 @@ export default function SigninForm() {
 
                           <Input placeholder='Eposta'
                             id="email"
-                            name="email"
+                            name="eposta"
                             type="email"
                             icon="user"
                             iconPosition="left"

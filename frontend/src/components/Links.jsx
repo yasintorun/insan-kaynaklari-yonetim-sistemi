@@ -1,5 +1,9 @@
 export default class Links {
-    static HOST = "https://ikariyernet.herokuapp.com/"
+
+    static local = "http://localhost:8080/"
+    static live = "https://ikariyernet.herokuapp.com/"
+
+    static HOST = this.local
     static API = "api"
     static ROOT = this.HOST + this.API
     /*Kullanıcı giriş, kayıt ol gibi linklerin yer aldıgı kısım*/

@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 
 class Helper {
@@ -49,6 +50,27 @@ class Helper {
         })
     }
 
+    static ToastInfo(isSuccess, msg) {
+        if(isSuccess) {
+            toast.success(msg)
+        } else {
+            toast.error(msg)
+        }
+    }
+
+
+    static LoadState() {
+        const state = localStorage.getItem("state")
+        return JSON.parse(state)
+    }
+
+    static SaveState(state) {
+        localStorage.setItem("state", JSON.stringify(state))
+    }
+
+    static deleteState() {
+        localStorage.removeItem("state")
+    }
 
 }
 

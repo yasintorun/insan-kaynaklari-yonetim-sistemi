@@ -10,7 +10,7 @@ export default function AdminProfile() {
     let personelService = new PersonalService()
     useEffect(() => {
         
-        personelService.getById(3).then(result => setPersonel(result.data.data))
+        personelService.getById(1).then(result => setPersonel(result.data.data))
 
     }, [personel])
 

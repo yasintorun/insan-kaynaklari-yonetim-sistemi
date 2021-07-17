@@ -53,7 +53,7 @@ class RichTextEditor extends React.Component {
 	constructor(props) {
 		super(props);
 		this.editorRef = React.createRef()
-		this.val = ""
+		this.val = props.defaultValue ? props.defaultValue : ""
 		this.state = {
 			editorState: 
 			props.defaultValue ? EditorState.createWithContent(
@@ -63,6 +63,7 @@ class RichTextEditor extends React.Component {
 			)
 			: EditorState.createEmpty()
 		};
+		this.handleCallBack()
 	}
 	onChange = editorState => {
 		this.setState({

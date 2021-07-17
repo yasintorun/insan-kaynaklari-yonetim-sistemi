@@ -10,8 +10,8 @@ export default class EducationService{
         return axios.get(Links.ROOT + "/educations/getByUserId?userId=" + userId)
     }
 
-    update(id, values) {
-        return axios.post(`${Links.ROOT} /educations/update?id=${id}`, values)
+    update(values) {
+        return axios.post(`${Links.ROOT}/educations/update?id=${values.id}`, values)
     }
 
     add(values) {

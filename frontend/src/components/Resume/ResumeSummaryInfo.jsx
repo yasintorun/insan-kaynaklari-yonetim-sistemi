@@ -4,7 +4,14 @@ import { Form, Button, Icon, Divider } from 'semantic-ui-react'
 import RichTextEditor from '../RichTextEditor/RichTextEditor'
 import { useFormik } from 'formik'
 import ResumeService from '../../services/resumeService'
-export default function ResumeSummaryInfo({resume}) {
+import { useDispatch, useSelector } from 'react-redux'
+import { updateResumeSummary } from '../../Store/actions/ResumeActions'
+export default function ResumeSummaryInfo() {
+
+    const {resume} = useSelector(state => state.resume)
+
+    const dispatch = useDispatch()
+
     const [isEdit, setIsEdit] = useState(false)
 
     const handleEditClick = () => {
@@ -25,11 +32,9 @@ export default function ResumeSummaryInfo({resume}) {
             //languagesId: [],
         },
         onSubmit: values => {
-            //values = { ...values}
-            let resumeService = new ResumeService()
-            resumeService.updateResumeSummary(26, values).then(result => console.log(result.data))
+            dispatch(updateResumeSummary(values))
+            //resumeService.updateResumeSummary(26, values).then(result => console.log(result.data))
             handleCancelEdit()
-            console.log(values)
         },
     });
 

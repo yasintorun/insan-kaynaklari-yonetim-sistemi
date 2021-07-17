@@ -8,13 +8,18 @@ import UserLanguageService from '../../services/userLanguageService'
 import { StaticRouter } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import Helper from '../../utilities/Helper'
+import { useDispatch, useSelector } from 'react-redux'
+import { addLanguage, deleteLanguage, updateLanguage } from '../../Store/actions/ResumeActions'
 export default function LanguageInfo() {
 
+    //const {resume} = useSelector(state => state.resume)
+    //let languages = resume.languages
+    const {languages} = useSelector(state => state.resume)
     const [isEdit, setIsEdit] = useState(false)
-    const [languages, setLanguages] = useState([])
 
     const [isNew, setIsNew] = useState(false)
 
+    const dispatch = useDispatch()
     const handleEditClick = (val) => {
         setIsNew(false)
         setIsEdit(true)
@@ -40,9 +45,6 @@ export default function LanguageInfo() {
     }
 
     const languageService = new UserLanguageService()
-    useEffect(() => {
-        languageService.getByUserId(1).then(result => setLanguages(result.data.data))
-    }, [languages])
 
 
     const formik = useFormik({
@@ -52,15 +54,16 @@ export default function LanguageInfo() {
         onSubmit: values => {
             values = { ...values, jobseeker: { userId: 1 } }
             isNew
-                ? languageService.add(values).then(r => console.log(r.data))
-                : languageService.update(values).then(r => console.log(r.data))
+                ? dispatch(addLanguage(values))
+                //languageService.add(values).then(r => console.log(r.data))
+                : dispatch(updateLanguage(values))
+                //languageService.update(values).then(r => console.log(r.data))
             handleCancelEdit()
-            console.log(values)
         },
     });
 
     const handleLanguageDeleteClick = (id) => {
-        Helper.DeleteModalBox("Dil bilgisi", null, () => languageService.delete(id)).then(() => {
+        Helper.DeleteModalBox("Dil bilgisi", null, () => dispatch(deleteLanguage(id))).then(() => {
             
         })
     }

@@ -9,13 +9,12 @@ import JobPositionDropDown from '../../utilities/dropdowns/JobPositionDropdown'
 import ExperienceService from '../../services/experienceService'
 import Helper from '../../utilities/Helper'
 import { toast } from 'react-toastify'
+import { useDispatch, useSelector } from 'react-redux'
+import { addExperience, deleteExperience, updateEducation, updateExperience } from '../../Store/actions/ResumeActions'
 export default function JobExperienceInfo() {
+    const {experiences} = useSelector(state => state.resume)
 
-    const [experiences, setExperiences] = useState([])
-
-    useEffect(() => {
-        experienceService.getByUserId(1).then(result => setExperiences(result.data.data))
-    }, [experiences])
+    const dispatch = useDispatch()
 
     const [isEdit, setIsEdit] = useState(false)
 
@@ -54,8 +53,10 @@ export default function JobExperienceInfo() {
         },
         onSubmit: values => {
             isNew
-                ? experienceService.add(values).then(r => toast.success(r.data.message))
-                : experienceService.update(values.id, values).then(r => toast.success(r.data.message))
+                ? dispatch(addExperience(values))
+                //experienceService.add(values).then(r => toast.success(r.data.message))
+                :dispatch(updateExperience(values))
+                // experienceService.update(values).then(r => toast.success(r.data.message))
 
             handleCancelEdit()
         },
@@ -76,7 +77,7 @@ export default function JobExperienceInfo() {
     }
 
     const handleDeleteClick = () => {
-        Helper.DeleteModalBox("İş deneyimi", "Bu işlemi geri alamazsın!", () => experienceService.delete(formik.values.id)).then( () => {
+        Helper.DeleteModalBox("İş deneyimi", "Bu işlemi geri alamazsın!", () => dispatch(deleteExperience(formik.values.id))).then( () => {
             handleCancelEdit()
         })
         //experienceService.delete(formik.values.id).then(result => console.log(result.data))

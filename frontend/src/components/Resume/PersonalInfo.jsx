@@ -6,8 +6,12 @@ import { Form, Button, Input, Divider } from 'semantic-ui-react'
 import { useEffect } from 'react'
 import ResumeService from '../../services/resumeService'
 import GenderDropdown from '../../utilities/dropdowns/GenderDropdown'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateResume } from '../../Store/actions/ResumeActions'
 export default function PersonalInfo() {
-    const [resume, setResume] = useState({})
+
+    const {resume} = useSelector(state => state.resume)
+
     const [isEdit, setIsEdit] = useState(false)
 
 
@@ -18,6 +22,7 @@ export default function PersonalInfo() {
         formik.setValues ({
             id: resume?.id,
             user: {
+                userId: resume?.user?.userId,
                 firstname: resume?.user?.firstname,
                 lastname: resume?.user?.lastname,
                 eposta: resume?.user?.eposta,
@@ -28,17 +33,17 @@ export default function PersonalInfo() {
             linkedinLink: resume?.linkedinLink,
         })
     }
-    useEffect(() => {
-        resumeService.getResumeById(26).then(result => setResume(result.data.data)).catch(r => console.log(r.data))
-    }, [])
-
+    
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
         },
         onSubmit: values => {
-            resumeService.update(26, values).then(r => console.log(r.data.message))
-            handleEditClick()
+            dispatch(updateResume(values))
+            //resumeService.update(1, values).then(r => console.log(r.data.message))
+           //console.log(values) 
+           handleEditClick()
         },
     });
 

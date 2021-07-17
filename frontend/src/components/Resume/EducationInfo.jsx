@@ -10,11 +10,16 @@ import CityDropDown from '../../utilities/dropdowns/CityDropDown'
 import WorkTimeStyleDropdown from '../../utilities/dropdowns/WorkTimeStyleDropdown'
 import JobPositionDropDown from '../../utilities/dropdowns/JobPositionDropdown'
 import SchoolTypeDropdown from '../../utilities/dropdowns/SchoolTypeDropdown'
+import { useDispatch, useSelector } from 'react-redux'
+import { addEducation, deleteEducation, updateEducation, updateLanguage } from '../../Store/actions/ResumeActions'
+import Helper from '../../utilities/Helper'
 export default function EducationInfo() {
-    const [educations, setEducations] = useState([])
-    const [isEdit, setIsEdit] = useState(false)
+    const {educations} = useSelector(state => state.resume)
 
+    const [isEdit, setIsEdit] = useState(false)
     const [isNew, setIsNew] = useState(false)
+    
+    const dispatch = useDispatch()
 
     const handleEditClick = (index) => {
         setIsNew(false)
@@ -48,7 +53,8 @@ export default function EducationInfo() {
     }
 
     const handleDeleteClick = () => {
-        educationService.delete(formik.values.id).then(result => console.log(result.data))
+        //educationService.delete(formik.values.id).then(result => console.log(result.data))
+        Helper.DeleteModalBox("Eğitim bilgisi", "Bu işlem geri alınamaz!", () => dispatch(deleteEducation(formik.values.id)))
         handleCancelEdit()
     }
 
@@ -58,12 +64,6 @@ export default function EducationInfo() {
     }
 
     const educationService = new EducationService()
-    useEffect(() => {
-        educationService.getByUserId(1).then(result => setEducations(result.data.data))
-    }, [educations])
-
-
-
 
     const formik = useFormik({
         initialValues: {
@@ -71,8 +71,10 @@ export default function EducationInfo() {
         onSubmit: values => {
             values = { ...values, userId: 1 }
             isNew
-                ? educationService.add(values).then(result => console.log(result.data.message))
-                : educationService.update(values.id, values).then(r => console.log(r.data.message))
+                ? dispatch(addEducation(values))
+                //educationService.add(values).then(result => console.log(result.data.message))
+                : dispatch(updateEducation(values))
+                //educationService.update(values.id, values).then(r => console.log(r.data.message))
             console.log(values)
             handleCancelEdit()
         },

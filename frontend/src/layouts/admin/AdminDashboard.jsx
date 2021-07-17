@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, Route } from 'react-router-dom'
+import { NavLink, Redirect, Route, useHistory } from 'react-router-dom'
 import JobAdvertList from '../../pages/admin/JobAdvertList'
 import { Button, Icon, Dropdown } from 'semantic-ui-react'
 import './admin.css'
@@ -8,62 +8,18 @@ import Employer from '../../pages/admin/EmployerList'
 import AdminProfile from '../../pages/admin/AdminProfile'
 import AdminEmployerDetails from '../../pages/admin/AdminEmployerDetails'
 import SideBar from '../../components/SideBar'
+import { useDispatch } from 'react-redux'
+import { userLogout, USER_LOGOUT } from '../../Store/actions/userActions'
 export default function AdminDashboard() {
 
-    const [activePage, setActivePage] = useState({})
-
-    useEffect(() => {
-        setActivePage({ page: 'jobAdvertList' })
-    }, [])
-
-    const handlePageClick = (pageName) => {
-        setActivePage(pageName)
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const adminLogout = () => {
+        dispatch(userLogout(USER_LOGOUT)).then(() => {
+            history.push('/')
+        })
     }
-
-
-
-    const SideBarButton = ({ options }) => {
-        return (
-            <Button
-                fluid
-                size="huge"
-                color="teal"
-                className="rounded-0  d-flex justify-content-between align-items-center"
-                as={NavLink} to={options.url}
-            >
-                <div>
-                    <Icon name={options.iconName} />
-                    <span className="m-3">{options.buttonName}</span>
-                </div>
-                <Icon name="right chevron" />
-            </Button>
-        )
-    }
-
-    const sideBarOptions = [
-        {
-            buttonName: "İş ilanları",
-            iconName: "list layout",
-            url: "/admin/jobadvertlist"
-        },
-        {
-            buttonName: "Kullanıcılar",
-            iconName: "users",
-            url: "/admin/userList"
-        },
-        {
-            buttonName: "Özgeçmişler",
-            iconName: "gg",
-            url: "/admin/resumeList"
-        }
-    ]
-
-    const userOptions = [
-        {
-            text: 'test',
-            key: 'Jenny Hess',
-        },
-    ]
+    
     return (
 
         <div className="row">
@@ -83,6 +39,10 @@ export default function AdminDashboard() {
                 <Button className="p-4 theme-bg" as={NavLink} to="/admin/duyurular">
                     <Icon name="bullhorn" />
                     Duyurular
+                </Button>
+                <Button className="p-4 theme-bg text-danger" onClick={() => adminLogout()}>
+                    <Icon name="sign-out" />
+                    Çıkış Yap
                 </Button>
             </SideBar>
             <div className="col-md-10 container-content mt-0">

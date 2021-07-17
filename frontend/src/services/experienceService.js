@@ -14,8 +14,8 @@ export default class ExperienceService{
         return axios.post(Links.ROOT + "/experiences/addExperience", values)
     }
 
-    update(id, values) {
-        return axios.post(`${Links.ROOT} /experiences/updateExperience?id=${id}`, values)
+    update(values) {
+        return axios.post(`${Links.ROOT}/experiences/updateExperience?id=${values.id}`, values)
     }
     
     delete(id) {

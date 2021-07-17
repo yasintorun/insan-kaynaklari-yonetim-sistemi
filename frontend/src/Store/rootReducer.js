@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
-import cityReducer from "./reducers/CityReducer";
+import resumeReducer from "./reducers/resumeReducer";
+import UserReducer from "./reducers/userReducer";
 
 
 const rootReducer = combineReducers({
-    cities: cityReducer,
+    resume: resumeReducer,
+    user: UserReducer,
 })
 
 

@@ -10,11 +10,11 @@ export default class ResumeService {
         return  axios.get(Links.ROOT + "/resume/getById?id=" + id);
     }
 
-    update(id, values) {
-        return axios.post(`${Links.ROOT} /resume/update?id=${id}`, values)
+    update(values) {
+        return axios.post(`${Links.ROOT}/resume/update?id=${values.id}`, values)
     }
 
     updateResumeSummary(id, summary) {
-        return axios.post(`${Links.ROOT} /resume/updateSummary?id=${id}`, summary)
+        return axios.post(`${Links.ROOT}/resume/updateSummary?id=${id}`, summary)
     }
 }
