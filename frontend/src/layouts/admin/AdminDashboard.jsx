@@ -8,12 +8,19 @@ import Employer from '../../pages/admin/EmployerList'
 import AdminProfile from '../../pages/admin/AdminProfile'
 import AdminEmployerDetails from '../../pages/admin/AdminEmployerDetails'
 import SideBar from '../../components/SideBar'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { userLogout, USER_LOGOUT } from '../../Store/actions/userActions'
 export default function AdminDashboard() {
 
     const dispatch = useDispatch()
+
     const history = useHistory()
+
+
+    useEffect(() => {
+        
+    })
+
     const adminLogout = () => {
         dispatch(userLogout(USER_LOGOUT)).then(() => {
             history.push('/')

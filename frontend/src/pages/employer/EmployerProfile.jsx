@@ -11,7 +11,7 @@ import { toast } from 'react-toastify'
 export default function EmployerProfile() {
     const [employer, setEmployer] = useState({})
     const [isWaitConfirm, setIsWaitConfirm] = useState(false)
-    const id = 26
+    const id = 2
     useEffect(() => {
         let employerService = new EmployerService()
         employerService.getById(id).then(result => setEmployer(result.data.data))
@@ -27,8 +27,6 @@ export default function EmployerProfile() {
         setIsEdit(true)
         let val = employer
         delete val.id
-        val.password = ""
-        val.passwordCheck = ""
         formik.setValues(val)
     }
     const handleEditCancel = () => {
@@ -60,7 +58,10 @@ export default function EmployerProfile() {
         <div>
             <div className="w-75 m-auto">
                 <MessageBox>
-                    <div>Genel Şirket Bilgileri<Label className="ms-4" color="green" content="Kayıt Onaylandı" /></div>
+                    <div>
+                        Genel Şirket Bilgileri
+                        <Label className="ms-4" color="green" content="Kayıt Onaylandı" />
+                    </div>
                     {
                         isEdit
                             ?

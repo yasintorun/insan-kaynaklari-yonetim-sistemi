@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { Input, Button, Label, Form, Icon, Divider, Dropdown } from 'semantic-ui-react'
+import { Input, Button, Label, Form, Icon, Divider, Dropdown, Dimmer, Loader, Segment } from 'semantic-ui-react'
 import { NavLink, Redirect, useHistory } from 'react-router-dom';
 import Links from '../../components/Links';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +8,11 @@ import UserService from '../../services/userService'
 import { userLogin } from '../../Store/actions/userActions';
 export default function SigninForm() {
 
+  const [loading, setLoading] = useState(false)
+  const [loadingText, setLoadingText] = useState("Giriş Yapılıyor...")
+
+  useEffect(() => {
+  }, [loadingText])
   const dispatch = useDispatch()
   const history = useHistory()
   const formik = useFormik({
@@ -16,17 +21,29 @@ export default function SigninForm() {
       password: '',
     },
     onSubmit: values => {
-        dispatch(userLogin(values)).then(res => {
-          history.push('/')
-        })
-      // alert(JSON.stringify(values, null, 2));
-      // let userService = new UserService()
-      // userService.login(values).then(result => console.log(result.data))
+      setLoading(true)
+      dispatch(userLogin(values)).then(res => {
+        
+        if(res.success) {
+          setLoadingText("Giriş başarılı. Yönlendiriliyorsunuz..")
+          setLoading(true)
+          setTimeout(() => {
+          history.push("/admin/profile")
+          //setLoading(false)
+        }, 500);
+        } else {
+          
+        }
+      })
     },
-  }); 
+  });
   return (
     <div className="login-panel full-panel">
+        <Dimmer active = {loading}>
+          <Loader>{loadingText}</Loader>
+        </Dimmer>
       <div className="container">
+
         <div>
           <div className="row justify-content-center">
             <div className="col-md-2 mb-5 text-center">
@@ -42,20 +59,20 @@ export default function SigninForm() {
                     <h2 className="full-bold-text">Giriş Sayfasına Hoşgeldin!</h2>
                     <p>Üye değil misin? Hemen üye ol.</p>
                     <Dropdown
-                    text='Kayıt ol'
-                    icon='user'
-                    floating
-                    labeled
-                    button
-                    className='icon'
-                    style={{marginLeft: '10px'}}
-                >
-                    <Dropdown.Menu>
-                        <Dropdown.Item icon='user' text='iş arayan' as={NavLink} to={Links.JobSeekerRegister}/>
+                      text='Kayıt ol'
+                      icon='user'
+                      floating
+                      labeled
+                      button
+                      className='icon'
+                      style={{ marginLeft: '10px' }}
+                    >
+                      <Dropdown.Menu>
+                        <Dropdown.Item icon='user' text='iş arayan' as={NavLink} to={Links.JobSeekerRegister} />
                         <Dropdown.Divider />
-                        <Dropdown.Item icon='address book outline' text='İş veren'  as={NavLink} to={Links.EmployerRegister}/>
-                    </Dropdown.Menu>
-                </Dropdown>
+                        <Dropdown.Item icon='address book outline' text='İş veren' as={NavLink} to={Links.EmployerRegister} />
+                      </Dropdown.Menu>
+                    </Dropdown>
                   </div>
 
                 </div>
@@ -119,48 +136,6 @@ export default function SigninForm() {
 
         </div>
       </div>
-      {/* <Form onSubmit={formik.handleSubmit} className="mt-5 page-center full-bg-image no-scroll" size="big" align="center" >
-        <div className="bordered shadow w-25">
-
-
-          <Form.Field className="w-100 m-auto" >
-            <Label className="mt-3" color="grey">
-              Lütfen eposta adresinizi giriniz:
-            </Label>
-
-            <Input placeholder='Eposta'
-              id="email"
-              name="email"
-              type="email"
-              icon="user"
-              iconPosition="left"
-              onChange={formik.handleChange}
-              value={formik.values.email}
-            />
-          </Form.Field>
-
-          <Form.Field className="w-100 m-auto">
-            <Label className="mt-3" color="grey">
-              Lütfen şifrenizi giriniz
-            </Label>
-
-            <Input placeholder='Şifre'
-              id="password"
-              name="password"
-              type="password"
-              icon="key"
-              iconPosition="left"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-            />
-
-          </Form.Field>
-
-
-
-          <Button color='green' type="submit" className="mt-3"><Icon name="sign-in"/>Giriş Yap</Button>
-        </div>
-      </Form> */}
     </div>
   );
 };

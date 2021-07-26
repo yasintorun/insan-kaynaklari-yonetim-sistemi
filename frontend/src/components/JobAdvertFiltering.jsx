@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { Label, Dropdown, Segment, Checkbox, Button } from 'semantic-ui-react'
 import CityService from '../services/cityService';
 import JobPositionService from '../services/jobPositionService'
 import WorkStyleService from '../services/workStyleService';
 import WorkTimeStyleService from '../services/workTimeService';
+import { ApplyFilter } from '../Store/actions/jobAdvertFilterActions';
 
 export default function JobAdvertFiltering({ clickEvent }) {
 
@@ -26,6 +28,8 @@ export default function JobAdvertFiltering({ clickEvent }) {
         workTimeStyleService.getWorkTimeStyles().then(result => setWorkTimeStyle(result.data.data))
 
     }, [])
+
+    const dispatch = useDispatch()
 
     ///Filter elemanlarının değerlerini sakla
     const [cityIndexs, setCityIndexs] = useState([])
@@ -59,9 +63,6 @@ export default function JobAdvertFiltering({ clickEvent }) {
 
     const [workTimeStyleIndexs, setWorkTimeStyleIndexs] = useState([])
     const handleChangeWorkTimeStyle = (e, { value, checked }) => {
-
-
-
         if (checked)
             workTimeStyleIndexs.push(value)
         else {
@@ -70,6 +71,36 @@ export default function JobAdvertFiltering({ clickEvent }) {
                 workTimeStyleIndexs.splice(idx, 1)
             }
         }
+    }
+
+    
+    const [isFavorite, setIsFavorite] = useState(false)
+    const handleChangeFavorite = (e, { value, checked }) => {
+        setIsFavorite(checked)
+    }
+
+
+    const handleApplyFilterClick = () => {
+
+        
+
+        const filterOption = { cityId: cityIndexs, jobPositionId: jobPosIndexs, workStyleId: workStyleIndexs, workTimeStyleId: workTimeStyleIndexs, isFavorite: isFavorite }
+        
+        if (filterOption.cityId.length == 0)
+            filterOption.cityId = null
+        if (filterOption.jobPositionId.length == 0)
+            filterOption.jobPositionId = null
+        if (filterOption.workStyleId.length == 0)
+            filterOption.workStyleId = null
+        if (filterOption.workTimeStyleId.length == 0)
+            filterOption.workTimeStyleId = null
+        if(filterOption.isFavorite)
+            filterOption.userIdForFavorite = 1
+
+        dispatch(ApplyFilter(filterOption))
+
+        //clickEvent(filterOption)
+
     }
 
     return (
@@ -122,12 +153,21 @@ export default function JobAdvertFiltering({ clickEvent }) {
                     />
                 ))
             }
+            <h3 className="mt-5">İlan Özellikleri</h3>
+            {
+                <Checkbox
+                    label="Favorilere eklediğim ilanlar"
+                    className="mt-4 d-block"
+                    onChange={handleChangeFavorite}
+                    value={1}
+                />
+            }
 
             <Button
             className="mt-5"
                 type="button"
                 fluid positive
-                onClick={() => clickEvent({ cityId: cityIndexs, jobPositionId: jobPosIndexs, workStyleId: workStyleIndexs, workTimeStyleId: workTimeStyleIndexs })}
+                onClick={() => handleApplyFilterClick()}
             >
                 Filtrele
             </Button>

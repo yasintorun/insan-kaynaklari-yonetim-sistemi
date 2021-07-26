@@ -16,7 +16,7 @@ export const userLogin = (loginVal) => async (dispatch) => {
             
             Helper.ToastInfo(result.data.success, result.data.message)
             
-            return result.data.data
+            return result.data;
         })
 }
 

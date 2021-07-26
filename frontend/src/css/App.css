@@ -354,3 +354,6 @@ h3 {
   font-weight: 400 !important;
   font-family: poppins,arial,helvetica neue,sans-serif !important;
 }
+.register-card-text .text-danger {
+  color: red !important; 
+}

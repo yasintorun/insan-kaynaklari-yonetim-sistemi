@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import { Input, Button, label, Form, TextArea } from 'semantic-ui-react'
+import { Input, Button, label, Form, TextArea, Dimmer, Loader } from 'semantic-ui-react'
 import EmployerService from '../../services/employerService';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify'
@@ -64,174 +64,177 @@ export default function SignupForEmployer() {
     },
   });
   return (
-    <Form onSubmit={formik.handleSubmit} size="large">
-      <div className="register-card-text">
-        <Form.Field>
-          <label className="mt-3" color="grey">
-            eposta adresinizi giriniz:
-          </label>
+    <div>
 
-          <Input placeholder='Eposta'
-            id="eposta"
-            name="eposta"
-            type="email"
-            onChange={formik.handleChange}
-            value={formik.values.eposta}
-          />
-          {formik.errors.eposta && formik.touched.eposta
-            ? (
-              <label basic color='red' pointing>
-                {formik.errors.eposta}
-              </label>
-            )
-            : null
-          }
-        </Form.Field>
-
-        <Form.Group widths="equal">
+      <Form onSubmit={formik.handleSubmit} size="large">
+        <div className="register-card-text">
           <Form.Field>
             <label className="mt-3" color="grey">
-              şifrenizi giriniz
+              eposta adresinizi giriniz:
             </label>
 
-            <Input placeholder='Şifre'
-              id="password"
-              name="password"
-              type="password"
+            <Input placeholder='Eposta'
+              id="eposta"
+              name="eposta"
+              type="email"
               onChange={formik.handleChange}
-              value={formik.values.password}
+              value={formik.values.eposta}
             />
-            {formik.errors.password && formik.touched.password
+            {formik.errors.eposta && formik.touched.eposta
               ? (
                 <label basic color='red' pointing>
-                  {formik.errors.password}
-                </label>
-              )
-              : null
-            }
-          </Form.Field>
-          <Form.Field>
-            <label className="mt-3" color="grey">
-              şifrenizi tekrar giriniz
-            </label>
-
-            <Input placeholder='Şifre tekrarı'
-              id="passwordCheck"
-              name="passwordCheck"
-              type="password"
-              onChange={formik.handleChange}
-              value={formik.values.passwordCheck}
-            />
-            {formik.errors.passwordCheck && formik.touched.passwordCheck
-              ? (
-                <label basic color='red' pointing>
-                  {formik.errors.passwordCheck}
+                  {formik.errors.eposta}
                 </label>
               )
               : null
             }
           </Form.Field>
 
-        </Form.Group>
-
-        <Form.Field>
-          <label className="mt-3" color="grey">
-            şirket adını giriniz
-          </label>
-
-          <Input placeholder='şirket adı'
-            id="companyName"
-            name="companyName"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.companyName}
-          />
-          {formik.errors.companyName && formik.touched.companyName
-            ? (
-              <label basic color='red' pointing>
-                {formik.errors.companyName}
+          <Form.Group widths="equal">
+            <Form.Field>
+              <label className="mt-3" color="grey">
+                şifrenizi giriniz
               </label>
-            )
-            : null
-          }
-        </Form.Field>
-        <Form.Group widths="equal">
 
+              <Input placeholder='Şifre'
+                id="password"
+                name="password"
+                type="password"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+              {formik.errors.password && formik.touched.password
+                ? (
+                  <label basic color='red' pointing>
+                    {formik.errors.password}
+                  </label>
+                )
+                : null
+              }
+            </Form.Field>
+            <Form.Field>
+              <label className="mt-3" color="grey">
+                şifrenizi tekrar giriniz
+              </label>
+
+              <Input placeholder='Şifre tekrarı'
+                id="passwordCheck"
+                name="passwordCheck"
+                type="password"
+                onChange={formik.handleChange}
+                value={formik.values.passwordCheck}
+              />
+              {formik.errors.passwordCheck && formik.touched.passwordCheck
+                ? (
+                  <label basic color='red' pointing>
+                    {formik.errors.passwordCheck}
+                  </label>
+                )
+                : null
+              }
+            </Form.Field>
+
+          </Form.Group>
 
           <Form.Field>
             <label className="mt-3" color="grey">
-              website adresinizi giriniz
+              şirket adını giriniz
             </label>
 
-            <Input placeholder='website adresi'
-              id="website"
-              name="website"
+            <Input placeholder='şirket adı'
+              id="companyName"
+              name="companyName"
               type="text"
               onChange={formik.handleChange}
-              value={formik.values.website}
+              value={formik.values.companyName}
             />
-
-            {formik.errors.website && formik.touched.website
+            {formik.errors.companyName && formik.touched.companyName
               ? (
                 <label basic color='red' pointing>
-                  {formik.errors.website}
+                  {formik.errors.companyName}
                 </label>
               )
               : null
             }
           </Form.Field>
+          <Form.Group widths="equal">
 
 
+            <Form.Field>
+              <label className="mt-3" color="grey">
+                website adresinizi giriniz
+              </label>
+
+              <Input placeholder='website adresi'
+                id="website"
+                name="website"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.website}
+              />
+
+              {formik.errors.website && formik.touched.website
+                ? (
+                  <label basic color='red' pointing>
+                    {formik.errors.website}
+                  </label>
+                )
+                : null
+              }
+            </Form.Field>
+
+
+            <Form.Field>
+              <label className="mt-3" color="grey">
+                telefon numaranızı giriniz
+              </label>
+
+              <Input placeholder='Telefon numarası'
+                id="phone"
+                name="phone"
+                type="number"
+                maxLength="11"
+                onChange={formik.handleChange}
+                value={formik.values.phone}
+              />
+              {formik.errors.phone && formik.touched.phone
+                ? (
+                  <label basic color='red' pointing>
+                    {formik.errors.phone}
+                  </label>
+                )
+                : null
+              }
+
+            </Form.Field>
+          </Form.Group>
           <Form.Field>
             <label className="mt-3" color="grey">
-              telefon numaranızı giriniz
+              şirketiniz hakkında mesaj giriniz
             </label>
 
-            <Input placeholder='Telefon numarası'
-              id="phone"
-              name="phone"
-              type="number"
-              maxLength="11"
+            <TextArea placeholder='Şirket hakkında özet açıklama'
+              id="summary"
+              name="summary"
+              maxLength={2}
               onChange={formik.handleChange}
-              value={formik.values.phone}
+              value={formik.values.summary}
             />
-            {formik.errors.phone && formik.touched.phone
+
+            {formik.errors.summary && formik.touched.summary
               ? (
                 <label basic color='red' pointing>
-                  {formik.errors.phone}
+                  {formik.errors.summary}
                 </label>
               )
               : null
             }
-
           </Form.Field>
-        </Form.Group>
-        <Form.Field>
-          <label className="mt-3" color="grey">
-            şirketiniz hakkında mesaj giriniz
-          </label>
-
-          <TextArea placeholder='Şirket hakkında özet açıklama'
-            id="summary"
-            name="summary"
-            maxLength={2}
-            onChange={formik.handleChange}
-            value={formik.values.summary}
-          />
-
-          {formik.errors.summary && formik.touched.summary
-            ? (
-              <label basic color='red' pointing>
-                {formik.errors.summary}
-              </label>
-            )
-            : null
-          }
-        </Form.Field>
 
 
-        <Button color='blue' type="submit" className="mt-3">Kayıt Ol</Button>
-      </div>
-    </Form>
+          <Button color='blue' type="submit" className="mt-3">Kayıt Ol</Button>
+        </div>
+      </Form>
+    </div>
   );
 };

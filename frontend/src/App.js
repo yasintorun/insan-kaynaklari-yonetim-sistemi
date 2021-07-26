@@ -24,7 +24,6 @@ function App() {
     dispatch(getResume(26))
   }, [])
 
-
   const PathRedirect = ({ path = "/", to }) => {
     return (
       <Route exact path={path}>
@@ -35,22 +34,22 @@ function App() {
 
   const RoutersByUserAuth = () => {
 
-    if (!user?.authority) {
+    /*if (!user?.authority) {
       return (
         <>
           <Route exact path="/" component={HomeDashboard} />
           <Route path={Links.USERS} component={Auth} />
         </>
       )
-    }
-
-    switch (user.authority.id) {
+    }*/
+    //user.authority.id
+    switch (3) { 
       case 1:
         return (
           <>
             <PathRedirect to="/admin" />
             <Route exact path={"/admin*"} component={AdminDashboard} />
-          </>
+          </>   
         )
       case 2:
         return (
@@ -80,7 +79,6 @@ function App() {
 
   return (
     <div className="App">
-      {console.log(user)}
       <ToastContainer position="top-right" autoClose={2500} hideProgressBar={true} pauseOnHover={false} />
       <Switch>
         <RoutersByUserAuth />

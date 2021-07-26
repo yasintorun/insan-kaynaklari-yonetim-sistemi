@@ -7,7 +7,7 @@ export default class JobAdvertisementService {
     }
 
     getJobAdvertFilterAndPage(pageNo, pageSize, filterOption) {
-        return axios.post(`${Links.ROOT} /jobAdvertisements/getAllJobAdvertisementWithPage?pageNo=${pageNo}&pageSize=${pageSize}`, filterOption)
+        return axios.post(`${Links.ROOT}/jobAdvertisements/getAllJobAdvertisementWithPage?pageNo=${pageNo}&pageSize=${pageSize}`, filterOption)
     }
 
     getJobAdvertisementById(id) {
@@ -18,7 +18,7 @@ export default class JobAdvertisementService {
         return axios.post(Links.ROOT + "/jobAdvertisements/add", values);
     }
     changeActive(isActive, id) {
-        return axios.get(`${Links.ROOT} /jobAdvertisements/ChangeActive?isActive=${isActive}&jobAdvertisementId=${id}`)
+        return axios.get(`${Links.ROOT}/jobAdvertisements/ChangeActive?isActive=${isActive}&jobAdvertisementId=${id}`)
     }
 
     getByEmployerUserId(userId) {

@@ -7,7 +7,7 @@ export default class UpdateEmployerInfoService{
     }
 
     add(userId, values) {
-        return axios.post(`${Links.ROOT} /updateEmployerInfo/add?userId=` + userId, values)
+        return axios.post(`${Links.ROOT}/updateEmployerInfo/add?userId=` + userId, values)
     }
 
     getById(userId) {
@@ -15,7 +15,7 @@ export default class UpdateEmployerInfoService{
     }
 
     confirmByAdmin(userId) {
-        return axios.post(`${Links.ROOT} /updateEmployerInfo/confirmByAdmin?userId=` + userId)
+        return axios.post(`${Links.ROOT}/updateEmployerInfo/confirmByAdmin?userId=` + userId)
     }
 
 }

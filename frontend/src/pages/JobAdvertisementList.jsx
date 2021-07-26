@@ -3,15 +3,16 @@ import { Grid, Pagination, Dropdown, Label, Divider } from 'semantic-ui-react'
 import JobPost from '../components/JobPost'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import JobAdvertFiltering from '../components/JobAdvertFiltering'
+import { useSelector } from 'react-redux'
 
 export default function JobAdvertisement() {
     const [jobAdvertisements, setJobAdvertisements] = useState([])
-    const [baseJobAdvert, setBaseJobAdvert] = useState([])
+    
     const [activePage, setActivePage] = useState(1)
     const [filterOption, setFilterOption] = useState({})
     const [pageSize, setPageSize] = useState(1)
     const [totalPageSize, setTotalPageSize] = useState(0)
-    useEffect(() => {
+  /*  useEffect(() => {
         let jobAdvertisementService = new JobAdvertisementService()
         jobAdvertisementService.getJobAdvertFilterAndPage(activePage, pageSize, filterOption).then(result => {
             setJobAdvertisements(result.data.data)
@@ -20,17 +21,21 @@ export default function JobAdvertisement() {
         })
 
     }, [filterOption, activePage, pageSize])
+*/
+const {filter} = useSelector(state => state.jobAdvertFilter)
+    useEffect(() => {
+        let jobAdvertisementService = new JobAdvertisementService()
+        jobAdvertisementService.getJobAdvertFilterAndPage(activePage, pageSize, filter).then(result => {
+            setJobAdvertisements(result.data.data)
+            if (totalPageSize == 0 && !!result.data.data[0])
+                setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
+        })
+
+    }, [filter, activePage, pageSize])
+
 
 
     const handleFilterClick = (filterOption) => {
-        if (filterOption.cityId.length == 0)
-            filterOption.cityId = null
-        if (filterOption.jobPositionId.length == 0)
-            filterOption.jobPositionId = null
-        if (filterOption.workStyleId.length == 0)
-            filterOption.workStyleId = null
-        if (filterOption.workTimeStyleId.length == 0)
-            filterOption.workTimeStyleId = null
         setTotalPageSize(0)
         setActivePage(1)
         setFilterOption(filterOption)
