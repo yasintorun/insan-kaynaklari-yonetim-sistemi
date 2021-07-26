@@ -17,6 +17,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 @Entity
 @Table(name="users")
@@ -37,4 +39,8 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
+	
+	@ManyToOne
+	@JoinColumn(name = "authority_id")
+	private Authority authority;
 }

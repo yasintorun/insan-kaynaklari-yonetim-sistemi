@@ -19,6 +19,7 @@ import kodlamaio.hrms.dataAccess.abstracts.JobseekerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.User;
+import kodlamaio.hrms.entities.dtos.display.JobSeekerDisplayDto;
 import kodlamaio.hrms.entities.dtos.input.JobSeekerInputDto;
 
 @Service
@@ -39,14 +40,14 @@ public class JobseekerManager implements JobseekerService{
 	}
 
 	@Override
-	public Result add(Jobseeker entity) {
+	public DataResult add(Jobseeker entity) {
 		
 		if(isNull(entity)) {
-			return new ErrorDataResult<Employer>("Tüm alanları doldurunuz!");
+			return new ErrorDataResult<Jobseeker>("Tüm alanları doldurunuz!");
 		}
 		
 		if(!CheckHelper.emailCheck(entity.getEposta())) {
-			return new ErrorResult("Eposta Hatalı!");
+			return new ErrorDataResult<Jobseeker>("Eposta Hatalı!");
 		}
 		
 		
@@ -56,17 +57,17 @@ public class JobseekerManager implements JobseekerService{
 		}
 		
 		if(isExist(entity)) {
-			return new ErrorResult("Tc no veya eposta kayıtlı!");
+			return new ErrorDataResult<Jobseeker>("Tc no veya eposta kayıtlı!");
 		}
 
 		DataResult<User> userResult = (DataResult<User>) userManager.add((User)entity);
 		if(userResult.isSuccess()) {
 			entity.setUserId(userResult.getData().getUserId());
 			this.jobseekerDao.save(entity);
-			return new SuccessResult("İş Arayan eklendi");
+			return new SuccessDataResult<JobSeekerDisplayDto>(JobSeekerDtoConverter.NormalToDisplayDto(entity),"iKariyer Sitemize Hoşgeldin " + entity.getFirstname());
 		}
 		
-		return new ErrorResult("Kayıt Başarısız!");
+		return new ErrorDataResult<Jobseeker>("Kayıt Başarısız!");
 	}
 
 	
@@ -80,7 +81,7 @@ public class JobseekerManager implements JobseekerService{
 	}
 
 	@Override
-	public Result add(JobSeekerInputDto inputDto) {
+	public DataResult add(JobSeekerInputDto inputDto) {
 		return this.add(JobSeekerDtoConverter.InputDtoToNormal(inputDto));
 	}
 	

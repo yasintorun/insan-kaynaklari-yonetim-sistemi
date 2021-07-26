@@ -7,7 +7,9 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kodlamaio.hrms.business.abstracts.EmailService;
 import kodlamaio.hrms.business.abstracts.UserRegisterService;
+import kodlamaio.hrms.core.utilities.helpers.Encryption;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -34,12 +36,14 @@ public class UserRegisterManager implements UserRegisterService  {
 
 	@Override
 	public Result add(UserRegister entity) {
+		
 		userRegisterDao.save(entity);
+		
 		
 		return new SuccessResult("Kayıt oluşturuldu!");
 	}
 
-	
+	@Override
 	public Result NewRegister(User user) {
 		UserRegister userRegister = new UserRegister();
 		
@@ -49,8 +53,10 @@ public class UserRegisterManager implements UserRegisterService  {
 		
 		Random rand = new Random();
 		String code = String.format("%04d", 1000+ rand.nextInt(9000));
+		
 		userRegister.setActivisionCode(code);
 		userRegister.setRegisterDate(new Date());
+		
 		return this.add(userRegister);
 		
 	}
@@ -80,6 +86,11 @@ public class UserRegisterManager implements UserRegisterService  {
 		}
 		
 		return new ErrorResult("Kullanıcı  bulunamadı!");
+	}
+
+	@Override
+	public UserRegister getRegister(int userId) {
+		return this.userRegisterDao.getByUserId(userId);
 	}
 	
 	

@@ -9,6 +9,7 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.business.abstracts.UpdateEmployerInfoService;
 import kodlamaio.hrms.business.validations.EmployerValidation;
 import kodlamaio.hrms.core.utilities.converters.EmployerDtoConverter;
+import kodlamaio.hrms.core.utilities.helpers.CheckHelper;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
@@ -42,23 +43,26 @@ public class UpdateEmployerInfoManager implements UpdateEmployerInfoService{
 	@Override
 	public Result add(int userId, EmployerInputDto entity) {
 		
-		Result validate = employerService.validation(entity);
-		if(!validate.isSuccess()) {
-			return validate;
+		if(entity.getEposta().isEmpty() || entity.getCompanyName().isEmpty() || entity.getPhone().isEmpty() || entity.getSummary().isEmpty() || entity.getWebsite().isEmpty()) {
+			return new ErrorResult("Tüm alanları doldurunuz!");
 		}
 		
-		UpdateEmployerInfo control = this.updateEmployerInfoDao.getByEmployer_UserId(userId);
+		if(!CheckHelper.emailCheck(entity.getEposta())) {
+			return new ErrorResult("E posta hatalı!");
+		}
 		
+		try {
 		
+			UpdateEmployerInfo control = this.updateEmployerInfoDao.getByEmployer_UserId(userId);
+
+			this.updateEmployerInfoDao.save( EmployerDtoConverter.InputDtoToUpdateEmployer(userId, entity));
+			
+			return new SuccessResult("Güncelleme onay için sistem personeline gönderildi");
+	
+		} catch (Exception e) {
+			return new ErrorResult("Hata: " + e.getMessage());
+		}
 		
-		
-		/*if(control != null); {
-			this.updateEmployerInfoDao.delete(control);
-		}*/
-		System.out.println("\n\n" + control + "\n\n");
-		this.updateEmployerInfoDao.save( EmployerDtoConverter.InputDtoToUpdateEmployer(userId, entity));
-		
-		return new SuccessResult("Güncelleme onay için sistem personeline gönderildi");
 	}
 
 	@Override

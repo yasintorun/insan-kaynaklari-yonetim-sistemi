@@ -40,8 +40,12 @@ public class ExperienceManager implements ExperienceService{
 
 	@Override
 	public Result add(ExperienceInputDto entity) {
-		this.experienceDao.save(ExperienceDtoConverter.InputDtoToNormal(entity));
-		return new SuccessResult("İş deneyimi eklendi!");
+		try {
+			this.experienceDao.save(ExperienceDtoConverter.InputDtoToNormal(entity));	
+			return new SuccessResult("İş deneyimi eklendi!");		
+		} catch (Exception e) {
+			return new ErrorResult("Hata: " + e.getLocalizedMessage());
+		}
 	}
 
 	@Override

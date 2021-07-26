@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.EducationService;
 import kodlamaio.hrms.core.utilities.converters.EducationDtoConverter;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -75,17 +76,23 @@ public class EducationManager implements EducationService{
 
 	@Override
 	public DataResult<EducationDisplayDto> updateEducation(int id, EducationInputDto inputDto) {
-		Education current = this.educationDao.getOne(id);
-		Education temp = EducationDtoConverter.InputDtoToNormal(inputDto);
-		current.setSchool(temp.getSchool());
-		current.setDepartment(temp.getDepartment());
-		current.setJobseeker(temp.getJobseeker());
-		current.setGraduationDate(GraduationControl(temp.getGraduationDate()));
-		current.setStartingDate(temp.getStartingDate());
-		current.setSchoolType(inputDto.getSchoolType());
-		this.educationDao.save(current);
-		return new SuccessDataResult<EducationDisplayDto>
-		(null, "Eğitim güncellendi");
+		try {
+			Education current = this.educationDao.getOne(id);
+			Education temp = EducationDtoConverter.InputDtoToNormal(inputDto);
+			current.setSchool(temp.getSchool());
+			current.setDepartment(temp.getDepartment());
+			current.setJobseeker(temp.getJobseeker());
+			current.setGraduationDate(GraduationControl(temp.getGraduationDate()));
+			current.setStartingDate(temp.getStartingDate());
+			current.setSchoolType(inputDto.getSchoolType());
+			this.educationDao.save(current);
+			return new SuccessDataResult<EducationDisplayDto>
+			(null, "Eğitim güncellendi");			
+		} catch (Exception e) {
+			return new ErrorDataResult<EducationDisplayDto>
+			("Hata: "+e.getLocalizedMessage());
+		}
+		
 	}
 
 	@Override

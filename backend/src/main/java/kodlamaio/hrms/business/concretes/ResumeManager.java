@@ -9,6 +9,7 @@ import kodlamaio.hrms.business.abstracts.JobseekerService;
 import kodlamaio.hrms.business.abstracts.ResumeService;
 import kodlamaio.hrms.core.utilities.converters.ResumeDtoConverter;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -67,19 +68,24 @@ public class ResumeManager implements ResumeService{
 
 	@Override
 	public DataResult<ResumeDisplayDto> updateResume(int id, ResumeInputDto resume) {
-		Resume current = this.resumeDao.getResumeById(id);
-		Jobseeker self = current.getJobSeeker();
-		self.setFirstname(resume.getUser().getFirstname());
-		self.setLastname(resume.getUser().getLastname());
-		current.setPhone(resume.getPhone());
-		current.setBirtdate(resume.getBirthDate());
-		current.setGithub(resume.getGithubLink());
-		current.setLinkedin(resume.getLinkedinLink());
-		
-		this.jobseekerDao.save(self);
-		
-		this.resumeDao.save(current);
-		return new SuccessDataResult<ResumeDisplayDto>(null, "güncellendi");
+		try {
+			Resume current = this.resumeDao.getResumeById(id);
+			Jobseeker self = current.getJobSeeker();
+			self.setFirstname(resume.getUser().getFirstname());
+			self.setLastname(resume.getUser().getLastname());
+			current.setPhone(resume.getPhone());
+			current.setBirtdate(resume.getBirthDate());
+			current.setGithub(resume.getGithubLink());
+			current.setLinkedin(resume.getLinkedinLink());
+			
+			this.jobseekerDao.save(self);
+			
+			this.resumeDao.save(current);
+			return new SuccessDataResult<ResumeDisplayDto>(null, "güncellendi");
+		}catch (Exception e) {
+			return new ErrorDataResult<ResumeDisplayDto>("Hata: " + e.getLocalizedMessage());
+		}
+			
 	}
 
 	@Override

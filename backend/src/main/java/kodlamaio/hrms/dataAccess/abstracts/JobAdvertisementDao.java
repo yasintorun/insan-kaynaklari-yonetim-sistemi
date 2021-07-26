@@ -35,7 +35,9 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 	@Query("Select j from JobAdvertisement j where ((:#{#filter.cityId}) IS NULL OR j.city.id IN (:#{#filter.cityId}))"
 			+ "and ((:#{#filter.jobPositionId}) IS NULL OR j.jobPosition.id IN (:#{#filter.jobPositionId}))"
 			+ "and ((:#{#filter.workStyleId}) IS NULL OR j.workStyle.id IN (:#{#filter.workStyleId}))"
-			+ "and ((:#{#filter.workTimeStyleId}) IS NULL OR j.workTimeStyle.id IN (:#{#filter.workTimeStyleId}))")
+			+ "and ((:#{#filter.workTimeStyleId}) IS NULL OR j.workTimeStyle.id IN (:#{#filter.workTimeStyleId}))"
+			+ "and ((:#{#filter.userIdForFavorite}) = 0 OR j.id IN (select fj.jobAdvert.id from FavoriteJobAdvert fj where fj.jobseeker.userId = (:#{#filter.userIdForFavorite})))"
+			+ "and j.isActive = TRUE")
 	public Page<JobAdvertisement> getFilteringAndPage(@Param("filter") JobAdvertFilterOption filterOption, Pageable pageable);
 }
 

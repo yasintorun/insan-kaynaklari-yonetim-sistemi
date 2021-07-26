@@ -3,6 +3,7 @@ package kodlamaio.hrms.business.concretes;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.LanguageService;
@@ -40,8 +41,11 @@ public class LanguageManager implements LanguageService{
 
 	@Override
 	public DataResult<List<LanguageDisplayDto>> getByUserId(int userId) {
+		
+		Sort sort = Sort.by(Sort.Direction.DESC, "level");
+		
 		return new SuccessDataResult<List<LanguageDisplayDto>>
-		(LanguageDtoConverter.NormalToDisplayDto(this.languageDao.getByJobseeker_userId(userId)), "Dil bilgisi getirildi");
+		(LanguageDtoConverter.NormalToDisplayDto(this.languageDao.getByJobseeker_userId(userId, sort)), "Dil bilgisi getirildi");
 	}
 
 	@Override

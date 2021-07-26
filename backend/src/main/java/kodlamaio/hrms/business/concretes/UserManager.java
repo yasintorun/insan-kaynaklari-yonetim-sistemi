@@ -6,11 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.UserService;
+import kodlamaio.hrms.core.utilities.converters.UserDtoConverter;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.User;
+import kodlamaio.hrms.entities.dtos.display.UserDisplayDto;
+import kodlamaio.hrms.entities.dtos.input.UserInputDto;
 
 @Service
 public class UserManager implements UserService {
@@ -42,6 +47,23 @@ public class UserManager implements UserService {
 	@Override
 	public Result Verify(int userId, String code) {
 		return userRegisterManager.Verify(userId, code);
+	}
+
+	@Override
+	public DataResult<UserDisplayDto> login(UserInputDto inputDto) {
+		try {
+			User user = this.userDao.getByEpostaAndPassword(inputDto.getEposta(), inputDto.getPassword());
+			if(user == null) {
+				return new ErrorDataResult<UserDisplayDto>("Kullanıcı Adı veya şifre hatalı.");
+			}
+			
+			return new SuccessDataResult<UserDisplayDto>(UserDtoConverter.NormalToDisplayDto(user), "Giriş başarılı.");
+			
+			
+		} catch (Exception e) {
+			return new ErrorDataResult<UserDisplayDto>("Hata oluştu!");
+		}
+		
 	}
 
 	

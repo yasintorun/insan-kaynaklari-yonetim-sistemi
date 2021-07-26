@@ -14,4 +14,5 @@ public class JobAdvertFilterOption {
 	private List<Integer> jobPositionId;
 	private List<Integer> workStyleId;
 	private List<Integer> workTimeStyleId;
+	private int userIdForFavorite;
 }
