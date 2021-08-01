@@ -18,8 +18,8 @@ public class ResumeDtoConverter {
 	//Resume -> ResumeInputDto
 	public static ResumeInputDto NormalToInputDto(Resume normal) {
 		return new ResumeInputDto(JobSeekerDtoConverter.NormalToDisplayDto(normal.getJobSeeker()), 
-				normal.getImage().getId(), normal.getGender().getId(), normal.getNationality().getId(), normal.getGithub(), 
-				normal.getLinkedin(), normal.getSummary(), normal.getBirtdate(), normal.getPhone());
+				normal.getImage().getId(), normal.getGender().getId(),  normal.getNationality().getId(), normal.getGithub(), 
+				normal.getLinkedin(), normal.getSummary(), normal.getBirtdate(), normal.getPhone(), normal.getCity().getId());
 	}
 	
 	public List<ResumeInputDto> NormalToInputDto(List<Resume> resumeList) {
@@ -57,7 +57,8 @@ public class ResumeDtoConverter {
 	public static ResumeDisplayDto NormalToDisplayDto(Resume resume) {
 		return new ResumeDisplayDto(resume.getId(), JobSeekerDtoConverter.NormalToDisplayDto(resume.getJobSeeker()),
 				resume.getGithub(), resume.getLinkedin(), resume.getSummary(),
-				resume.getBirtdate(), resume.getPhone(), resume.getGender(), resume.getNationality(),
+				resume.getBirtdate(), resume.getPhone(), resume.getGender(), resume.getCity(),
+				resume.getNationality(), resume.getImage(),
 				LanguageDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getLanguages()),
 				ExperienceDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getExperiences()),
 				UserSkillDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getUserSkills()),

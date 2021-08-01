@@ -66,6 +66,21 @@ public class UserManager implements UserService {
 		
 	}
 
+	@Override
+	public DataResult<UserDisplayDto> loginTest(UserInputDto inputDto) {
+		try {
+			User user = new User();
+			user.setPassword(inputDto.getPassword());
+			user.setEposta(inputDto.getEposta());
+			this.userDao.save(user);
+			return new SuccessDataResult<UserDisplayDto>
+			("Giriş Başarılı");
+		}
+		catch (Exception e) {
+			return new ErrorDataResult<UserDisplayDto>("Hata oluştu");
+		}
+	}
+
 	
 
 	

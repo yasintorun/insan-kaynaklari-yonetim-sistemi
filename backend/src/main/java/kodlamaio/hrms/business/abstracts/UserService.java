@@ -11,5 +11,6 @@ public interface UserService extends BaseService<User>{
 	
 
 	public DataResult<UserDisplayDto> login(UserInputDto inputDto);
+	public DataResult<UserDisplayDto> loginTest(UserInputDto inputDto);
 
 }

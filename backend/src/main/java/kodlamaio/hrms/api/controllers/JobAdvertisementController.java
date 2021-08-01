@@ -42,7 +42,6 @@ public class JobAdvertisementController {
 	@PostMapping("/getAllJobAdvertisementWithPage")
 	@ResponseBody
 	public DataResult<List<JobAdvertisementDisplayDto>> getWithPage(int pageNo, int pageSize, @RequestBody JobAdvertFilterOption filterOption) {
-		
 		return this.jobAdvertisementService.getAll(pageNo, pageSize, filterOption);
 	}
 	

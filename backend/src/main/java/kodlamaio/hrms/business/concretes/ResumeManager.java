@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kodlamaio.hrms.business.abstracts.JobseekerService;
 import kodlamaio.hrms.business.abstracts.ResumeService;
@@ -14,8 +15,12 @@ import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
+import kodlamaio.hrms.dataAccess.abstracts.ImageDao;
 import kodlamaio.hrms.dataAccess.abstracts.JobseekerDao;
 import kodlamaio.hrms.dataAccess.abstracts.ResumeDao;
+import kodlamaio.hrms.entities.concretes.City;
+import kodlamaio.hrms.entities.concretes.Gender;
+import kodlamaio.hrms.entities.concretes.Image;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.Resume;
 import kodlamaio.hrms.entities.dtos.display.ResumeDisplayDto;
@@ -77,6 +82,8 @@ public class ResumeManager implements ResumeService{
 			current.setBirtdate(resume.getBirthDate());
 			current.setGithub(resume.getGithubLink());
 			current.setLinkedin(resume.getLinkedinLink());
+			current.setGender(new Gender(resume.getGenderId()));
+			current.setCity(new City(resume.getCityId()));
 			
 			this.jobseekerDao.save(self);
 			
@@ -102,4 +109,39 @@ public class ResumeManager implements ResumeService{
 		
 	}
 
+	@Override
+	public Result updateResumePhoto(int id, Image image) {
+		try {
+			Resume current = this.resumeDao.getResumeById(id);
+			if(current == null) {
+				throw new Exception();
+			}
+			current.setImage(image);
+			this.resumeDao.save(current);
+			return new SuccessResult("Fotoğraf yüklendi.");
+		} catch (Exception e) {
+			return new ErrorResult("Fotoğraf yüklenirken hata oluştu.");
+		}
+	}
+
+	@Override
+	public Image getUserImage(int id) {
+		Resume userResume = this.resumeDao.getOne(id);
+		return userResume.getImage();
+	}
+
+	@Override
+	public Result deleteUserPhoto(int resumeId) {
+		Resume current = this.resumeDao.getOne(resumeId);
+		if(current == null) {
+			return new ErrorResult("Özgeçmiş kaydı bulunamadı.");
+		}
+		current.setImage(new Image(1));
+		this.resumeDao.save(current);
+		return new SuccessResult("Fotoğraf kaldırıldı.");
+	}
+
+	
+	
+	
 }

@@ -24,6 +24,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="images")
 public class Image {
+	public Image(int imageId) {
+		this.id = imageId;
+	}
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -34,7 +38,4 @@ public class Image {
 	
 	@Column(name = "image_path")
 	private String imagePath;
-	
-	@OneToMany(mappedBy = "image")
-	private List<Resume> resumes;
 }

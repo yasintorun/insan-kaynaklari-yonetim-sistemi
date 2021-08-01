@@ -21,5 +21,6 @@ public class ResumeInputDto {
 	private String summary;
 	private LocalDate birthDate;
 	private String phone;
+	private int cityId;	
 	
 }

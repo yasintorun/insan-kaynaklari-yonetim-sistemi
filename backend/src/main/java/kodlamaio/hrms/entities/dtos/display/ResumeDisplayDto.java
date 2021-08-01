@@ -3,7 +3,9 @@ package kodlamaio.hrms.entities.dtos.display;
 import java.time.LocalDate;
 import java.util.List;
 
+import kodlamaio.hrms.entities.concretes.City;
 import kodlamaio.hrms.entities.concretes.Gender;
+import kodlamaio.hrms.entities.concretes.Image;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.Nationality;
 import kodlamaio.hrms.entities.concretes.Skill;
@@ -25,7 +27,9 @@ public class ResumeDisplayDto {
 	private LocalDate birtdate;
 	private String phone;
 	private Gender gender;
+	private City city;
 	private Nationality nationality;
+	private Image image;
 	private List<LanguageDisplayDto> languages;
 	private List<ExperienceDisplayDto> experiences;
 	private List<UserSkillDisplayDto> skills;

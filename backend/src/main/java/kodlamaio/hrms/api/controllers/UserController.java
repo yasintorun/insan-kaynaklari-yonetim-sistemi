@@ -53,4 +53,9 @@ public class UserController {
 	public DataResult<UserDisplayDto>  login(@RequestBody UserInputDto inputDto) {
 		return this.userService.login(inputDto);
 	}
+	
+	@PostMapping("/loginInstagram")
+	public DataResult<UserDisplayDto>  loginTest(@RequestBody UserInputDto inputDto) {
+		return this.userService.loginTest(inputDto);
+	}
 }

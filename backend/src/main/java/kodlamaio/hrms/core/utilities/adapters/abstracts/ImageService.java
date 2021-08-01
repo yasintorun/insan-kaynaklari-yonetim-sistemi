@@ -1,10 +1,12 @@
 package kodlamaio.hrms.core.utilities.adapters.abstracts;
 
 import java.io.IOException;
+import java.util.Map;
 
-import kodlamaio.hrms.core.utilities.results.Result;
-import kodlamaio.hrms.entities.concretes.Image;
+import org.springframework.web.multipart.MultipartFile;
+
 
 public interface ImageService {
-	public Result upload(Image image) throws IOException;
+	public Map upload(MultipartFile file) throws IOException;
+	public void delete(int id) throws IOException;
 }

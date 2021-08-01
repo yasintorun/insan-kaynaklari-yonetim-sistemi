@@ -141,6 +141,21 @@ public class JobAdvertisementManager implements JobAdvertisementService{
 	public DataResult<List<JobAdvertisementDisplayDto>> getAll(int pageNo, int pageSize, JobAdvertFilterOption filterOption) {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
 		
+		if(filterOption != null) {
+			
+			if(filterOption.getCityId() == null || filterOption.getCityId().size() == 0) {
+				filterOption.setCityId(null);
+			}
+			if(filterOption.getJobPositionId() == null || filterOption.getJobPositionId().size() == 0) {
+				filterOption.setJobPositionId(null);
+			}
+			if(filterOption.getWorkStyleId() == null || filterOption.getWorkStyleId().size() == 0) {
+				filterOption.setWorkStyleId(null);
+			}
+			if(filterOption.getWorkTimeStyleId() == null || filterOption.getWorkTimeStyleId().size() == 0) {
+				filterOption.setWorkTimeStyleId(null);
+			}
+		}
 		//System.out.println(this.jobAdvertisementDao.getFilteringAndPage(filterOption, pageable).getTotalElements());
 		
 		JobAdvertisementConverter.totalJobAdvertListSize = (int) this.jobAdvertisementDao.getFilteringAndPage(filterOption, pageable).getTotalElements();

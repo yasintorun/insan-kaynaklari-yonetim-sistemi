@@ -28,3 +28,15 @@ public class HrmsApplication {
     }
 	
 }
+
+/*
+ * 
+ * 
+ *
+spring.datasource.url=jdbc:postgresql://ec2-34-193-101-0.compute-1.amazonaws.com:5432/ddauehf9qlidju
+spring.datasource.username=dkbkhpkexbkgwu
+spring.datasource.password=7e03555790250cfa9d254f23214cb8676753300488e3e07e0ae944acb4031b44
+ * 
+ * 
+ * 
+ * */

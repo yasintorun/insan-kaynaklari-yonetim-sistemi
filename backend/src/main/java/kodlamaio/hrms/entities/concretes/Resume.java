@@ -30,12 +30,8 @@ public class Resume {
 		this.github = githubLink;
 		this.linkedin = linkedinLink;
 		this.summary = summary;
-		Jobseeker jobSeeker = new Jobseeker();
-		jobSeeker.setUserId(userId);
-		this.jobSeeker = jobSeeker;
-		Image image = new Image();
-		image.setId(imageId);
-		this.image = image;
+		this.jobSeeker = new Jobseeker(userId);
+		this.image = new Image(imageId);
 	}
 
 	@Id
@@ -68,6 +64,10 @@ public class Resume {
 	@ManyToOne()
 	@JoinColumn(name="gender_id")
 	private Gender gender;
+	
+	@ManyToOne()
+	@JoinColumn(name="city_id")
+	private City city;
 	
 	
 	@ManyToOne()
