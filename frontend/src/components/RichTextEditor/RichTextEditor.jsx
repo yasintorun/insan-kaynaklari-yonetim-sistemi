@@ -118,8 +118,8 @@ class RichTextEditor extends React.Component {
 					<div className="editorBtnGroup">
 						<Button.Group>
 							{
-								allTransactions.map(transaction => (
-									<Button type="button" icon onClick={()=>this.toggleClick(transaction)}>
+								allTransactions.map((transaction, index) => (
+									<Button type="button" icon onClick={()=>this.toggleClick(transaction)} key={index}>
 										<Icon name={transaction.iconName} />
 									</Button>
 								))

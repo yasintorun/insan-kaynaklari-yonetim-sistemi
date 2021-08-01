@@ -13,7 +13,7 @@ class YTAlerts {
     */
     static async DeleteAlert(header, text, callBack) {
         return Swal.fire({
-            title: header + ' silmek istediğinden emin misin?',
+            title: header + ' silinecektir. Onaylıyor musun?',
             text: text,
             icon: 'warning',
             showCancelButton: true,
@@ -21,13 +21,17 @@ class YTAlerts {
             cancelButtonText: 'Vazgeç'
         }).then((result) => {
             if (result.isConfirmed) {
-                callBack().then(result => {
-                    Swal.fire(
-                        'Silindi!',
-                        result?.data?.message,
-                        'success'
-                    )
-                })
+                if(!!callBack) {
+                    callBack().then(result => {
+                        Swal.fire(
+                            'Silindi!',
+                            result?.data?.message,
+                            'success'
+                        )
+                    })
+                } else {
+                    return true
+                }
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire(
                     'İptal Edildi',

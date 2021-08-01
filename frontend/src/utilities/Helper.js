@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 
 class Helper {
 

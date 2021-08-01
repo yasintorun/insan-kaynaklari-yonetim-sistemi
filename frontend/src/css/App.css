@@ -357,3 +357,18 @@ h3 {
 .register-card-text .text-danger {
   color: red !important; 
 }
+
+.imageUpload {
+  position: relative;
+  min-width: 200px;
+  max-width: 250px;
+}
+
+.imageUpload .imageUpload-btn {
+  position: absolute;
+  left: 50%; 
+  bottom: 10px;
+  margin-left: auto; 
+  margin-right: auto; 
+  transform: translate(-50%, -50%);
+}

@@ -7,7 +7,7 @@ export default class FavoriteJobAdvertService{
     }
 
     getById(userId, jobAdvertId) {
-        return axios.get(`${Links.ROOT} /favoriteJobAdverts/getFavorite?jobAdvertId=${jobAdvertId}&userId=${userId}`)
+        return axios.get(`${Links.ROOT}/favoriteJobAdverts/getFavorite?jobAdvertId=${jobAdvertId}&userId=${userId}`)
     }
 
     getByJobAdvert_Id(id) {

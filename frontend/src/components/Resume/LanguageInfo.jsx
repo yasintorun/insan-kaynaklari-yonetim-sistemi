@@ -109,7 +109,7 @@ export default function LanguageInfo() {
                                 <Table.Body>
                                     {
                                         languages?.map((language, index) => (
-                                            <Table.Row className="message-content hover-shadow" >
+                                            <Table.Row className="message-content hover-shadow" key={index}>
                                                 <Table.Cell>
                                                     <span className="bolder text-bb">{language.languageName}</span>
                                                 </Table.Cell>
@@ -143,8 +143,8 @@ const StarLevel = ({ level }) => {
     return (
         <div>
             {
-                star.map(s => (
-                    <Icon name="favorite" color={s <= level ? "red" : "black"} />
+                star.map((s, index) => (
+                    <Icon name="favorite" color={s <= level ? "red" : "black"} key = {index}/>
                 ))
             }
         </div>

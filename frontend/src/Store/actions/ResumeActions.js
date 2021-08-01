@@ -4,6 +4,7 @@ import Helper from "../../utilities/Helper"
 import EducationService from '../../services/educationService'
 import ExperienceService from '../../services/experienceService'
 import SkillService from '../../services/SkillService'
+import YTAlerts from "../../utilities/YTAlerts"
 
 export const types = {
     GET_RESUME_SUCCESS: "GET_RESUME_SUCCESS",
@@ -43,6 +44,21 @@ export const updateResume = (resumeVal) => async (dispatch) => {
 /*CV Özet yazısını güncelle */
 export const updateResumeSummary = (summaryVal) => async (dispatch) => {
     return await resumeService.updateResumeSummary(26, summaryVal)
+        .then(result => {
+            BaseCallBackFunc(dispatch, result)
+        })
+}
+
+/*CV kullanıcı fotoğrafını güncelle */
+export const updateResumePhoto = (photoFile) => async (dispatch) => {
+    return await resumeService.updateResumePhoto(26, photoFile)
+        .then(result => {
+            BaseCallBackFunc(dispatch, result)
+        })
+}
+
+export const deleteResumePhoto = () => async (dispatch) => {
+    return await resumeService.deleteUserPhoto(26)
         .then(result => {
             BaseCallBackFunc(dispatch, result)
         })

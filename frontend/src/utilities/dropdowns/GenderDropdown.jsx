@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import GenderService from '../../services/GenderService'
-import { Dropdown, Form } from 'semantic-ui-react'
-export default function GenderDropdown({onChangeEvent}) {
+import { Form } from 'semantic-ui-react'
+export default function GenderDropdown({onChangeEvent, value}) {
     const [genders, setGenders] = useState([])
 
     useEffect(() => {
@@ -20,6 +20,7 @@ export default function GenderDropdown({onChangeEvent}) {
               })}
               onChange= {onChangeEvent}
               name = "gender"
+              value = {value}
             />
         </div>
     )

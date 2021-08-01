@@ -3,36 +3,38 @@ import { Grid, Pagination, Dropdown, Label, Divider } from 'semantic-ui-react'
 import JobPost from '../components/JobPost'
 import JobAdvertisementService from '../services/jobAdvertisementService'
 import JobAdvertFiltering from '../components/JobAdvertFiltering'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector, useStore } from 'react-redux'
+import { ApplyFilter } from '../Store/actions/jobAdvertFilterActions'
 
 export default function JobAdvertisement() {
     const [jobAdvertisements, setJobAdvertisements] = useState([])
-    
+
     const [activePage, setActivePage] = useState(1)
     const [filterOption, setFilterOption] = useState({})
     const [pageSize, setPageSize] = useState(1)
     const [totalPageSize, setTotalPageSize] = useState(0)
-  /*  useEffect(() => {
+    /*  useEffect(() => {
+          let jobAdvertisementService = new JobAdvertisementService()
+          jobAdvertisementService.getJobAdvertFilterAndPage(activePage, pageSize, filterOption).then(result => {
+              setJobAdvertisements(result.data.data)
+              if (totalPageSize == 0 && !!result.data.data[0])
+                  setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
+          })
+  
+      }, [filterOption, activePage, pageSize])
+      
+  
+*/
+    useEffect(() => {
+        console.log("run effect")
         let jobAdvertisementService = new JobAdvertisementService()
+        console.log(filterOption)
         jobAdvertisementService.getJobAdvertFilterAndPage(activePage, pageSize, filterOption).then(result => {
             setJobAdvertisements(result.data.data)
             if (totalPageSize == 0 && !!result.data.data[0])
                 setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
         })
-
     }, [filterOption, activePage, pageSize])
-*/
-const {filter} = useSelector(state => state.jobAdvertFilter)
-    useEffect(() => {
-        let jobAdvertisementService = new JobAdvertisementService()
-        jobAdvertisementService.getJobAdvertFilterAndPage(activePage, pageSize, filter).then(result => {
-            setJobAdvertisements(result.data.data)
-            if (totalPageSize == 0 && !!result.data.data[0])
-                setTotalPageSize(result.data.data[0]?.totalJobAdvertSize)
-        })
-
-    }, [filter, activePage, pageSize])
-
 
 
     const handleFilterClick = (filterOption) => {

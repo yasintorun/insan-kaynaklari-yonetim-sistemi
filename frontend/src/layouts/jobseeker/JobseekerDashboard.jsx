@@ -55,9 +55,9 @@ export default function JobseekerDashboard() {
 
                 <div className="col-md-10 container-content">
                     <Route path="/jobseeker_dashboard/profile" component={JobseekerProfile} />
-                    <Route path="/jobseeker_dashboard/isilanlari" component={JobAdvertisement} />
+                    <Route exact path="/jobseeker_dashboard/isilanlari" component={JobAdvertisement} />
                     <Route path="/jobseeker_dashboard/resume" component={ResumeDetail} />
-                    <Route path="/jobseeker_dashboard/jobpost_detail/:id" component={JobPostDetail} />
+                    <Route path="/jobseeker_dashboard/isilanlari/:id" component={JobPostDetail} />
                 </div>
             </div>
         </div>

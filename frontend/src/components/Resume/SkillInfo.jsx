@@ -10,8 +10,7 @@ import { updateSkill } from '../../Store/actions/ResumeActions'
 export default function SkillInfo() {
 
     const {skills} = useSelector(state => state.resume)
-    //let skills = resume?.skills
-    console.log(skills)
+
     const [isEdit, setIsEdit] = useState(false)
     const handleEditClick = () => {
         setIsEdit(!isEdit)
@@ -31,7 +30,6 @@ export default function SkillInfo() {
             //skillService.update(values).then(r => console.log(r.data.message))
             dispatch(updateSkill(values))
             handleEditClick()
-            console.log(values)
         },
     });
     //console.log(skills)
@@ -54,8 +52,10 @@ export default function SkillInfo() {
                         
                         : <div className="message-content anim" onClick={() => handleEditClick()}>
                             {
-                                skills?.map(skill => (
-                                    <Label color="teal" className="mb-2"><p className="h5">{skill?.skillName}</p></Label>
+                                skills?.map((skill, index) => (
+                                    <Label color="teal" className="mb-2" key={index}>
+                                        <p className="h5">{skill?.skillName}</p>
+                                    </Label>
                                 ))
                             }
                         </div>

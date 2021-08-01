@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Card, Label, Icon, Button, Segment } from 'semantic-ui-react'
-import Helper from '../utilities/Helper'
+import {Button, Segment } from 'semantic-ui-react'
 import { toast } from 'react-toastify'
 import FavoriteJobAdvertService from '../services/favoriteJobAdvert'
 import JobAdvertCardInfo from './JobAdvertCardInfo'
@@ -37,7 +36,7 @@ export default function JobPost({ jobAdvert }) {
     return (
         <div >
             <div className="bordered bg-light-blue  ms-4 mb-4 p-3 hover-shadow font-small position-relative">
-                <Segment basic as={NavLink} to={'/jobseeker_dashboard/jobpost_detail/' + jobAdvert.id} className="color-grey">
+                <Segment basic as={NavLink} to={'/jobseeker_dashboard/isilanlari/' + jobAdvert.id} className="color-grey">
                     <JobAdvertCardInfo jobAdvertisement={jobAdvert} isSmall />
                 </Segment>
                 <div>

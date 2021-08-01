@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Label, Dropdown, Segment, Checkbox, Button } from 'semantic-ui-react'
 import CityService from '../services/cityService';
 import JobPositionService from '../services/jobPositionService'
@@ -14,7 +14,10 @@ export default function JobAdvertFiltering({ clickEvent }) {
     const [workStyle, setWorkStyle] = useState([])
     const [workTimeStyle, setWorkTimeStyle] = useState([])
 
+    const {filter} = useSelector(state => state.jobAdvertFilter)
+    
     useEffect(() => {
+        handleApplyFilterClick()
         let cityService = new CityService()
         cityService.getCity().then(result => setCities(result.data.data))
 
@@ -26,81 +29,49 @@ export default function JobAdvertFiltering({ clickEvent }) {
 
         let workTimeStyleService = new WorkTimeStyleService()
         workTimeStyleService.getWorkTimeStyles().then(result => setWorkTimeStyle(result.data.data))
-
+        //dispatch(ApplyFilter(filter))
+       // filter = filter;
+        //console.log("filteeer")
     }, [])
 
     const dispatch = useDispatch()
+    
+    function checkIndexData(data, checked, value) {
+        if (checked)
+            data.push(value)
+        else {
+            let idx = data.indexOf(value)
+            if (idx > -1) {
+                data.splice(idx, 1)
+            }
+        }
+    }
 
     ///Filter elemanlarının değerlerini sakla
-    const [cityIndexs, setCityIndexs] = useState([])
     const handleChangeCity = (e, { value }) => {
-        setCityIndexs(value)
+        filter.cityId = value
     }
 
-    const [jobPosIndexs, setJobPosIndexs] = useState([])
     const handleChangeJobPosition = (e, { value, checked }) => {
-        if (checked)
-            jobPosIndexs.push(value)
-        else {
-            let idx = jobPosIndexs.indexOf(value)
-            if (idx > -1) {
-                jobPosIndexs.splice(idx, 1)
-            }
-        }
+        checkIndexData(filter.jobPositionId, checked, value)
     }
 
-    const [workStyleIndexs, setWorkStyleIndexs] = useState([])
     const handleChangeWorkStyle = (e, { value, checked }) => {
-        if (checked)
-            workStyleIndexs.push(value)
-        else {
-            let idx = workStyleIndexs.indexOf(value)
-            if (idx > -1) {
-                workStyleIndexs.splice(idx, 1)
-            }
-        }
+        checkIndexData(filter.workStyleId, checked, value)
     }
 
-    const [workTimeStyleIndexs, setWorkTimeStyleIndexs] = useState([])
     const handleChangeWorkTimeStyle = (e, { value, checked }) => {
-        if (checked)
-            workTimeStyleIndexs.push(value)
-        else {
-            let idx = workTimeStyleIndexs.indexOf(value)
-            if (idx > -1) {
-                workTimeStyleIndexs.splice(idx, 1)
-            }
-        }
+        checkIndexData(filter.workTimeStyleId, checked, value)
     }
 
-    
-    const [isFavorite, setIsFavorite] = useState(false)
     const handleChangeFavorite = (e, { value, checked }) => {
-        setIsFavorite(checked)
+        filter.isFavorite = checked
     }
 
 
     const handleApplyFilterClick = () => {
-
-        
-
-        const filterOption = { cityId: cityIndexs, jobPositionId: jobPosIndexs, workStyleId: workStyleIndexs, workTimeStyleId: workTimeStyleIndexs, isFavorite: isFavorite }
-        
-        if (filterOption.cityId.length == 0)
-            filterOption.cityId = null
-        if (filterOption.jobPositionId.length == 0)
-            filterOption.jobPositionId = null
-        if (filterOption.workStyleId.length == 0)
-            filterOption.workStyleId = null
-        if (filterOption.workTimeStyleId.length == 0)
-            filterOption.workTimeStyleId = null
-        if(filterOption.isFavorite)
-            filterOption.userIdForFavorite = 1
-
-        dispatch(ApplyFilter(filterOption))
-
-        //clickEvent(filterOption)
-
+        clickEvent(filter)
+        dispatch(ApplyFilter(filter))
     }
 
     return (
@@ -113,11 +84,12 @@ export default function JobAdvertFiltering({ clickEvent }) {
                 selection
                 search
                 multiple
+                defaultValue = {filter.cityId}
                 options={cities.map((x, index) => {
                     return { text: x.cityName, key: x.index, value: x.id }
                 })}
                 onChange={handleChangeCity}
-                value={cityIndexs}
+               // value={filter?.cityId}
             />
 
             <h3 className="mt-5">İş pozisyonu</h3>
@@ -126,6 +98,7 @@ export default function JobAdvertFiltering({ clickEvent }) {
                     <Checkbox
                         label={jobPos.jobName}
                         className="mt-4 d-block"
+                        defaultChecked={filter.jobPositionId?.indexOf(jobPos.id) >= 0}
                         onChange={handleChangeJobPosition}
                         value={jobPos.id}
                     />
@@ -136,6 +109,7 @@ export default function JobAdvertFiltering({ clickEvent }) {
                 workStyle.map(style => (
                     <Checkbox
                         label={style.name}
+                        defaultChecked={filter.workStyleId?.indexOf(style.id) >= 0}
                         className="mt-4 d-block"
                         onChange={handleChangeWorkStyle}
                         value={style.id}
@@ -147,6 +121,7 @@ export default function JobAdvertFiltering({ clickEvent }) {
                 workTimeStyle.map(style => (
                     <Checkbox
                         label={style.name}
+                        defaultChecked={filter.workTimeStyleId?.indexOf(style.id) >= 0}
                         className="mt-4 d-block"
                         onChange={handleChangeWorkTimeStyle}
                         value={style.id}

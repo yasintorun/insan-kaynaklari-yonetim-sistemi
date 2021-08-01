@@ -1,6 +1,4 @@
-import { Button } from 'semantic-ui-react'
 import React from 'react'
-import GenderDropdown from '../dropdowns/GenderDropdown'
 
 export default function YTInfoMessage(props) {
     return (
