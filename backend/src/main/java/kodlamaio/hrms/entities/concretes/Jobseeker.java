@@ -6,7 +6,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -37,10 +39,10 @@ public class Jobseeker extends User{
 	@Column(name="tc_no")
 	private String tcNo;
 	
-
-	@OneToMany(mappedBy = "jobSeeker")
-	private List<Resume> resumes;
-	
+	@OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "jobSeeker")
+	private Resume resumes;
 
 	@OneToMany(mappedBy = "jobseeker")
 	private List<Language> languages;

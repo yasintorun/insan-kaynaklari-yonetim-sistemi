@@ -41,8 +41,7 @@ public class JobAdvertisement {
 		this.releaseDate = releaseDate2;
 		this.deadline = deadline2;
 		this.isActive = isActive2;
-		//this.jobPosition.setId(jobPositionId);
-		this.setJobPosition(new JobPosition(jobPositionId, "", null, null));
+		this.setJobPosition(new JobPosition(jobPositionId));
 		Employer emp = new Employer();
 		emp.setUserId(employerId);
 		
@@ -109,9 +108,6 @@ public class JobAdvertisement {
 	@ManyToOne()
 	@JoinColumn(name="work_time_style_id")
 	private WorkTimeStyle workTimeStyle;
-	
-	@OneToMany(mappedBy = "jobAdvert", cascade = CascadeType.REMOVE)
-	private List<FavoriteJobAdvert> favoriteJobAdverts;
 	
 	///////////////////
 	

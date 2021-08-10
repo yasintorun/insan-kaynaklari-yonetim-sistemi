@@ -30,10 +30,4 @@ public class City {
 	
 	@Column(name="city_name")
 	private String cityName;
-	
-	@OneToMany(mappedBy = "city")
-	private List<JobAdvertisement> jobAdvertisements;
-	
-	@OneToMany(mappedBy = "city")
-	private List<Resume> resumes;
 }

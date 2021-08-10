@@ -33,7 +33,4 @@ public class Department {
 
 	@Column(name = "department_name")
 	private String departmentName;
-	
-	@OneToMany(mappedBy = "department")
-	private List<Education> educations;
 }

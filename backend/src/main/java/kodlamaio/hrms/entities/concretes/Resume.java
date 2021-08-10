@@ -5,12 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -59,8 +61,6 @@ public class Resume {
 	@JoinColumn(name="image_id")
 	private Image image;
 	
-	
-
 	@ManyToOne()
 	@JoinColumn(name="gender_id")
 	private Gender gender;
@@ -69,15 +69,11 @@ public class Resume {
 	@JoinColumn(name="city_id")
 	private City city;
 	
-	
 	@ManyToOne()
 	@JoinColumn(name="nationality_id")
 	private Nationality nationality;
 	
-	@ManyToOne()
-	@JoinColumn(name="user_id")
+	@OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
 	private Jobseeker jobSeeker;
-	
-	
-	
 }

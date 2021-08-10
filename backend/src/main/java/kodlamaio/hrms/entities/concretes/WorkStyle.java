@@ -30,7 +30,4 @@ public class WorkStyle {
 	
 	@Column(name="name")
 	private String name;
-	
-	@OneToMany(mappedBy = "workStyle")
-	private List<JobAdvertisement> jobAdvertisements;
 }

@@ -8,6 +8,7 @@ import FavoriteJobAdvertService from '../services/favoriteJobAdvert'
 import JobAdvertCardInfo from '../components/JobAdvertCardInfo'
 import Swal from 'sweetalert2'
 import Helper from '../utilities/Helper'
+import YTAlerts from '../utilities/YTAlerts'
 export default function JobPostDetail(props) {
     let { id } = useParams()
     const [jobAdvertisement, setjobAdvertisement] = useState({})
@@ -53,9 +54,8 @@ export default function JobPostDetail(props) {
     const handleDeleteJobAdvertClick = () => {
         
         //
-        Helper.DeleteModalBox("İş ilanı", "İş ilanını silersen tekrar geri getiremezsin!", () => jobAdvertService.delete(jobAdvertisement.id)).then(() => {
-            
-        })
+        YTAlerts.DeleteAlert("İş ilanı", "İş ilanını silersen tekrar geri getiremezsin!", () => jobAdvertService.delete(jobAdvertisement.id))
+
     }
 
     useEffect(() => {

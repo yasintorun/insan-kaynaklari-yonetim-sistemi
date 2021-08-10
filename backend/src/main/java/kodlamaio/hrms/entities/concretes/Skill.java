@@ -34,8 +34,5 @@ public class Skill {
 
 	@Column(name="name")
 	private String skillName;
-		
-	@OneToMany(mappedBy = "skill")
-	private List<UserSkill> userSkills;
 }
 

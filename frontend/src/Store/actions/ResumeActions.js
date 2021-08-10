@@ -1,4 +1,4 @@
-import ResumeService from "../../services/resumeService" 
+import ResumeService from "../../services/resumeService"
 import UserLanguageService from "../../services/userLanguageService"
 import Helper from "../../utilities/Helper"
 import EducationService from '../../services/educationService'
@@ -21,14 +21,14 @@ let skillService = new SkillService()
 /*RESUME İŞLEMLERİ*/
 
 /*Cv bilgisini al*/
-export const getResume = (jobSeekerId) =>  async (dispatch) => {
+export const getResume = (jobSeekerId) => async (dispatch) => {
     return await resumeService.getResumeById(jobSeekerId)
         .then(result => {
-            dispatch({type: types.GET_RESUME_SUCCESS, payload: result.data.data})
+            dispatch({ type: types.GET_RESUME_SUCCESS, payload: result.data.data })
             return result.data.data
         })
         .catch(error => {
-            dispatch({type: types.GET_RESUME_ERROR, payload: error.data?.message})
+            dispatch({ type: types.GET_RESUME_ERROR, payload: error.data?.message })
             return error.data
         })
 }
@@ -57,6 +57,7 @@ export const updateResumePhoto = (photoFile) => async (dispatch) => {
         })
 }
 
+/*CV kullanıcı fotoğrafını kaldır*/
 export const deleteResumePhoto = () => async (dispatch) => {
     return await resumeService.deleteUserPhoto(26)
         .then(result => {
@@ -80,13 +81,13 @@ export const addLanguage = (languageVal) => async (dispatch) => {
 export const updateLanguage = (languageVal) => async (dispatch) => {
     return await languageService.update(languageVal)
         .then((result) => {
-           BaseCallBackFunc(dispatch, result)
+            BaseCallBackFunc(dispatch, result)
         })
 }
 /*Dil Silme */
 export const deleteLanguage = (lanugageID) => async (dispatch) => {
     return await languageService.delete(lanugageID)
-        .then(result=> {
+        .then(result => {
             BaseCallBackFunc(dispatch, result)
         })
 }
@@ -100,7 +101,8 @@ export const deleteLanguage = (lanugageID) => async (dispatch) => {
 export const addEducation = (educationVal) => async (dispatch) => {
     return await educationService.add(educationVal)
         .then(result => {
-            BaseCallBackFunc(dispatch, result)
+            BaseCallBackFunc(dispatch, result, true)
+
         })
 }
 
@@ -163,8 +165,15 @@ export const updateSkill = (skillVal) => async (dispatch) => {
 
 
 //cv ile ilgili işlemler güncellendiginde eklendiginde silindiginde çalıştırılacak ana fonksiyon.
-const BaseCallBackFunc = (dispatch, result) => {
-    Helper.ToastInfo(result.data.success, result.data.message)
+const BaseCallBackFunc = (dispatch, result, showAlert = true) => {
+    if (showAlert) {
+        if(!result.data.success) {
+            YTAlerts.WarningAlert("Hata", result.data.message)
+        } else {
+            YTAlerts.InfoAlert("Başarılı", result.data.message)
+        }
+    }
+    //Helper.ToastInfo(result.data.success, result.data.message)
     dispatch(getResume(26))
 }
 

@@ -30,10 +30,4 @@ public class JobPosition {
 	
 	@Column(name="job_name")
 	private String jobName;
-
-	@OneToMany(mappedBy = "jobPosition")
-	private List<JobAdvertisement> jobAdvertisements;
-	
-	@OneToMany(mappedBy = "jobPosition")
-	private List<Experience> experiences;
 }

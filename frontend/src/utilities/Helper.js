@@ -9,10 +9,23 @@ class Helper {
     
     //dd-mm-yyyy formatını mm-yyyy formatına çeviriyor.
     static OnlyYearAndMonth(date) {
-        let dateValues = date.split('-')
-        return (dateValues[0] + "-"+ dateValues[1])
+        const d =  new Date(date)
+        if(Helper.isValidDate(d)) {
+            const months = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Agustos", "Eylül", "Ekim", "Kasım", "Aralık"]
+            let dateValues = date.split('-')
+            return (months[parseInt(dateValues[1])] + " " + dateValues[0])
+        }
+        return undefined
     }
 
+    static getMonthAndYear(date) {
+        const d = new Date(date)
+        if(Helper.isValidDate(d)) {
+            let dateValues = date.split('-')
+            return dateValues[0] + '-' + dateValues[1]
+        }
+        return undefined
+    }
 
     
 
@@ -38,6 +51,14 @@ class Helper {
         localStorage.removeItem("state")
     }
 
+    static async setMyCallBack(mainFunc) {
+        await mainFunc()
+    }
+
+    static isValidDate(d) {
+        return d instanceof Date && !isNaN(d);
+      }
+    
 }
 
 export default Helper;

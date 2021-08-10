@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import CityService from '../../services/cityService'
-import { Form } from 'semantic-ui-react'
-export default function CityDropDown({onChangeEvent, value}) {
+import { Form, Label } from 'semantic-ui-react'
+export default function CityDropDown({ onChangeEvent, value }) {
     const [cities, setCities] = useState([])
 
     useEffect(() => {
@@ -9,7 +9,7 @@ export default function CityDropDown({onChangeEvent, value}) {
         cityService.getCity().then(result => setCities(result.data.data))
     }, [])
     return (
-        <div>
+        <Form.Field>
             <Form.Select
                 placeholder='Şehir seçiniz'
                 label="Şehir"
@@ -19,8 +19,8 @@ export default function CityDropDown({onChangeEvent, value}) {
                     return { text: x.cityName, key: x.index, value: x.id }
                 })}
                 onChange={onChangeEvent}
-                value = {value}
+                value={value}
             />
-        </div>
+        </Form.Field>
     )
 }

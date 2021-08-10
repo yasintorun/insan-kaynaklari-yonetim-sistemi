@@ -34,6 +34,4 @@ public class School {
 	@Column(name = "school_name")
 	private String schoolName;
 	
-	@OneToMany(mappedBy = "school")
-	private List<Education> educations;
 }

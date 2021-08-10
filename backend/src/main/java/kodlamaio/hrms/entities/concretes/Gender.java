@@ -32,6 +32,4 @@ public class Gender {
 	@Column(name = "name")
 	private String name;
 	
-	@OneToMany(mappedBy = "gender")
-	private List<Resume> resumes;
 }

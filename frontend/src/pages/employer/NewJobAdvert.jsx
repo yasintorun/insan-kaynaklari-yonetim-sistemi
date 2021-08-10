@@ -113,7 +113,7 @@ export default function NewJobAdvert(props) {
                 })}
                 //onBlur={formik.onBlur}
                 onChange={(event, data) =>
-                  formik.setFieldValue("cityId", data.value)
+                  formik.setFieldValue("workingTime.id", data.value)
                 }
                 //id="cityId"
                 value={formik.values.cityId}

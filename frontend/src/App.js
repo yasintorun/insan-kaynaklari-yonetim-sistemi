@@ -11,6 +11,7 @@ import EmployerDashboard from './layouts/employer/EmployerDashboard';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getResume } from './Store/actions/ResumeActions';
+import AuthManager from './utilities/Managers/AuthManager';
 function App() {
 
 
@@ -40,21 +41,21 @@ function App() {
     }*/
     //user.authority.id
     switch (3) { 
-      case 1:
+      case AuthManager.Authority.ADMIN: //1
         return (
           <>
             <PathRedirect to="/admin" />
             <Route exact path={"/admin*"} component={AdminDashboard} />
           </>   
         )
-      case 2:
+      case AuthManager.Authority.EMPLOYER: //2
         return (
           <>
             <PathRedirect to="/employer_dashboard" />
             <Route exact path="/employer_dashboard*" component={EmployerDashboard} />
           </>
         )
-      case 3:
+      case AuthManager.Authority.JOBSEEKER: //3
         return (
           <>
             <PathRedirect to="/jobseeker_dashboard" />
@@ -62,6 +63,7 @@ function App() {
           </>
         )
 
+        //Giriş yapılmadıysa sitede gidilebilecek kısımlar.
       default:
         return (
           <>

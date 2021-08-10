@@ -11,8 +11,12 @@ import Helper from '../../utilities/Helper'
 import { toast } from 'react-toastify'
 import { useDispatch, useSelector } from 'react-redux'
 import { addExperience, deleteExperience, updateEducation, updateExperience } from '../../Store/actions/ResumeActions'
+import YTAlerts from '../../utilities/YTAlerts'
+import YTNumberDropdown from '../../utilities/YTNumberDropdown'
+import * as Yup from 'yup';
+import YTFormField from '../../utilities/messages/YTFormField'
 export default function JobExperienceInfo() {
-    const {experiences} = useSelector(state => state.resume)
+    const { experiences } = useSelector(state => state.resume)
 
     const dispatch = useDispatch()
 
@@ -27,8 +31,8 @@ export default function JobExperienceInfo() {
         setIsEdit(true)
         setIndex(index)
         let val = experiences[index]
-        let startingDate = Helper.OnlyYearAndMonth(val?.startingDate)
-        let leavingDate = Helper.OnlyYearAndMonth(val?.leavingDate)
+        let startingDate = Helper.getMonthAndYear(val?.startingDate)
+        let leavingDate = Helper.getMonthAndYear(val?.leavingDate)
         formik.setValues({
             id: val.id,
             userId: val.userId,
@@ -45,18 +49,33 @@ export default function JobExperienceInfo() {
         setIsNew(false)
     }
 
-    const experienceService = new ExperienceService()
+    const addExperienceSchema = Yup.object().shape({
+        cityId: Yup.string()
+            .required(),
+        jobPositionId: Yup.number()
+            .required(),
+        startingDate: Yup.date()
+            .required(),
+        leavingDate: Yup.date()
+            .required(),
+        workTimeStyleId: Yup.number()
+            .required(),
+        companyName: Yup.string()
+            .required(),
+        //email: Yup.string().email('Invalid email').required('Required'),
+    });
 
     const formik = useFormik({
         initialValues: {
             userId: 1,
         },
+        validationSchema: addExperienceSchema,
         onSubmit: values => {
             isNew
-                ? dispatch(addExperience(values))
-                //experienceService.add(values).then(r => toast.success(r.data.message))
-                :dispatch(updateExperience(values))
-                // experienceService.update(values).then(r => toast.success(r.data.message))
+             ? dispatch(addExperience(values))
+            //experienceService.add(values).then(r => toast.success(r.data.message))
+              : dispatch(updateExperience(values))
+            // experienceService.update(values).then(r => toast.success(r.data.message))
 
             handleCancelEdit()
         },
@@ -77,7 +96,7 @@ export default function JobExperienceInfo() {
     }
 
     const handleDeleteClick = () => {
-        Helper.DeleteModalBox("İş deneyimi", "Bu işlemi geri alamazsın!", () => dispatch(deleteExperience(formik.values.id))).then( () => {
+        YTAlerts.DeleteAlert("İş deneyimi", "Bu işlemi geri alamazsın!", () => dispatch(deleteExperience(formik.values.id))).then(() => {
             handleCancelEdit()
         })
         //experienceService.delete(formik.values.id).then(result => console.log(result.data))
@@ -96,18 +115,31 @@ export default function JobExperienceInfo() {
                         <div>
                             <Form onSubmit={formik.handleSubmit} size="small">
                                 <Form.Group widths='equal'>
-                                    <Form.Field><JobPositionDropDown onChangeEvent={(event, data) => formik.setFieldValue("jobPositionId", data.value)} value={formik.values?.jobPositionId} /></Form.Field>
-                                    <Form.Input fluid placeholder="Firma adı" label='Firma Adı*' name="companyName" onChange={formik.handleChange} value={formik.values?.companyName} />
-                                    <Form.Field><CityDropDown onChangeEvent={(event, data) => formik.setFieldValue("cityId", data.value)} value={formik.values?.cityId} /></Form.Field>
+                                    <YTFormField value="jobPositionId" formik={formik}>
+                                        <JobPositionDropDown onChangeEvent={(event, data) => formik.setFieldValue("jobPositionId", data.value)} value={formik.values?.jobPositionId} />
+                                    </YTFormField>
+                                    <YTFormField value="companyName" formik={formik}>
+                                        <Form.Input fluid placeholder="Firma adı" label='Firma Adı*' name="companyName" onChange={formik.handleChange} value={formik.values?.companyName} />
+                                    </YTFormField>
+                                    <YTFormField value="cityId" formik={formik}>
+                                        <CityDropDown onChangeEvent={(event, data) => formik.setFieldValue("cityId", data.value)} value={formik.values?.cityId} />
+                                    </YTFormField>
                                 </Form.Group>
                                 <Form.Group widths='equal'>
-                                    <Form.Field><WorkTimeStyleDropdown onChangeEvent={(event, data) => formik.setFieldValue("workTimeStyleId", data.value)} value={formik.values?.workTimeStyleId} /></Form.Field>
-                                    <Form.Input type="month" fluid placeholder="Başlama tarihi" label='Başlangıç tarihi*' name="startingDate" onChange={formik.handleChange} value={formik.values?.startingDate} />
-                                    <Form.Input type="month" fluid placeholder="Çıkış tarihi" label='Çıkış tarihi*' name="leavingDate" onChange={formik.handleChange} value={formik.values?.leavingDate} />
+                                    <YTFormField value="workTimeStyleId" formik={formik}>
+                                        <WorkTimeStyleDropdown onChangeEvent={(event, data) => formik.setFieldValue("workTimeStyleId", data.value)} value={formik.values?.workTimeStyleId} />
+                                    </YTFormField>
+                                    <YTFormField value="startingDate" formik={formik}>
+                                        <Form.Input type="month" fluid placeholder="Başlama tarihi" label='Başlangıç tarihi*' name="startingDate" onChange={formik.handleChange} value={formik.values?.startingDate} />
+
+                                    </YTFormField>
+                                    <YTFormField value="leavingDate" formik={formik}>
+                                        <Form.Input type="month" fluid placeholder="Çıkış tarihi" label='Çıkış tarihi*' name="leavingDate" onChange={formik.handleChange} value={formik.values?.leavingDate} />
+
+                                    </YTFormField>
                                 </Form.Group>
 
-
-
+                    
                                 <div className="d-flex justify-content-between">
                                     <div>
                                         <Button positive type="submit" >Kaydet</Button>
@@ -115,10 +147,10 @@ export default function JobExperienceInfo() {
                                     </div>
                                     {
                                         !isNew ?
-                                        <div>
-                                            <Button negative type="button" onClick={() => handleDeleteClick()}>Sil</Button>
-                                        </div>
-                                        : null
+                                            <div>
+                                                <Button negative type="button" onClick={() => handleDeleteClick()}>Sil</Button>
+                                            </div>
+                                            : null
                                     }
                                 </div>
                             </Form>
@@ -144,8 +176,8 @@ export default function JobExperienceInfo() {
                                                 </div>
                                                 <div>
                                                     <YTInfoMessage info="Çalışma şekli" text={experience?.workTimeStyle?.name} />
-                                                    <YTInfoMessage info="Başlangıç tarihi" text={experience?.startingDate} />
-                                                    <YTInfoMessage info="Bitiş tarihi" text={experience?.leavingDate} />
+                                                    <YTInfoMessage info="Başlangıç tarihi" text={Helper.OnlyYearAndMonth(experience?.startingDate)} />
+                                                    <YTInfoMessage info="Bitiş tarihi" text={Helper.OnlyYearAndMonth(experience?.leavingDate)} />
                                                 </div>
 
                                             </div>

@@ -34,10 +34,4 @@ public class WorkTimeStyle {
 	
 	@Column(name="name")
 	private String name;
-	
-	@OneToMany(mappedBy = "workTimeStyle")
-	private List<JobAdvertisement> jobAdvertisements;
-	
-	@OneToMany(mappedBy = "workTimeStyle")
-	private List<Experience> experiences;
 }

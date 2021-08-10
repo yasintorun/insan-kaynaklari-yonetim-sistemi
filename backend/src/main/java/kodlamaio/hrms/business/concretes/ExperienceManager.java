@@ -74,7 +74,7 @@ public class ExperienceManager implements ExperienceService{
 		
 		this.experienceDao.save(current);
 		return new SuccessDataResult<ExperienceDisplayDto>
-		(null, "Eğitim güncellendi!");
+		(null, "Deneyim güncellendi!");
 	}
 
 	@Override

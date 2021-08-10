@@ -52,7 +52,7 @@ class YTAlerts {
           )
     }
 
-    static async WarningAlert(header, text, callBack) {
+    static async WarningAlert(header, text, callBack = null) {
         return Swal.fire(
             header,
             text,

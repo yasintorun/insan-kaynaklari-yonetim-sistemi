@@ -10,11 +10,14 @@ import Swal from 'sweetalert2'
 import Helper from '../../utilities/Helper'
 import { useDispatch, useSelector } from 'react-redux'
 import { addLanguage, deleteLanguage, updateLanguage } from '../../Store/actions/ResumeActions'
+import YTFormField from '../../utilities/messages/YTFormField'
+import * as Yup from 'yup';
+import YTAlerts from '../../utilities/YTAlerts'
 export default function LanguageInfo() {
 
     //const {resume} = useSelector(state => state.resume)
     //let languages = resume.languages
-    const {languages} = useSelector(state => state.resume)
+    const { languages } = useSelector(state => state.resume)
     const [isEdit, setIsEdit] = useState(false)
 
     const [isNew, setIsNew] = useState(false)
@@ -46,26 +49,35 @@ export default function LanguageInfo() {
 
     const languageService = new UserLanguageService()
 
+    const addLanguageSchema = Yup.object().shape({
+        languageName: Yup.string()
+            .required(),
+        level: Yup.number()
+            .required(),
+    });
 
     const formik = useFormik({
         initialValues: {
             //languagesId: [],
         },
+        validationSchema: addLanguageSchema,
+
         onSubmit: values => {
             values = { ...values, jobseeker: { userId: 1 } }
             isNew
                 ? dispatch(addLanguage(values))
                 //languageService.add(values).then(r => console.log(r.data))
                 : dispatch(updateLanguage(values))
-                //languageService.update(values).then(r => console.log(r.data))
+            //languageService.update(values).then(r => console.log(r.data))
             handleCancelEdit()
         },
     });
 
     const handleLanguageDeleteClick = (id) => {
-        Helper.DeleteModalBox("Dil bilgisi", null, () => dispatch(deleteLanguage(id))).then(() => {
-            
-        })
+        // Helper.DeleteModalBox("Dil bilgisi", null, () => dispatch(deleteLanguage(id))).then(() => {
+
+        // })
+        YTAlerts.DeleteAlert("Dil bilgisi", null, () => dispatch(deleteLanguage(id)))
     }
 
     //console.log(languages)
@@ -82,12 +94,15 @@ export default function LanguageInfo() {
                         ? <div>
                             <Form onSubmit={formik.handleSubmit} size="small">
                                 <Form.Group widths="equal">
-                                    <Form.Input fluid placeholder="Dil adı" label='Dil Adı*' name="languageName" onChange={formik.handleChange} value={formik.values?.languageName} />
+                                    <YTFormField formik={formik} value="languageName" labeled   >
+                                        <Form.Input fluid placeholder="Dil adı" label='Dil Adı' name="languageName" onChange={formik.handleChange} value={formik.values?.languageName} required/>
+
+                                    </YTFormField>
                                     {/* <Form.Input fluid placeholder="Seviye" label='Seviye*' name="level" onChange={formik.handleChange} value={formik.values?.level} /> */}
-                                    <Form.Field>
+                                    <YTFormField formik={formik} value="level">
                                         <label className="mb-2">Seviye</label>
                                         <Rating className="mt-2" defaultRating={formik.values.level} maxRating={5} onRate={(e, { rating }) => { formik.setFieldValue("level", rating) }} icon="star" />
-                                    </Form.Field>
+                                    </YTFormField>
                                 </Form.Group>
                                 <Divider />
                                 <Button positive type="submit">Kaydet</Button>
@@ -144,7 +159,7 @@ const StarLevel = ({ level }) => {
         <div>
             {
                 star.map((s, index) => (
-                    <Icon name="favorite" color={s <= level ? "red" : "black"} key = {index}/>
+                    <Icon name="favorite" color={s <= level ? "red" : "black"} key={index} />
                 ))
             }
         </div>
