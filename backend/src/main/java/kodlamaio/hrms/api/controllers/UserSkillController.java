@@ -17,7 +17,6 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Skill;
 import kodlamaio.hrms.entities.concretes.UserSkill;
-import kodlamaio.hrms.entities.dtos.input.UserSkillInputDto;
 
 @RestController
 @RequestMapping("/api/skills")
@@ -48,8 +47,8 @@ public class UserSkillController {
 	
 	@PutMapping("/update")
 	@Transactional
-	public Result update(@RequestBody UserSkillInputDto dto) {
-		return this.userSkillService.update(dto);
+	public Result update(int userId, @RequestBody List<Integer >skillIds) {
+		return this.userSkillService.update(userId, skillIds);
 	}
 	
 }

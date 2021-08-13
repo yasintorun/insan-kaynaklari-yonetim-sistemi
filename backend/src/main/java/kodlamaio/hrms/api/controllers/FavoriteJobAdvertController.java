@@ -17,7 +17,6 @@ import kodlamaio.hrms.business.abstracts.FavoriteJobAdvertService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.FavoriteJobAdvert;
-import kodlamaio.hrms.entities.dtos.input.FavoriteJobAdvertInputDto;
 
 @RestController
 @RequestMapping("/api/favoriteJobAdverts")
@@ -38,8 +37,8 @@ public class FavoriteJobAdvertController {
 	}
 	
 	@GetMapping("/getFavorite")
-	public DataResult<FavoriteJobAdvert> getFavorite(FavoriteJobAdvertInputDto inputDto) {
-		return this.favoriteJobAdvertService.getFavorite(inputDto);
+	public DataResult<FavoriteJobAdvert> getFavorite(FavoriteJobAdvert favoriteJobAdvert) {
+		return this.favoriteJobAdvertService.getFavorite(favoriteJobAdvert);
 	}
 	
 	
@@ -49,7 +48,7 @@ public class FavoriteJobAdvertController {
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody FavoriteJobAdvertInputDto favoriteJobAdvert) {
+	public Result add(@RequestBody FavoriteJobAdvert favoriteJobAdvert) {
 		return this.favoriteJobAdvertService.add(favoriteJobAdvert);
 	}
 	

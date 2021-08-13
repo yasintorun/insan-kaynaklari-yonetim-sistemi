@@ -15,8 +15,6 @@ import kodlamaio.hrms.business.abstracts.EducationService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Education;
-import kodlamaio.hrms.entities.dtos.display.EducationDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.EducationInputDto;
 
 @RestController
 @RequestMapping("/api/educations")
@@ -31,29 +29,29 @@ public class EducationController {
 	}
 	
 	@GetMapping("/getAllEduation")
-	public DataResult<List<EducationDisplayDto>> getAll() {
+	public DataResult<List<Education>> getAll() {
 		return this.educationService.getAllDisplay();
 	}
 	
 	@GetMapping("/getByUserId")
-	public DataResult<List<EducationDisplayDto>> getByUserId(int userId) {
+	public DataResult<List<Education>> getByUserId(int userId) {
 		return this.educationService.getByUserId(userId);
 	}
 	
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody EducationInputDto education) {
+	public Result add(@RequestBody Education education) {
 		return this.educationService.add(education);
 	}
 	
 	@PostMapping("/update")
-	public Result update(int id, @RequestBody EducationInputDto education) {
+	public Result update(int id, @RequestBody Education education) {
 		return this.educationService.updateEducation(id, education);
 	}
 	
 	
 	@GetMapping("/getAllSortedEduation")
-	public DataResult<List<EducationDisplayDto>> getAllSortedByGraduation() {
+	public DataResult<List<Education>> getAllSortedByGraduation() {
 		return this.educationService.getAllSortedByGraduation();
 	}
 	

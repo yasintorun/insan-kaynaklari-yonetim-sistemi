@@ -28,9 +28,8 @@ public class FavoriteJobAdvert {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne()
-	@JoinColumn(name="user_id")
-	private Jobseeker jobseeker;
+	@Column(name="user_id")
+	private int userId;
 	
 	@ManyToOne()
 	@JoinColumn(name="job_advert_id")

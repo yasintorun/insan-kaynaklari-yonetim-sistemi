@@ -20,8 +20,6 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import kodlamaio.hrms.entities.dtos.display.JobAdvertisementDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.JobAdvertisementInputDto;
 
 @RestController
 @RequestMapping("/api/jobAdvertisements")
@@ -35,36 +33,36 @@ public class JobAdvertisementController {
 	}
 	
 	@GetMapping("/getAllJobAdvertisement")
-	public DataResult<List<JobAdvertisementDisplayDto>> getAll() {
+	public DataResult<List<JobAdvertisement>> getAll() {
 		return this.jobAdvertisementService.getAllDisplay();
 	}
 	
 	@PostMapping("/getAllJobAdvertisementWithPage")
 	@ResponseBody
-	public DataResult<List<JobAdvertisementDisplayDto>> getWithPage(int pageNo, int pageSize, @RequestBody JobAdvertFilterOption filterOption) {
+	public DataResult<List<JobAdvertisement>> getWithPage(int pageNo, int pageSize, @RequestBody JobAdvertFilterOption filterOption) {
 		return this.jobAdvertisementService.getAll(pageNo, pageSize, filterOption);
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobAdvertisementInputDto jobAdvertisement) {
+	public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
 		//System.out.println("\n\n\n"+jobAdvertisement.getCityId() +"\n\n\n");
 		return this.jobAdvertisementService.add(jobAdvertisement);
 	}
 	
 	@GetMapping("/getActiveJobAdvertisement")
-	public DataResult<List<JobAdvertisementDisplayDto>> getByIsActive() {
+	public DataResult<List<JobAdvertisement>> getByIsActive() {
 		return this.jobAdvertisementService.getByIsActive(true);
 	}
 	
 	
 	@GetMapping("/getActiveAndDateJobAdvertisement")
-	public DataResult<List<JobAdvertisementDisplayDto>> getByIsActiveAndReleaseDate(@RequestParam Date releaseDate) {
+	public DataResult<List<JobAdvertisement>> getByIsActiveAndReleaseDate(@RequestParam Date releaseDate) {
 		
 		return this.jobAdvertisementService.getByIsActiveAndReleaseDate(true, releaseDate);
 	}
 	
 	@GetMapping("/getAllSortedJobAdvertisement")
-	public DataResult<List<JobAdvertisementDisplayDto>> getAllSorted() {
+	public DataResult<List<JobAdvertisement>> getAllSorted() {
 		return this.jobAdvertisementService.getAllSorted();
 	}
 
@@ -74,17 +72,17 @@ public class JobAdvertisementController {
 	}
 
 	@GetMapping("/ChangeActive")
-	public DataResult<JobAdvertisementInputDto> updateActive(int jobAdvertisementId, boolean isActive) {
+	public DataResult<JobAdvertisement> updateActive(int jobAdvertisementId, boolean isActive) {
 		return this.jobAdvertisementService.updateActive(jobAdvertisementId, isActive);
 	}
 	
 	@GetMapping("/getById")
-	public DataResult<JobAdvertisementDisplayDto> getJobAdvertisementById(int id) {
+	public DataResult<JobAdvertisement> getJobAdvertisementById(int id) {
 		return this.jobAdvertisementService.getJobAdvertisementById(id);
 	}
 	
 	@GetMapping("/getByEmployerUserId")
-	public DataResult<List<JobAdvertisementDisplayDto>> getByEmployerUserId(int userId) {
+	public DataResult<List<JobAdvertisement>> getByEmployerUserId(int userId) {
 		return this.jobAdvertisementService.getByEmployerUserId(userId);
 	}
 	

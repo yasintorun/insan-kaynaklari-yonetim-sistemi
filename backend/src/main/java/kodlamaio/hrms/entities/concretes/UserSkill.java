@@ -24,9 +24,8 @@ public class UserSkill {
 	@Column(name="id")
 	private int id;
 	
-	@ManyToOne()
-	@JoinColumn(name="user_id")
-	private Jobseeker jobseeker;
+	@Column(name="user_id")
+	private int userId;
 	
 	@ManyToOne()
 	@JoinColumn(name="skill_id")

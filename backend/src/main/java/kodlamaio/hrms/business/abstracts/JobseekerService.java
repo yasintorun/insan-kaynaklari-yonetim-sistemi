@@ -7,5 +7,5 @@ import kodlamaio.hrms.entities.dtos.input.JobSeekerInputDto;
 
 public interface JobseekerService extends BaseService<Jobseeker>{
 	DataResult add(JobSeekerInputDto inputDto);
-	public DataResult add(Jobseeker entity);
+	public DataResult<Jobseeker> add(Jobseeker entity);
 }

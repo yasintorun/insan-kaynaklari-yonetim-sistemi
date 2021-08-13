@@ -16,8 +16,6 @@ import kodlamaio.hrms.core.utilities.helpers.Encryption;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.entities.concretes.User;
-import kodlamaio.hrms.entities.dtos.display.UserDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.UserInputDto;
 import kodlamaio.hrms.core.utilities.results.Result;
 
 @RestController
@@ -50,12 +48,8 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public DataResult<UserDisplayDto>  login(@RequestBody UserInputDto inputDto) {
-		return this.userService.login(inputDto);
+	public DataResult<User>  login(@RequestBody User user) {
+		return this.userService.login(user);
 	}
 	
-	@PostMapping("/loginInstagram")
-	public DataResult<UserDisplayDto>  loginTest(@RequestBody UserInputDto inputDto) {
-		return this.userService.loginTest(inputDto);
-	}
 }

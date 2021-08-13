@@ -15,8 +15,6 @@ import kodlamaio.hrms.business.abstracts.ExperienceService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Experience;
-import kodlamaio.hrms.entities.dtos.display.ExperienceDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.ExperienceInputDto;
 
 @RestController
 @RequestMapping("/api/experiences")
@@ -30,29 +28,29 @@ public class ExperienceController {
 	}
 	
 	@GetMapping("/getAllExperiences")
-	public DataResult<List<ExperienceDisplayDto>> getAll() {
+	public DataResult<List<Experience>> getAll() {
 		return this.experienceService.getAllDisplay();
 	}
 	
 	
 	@GetMapping("/getByUserId")
-	public DataResult<List<ExperienceDisplayDto>> getByUserId(int userId) {
+	public DataResult<List<Experience>> getByUserId(int userId) {
 		return this.experienceService.getByUserId(userId);
 	}
 	
 	
 	@GetMapping("/getAllSortedExperiences")
-	public DataResult<List<ExperienceDisplayDto>> getAllSorted() {
+	public DataResult<List<Experience>> getAllSorted() {
 		return this.experienceService.getAllSorted();
 	}
 	
 	@PostMapping("/addExperience")
-	public Result add(@RequestBody ExperienceInputDto experience) {
+	public Result add(@RequestBody Experience experience) {
 		return this.experienceService.add(experience);
 	}
 	
 	@PostMapping("/updateExperience")
-	public Result update(int id, @RequestBody ExperienceInputDto experience) {
+	public Result update(int id, @RequestBody Experience experience) {
 		return this.experienceService.updateExperience(id, experience);
 	}
 	

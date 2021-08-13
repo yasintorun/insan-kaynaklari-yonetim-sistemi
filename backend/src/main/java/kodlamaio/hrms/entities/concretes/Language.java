@@ -37,7 +37,6 @@ public class Language {
 	@Column(name="level")
 	private int level;
 	
-	@ManyToOne()
-	@JoinColumn(name="user_id")
-	private Jobseeker jobseeker;
+	@Column(name="user_id")
+	private int userId;
 }

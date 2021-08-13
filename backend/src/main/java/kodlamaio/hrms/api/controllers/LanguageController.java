@@ -16,7 +16,6 @@ import kodlamaio.hrms.business.abstracts.LanguageService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Language;
-import kodlamaio.hrms.entities.dtos.display.LanguageDisplayDto;
 
 @RestController
 @RequestMapping("/api/languages")
@@ -35,7 +34,7 @@ public class LanguageController {
 	}
 	
 	@GetMapping("/getByUserId")
-	public DataResult<List<LanguageDisplayDto>> getByUserId(int userId) {
+	public DataResult<List<Language>> getByUserId(int userId) {
 		return this.languageService.getByUserId(userId);
 	}
 	

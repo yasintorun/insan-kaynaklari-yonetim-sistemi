@@ -5,19 +5,17 @@ import java.util.List;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Education;
-import kodlamaio.hrms.entities.dtos.display.EducationDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.EducationInputDto;
 
 public interface EducationService extends BaseService<Education>{
-	public DataResult<List<EducationDisplayDto>> getAllDisplay();
+	public DataResult<List<Education>> getAllDisplay();
 	
-	public DataResult<List<EducationDisplayDto>> getByUserId(int userId);
+	public DataResult<List<Education>> getByUserId(int userId);
 	
-	public DataResult<List<EducationDisplayDto>> getAllSortedByGraduation();
+	public DataResult<List<Education>> getAllSortedByGraduation();
 	
-	public DataResult<EducationDisplayDto> updateEducation(int id, EducationInputDto inputDto);
+	public DataResult<Education> updateEducation(int id, Education education);
 
-	public Result add(EducationInputDto education);
+	public Result add(Education education);
 
 	public Result delete(int id);
 }

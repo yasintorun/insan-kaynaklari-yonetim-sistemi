@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="schools")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","educations"})
 public class School {
 	public School(int id) {
 		this.id = id;

@@ -52,7 +52,6 @@ public class Experience {
 	@JoinColumn(name="city_id")
 	private City city;
 	
-	@ManyToOne()
-	@JoinColumn(name="user_id")
-	private Jobseeker jobseeker;
+	@Column(name="user_id")
+	private int userId;
 }

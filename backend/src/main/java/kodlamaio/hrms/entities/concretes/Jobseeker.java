@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resumes", "languages", "experiences", "userSkills", "educations", "favoriteJobAdverts"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resumes"})
 public class Jobseeker extends User{
 		
 	public Jobseeker(int userId) {
@@ -43,20 +43,4 @@ public class Jobseeker extends User{
             cascade =  CascadeType.ALL,
             mappedBy = "jobSeeker")
 	private Resume resumes;
-
-	@OneToMany(mappedBy = "jobseeker")
-	private List<Language> languages;
-	
-	@OneToMany(mappedBy = "jobseeker")
-	private List<Experience> experiences;
-	
-	@OneToMany(mappedBy = "jobseeker", cascade = CascadeType.REMOVE)
-	private List<UserSkill> userSkills;
-	
-
-	@OneToMany(mappedBy = "jobseeker")
-	private List<Education> educations;
-	
-	@OneToMany(mappedBy = "jobseeker")
-	private List<FavoriteJobAdvert> favoriteJobAdverts;
 }

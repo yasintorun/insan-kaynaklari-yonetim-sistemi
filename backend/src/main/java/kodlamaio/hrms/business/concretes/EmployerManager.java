@@ -18,7 +18,6 @@ import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.UpdateEmployerInfo;
 import kodlamaio.hrms.entities.concretes.User;
-import kodlamaio.hrms.entities.dtos.display.EmployerDisplayDto;
 import kodlamaio.hrms.entities.dtos.input.EmployerInputDto;
 @Service
 public class EmployerManager implements EmployerService{
@@ -69,9 +68,9 @@ public class EmployerManager implements EmployerService{
 	}
 
 	@Override
-	public DataResult<EmployerDisplayDto> getById(int userId) {
-		return new SuccessDataResult<EmployerDisplayDto>
-		(EmployerDtoConverter.NormalToDisplayDto(this.employerDao.getOne(userId)), "işveren getirildi");
+	public DataResult<Employer> getById(int userId) {
+		return new SuccessDataResult<Employer>
+		(this.employerDao.getOne(userId), "işveren getirildi");
 	}
 
 	

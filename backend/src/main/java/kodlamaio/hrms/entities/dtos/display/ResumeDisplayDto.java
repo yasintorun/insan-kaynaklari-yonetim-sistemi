@@ -4,9 +4,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 import kodlamaio.hrms.entities.concretes.City;
+import kodlamaio.hrms.entities.concretes.Education;
+import kodlamaio.hrms.entities.concretes.Experience;
 import kodlamaio.hrms.entities.concretes.Gender;
 import kodlamaio.hrms.entities.concretes.Image;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
+import kodlamaio.hrms.entities.concretes.Language;
 import kodlamaio.hrms.entities.concretes.Nationality;
 import kodlamaio.hrms.entities.concretes.Skill;
 import kodlamaio.hrms.entities.concretes.UserSkill;
@@ -20,7 +23,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResumeDisplayDto {
 	private int id;
-	private JobSeekerDisplayDto user;
+	private Jobseeker user;
 	private String githubLink;
 	private String linkedinLink;
 	private String summary;
@@ -30,8 +33,8 @@ public class ResumeDisplayDto {
 	private City city;
 	private Nationality nationality;
 	private Image image;
-	private List<LanguageDisplayDto> languages;
-	private List<ExperienceDisplayDto> experiences;
-	private List<UserSkillDisplayDto> skills;
-	private List<EducationDisplayDto> educations;
+	private List<Language> languages;
+	private List<Experience> experiences;
+	private List<UserSkill> skills;
+	private List<Education> educations;
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 import kodlamaio.hrms.entities.concretes.Language;
 import kodlamaio.hrms.entities.concretes.Resume;
-import kodlamaio.hrms.entities.dtos.display.JobSeekerDisplayDto;
 import kodlamaio.hrms.entities.dtos.display.ResumeDisplayDto;
 import kodlamaio.hrms.entities.dtos.input.ResumeInputDto;
 
@@ -17,7 +16,7 @@ public class ResumeDtoConverter {
 	
 	//Resume -> ResumeInputDto
 	public static ResumeInputDto NormalToInputDto(Resume normal) {
-		return new ResumeInputDto(JobSeekerDtoConverter.NormalToDisplayDto(normal.getJobSeeker()), 
+		return new ResumeInputDto(normal.getJobSeeker(), 
 				normal.getImage().getId(), normal.getGender().getId(),  normal.getNationality().getId(), normal.getGithub(), 
 				normal.getLinkedin(), normal.getSummary(), normal.getBirtdate(), normal.getPhone(), normal.getCity().getId());
 	}
@@ -55,14 +54,14 @@ public class ResumeDtoConverter {
 	
 	//Resume -> ResumeDisplayDto
 	public static ResumeDisplayDto NormalToDisplayDto(Resume resume) {
-		return new ResumeDisplayDto(resume.getId(), JobSeekerDtoConverter.NormalToDisplayDto(resume.getJobSeeker()),
+		/*return new ResumeDisplayDto(resume.getId(), JobSeekerDtoConverter.NormalToDisplayDto(resume.getJobSeeker()),
 				resume.getGithub(), resume.getLinkedin(), resume.getSummary(),
 				resume.getBirtdate(), resume.getPhone(), resume.getGender(), resume.getCity(),
 				resume.getNationality(), resume.getImage(),
 				LanguageDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getLanguages()),
 				ExperienceDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getExperiences()),
-				UserSkillDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getUserSkills()),
-				EducationDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getEducations()));
+				UserSkillDtoConverter.NormalToDisplayDto(resume.getJobSeeker().getUserSkills()));*/
+		return null;
 	}
 	
 	public static List<ResumeDisplayDto> NormalToDisplayDto(List<Resume> resumeList) {

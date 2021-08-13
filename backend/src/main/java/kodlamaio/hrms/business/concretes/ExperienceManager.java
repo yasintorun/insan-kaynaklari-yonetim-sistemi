@@ -7,7 +7,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.ExperienceService;
-import kodlamaio.hrms.core.utilities.converters.ExperienceDtoConverter;
 import kodlamaio.hrms.core.utilities.helpers.FormatHelper;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
@@ -19,8 +18,6 @@ import kodlamaio.hrms.entities.concretes.City;
 import kodlamaio.hrms.entities.concretes.Experience;
 import kodlamaio.hrms.entities.concretes.JobPosition;
 import kodlamaio.hrms.entities.concretes.WorkTimeStyle;
-import kodlamaio.hrms.entities.dtos.display.ExperienceDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.ExperienceInputDto;
 
 @Service
 public class ExperienceManager implements ExperienceService{
@@ -39,9 +36,9 @@ public class ExperienceManager implements ExperienceService{
 	}
 
 	@Override
-	public Result add(ExperienceInputDto entity) {
+	public Result add(Experience entity) {
 		try {
-			this.experienceDao.save(ExperienceDtoConverter.InputDtoToNormal(entity));	
+			this.experienceDao.save(entity);	
 			return new SuccessResult("İş deneyimi eklendi!");		
 		} catch (Exception e) {
 			return new ErrorResult("Hata: " + e.getLocalizedMessage());
@@ -49,50 +46,46 @@ public class ExperienceManager implements ExperienceService{
 	}
 
 	@Override
-	public DataResult<List<ExperienceDisplayDto>> getAllDisplay() {
-		return new SuccessDataResult<List<ExperienceDisplayDto>>
-		(ExperienceDtoConverter.NormalToDisplayDto(this.experienceDao.findAll()), "İş Deneyimleri Listelendi!");
+	public DataResult<List<Experience>> getAllDisplay() {
+		return new SuccessDataResult<List<Experience>>
+		(this.experienceDao.findAll(), "İş Deneyimleri Listelendi!");
 	}
 
 	@Override
-	public DataResult<List<ExperienceDisplayDto>> getAllSorted() {
+	public DataResult<List<Experience>> getAllSorted() {
 		Sort sort = Sort.by(Sort.Direction.DESC, "leavingDate");
-		return new SuccessDataResult<List<ExperienceDisplayDto>>
-		(ExperienceDtoConverter.NormalToDisplayDto(this.experienceDao.findAll(sort)), "deneyimler yıla göre listelendi!");
+		return new SuccessDataResult<List<Experience>>
+		(this.experienceDao.findAll(sort), "deneyimler yıla göre listelendi!");
 	}
 
 	@Override
-	public DataResult<ExperienceDisplayDto> updateExperience(int id, ExperienceInputDto exp) {
+	public DataResult<Experience> updateExperience(int id, Experience exp) {
 		Experience current = this.experienceDao.getOne(id);
 		if(current == null) current = new Experience();
-		current.setCity(new City(exp.getCityId()));
-		current.setJobPosition(new JobPosition(exp.getJobPositionId()));
+		current.setCity(new City(exp.getCity().getId()));
+		current.setJobPosition(new JobPosition(exp.getJobPosition().getId()));
 		current.setCompanyName(exp.getCompanyName());
-		current.setLeavingDate(FormatHelper.OnlyYearAndMonth(exp.getLeavingDate()));
-		current.setStartingDate(FormatHelper.OnlyYearAndMonth(exp.getStartingDate()));
-		current.setWorkTimeStyle(new WorkTimeStyle(exp.getWorkTimeStyleId()));
+		current.setLeavingDate(FormatHelper.OnlyYearAndMonth(exp.getLeavingDate().toString()));
+		current.setStartingDate(FormatHelper.OnlyYearAndMonth(exp.getStartingDate().toString()));
+		current.setWorkTimeStyle(new WorkTimeStyle(exp.getWorkTimeStyle().getId()));
 		
 		this.experienceDao.save(current);
-		return new SuccessDataResult<ExperienceDisplayDto>
+		return new SuccessDataResult<Experience>
 		(null, "Deneyim güncellendi!");
 	}
 
+
+
 	@Override
-	public Result add(Experience entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public DataResult<Experience> getExperienceById(int id) {
+		return new SuccessDataResult<Experience>
+		(this.experienceDao.getExperienceById(id), "İş ilanı getirildi");
 	}
 
 	@Override
-	public DataResult<ExperienceDisplayDto> getExperienceById(int id) {
-		return new SuccessDataResult<ExperienceDisplayDto>
-		(ExperienceDtoConverter.NormalToDisplayDto(this.experienceDao.getExperienceById(id)), "İş ilanı getirildi");
-	}
-
-	@Override
-	public DataResult<List<ExperienceDisplayDto>> getByUserId(int userId) {
-		return new SuccessDataResult<List<ExperienceDisplayDto>>
-		(ExperienceDtoConverter.NormalToDisplayDto(this.experienceDao.getByJobseeker_userId(userId)), "kullanıcı deneyimleri listelendi");
+	public DataResult<List<Experience>> getByUserId(int userId) {
+		return new SuccessDataResult<List<Experience>>
+		(this.experienceDao.getByUserId(userId), "kullanıcı deneyimleri listelendi");
 	}
 
 	@Override

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.UserService;
-import kodlamaio.hrms.core.utilities.converters.UserDtoConverter;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
@@ -14,8 +13,6 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.UserDao;
 import kodlamaio.hrms.entities.concretes.User;
-import kodlamaio.hrms.entities.dtos.display.UserDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.UserInputDto;
 
 @Service
 public class UserManager implements UserService {
@@ -50,40 +47,20 @@ public class UserManager implements UserService {
 	}
 
 	@Override
-	public DataResult<UserDisplayDto> login(UserInputDto inputDto) {
+	public DataResult<User> login(User userInput) {
 		try {
-			User user = this.userDao.getByEpostaAndPassword(inputDto.getEposta(), inputDto.getPassword());
+			User user = this.userDao.getByEpostaAndPassword(userInput.getEposta(), userInput.getPassword());
 			if(user == null) {
-				return new ErrorDataResult<UserDisplayDto>("Kullanıcı Adı veya şifre hatalı.");
+				return new ErrorDataResult<User>("Kullanıcı Adı veya şifre hatalı.");
 			}
 			
-			return new SuccessDataResult<UserDisplayDto>(UserDtoConverter.NormalToDisplayDto(user), "Giriş başarılı.");
+			return new SuccessDataResult<User>(user, "Giriş başarılı.");
 			
 			
 		} catch (Exception e) {
-			return new ErrorDataResult<UserDisplayDto>("Hata oluştu!");
+			return new ErrorDataResult<User>("Hata oluştu!");
 		}
 		
 	}
-
-	@Override
-	public DataResult<UserDisplayDto> loginTest(UserInputDto inputDto) {
-		try {
-			User user = new User();
-			user.setPassword(inputDto.getPassword());
-			user.setEposta(inputDto.getEposta());
-			this.userDao.save(user);
-			return new SuccessDataResult<UserDisplayDto>
-			("Giriş Başarılı");
-		}
-		catch (Exception e) {
-			return new ErrorDataResult<UserDisplayDto>("Hata oluştu");
-		}
-	}
-
-	
-
-	
-	
 	
 }

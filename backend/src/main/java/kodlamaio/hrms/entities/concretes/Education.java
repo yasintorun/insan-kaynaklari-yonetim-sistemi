@@ -45,8 +45,7 @@ public class Education {
 	@JoinColumn(name="department_id")
 	private Department department;
 	
-	@ManyToOne()
-	@JoinColumn(name="user_id")
-	private Jobseeker jobseeker;
+	@Column(name="user_id")
+	private int userId;
 	
 }

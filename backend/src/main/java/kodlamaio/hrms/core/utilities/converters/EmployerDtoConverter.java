@@ -6,27 +6,9 @@ import java.util.List;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.entities.concretes.Employer;
 import kodlamaio.hrms.entities.concretes.UpdateEmployerInfo;
-import kodlamaio.hrms.entities.dtos.display.EmployerDisplayDto;
 import kodlamaio.hrms.entities.dtos.input.EmployerInputDto;
 
 public class EmployerDtoConverter {
-	public static EmployerDisplayDto NormalToDisplayDto(Employer employer) {
-		return new EmployerDisplayDto(employer.getUserId(), employer.getCompanyName(), 
-				employer.getEposta(), employer.getWebsite(),employer.getSummary(), employer.getPhone(), employer.isConfirmed(), true);
-	}
-	
-	public static List<EmployerDisplayDto> NormalToDisplayDto(List<Employer> empList) {
-		List<EmployerDisplayDto> dtoList = new ArrayList<EmployerDisplayDto>();
-		
-		for(Employer emp : empList) {
-			dtoList.add(NormalToDisplayDto(emp));
-		}
-		
-		return dtoList;
-	}
-	
-	
-	
 	//INPUT DTO
 	public static Employer InputToNormal(EmployerInputDto inputDto) {
 		

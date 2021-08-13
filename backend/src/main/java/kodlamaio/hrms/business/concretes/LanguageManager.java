@@ -7,7 +7,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.LanguageService;
-import kodlamaio.hrms.core.utilities.converters.LanguageDtoConverter;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -15,7 +14,6 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.LanguageDao;
 import kodlamaio.hrms.entities.concretes.Language;
-import kodlamaio.hrms.entities.dtos.display.LanguageDisplayDto;
 
 @Service
 public class LanguageManager implements LanguageService{
@@ -40,12 +38,12 @@ public class LanguageManager implements LanguageService{
 	}
 
 	@Override
-	public DataResult<List<LanguageDisplayDto>> getByUserId(int userId) {
+	public DataResult<List<Language>> getByUserId(int userId) {
 		
 		Sort sort = Sort.by(Sort.Direction.DESC, "level");
 		
-		return new SuccessDataResult<List<LanguageDisplayDto>>
-		(LanguageDtoConverter.NormalToDisplayDto(this.languageDao.getByJobseeker_userId(userId, sort)), "Dil bilgisi getirildi");
+		return new SuccessDataResult<List<Language>>
+		(this.languageDao.getByUserId(userId, sort), "Dil bilgisi getirildi");
 	}
 
 	@Override

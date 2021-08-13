@@ -2,8 +2,8 @@ package kodlamaio.hrms.entities.dtos.input;
 
 import java.time.LocalDate;
 
+import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.User;
-import kodlamaio.hrms.entities.dtos.display.JobSeekerDisplayDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResumeInputDto {
-	private JobSeekerDisplayDto user;
+	private Jobseeker user;
 	private int imageId;
 	private int genderId;
 	private int nationalityId;

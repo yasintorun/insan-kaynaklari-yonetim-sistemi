@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import kodlamaio.hrms.entities.concretes.Education;
 
 public interface EducationDao extends JpaRepository<Education, Integer>{
-	List<Education> getByJobseeker_userId(int userId, Sort sort);
+	List<Education> getByUserId(int userId, Sort sort);
 }
