@@ -46,9 +46,6 @@ export default function LanguageInfo() {
 
         })
     }
-
-    const languageService = new UserLanguageService()
-
     const addLanguageSchema = Yup.object().shape({
         languageName: Yup.string()
             .required(),
@@ -63,13 +60,14 @@ export default function LanguageInfo() {
         validationSchema: addLanguageSchema,
 
         onSubmit: values => {
-            values = { ...values, jobseeker: { userId: 1 } }
+            values = { ...values, resume: {id: 26 } }
             isNew
                 ? dispatch(addLanguage(values))
                 //languageService.add(values).then(r => console.log(r.data))
                 : dispatch(updateLanguage(values))
             //languageService.update(values).then(r => console.log(r.data))
             handleCancelEdit()
+            //console.log(values)
         },
     });
 

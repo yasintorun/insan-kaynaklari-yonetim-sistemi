@@ -47,8 +47,8 @@ public class UserSkillController {
 	
 	@PutMapping("/update")
 	@Transactional
-	public Result update(int userId, @RequestBody List<Integer >skillIds) {
-		return this.userSkillService.update(userId, skillIds);
+	public Result update(int resumeId, @RequestBody List<Integer >skillIds) {
+		return this.userSkillService.update(resumeId, skillIds);
 	}
 	
 }

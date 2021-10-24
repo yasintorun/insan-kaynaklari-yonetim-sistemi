@@ -14,8 +14,9 @@ public class FormatHelper {
 	}
 	
 	public static LocalDate OnlyYearAndMonth(String date) {
-		
-		date += "-01";
+		int i = date.split("-").length;
+		if(i < 2)
+			date += "-01";
 		return LocalDate.parse(date);
 	}
 }

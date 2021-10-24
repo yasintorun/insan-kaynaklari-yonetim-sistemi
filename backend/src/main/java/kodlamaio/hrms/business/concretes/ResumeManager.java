@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kodlamaio.hrms.business.abstracts.JobseekerService;
 import kodlamaio.hrms.business.abstracts.ResumeService;
-import kodlamaio.hrms.core.utilities.converters.ResumeDtoConverter;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
@@ -23,8 +22,6 @@ import kodlamaio.hrms.entities.concretes.Gender;
 import kodlamaio.hrms.entities.concretes.Image;
 import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.Resume;
-import kodlamaio.hrms.entities.dtos.display.ResumeDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.ResumeInputDto;
 
 @Service
 public class ResumeManager implements ResumeService{
@@ -51,52 +48,38 @@ public class ResumeManager implements ResumeService{
 	}
 
 	@Override
-	public Result add(ResumeInputDto resume) {
-		Resume res = ResumeDtoConverter.InputDtoToNormal(resume);
-		System.out.println("\n\n\n\n");
-		System.out.println(res.getImage().getId());
-		this.resumeDao.save(res);
-		return new SuccessResult("CV Eklendi");
+	public DataResult<List<Resume>> getAllDisplay() {
+		return new SuccessDataResult<List<Resume>>
+		(this.resumeDao.findAll(), "Cvler listelendi!");
 	}
 
 	@Override
-	public DataResult<List<ResumeDisplayDto>> getAllDisplay() {
-		return new SuccessDataResult<List<ResumeDisplayDto>>
-		(ResumeDtoConverter.NormalToDisplayDto(this.resumeDao.findAll()), "Cvler listelendi!");
+	public DataResult<Resume> getResumeById(int id) {
+		return new SuccessDataResult<Resume>
+		(this.resumeDao.getResumeById(id), "Özgeçmiş başarıyla getirildi");
 	}
 
 	@Override
-	public DataResult<ResumeDisplayDto> getResumeById(int id) {
-		return new SuccessDataResult<ResumeDisplayDto>
-		(ResumeDtoConverter.NormalToDisplayDto(this.resumeDao.getResumeById(id)), "Özgeçmiş başarıyla getirildi");
-	}
-
-	@Override
-	public DataResult<ResumeDisplayDto> updateResume(int id, ResumeInputDto resume) {
+	public DataResult<Resume> updateResume(int id, Resume resume) {
 		try {
 			Resume current = this.resumeDao.getResumeById(id);
-			Jobseeker self = current.getJobSeeker();
-			self.setFirstname(resume.getUser().getFirstname());
-			self.setLastname(resume.getUser().getLastname());
 			current.setPhone(resume.getPhone());
-			current.setBirtdate(resume.getBirthDate());
-			current.setGithub(resume.getGithubLink());
-			current.setLinkedin(resume.getLinkedinLink());
-			current.setGender(new Gender(resume.getGenderId()));
-			current.setCity(new City(resume.getCityId()));
-			
-			this.jobseekerDao.save(self);
+			current.setBirtdate(resume.getBirtdate());
+			current.setGithub(resume.getGithub());
+			current.setLinkedin(resume.getLinkedin());
+			current.setGender(new Gender(resume.getGender().getId()));
+			current.setCity(new City(resume.getCity().getId()));
 			
 			this.resumeDao.save(current);
-			return new SuccessDataResult<ResumeDisplayDto>(null, "güncellendi");
+			return new SuccessDataResult<Resume>(null, "güncellendi");
 		}catch (Exception e) {
-			return new ErrorDataResult<ResumeDisplayDto>("Hata: " + e.getLocalizedMessage());
+			return new ErrorDataResult<Resume>("Hata: " + e.getLocalizedMessage());
 		}
 			
 	}
 
 	@Override
-	public Result updateResumeSummary(int id, ResumeInputDto dto) {
+	public Result updateResumeSummary(int id, Resume dto) {
 		Resume current = this.resumeDao.getResumeById(id);
 		current.setSummary(dto.getSummary());
 		

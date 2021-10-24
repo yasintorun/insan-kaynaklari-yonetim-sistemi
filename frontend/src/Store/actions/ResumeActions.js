@@ -155,8 +155,8 @@ export const deleteExperience = (experienceID) => async (dispatch) => {
 /*SKILL İŞLEMLERİ */
 
 /*Yetenek kısmı diğerleri gibi değil. Burada sadece update işlemi bulunuyor. */
-export const updateSkill = (skillVal) => async (dispatch) => {
-    return await skillService.update(skillVal)
+export const updateSkill = (resumeId, skillIds) => async (dispatch) => {
+    return await skillService.update(resumeId, skillIds)
         .then(result => {
             BaseCallBackFunc(dispatch, result)
         })

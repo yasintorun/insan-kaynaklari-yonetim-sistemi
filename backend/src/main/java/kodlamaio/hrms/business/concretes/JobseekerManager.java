@@ -40,7 +40,6 @@ public class JobseekerManager implements JobseekerService{
 
 	@Override
 	public DataResult<Jobseeker> add(Jobseeker entity) {
-		
 		if(isNull(entity)) {
 			return new ErrorDataResult<Jobseeker>("Tüm alanları doldurunuz!");
 		}

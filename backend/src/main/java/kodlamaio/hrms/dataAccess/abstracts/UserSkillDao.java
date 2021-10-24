@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import kodlamaio.hrms.entities.concretes.UserSkill;
 
 public interface UserSkillDao extends JpaRepository<UserSkill, Integer>{
-	List<UserSkill> getByUserId(int userId);
+	List<UserSkill> getByResumeId(int userId);
 	
 	//UserSkill getByJobseeker_userIdAndSkill_id(int userId, int skillId);
 	
-	void deleteByUserId(int userId);
+	void deleteByResumeId(int userId);
 	
 }

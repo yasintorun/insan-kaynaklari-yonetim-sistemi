@@ -10,6 +10,6 @@ public interface UserSkillService extends BaseService<UserSkill>{
 
 	DataResult<List<UserSkill>> getByUserId(int userId);
 
-	Result update(int userId, List<Integer> skillIds);
+	Result update(int resumeId, List<Integer> skillIds);
 
 }

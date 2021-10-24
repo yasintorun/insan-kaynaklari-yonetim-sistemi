@@ -31,20 +31,7 @@ export default function PersonalInfo() {
     const handleEditClick = () => {
         setIsEdit(!isEdit)
         formik.setValues({
-            id: resume?.id,
-            user: {
-                userId: resume?.user?.userId,
-                firstname: resume?.user?.firstname,
-                lastname: resume?.user?.lastname,
-                eposta: resume?.user?.eposta,
-            },
-            phone: resume?.phone,
-            genderId: resume?.gender?.id,
-            githubLink: resume?.githubLink,
-            linkedinLink: resume?.linkedinLink,
-            cityId: resume?.city?.id,
-            birtdate: resume?.birtdate,
-            imageId: resume?.image?.id,
+            ...resume
         })
     }
 
@@ -57,9 +44,9 @@ export default function PersonalInfo() {
             .required(),
         cityId: Yup.number()
             .required(),
-        githubLink: Yup.string()
+        github: Yup.string()
             .required(),
-        linkedinLink: Yup.string()
+        linkedin: Yup.string()
             .required(),
         phone: Yup.string()
             .required(),
@@ -68,12 +55,13 @@ export default function PersonalInfo() {
     const formik = useFormik({
         initialValues: {
         },
-        validationSchema: personelValidationSchema,
+        //validationSchema: personelValidationSchema,
         onSubmit: values => {
             //dispatch(updateResume(values))
             //resumeService.update(1, values).then(r => console.log(r.data.message))
-            console.log(values)
+           
             handleEditClick()
+            console.log(resume)
         },
     });
 
@@ -142,14 +130,14 @@ export default function PersonalInfo() {
                             </div>
                             <div className="col-lg-9">
                                 <Form onSubmit={formik.handleSubmit} size="small">
-                                    <Form.Group widths='equal'>
+                                    {/* <Form.Group widths='equal'>
                                         <Form.Field>
-                                            <Form.Input fluid placeholder="İsim" label='İsim*' name="user.firstname" onChange={formik.handleChange} value={formik.values?.user?.firstname} required/>
+                                            <Form.Input fluid placeholder="İsim" label='İsim*' name="jobSeeker.firstname" onChange={formik.handleChange} value={formik.values?.user?.firstname} required/>
                                         </Form.Field>
                                         <YTFormField formik={formik} value="lastname">
-                                            <Form.Input fluid placeholder="Soyisim" label='Soyisim*' name="user.lastname" onChange={formik.handleChange} value={formik.values?.user?.lastname} required/>
+                                            <Form.Input fluid placeholder="Soyisim" label='Soyisim*' name="jobSeeker.lastname" onChange={formik.handleChange} value={formik.values?.user?.lastname} required/>
                                         </YTFormField>
-                                    </Form.Group>
+                                    </Form.Group> */}
                                     <Form.Group widths='equal'>
                                         <YTFormField formik={formik} value="genderId">
                                             <GenderDropdown onChangeEvent={(event, data) => formik.setFieldValue("genderId", data.value)} value={formik.values?.genderId} />
@@ -163,18 +151,18 @@ export default function PersonalInfo() {
                                             <Form.Input fluid placeholder="Telefon" label='Telefon' name="phone" onChange={formik.handleChange} value={formik.values?.phone} />
                                         </YTFormField>
                                         <YTFormField formik={formik} value="lastname">
-                                            <Form.Field><CityDropDown onChangeEvent={(event, data) => formik.setFieldValue("cityId", data.value)} value={formik.values?.cityId} /> </Form.Field>
+                                            <Form.Field><CityDropDown onChangeEvent={(event, data) => formik.setFieldValue("city.id", data.value)} value={formik.values?.city?.id} /> </Form.Field>
                                         </YTFormField>
                                     </Form.Group>
                                     <Form.Group widths='equal'>
-                                        <YTFormField formik={formik} value="githubLink">
-                                            <Form.Input fluid placeholder="Github Link" label='Github' name="githubLink" onChange={formik.handleChange} value={formik.values?.githubLink} />
+                                        <YTFormField formik={formik} value="github">
+                                            <Form.Input fluid placeholder="Github Link" label='Github' name="github" onChange={formik.handleChange} value={formik.values?.github} />
                                         </YTFormField>
-                                        <YTFormField formik={formik} value="linkedinLink">
-                                            <Form.Input fluid placeholder="Linkedin Link" label='Linkedin' name="linkedinLink" onChange={formik.handleChange} value={formik.values?.linkedinLink} />
+                                        <YTFormField formik={formik} value="linkedin">
+                                            <Form.Input fluid placeholder="Linkedin Link" label='Linkedin' name="linkedin" onChange={formik.handleChange} value={formik.values?.linkedin} />
                                         </YTFormField>
                                     </Form.Group>
-                                    <Button positive type="submit">Kaydet</Button>
+                                    <Button positive type="submit" >Kaydet</Button>
                                     <Button negative type="button" onClick={() => handleEditClick()}>Vazgeç</Button>
                                 </Form>
                             </div>
@@ -188,19 +176,19 @@ export default function PersonalInfo() {
                             </div>
                             <div className="w-100 ms-4">
                                 <div>
-                                    <h2>{resume.user?.firstname + " " + resume.user?.lastname}</h2>
+                                    <h2>{resume.jobSeeker?.firstname + " " + resume.jobSeeker?.lastname}</h2>
                                     <div className="d-flex justify-content-between w-75">
                                         <div>
-                                            <YTInfoMessage info="E-posta adresi" text={resume.user?.eposta} />
+                                            <YTInfoMessage info="E-posta adresi" text={resume.jobSeeker?.eposta} />
                                             <YTInfoMessage info="Telefon" text={resume.phone} />
                                             <YTInfoMessage info="Yaşadığım şehir" text={resume?.city?.cityName} />
-                                            <YTInfoMessage info="Github" text={resume.githubLink} />
+                                            <YTInfoMessage info="Github" text={resume.github} />
                                         </div>
                                         <div>
                                             <YTInfoMessage info="Doğum tarihi" text={resume.birtdate} />
                                             <YTInfoMessage info="Cinsiyet" text={resume.gender?.name} />
                                             <YTInfoMessage info="Uyruk" text={resume.nationality?.name} />
-                                            <YTInfoMessage info="Linkedin" text={resume.linkedinLink} />
+                                            <YTInfoMessage info="Linkedin" text={resume.linkedin} />
                                         </div>
                                     </div>
                                 </div>

@@ -12,7 +12,7 @@ export default class SkillService{
         return axios.get(Links.ROOT + "/skills/getByUserId?userId=" + userId)
     }
 
-    update(values) {
-        return axios.put(Links.ROOT + "/skills/update", values)
+    update(resumeId, skillIds) {
+        return axios.put(Links.ROOT + "/skills/update?resumeId="+resumeId, skillIds)
     } 
 }

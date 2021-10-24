@@ -26,10 +26,10 @@ export default function SkillInfo() {
             skillIds: [],
         },
         onSubmit: values => {
-            values = { ...values, userId: 1 }
             //skillService.update(values).then(r => console.log(r.data.message))
-            dispatch(updateSkill(values))
+            dispatch(updateSkill(26, values.skillIds))
             handleEditClick()
+            console.log(values)
         },
     });
     //console.log(skills)
@@ -42,7 +42,7 @@ export default function SkillInfo() {
                     isEdit
                         ? <div>
                             <Form onSubmit={formik.handleSubmit} size="small">
-                                <SkillDropDown onChangeEvent= {(event, data) => formik.setFieldValue("skillIds", data.value)} isMultiple={true} defaultValue = {skills?.map(skill => skill.skillId)}/>
+                                <SkillDropDown onChangeEvent= {(event, data) => formik.setFieldValue("skillIds", data.value)} isMultiple={true} defaultValue = {skills?.map(skill => skill?.skill?.id)}/>
 
                                 <Divider />
                                 <Button positive type="submit">Kaydet</Button>
@@ -54,7 +54,7 @@ export default function SkillInfo() {
                             {
                                 skills?.map((skill, index) => (
                                     <Label color="teal" className="mb-2" key={index}>
-                                        <p className="h5">{skill?.skillName}</p>
+                                        <p className="h5">{skill?.skill?.skillName}</p>
                                     </Label>
                                 ))
                             }

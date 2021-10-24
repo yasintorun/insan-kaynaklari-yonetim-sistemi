@@ -9,5 +9,5 @@ import kodlamaio.hrms.entities.concretes.Experience;
 
 public interface ExperienceDao extends JpaRepository<Experience, Integer> {
 	Experience getExperienceById(int id);
-	List<Experience> getByUserId(int userId);
+	List<Experience> getByResumeId(int resumeId);
 }

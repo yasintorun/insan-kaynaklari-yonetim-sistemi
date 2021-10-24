@@ -38,12 +38,12 @@ public class LanguageManager implements LanguageService{
 	}
 
 	@Override
-	public DataResult<List<Language>> getByUserId(int userId) {
+	public DataResult<List<Language>> getByUserId(int resumeId) {
 		
 		Sort sort = Sort.by(Sort.Direction.DESC, "level");
 		
 		return new SuccessDataResult<List<Language>>
-		(this.languageDao.getByUserId(userId, sort), "Dil bilgisi getirildi");
+		(this.languageDao.getByResumeId(resumeId, sort), "Dil bilgisi getirildi");
 	}
 
 	@Override

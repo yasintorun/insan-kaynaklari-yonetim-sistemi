@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +36,10 @@ public class Resume {
 		this.summary = summary;
 		this.jobSeeker = new Jobseeker(userId);
 		this.image = new Image(imageId);
+	}
+
+	public Resume(int resumeId) {
+		this.id = resumeId;
 	}
 
 	@Id
@@ -73,7 +79,26 @@ public class Resume {
 	@JoinColumn(name="nationality_id")
 	private Nationality nationality;
 	
+	@JsonProperty(access = Access.READ_ONLY)
+	@OneToMany(mappedBy = "resume")
+	private List<Education> educations;
+
+	@JsonProperty(access = Access.READ_ONLY)
+	@OneToMany(mappedBy = "resume")
+	private List<Experience> experiences;
+
+	@JsonProperty(access = Access.READ_ONLY)
+	@OneToMany(mappedBy = "resume")
+	private List<Language> languages;
+
+	@JsonProperty(access = Access.READ_ONLY)
+	@OneToMany(mappedBy = "resume")
+	private List<UserSkill> skills;
+	
+
+	@JsonProperty(access = Access.READ_ONLY)
 	@OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
 	private Jobseeker jobSeeker;
+	
 }

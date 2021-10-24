@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +25,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name="languages")
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","resume"})
 public class Language {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,6 +41,9 @@ public class Language {
 	@Column(name="level")
 	private int level;
 	
-	@Column(name="user_id")
-	private int userId;
+
+	@ManyToOne()
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@JoinColumn(name="resume_id")
+	private Resume resume;
 }

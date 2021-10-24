@@ -35,10 +35,18 @@ export default function JobExperienceInfo() {
         let leavingDate = Helper.getMonthAndYear(val?.leavingDate)
         formik.setValues({
             id: val.id,
-            userId: val.userId,
-            cityId: val?.city.id,
-            jobPositionId: val?.jobPosition.id,
-            workTimeStyleId: val?.workTimeStyle.id,
+            resume: {
+                id: val.resume?.id,
+            },
+            city:{
+                id:val?.city.id, 
+            },
+            jobPosition: {
+                id: val?.jobPosition.id
+            } ,
+            workTimeStyle: {
+                id: val?.workTimeStyle.id
+            },
             startingDate: startingDate,
             leavingDate: leavingDate,
             companyName: val?.companyName,
@@ -69,14 +77,15 @@ export default function JobExperienceInfo() {
         initialValues: {
             userId: 1,
         },
-        validationSchema: addExperienceSchema,
+       // validationSchema: addExperienceSchema,
         onSubmit: values => {
+            values = {...values, resume:{id: 26}}
             isNew
              ? dispatch(addExperience(values))
             //experienceService.add(values).then(r => toast.success(r.data.message))
               : dispatch(updateExperience(values))
-            // experienceService.update(values).then(r => toast.success(r.data.message))
-
+            // experienceService.update(values).then(r => toast.success(r.data.message))*/
+            console.log(values)
             handleCancelEdit()
         },
     });
@@ -85,10 +94,10 @@ export default function JobExperienceInfo() {
         setIsNew(true)
         setIsEdit(true)
         formik.setValues({
-            userId: 1,
-            cityId: '',
-            jobPositionId: '',
-            workTimeStyleId: '',
+            resume: {id: 26},
+            city:{id: ''},
+            jobPosition:{id: ''},
+            workTimeStyle: {id: ''},
             startingDate: '',
             leavingDate: '',
             companyName: '',
@@ -115,23 +124,22 @@ export default function JobExperienceInfo() {
                         <div>
                             <Form onSubmit={formik.handleSubmit} size="small">
                                 <Form.Group widths='equal'>
-                                    <YTFormField value="jobPositionId" formik={formik}>
-                                        <JobPositionDropDown onChangeEvent={(event, data) => formik.setFieldValue("jobPositionId", data.value)} value={formik.values?.jobPositionId} />
+                                    <YTFormField value="jobPosition.id" formik={formik}>
+                                        <JobPositionDropDown onChangeEvent={(event, data) => formik.setFieldValue("jobPosition.id", data.value)} value={formik.values?.jobPosition?.id} />
                                     </YTFormField>
                                     <YTFormField value="companyName" formik={formik}>
                                         <Form.Input fluid placeholder="Firma adı" label='Firma Adı*' name="companyName" onChange={formik.handleChange} value={formik.values?.companyName} />
                                     </YTFormField>
-                                    <YTFormField value="cityId" formik={formik}>
-                                        <CityDropDown onChangeEvent={(event, data) => formik.setFieldValue("cityId", data.value)} value={formik.values?.cityId} />
+                                    <YTFormField value="city.id" formik={formik}>
+                                        <CityDropDown onChangeEvent={(event, data) => formik.setFieldValue("city.id", data.value)} value={formik.values?.city?.id} />
                                     </YTFormField>
                                 </Form.Group>
                                 <Form.Group widths='equal'>
-                                    <YTFormField value="workTimeStyleId" formik={formik}>
-                                        <WorkTimeStyleDropdown onChangeEvent={(event, data) => formik.setFieldValue("workTimeStyleId", data.value)} value={formik.values?.workTimeStyleId} />
+                                    <YTFormField value="workTimeStyle.id" formik={formik}>
+                                        <WorkTimeStyleDropdown onChangeEvent={(event, data) => formik.setFieldValue("workTimeStyle.id", data.value)} value={formik.values?.workTimeStyle?.id} />
                                     </YTFormField>
                                     <YTFormField value="startingDate" formik={formik}>
                                         <Form.Input type="month" fluid placeholder="Başlama tarihi" label='Başlangıç tarihi*' name="startingDate" onChange={formik.handleChange} value={formik.values?.startingDate} />
-
                                     </YTFormField>
                                     <YTFormField value="leavingDate" formik={formik}>
                                         <Form.Input type="month" fluid placeholder="Çıkış tarihi" label='Çıkış tarihi*' name="leavingDate" onChange={formik.handleChange} value={formik.values?.leavingDate} />

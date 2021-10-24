@@ -77,7 +77,6 @@ public class EducationManager implements EducationService{
 			Education current = this.educationDao.getOne(id);
 			current.setSchool(education.getSchool());
 			current.setDepartment(education.getDepartment());
-			current.setUserId(education.getUserId());
 			current.setGraduationDate(GraduationControl(education.getGraduationDate()));
 			current.setStartingDate(education.getStartingDate());
 			current.setSchoolType(education.getSchoolType());
@@ -92,10 +91,10 @@ public class EducationManager implements EducationService{
 	}
 
 	@Override
-	public DataResult<List<Education>> getByUserId(int userId) {
+	public DataResult<List<Education>> getByUserId(int resumeId) {
 		Sort sort = Sort.by(Sort.Direction.DESC, "graduationDate");
 		return new SuccessDataResult<List<Education>>
-		(this.educationDao.getByUserId(userId, sort), "kullanıcı eğitim bilgileri listelendi");
+		(this.educationDao.getByResumeId(resumeId, sort), "kullanıcı eğitim bilgileri listelendi");
 	}	
 
 	

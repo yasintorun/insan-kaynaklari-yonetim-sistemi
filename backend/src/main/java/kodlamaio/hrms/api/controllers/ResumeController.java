@@ -18,9 +18,8 @@ import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Image;
+import kodlamaio.hrms.entities.concretes.Jobseeker;
 import kodlamaio.hrms.entities.concretes.Resume;
-import kodlamaio.hrms.entities.dtos.display.ResumeDisplayDto;
-import kodlamaio.hrms.entities.dtos.input.ResumeInputDto;
 
 @RestController
 @RequestMapping("/api/resume")
@@ -34,30 +33,30 @@ public class ResumeController {
 	}
 	
 	@GetMapping("/getAllResume")
-	public DataResult<List<ResumeDisplayDto>> getAll() {
+	public DataResult<List<Resume>> getAll() {
 
-		return this.resumeService.getAllDisplay();
+		return this.resumeService.getAll();
 	}
 
 	@GetMapping("/getById")
-	public DataResult<ResumeDisplayDto> getById(int id) {
+	public DataResult<Resume> getById(int id) {
 		return this.resumeService.getResumeById(id);
 	}
 	
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody ResumeInputDto resumeDto) {
+	public Result add(@RequestBody Resume resumeDto) {
 		return this.resumeService.add(resumeDto);
 	}
 	
 	
 	@PostMapping("/update")
-	public Result update(int id, @RequestBody ResumeInputDto resume) {
+	public Result update(int id, @RequestBody Resume resume) {
 		return this.resumeService.updateResume(id, resume);
 	}
 	
 	@PostMapping("/updateSummary")
-	public Result updateSummary(int id,  @RequestBody ResumeInputDto resume) {
+	public Result updateSummary(int id,  @RequestBody Resume resume) {
 		return this.resumeService.updateResumeSummary(id, resume);
 	}
 	

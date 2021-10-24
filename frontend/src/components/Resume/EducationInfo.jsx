@@ -33,9 +33,9 @@ export default function EducationInfo() {
 
         formik.setValues({
             id: val?.id,
-            userId: 1,
-            schoolId: val?.school?.id,
-            departmentId: val?.department?.id,
+            resume:{id: 25},
+            school: {id: val?.school?.id},
+            department: {id: val?.department?.id},
             startingDate: val?.startingDate,
             graduationDate: val?.graduationDate,
             schoolType: val?.schoolType,
@@ -47,9 +47,9 @@ export default function EducationInfo() {
         setIsEdit(true)
         formik.setValues({
             id: 0,
-            userId: 1,
-            schoolId: '',
-            departmentId: '',
+            resume: {id:26},
+            school: {id: ''},
+            department: {id: ''},
             startingDate: '',
             graduationDate: '',
             schoolType: '',
@@ -73,10 +73,14 @@ export default function EducationInfo() {
     const addEducationSchema = Yup.object().shape({
         schoolType: Yup.string()
             .required(),
-        schoolId: Yup.number()
-            .required(),
-        departmentId: Yup.number()
-            .required(),
+        school: Yup.object().shape({ 
+            id: Yup.number()
+                .required()
+        }),
+        department: Yup.object().shape({ 
+            id: Yup.number()
+                .required()
+        }),
         startingDate: Yup.number()
             .required(),
         graduationDate: Yup.number()
@@ -89,14 +93,15 @@ export default function EducationInfo() {
         },
         validationSchema: addEducationSchema,
         onSubmit: values => {
-            values = { ...values, userId: 1 }
+            values = { ...values, resume: {id:26} }
             isNew
                 ? dispatch(addEducation(values))
                 //educationService.add(values).then(result => console.log(result.data.message))
                 : dispatch(updateEducation(values))
-            //educationService.update(values.id, values).then(r => console.log(r.data.message))
+            //educationService.update(values.id, values).then(r => console.log(r.data.message))*/
+
             console.log(values)
-            // handleCancelEdit()
+            //handleCancelEdit()
         },
     });
 
@@ -124,11 +129,11 @@ export default function EducationInfo() {
                                     </YTFormField>
                                 </Form.Group>
                                 <Form.Group widths='equal'>
-                                    <YTFormField formik={formik} value="schoolId">
-                                        <SchoolDropDown onChangeEvent={(event, data) => formik.setFieldValue("schoolId", data.value)} value={formik.values?.schoolId} />
+                                    <YTFormField formik={formik} value="school.id">
+                                        <SchoolDropDown onChangeEvent={(event, data) => formik.setFieldValue("school.id", data.value)} value={formik.values?.school?.id} />
                                     </YTFormField>
-                                    <YTFormField formik={formik} value="departmentId">
-                                        <DepartmentDropDown onChangeEvent={(event, data) => formik.setFieldValue("departmentId", data.value)} value={formik.values?.departmentId} />
+                                    <YTFormField formik={formik} value="department.id">
+                                        <DepartmentDropDown onChangeEvent={(event, data) => formik.setFieldValue("department.id", data.value)} value={formik.values?.department?.id} />
                                     </YTFormField>
                                 </Form.Group>
                                 <Form.Group widths='equal'>

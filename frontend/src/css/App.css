@@ -372,3 +372,7 @@ h3 {
   margin-right: auto; 
   transform: translate(-50%, -50%);
 }
+
+.transparent {
+  background-color: transparent;
+}

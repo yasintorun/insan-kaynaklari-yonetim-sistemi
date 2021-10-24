@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kodlamaio.hrms.business.abstracts.ExperienceService;
 import kodlamaio.hrms.core.utilities.helpers.FormatHelper;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.ErrorResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
@@ -61,14 +62,10 @@ public class ExperienceManager implements ExperienceService{
 	@Override
 	public DataResult<Experience> updateExperience(int id, Experience exp) {
 		Experience current = this.experienceDao.getOne(id);
-		if(current == null) current = new Experience();
-		current.setCity(new City(exp.getCity().getId()));
-		current.setJobPosition(new JobPosition(exp.getJobPosition().getId()));
-		current.setCompanyName(exp.getCompanyName());
-		current.setLeavingDate(FormatHelper.OnlyYearAndMonth(exp.getLeavingDate().toString()));
-		current.setStartingDate(FormatHelper.OnlyYearAndMonth(exp.getStartingDate().toString()));
-		current.setWorkTimeStyle(new WorkTimeStyle(exp.getWorkTimeStyle().getId()));
-		
+		if(current == null)
+			new ErrorDataResult<Experience>("Deneyim bulunamadı.");
+		current = exp;
+		current.setId(id);
 		this.experienceDao.save(current);
 		return new SuccessDataResult<Experience>
 		(null, "Deneyim güncellendi!");
@@ -83,9 +80,9 @@ public class ExperienceManager implements ExperienceService{
 	}
 
 	@Override
-	public DataResult<List<Experience>> getByUserId(int userId) {
+	public DataResult<List<Experience>> getByUserId(int resumeId) {
 		return new SuccessDataResult<List<Experience>>
-		(this.experienceDao.getByUserId(userId), "kullanıcı deneyimleri listelendi");
+		(this.experienceDao.getByResumeId(resumeId), "kullanıcı deneyimleri listelendi");
 	}
 
 	@Override
